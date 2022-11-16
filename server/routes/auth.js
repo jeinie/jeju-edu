@@ -11,46 +11,42 @@ router.post("/join", async (req, res, next) => {
   try {
     const exUser = await User.findOne({ where: { id } });
     if (exUser) {
-      //return res.redirect("/join?error=exist");
-	  res.send('유저 중복');
+      res.send("유저 중복");
     }
-    //const hash = await bcrypt.hash(password, 12);
+
     await User.create({
       id,
       password,
-	  name
+      name,
     });
     console.log(`회원가입 정보\nid : ${id}\npw : ${password}\nname : ${name}`);
-    //return res.redirect("/");
   } catch (error) {
     console.error(error);
     return next(error);
   }
 });
 
-router.post("/login", (req, res, next) => {
-  passport.authenticate("local", (authError, user, info) => {
-    if (authError) {
-      console.error(authError);
-      return next(authError);
-    }
-    if (!user) {
-      return res.redirect(`/?loginError=${info.message}`);
-    }
-    return req.login(user, (loginError) => {
-      if (loginError) {
-        console.error(loginError);
-        return next(loginError);
-      }
-      return res.redirect("/");
+router.post("/login", async (req, res, next) => {
+  const { id, password } = req.body;
+  try {
+    const exUser = await User.findOne({
+      where: { id: id, password: password },
     });
-  })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 붙입니다.
+
+    req.session.userInfo = exUser.dataValues;
+
+    console.log(`로그인 확인 ${JSON.stringify(req.session.userInfo)}`);
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
 });
 
 router.get("/logout", (req, res) => {
   req.logout();
   req.session.destroy();
-  res.redirect("/");
+  //res.redirect("/");
+  console.log(`로그아웃 확인${req}`);
 });
 
 module.exports = router;
