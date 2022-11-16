@@ -43,10 +43,8 @@ router.get("/", async (req, res, next) => {
 });
 */
 
-router.get("/",( req , res )=>{
-	
-	res.send("들어오는걸 확인");
-	
+router.get("/", (req, res) => {
+  console.log("엥?");
 });
 
 module.exports = router;
