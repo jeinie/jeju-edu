@@ -13,7 +13,7 @@ router.use((req, res, next) => {
   next();
 });
 */
-
+/*
 router.get("/", async (req, res, next) => {
   try {
     const posts = await Post.findAll({
@@ -40,6 +40,13 @@ router.get("/", async (req, res, next) => {
     console.error(err);
     next(err);
   }
+});
+*/
+
+router.get("/",( req , res )=>{
+	
+	res.send("들어오는걸 확인");
+	
 });
 
 module.exports = router;
