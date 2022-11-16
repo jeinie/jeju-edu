@@ -32,6 +32,12 @@ module.exports = class Study extends Sequelize.Model {
         study_date: {
           type: Sequelize.DATEONLY,
         },
+        tmX: {
+          type: Sequelize.INTEGER,
+        },
+        tmY: {
+          type: Sequelize.INTEGER,
+        },
       },
       {
         sequelize,
