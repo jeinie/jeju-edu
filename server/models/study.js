@@ -26,6 +26,12 @@ module.exports = class Study extends Sequelize.Model {
         open_date: {
           type: Sequelize.DATEONLY,
         },
+        close_date: {
+          type: Sequelize.DATEONLY,
+        },
+        study_date: {
+          type: Sequelize.DATEONLY,
+        },
       },
       {
         sequelize,
