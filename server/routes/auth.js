@@ -1,25 +1,26 @@
 const express = require("express");
 //const passport = require("passport");
-//const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 //const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 const User = require("../models/user");
 
 const router = express.Router();
 
 router.post("/join", async (req, res, next) => {
-  const { email, nick, password } = req.body;
+  const { id, password, name } = req.body;
   try {
-    const exUser = await User.findOne({ where: { email } });
+    const exUser = await User.findOne({ where: { id } });
     if (exUser) {
       return res.redirect("/join?error=exist");
     }
-    const hash = await bcrypt.hash(password, 12);
+    //const hash = await bcrypt.hash(password, 12);
     await User.create({
       email,
       nick,
-      password: hash,
+      password: password,
     });
-    return res.redirect("/");
+    console.log(`회원가입 정보\nid : ${id}\npw : ${password}\nname : ${name}`);
+    //return res.redirect("/");
   } catch (error) {
     console.error(error);
     return next(error);
