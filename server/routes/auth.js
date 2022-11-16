@@ -43,7 +43,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.logout();
+  //req.logout();
   req.session.destroy();
   //res.redirect("/");
   console.log(`로그아웃 확인${req}`);
