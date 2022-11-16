@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"node index.js",
+    "backend":"nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"concurrently \"npm run backend\" \"npm run start --prefix client\""
+
   },
   "repository": {
     "type": "git",
@@ -16,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/JadeHyun/jeju-edu/issues"
   },
-  "homepage": "https://github.com/JadeHyun/jeju-edu#readme"
+  "homepage": "https://github.com/JadeHyun/jeju-edu#readme",
+  "dependencies": {
+    "concurrently": "^7.5.0"
+  }
 }
