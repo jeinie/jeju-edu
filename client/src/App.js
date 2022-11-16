@@ -5,8 +5,8 @@ import Router from "./router";
 function App() {
   return (
     <div className="App">
-      <Address />
-      <PartyMarker />
+      {/* <Address />
+      <PartyMarker /> */}
       <Router />
     </div>
   );
