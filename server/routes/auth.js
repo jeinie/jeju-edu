@@ -11,13 +11,14 @@ router.post("/join", async (req, res, next) => {
   try {
     const exUser = await User.findOne({ where: { id } });
     if (exUser) {
-      return res.redirect("/join?error=exist");
+      //return res.redirect("/join?error=exist");
+	  res.send('유저 중복');
     }
     //const hash = await bcrypt.hash(password, 12);
     await User.create({
-      email,
-      nick,
-      password: password,
+      id,
+      password,
+	  name
     });
     console.log(`회원가입 정보\nid : ${id}\npw : ${password}\nname : ${name}`);
     //return res.redirect("/");
