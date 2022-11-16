@@ -14,7 +14,7 @@ const { sequelize } = require("./models");
 
 const app = express();
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 80);
 app.set("view engine", "html");
 
 sequelize
