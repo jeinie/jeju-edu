@@ -61,14 +61,11 @@ export default function ViewDetail({ list, id }) {
           </div>
           <div className="headerCircle"></div>
         </div>
-        <pre className="partyDesc">{newData.study_detail}</pre>
+        <p className="partyDesc">{newData.study_detail}</p>
         <section className="detailCreateBtn">
           <div className="btnBox">
-            {/* <button
-              className="joinBtn"
-              onClick={handleModalView}
-            >{`J-JOIN`}</button> */}
             <button
+              className="joinBtn"
               onClick={() => {
                 setOpen(true);
                 handleModalView();
@@ -115,6 +112,9 @@ const ViewDetailContainer = styled.section`
     flex-direction: column;
   }
   .calender {
+    padding: 5px 0 0 1px;
+    display: flex;
+    align-items: center;
     font-size: 10px;
   }
   .deathLine {
@@ -129,6 +129,7 @@ const ViewDetailContainer = styled.section`
   }
 
   .userName {
+    margin-bottom: 5px;
     font-size: 12px;
     font-weight: 350;
   }
@@ -174,8 +175,9 @@ const ViewDetailContainer = styled.section`
   }
 
   .partyDesc {
-    width: 208px;
-    height: 60px;
+    margin-top: 47px;
+    width: 280px;
+    height: 129px;
   }
 
   .detailCreateBtn {

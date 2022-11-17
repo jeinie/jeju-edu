@@ -10,10 +10,6 @@ export default function ProfileDetail({
   createState,
 }) {
   // const stateArr = ["대기","매칭","마감기한 만료","","완료"]
-  console.log(join);
-  console.log(create);
-  console.log(joinState, "joinState");
-  console.log(createState, "createState");
   if (joinState === true) {
     return (
       <Wrapper>
@@ -110,7 +106,7 @@ const ListContainer = styled.section`
   .headerTitleState {
     text-align: left;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     justify-content: space-around;
   }
 
