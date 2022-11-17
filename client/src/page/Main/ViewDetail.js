@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
 import axios from "axios";
-import BasicModal from "../../components/Modal";
+import Modal from "../../components/Modal";
 import { BsCalendar2WeekFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
@@ -21,10 +21,8 @@ export default function ViewDetail({ list, id }) {
     console.log(id);
     console.log(userId);
     axios.post("http://13.125.223.194:56742/api/joinStudy", {
-      body: {
         study_no: id,
-        id: userId,
-      },
+        id: userId
     });
   };
 
@@ -71,10 +69,10 @@ export default function ViewDetail({ list, id }) {
               className="joinBtn"
               onClick={handleModalView}
             >{`J-JOIN`}</button> */}
-            <button onClick={()=>setOpen(true)}>
+            <button onClick={()=> { setOpen(true); handleModalView();}}>
               <p className="join">J-Join</p>
             </button>
-            <BasicModal open={open} handleClose={setOpen} list={newData} />
+            <Modal status={1} open={open} handleClose={setOpen} list={newData} />
           </div>
         </section>
       </div>

@@ -5,24 +5,52 @@ import Modal from "@mui/material/Modal";
 import { MdPeopleAlt } from "react-icons/md";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import tree_1_1x from "../img/tree_1_1x.png";
+import tree_2_1x from "../img/tree_2_1x.png";
+import tree_3_1x from "../img/tree_3_1x.png";
+import tree_4_1x from "../img/tree_4_1x.png";
+
+const statusList = [
+  {
+    "title":"스터디가 만들어졌어요!",
+    "detail":"이제 내 나무에 물을 줄",
+    "detail2":"스터디원을 기다리면 돼요!",
+    "link_title":"링크로 홍보하기",
+    "link":"/Profile"
+  },
+  {
+    "title":"스터디에 참여완료!",
+    "detail":"이제 내 나무에 물을 줄",
+    "detail2":"스터디원을 기다리면 돼요!",
+    "link_title":"다른 스터디 보러가기",
+    "link":"/Profile"
+  },
+  {
+    "title":"스터디 종료!",
+    "detail":"오늘도 보람찬 하루를 보내셨군요:)",
+    "detail2":"수확에 성공했어요!",
+    "link_title":"수확 현황 확인하러가기",
+    "link":"/Profile"
+  }
+];
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  textAlign: "center",
-  p: 4,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    textAlign: "center",
+    p: 4,
 };
 
 export default function BasicModal(props) {
   const navigate = useNavigate();
-  const moveMain = () => {
-    navigate("/Profile");
+  const move = () => {
+    navigate(statusList[props.status]['link']);
   };
 
   return (
@@ -35,22 +63,22 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            스터디에 참여 완료!
+            {statusList[props.status]['title']}
           </Typography>
-          <div>이미지 받아서 쓰기</div>
+          <img src={tree_1_1x} />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            이제 내 나무에 물을 줄<br /> 스터디원을 기다리면 돼요!
+            {statusList[props.status]['detail']}<br/>{statusList[props.status]['detail2']}
           </Typography>
           <ModalMemberContainer>
             <MdPeopleAlt />
             {props.list ? (
-              <p className="mixMember">{props.list.members}/10</p>
+              <p className="mixMember">{props.list.members}/{props.list.min_party}</p>
             ) : (
               <></>
             )}
           </ModalMemberContainer>
           <PageButtonBox>
-            <MoreParty onClick={moveMain}>다른 스터디 보러가기</MoreParty>
+            <MoreParty onClick={move}>다른 스터디 보러가기</MoreParty>
             <CloseBtn onClick={() => props.handleClose(false)}>닫기</CloseBtn>
           </PageButtonBox>
         </Box>

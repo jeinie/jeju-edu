@@ -2,7 +2,7 @@ import { useState } from "react";
 import Nav from "../../components/Nav";
 import DateTime from "../../components/DateTime";
 import axios from "axios";
-import BasicModal from "../../components/Modal";
+import Modal from "../../components/Modal";
 import { useSelector } from "react-redux";
 
 export default function PartyJoin() {
@@ -87,7 +87,7 @@ export default function PartyJoin() {
           </button>
         </form>
       </div>
-      <BasicModal open={open} handleClose={setOpen} />
+      <Modal open={open} handleClose={setOpen} status={0}/>
     </div>
   );
 }
