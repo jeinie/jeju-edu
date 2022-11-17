@@ -23,11 +23,8 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<Main list={list} />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/PartyJoin" element={<PartyJoin/>} />
-      <Route
-        path={`/PartyDetail/:${list.study_no}`}
-        element={<PartyDetail />}
-      />
+      <Route path="/PartyJoin" element={<PartyJoin />} />
+      <Route path={`/PartyDetail/:id`} element={<PartyDetail />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/PartySearch" element={<PartySearch />} />
     </Routes>
