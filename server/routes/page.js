@@ -10,8 +10,8 @@ router.post("/viewDetail/:study_no", async (req, res) => {
       where: { study_no: req.params.study_no },
     });
 
-    studyInfo.createdAt = studyInfo.createdAt.split(" ")[0];
-    studyInfo.updatedAt = studyInfo.updatedAt.split(" ")[0];
+    //studyInfo.createdAt = studyInfo.createdAt.split(" ")[0];
+    //studyInfo.updatedAt = studyInfo.updatedAt.split(" ")[0];
     console.log(`처리1 ${studyInfo}`);
     console.log(`처리2 ${studyInfo.createdAt}`);
     console.log(`처리3 ${studyInfo.updatedAt}`);
