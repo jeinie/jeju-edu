@@ -19,8 +19,10 @@ const PlusContainer = styled.div`
   border-radius: 50%;
   color: white;
   background-color: #e47b00;
-  border: 1px solid black;
   font-size: 40px;
+  position: fixed;
+  top: 80%;
+  left: 80%;
 
   display: flex;
   justify-content: space-around;
