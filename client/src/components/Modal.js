@@ -53,6 +53,19 @@ export default function BasicModal(props) {
     navigate(statusList[props.status]['link']);
   };
 
+  const handleImage = (num) => {
+    switch (Math.floor(num/4)) {
+      case 1 : 
+        return tree_2_1x;
+      case 2 :
+        return tree_3_1x;
+      case 3: 
+        return tree_4_1x;
+      default : 
+        return tree_1_1x;
+    }
+  }
+
   return (
     <ModalContainer>
       <Modal
@@ -65,7 +78,7 @@ export default function BasicModal(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {statusList[props.status]['title']}
           </Typography>
-          <img src={tree_1_1x} />
+          <img src={handleImage(props.list.members)} />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {statusList[props.status]['detail']}<br/>{statusList[props.status]['detail2']}
           </Typography>
