@@ -6,14 +6,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 export default function ResponsiveDateTimePickers(props) {
-  const [value, setValue] = React.useState(dayjs('2018-01-01T00:00:00.000Z'));
+  const [value, setValue] = React.useState(null);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateTimePicker
+            inputFormat="YYYY-MM-DD"
             renderInput={(params) => <TextField {...params} inputProps={{...params.inputProps, placeholder:props.placeholder}} sx={props.margin} fullWidth />}
             value={value}
-            
             onChange={(newValue) => {
                 setValue(newValue);
             }}
