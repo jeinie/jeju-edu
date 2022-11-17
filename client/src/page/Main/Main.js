@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import Footer from "../../components/Footer";
 import Input from "../../components/Input";
 import PlusBtn from "../../components/PlusBtn";
 import StudyCard from "../../components/StudyCard";
@@ -22,7 +21,6 @@ export default function Main() {
       {
         <>{test()}</>
       }
-      <Footer />
     </MainContainer>
   );
 }

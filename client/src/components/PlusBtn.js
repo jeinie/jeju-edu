@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { PlusIcon } from "@goorm-dev/gds-goormthon";
 import { AiOutlinePlus } from "react-icons/ai";
 
 export default function PlusBtn() {
+
   return (
     <PlusContainer>
       <div className="plus">
@@ -21,8 +21,8 @@ const PlusContainer = styled.div`
   background-color: #e47b00;
   font-size: 40px;
   position: fixed;
-  top: 80%;
-  left: 80%;
+  top: 90%;
+  left: 45%;
 
   display: flex;
   justify-content: space-around;
