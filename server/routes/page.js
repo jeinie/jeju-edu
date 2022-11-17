@@ -22,8 +22,8 @@ router.post("/viewDetail/:study_no", async (req, res) => {
 
       //for (var i = 0; i < studyInfo.length; i++) {
       let concat = studyInfo.location.split(" ");
-      let result = concat[1] + " " + concat[2];
-      studyInfo.location = result;
+      let result1 = concat[1] + " " + concat[2];
+      studyInfo.location = result1;
       //}
       result["studyInfo"] = studyInfo;
       res.json(result);
