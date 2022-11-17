@@ -6,8 +6,10 @@ import { useEffect } from "react";
 
 function App() {
   useEffect(() => {
+    // fetch('get',)
+    // fetch
     axios
-      .get("13.125.223.194:56742/api/getStudyList")
+      .get("http://13.125.223.194:56742/api/getStudyList")
       .then((data) => console.log(data));
   }, []);
   return (
