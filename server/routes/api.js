@@ -33,21 +33,22 @@ router.post("/getStudyList", async (req, res, next) => {
     //console.log(search);
 
     const studyList = await JejuAreaDB.findAll({
-      where:{
-        [Op.or]:[
-          areaName: {
-            [Op.like]: `%${area}%`,
-          }
-        ]
-      }
-
+      where: {
+        [Op.or]: [
+          {
+            areaName: {
+              [Op.like]: `%${area}%`,
+            },
+          },
+        ],
+      },
     });
     console.log(studyList);
     //Array.from(studyList).forEach((item) => {
-    for( var i = 0 ; i < 5 ; i++ ){
-      let concat = studyList[ i ].location.split(" ");
+    for (var i = 0; i < 5; i++) {
+      let concat = studyList[i].location.split(" ");
       let result = concat[1] + " " + concat[2];
-      studyList[ i ].location = result;
+      studyList[i].location = result;
     }
     //});
 
