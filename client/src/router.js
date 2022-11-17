@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 const Router = () => {
   
   return (
-    
     <>
       <Routes>
         <Route path="/" element={<Main />} />
