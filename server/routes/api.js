@@ -8,6 +8,25 @@ const { route } = require("./page");
 
 const router = express.Router();
 
+router.get("/getStudyList", async (req, res, next) => {
+  try {
+    let studyList = await Study.findAll({});
+
+    Array.from(studyList).forEach((item) => {
+      let concat = item.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      item.location = result;
+    });
+
+    if (studyList) {
+      res.json(studyList);
+    }
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
 router.get("/getStudyList/code", async (req, res, next) => {
   try {
     //let studyList = await Study.findAll({});
