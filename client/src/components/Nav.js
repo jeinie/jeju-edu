@@ -2,27 +2,53 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
 export default function Nav() {
-  const [onPage, setOnPage] = useState(false);
+  const [onCode, setOnCode] = useState(true);
+  const [onSing, setOnSing] = useState(false);
+  const [onDance, setOnDance] = useState(false);
   const codeEle = useRef();
   const singEle = useRef();
   const danceEle = useRef();
 
-  const handlePageMenu = () => {
-    setOnPage(!onPage);
-    const div = document.querySelectorAll("div");
-    console.log(div);
-    // div.classList.toggle("clickPage");
+  //   console.log(codeEle.current);
+
+  const handlePageMenu = (e) => {
+    // console.log(e.target.textContent);
+    if (e.target.textContent === "코드") {
+      setOnCode(true);
+      setOnSing(false);
+      setOnDance(false);
+    } else if (e.target.textContent === "노래") {
+      setOnCode(false);
+      setOnSing(true);
+      setOnDance(false);
+    } else if (e.target.textContent === "춤") {
+      setOnCode(false);
+      setOnSing(false);
+      setOnDance(true);
+    }
   };
 
   return (
     <NavContainer>
-      <div className="navBox" ref={codeEle} onClick={handlePageMenu}>
+      <div
+        className={onCode ? "navBox addColor" : "navBox"}
+        ref={codeEle}
+        onClick={handlePageMenu}
+      >
         코드
       </div>
-      <div className="navBox" ref={singEle} onClick={handlePageMenu}>
+      <div
+        className={onSing ? "navBox addColor" : "navBox"}
+        ref={singEle}
+        onClick={handlePageMenu}
+      >
         노래
       </div>
-      <div className="navBox" ref={danceEle} onClick={handlePageMenu}>
+      <div
+        className={onDance ? "navBox addColor" : "navBox"}
+        ref={danceEle}
+        onClick={handlePageMenu}
+      >
         춤
       </div>
     </NavContainer>
@@ -31,20 +57,25 @@ export default function Nav() {
 
 const NavContainer = styled.nav`
   width: 100%;
-  border: 1px solid black;
+  height: 31px;
+  margin-top: 48px;
+
+  /* border: 1px solid black; */
   display: flex;
   color: #e47b00;
   .navBox {
-    border: 1px solid black;
-
+    color: white;
+    background-color: #e47b00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px 15px 0 0;
     text-align: center;
     flex-grow: 1;
   }
 
-  .clickPage {
+  .addColor {
     color: black;
-  }
-  &.active {
-    background-color: lightblue;
+    background-color: white;
   }
 `;
