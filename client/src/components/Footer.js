@@ -34,11 +34,12 @@ const FooterContainer = styled.footer`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 48px;
+  height: 10%;
   font-size: 48px;
   color: #cbcbcb;
   position: fixed;
   top: 90%;
+  background: white;
 
   .iconBox {
     flex-grow: 1;
