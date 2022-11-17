@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Input from "../../components/Input";
 import PlusBtn from "../../components/PlusBtn";
 import StudyCard from "../../components/StudyCard";
-import MainCategory from "./MainCategory";
+import MainCategory from "../../components/Nav";
 import ViewDetail from "./ViewDetail";
 import Footer from "./../../components/Footer";
 

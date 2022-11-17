@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import ViewDetail from "./ViewDetail";
+import ViewDetail from "../page/Main/ViewDetail";
 
 export default function MainCategory() {
   const [onCode, setOnCode] = useState(true);
