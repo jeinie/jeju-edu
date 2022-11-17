@@ -25,9 +25,9 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<Main list={list} />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/Profile" element={<Profile />} />
       <Route path="/PartyJoin" element={<PartyJoin />} />
       <Route path={`/PartyDetail/:id`} element={<PartyDetail />} />
-      <Route path="/Profile" element={<Profile />} />
       <Route path="/PartySearch" element={<PartySearch />} />
     </Routes>
     <Footer/>

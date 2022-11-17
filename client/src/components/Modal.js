@@ -1,6 +1,5 @@
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { MdPeopleAlt } from "react-icons/md";
@@ -20,24 +19,17 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ list }) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function BasicModal(props) {
   const navigate = useNavigate();
-
   const moveMain = () => {
     navigate("/Profile");
   };
 
   return (
     <ModalContainer>
-      <Button onClick={handleOpen}>
-        <p className="join">J-Join</p>
-      </Button>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={() => props.handleClose(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -51,11 +43,11 @@ export default function BasicModal({ list }) {
           </Typography>
           <ModalMemberContainer>
             <MdPeopleAlt />
-            <p className="mixMember">{list.members}/10</p>
+            {props.list ? <p className="mixMember">{props.list.members}/10</p> : <></>}
           </ModalMemberContainer>
           <PageButtonBox>
             <MoreParty onClick={moveMain}>다른 스터디 보러가기</MoreParty>
-            <CloseBtn onClick={handleClose}>닫기</CloseBtn>
+            <CloseBtn onClick={()=>props.handleClose(false)}>닫기</CloseBtn>
           </PageButtonBox>
         </Box>
       </Modal>

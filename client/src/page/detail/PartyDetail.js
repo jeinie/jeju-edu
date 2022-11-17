@@ -6,7 +6,6 @@ import axios from "axios";
 import ViewDetail from "../Main/ViewDetail";
 import PartyMarker from "../../components/PartyMarker";
 import Input from "./../../components/Input";
-import BasicModal from "../../components/Modal";
 
 export default function PartyDetail() {
   const { id } = useParams();
