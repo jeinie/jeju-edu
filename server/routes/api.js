@@ -112,14 +112,15 @@ router.post("/openStudy", async (req, res, next) => {
 router.post("/joinStudy", async (req, res, next) => {
   const result = {};
   const { study_no, id } = req.body;
-  console.log(study_no);
-  console.log(id);
-  console.log(req.body);
+
   try {
     await StudyAttendsStatus.create({
-      study_no: req.body.body.study_no,
-      id: req.body.body.id,
+      study_no: study_no,
+      id: id,
     });
+
+    await Study.increment({ members: 1 }, { where: { study_no: study_no } });
+
     result["success"] = 200;
     result["msg"] = "study 테이블 join 성공";
     res.json(result);
