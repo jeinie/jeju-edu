@@ -19,6 +19,8 @@ const app = express();
 
 app.set("port", process.env.PORT || 80);
 
+app.use(cors());
+
 sequelize
   .sync({ force: false })
   .then(() => {
