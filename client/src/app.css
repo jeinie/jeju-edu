@@ -1,1 +1,17 @@
+.font {
+    font-family: 'NanumSquare Neo';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 13px;
+    text-align: center;
+}
 
+.font-bold {
+    font-family: 'NanumSquare Neo';
+    font-style: normal;
+    font-weight: 350;
+    font-size: 8px;
+    line-height: 9px;
+    text-align: center;
+}
