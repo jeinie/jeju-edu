@@ -10,6 +10,13 @@ const router = express.Router();
 router.get("/getStudyList", async (req, res, next) => {
   try {
     const studyList = await Study.findAll({});
+
+    Array.from(studyList).forEach((item) => {
+      let concat = studyList.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      studyList.location = result;
+    });
+
     if (studyList) {
       res.json(studyList);
     }
