@@ -43,7 +43,8 @@ router.post("/api/login", async (req, res, next) => {
       req.session.userInfo = exUser.dataValues;
       result["success"] = 200;
       result["msg"] = "로그인 성공";
-      console.log(`로그인 확인 ${JSON.stringify(req.session.userInfo)}`);
+      result["userInfo"] = req.session.userInfo;
+      //console.log(`로그인 확인 ${JSON.stringify(req.session.userInfo)}`);
       res.json(result);
     } else {
       result["success"] = 100;
