@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
-import Main from "./page/Main";
-import PartyDetail from "./page/PartyDetail";
+import Main from "./page/Main/Main";
+import PartyDetail from "./page/detail/PartyDetail";
 import PartySearch from "./page/PartySearch";
 import Profile from "./page/Profile";
 

@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 // 개설된 스터디 상세페이지에서 사용될 지도 와 마커
-export default function PartyMarker() {
+export default function PartyMarker({ lat, lon }) {
   const { kakao } = window;
   const markerPosition = new kakao.maps.LatLng(33.450317, 126.570764);
   // 마커(스터디장소)를 찍기 위한 변수
-  // let lat;
-  // let lon;
 
   const imageSrc =
     "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
@@ -34,7 +32,6 @@ export default function PartyMarker() {
 
       infoWindow.open(map, marker);
       map.setCenter(localPosition);
-      // map.setCenter(33.450317, 126.570764);
     };
     if (navigator.geolocation) {
       const handlePosition = (position) => {
@@ -68,7 +65,7 @@ export default function PartyMarker() {
     });
 
     const options = {
-      center: new kakao.maps.LatLng(33.450317, 126.570764),
+      center: new kakao.maps.LatLng(lat, lon), // lat,lon 으로 변경할것.
       level: 5,
     };
     const map = new kakao.maps.Map(container, options);
@@ -83,25 +80,25 @@ export default function PartyMarker() {
           id="map"
           style={{ height: "150px" }}
         ></div>
-        <SearchBox>
+        {/* <SearchBox>
           <div className="test-box"></div>
-        </SearchBox>
+        </SearchBox> */}
       </div>
     </div>
   );
 }
 
-const SearchBox = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+// const SearchBox = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-around;
 
-  .test-box {
-    background-color: black;
-    width: 100px;
-    height: 50px;
-    position: absolute;
-    z-index: 99;
-  }
-`;
+//   .test-box {
+//     background-color: black;
+//     width: 100px;
+//     height: 50px;
+//     position: absolute;
+//     z-index: 99;
+//   }
+// `;
