@@ -36,6 +36,9 @@ router.post("/openStudy", async (req, res, next) => {
     deadline,
   } = req.body;
 
+  console.log(tmX);
+  console.log(tmY);
+
   try {
     await Study.create({
       study_name: study_name,
