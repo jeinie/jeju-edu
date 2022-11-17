@@ -18,12 +18,11 @@ export default function Main({ list }) {
       <MainCategory />
       {list.map((el, idx) => {
         return (
-          <Link to={`/PartyDetail/:${el.study_no}`} key={idx}>
+          <Link to={`/PartyDetail/${el.study_no}`} key={idx}>
             <StudyCard index={idx} item={el} />
           </Link>
         );
       })}
-      {/* <ViewDetail list={list} /> */}
       <Footer />
     </MainContainer>
   );

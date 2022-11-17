@@ -21,10 +21,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Main list={list} />} />
-      <Route
-        path={`/PartyDetail/:${list.study_no}`}
-        element={<PartyDetail />}
-      />
+      <Route path={`/PartyDetail/:id`} element={<PartyDetail list={list} />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/PartySearch" element={<PartySearch />} />
     </Routes>

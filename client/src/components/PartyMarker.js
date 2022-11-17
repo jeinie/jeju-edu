@@ -37,7 +37,7 @@ export default function PartyMarker({ lat, lon }) {
       const handlePosition = (position) => {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
-        console.log(position.coords);
+        // console.log(position.coords);
 
         let locPosition = new kakao.maps.LatLng(lat, lon);
         let message = '<div style="padding:5px;">현위치</div>';
