@@ -205,6 +205,9 @@ router.post("/joinStudy", async (req, res, next) => {
 
     result["success"] = 200;
     result["msg"] = "study 테이블 join 성공";
+    result["members"] = (
+      await Study.findOne({ where: { study_no: study_no } })
+    ).members;
     res.json(result);
   } catch (error) {
     result["success"] = 100;
