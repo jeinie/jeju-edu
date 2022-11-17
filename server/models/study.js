@@ -5,7 +5,8 @@ module.exports = class Study extends Sequelize.Model {
     return super.init(
       {
         study_no: {
-          type: Sequelize.STRING(20),
+          type: Sequelize.INTEGER,
+          autoIncrement: true,
           primaryKey: true,
         },
         study_name: {
