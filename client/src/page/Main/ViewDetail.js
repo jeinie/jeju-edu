@@ -7,7 +7,6 @@ export default function ViewDetail({ list }) {
   if (typeof list === "undefined") {
     return;
   }
-  const first = list[0];
   return (
     <ViewDetailContainer>
       <div className="wrapper">
@@ -17,18 +16,18 @@ export default function ViewDetail({ list }) {
               {/* <div className="headerProfile"></div> */}
               <div className="headerTitle">
                 <p>{list.who_open}</p>
-                <p>{first.study_name}</p>
+                <p>{list.study_name}</p>
               </div>
             </section>
             <section className="placeData">
               <div className="placeAddress">
                 <HiLocationMarker />
                 <h6 className="addressTitle">place</h6>
-                <p className="address">{first.location}</p>
+                <p className="address">{list.location}</p>
               </div>
               <div className="memberContainer">
                 <MdPeopleAlt />
-                <p className="partyMembers">{`${first.members}/10`}</p>
+                <p className="partyMembers">{`${list.members}/10`}</p>
               </div>
             </section>
           </div>

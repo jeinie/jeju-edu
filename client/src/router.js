@@ -22,8 +22,6 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Main list={list} />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/PartyDetail" element={<PartyJoin/>} />
       <Route
         path={`/PartyDetail/:${list.study_no}`}
         element={<PartyDetail />}
