@@ -1,5 +1,7 @@
 const express = require("express");
 const Study = require("../models/study");
+const StudyAttendsStatus = require("../models/studyAttendsStatus");
+const { route } = require("./page");
 
 const router = express.Router();
 
@@ -57,6 +59,23 @@ router.post("/openStudy", async (req, res, next) => {
     });
     result["success"] = 200;
     result["msg"] = "study 테이블 insert 성공";
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
+router.post("/joinStudy", async (req, res, next) => {
+  const result = {};
+  const { study_no, id } = req.body;
+  try {
+    await StudyAttendsStatus.create({
+      study_no: study_no,
+      id: id,
+    });
+    result["success"] = 200;
+    result["msg"] = "study 테이블 join 성공";
     res.json(result);
   } catch (error) {
     console.error(error);
