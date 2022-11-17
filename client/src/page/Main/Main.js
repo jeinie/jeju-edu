@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Input from "../../components/Input";
 import PlusBtn from "../../components/PlusBtn";
 import StudyCard from "../../components/StudyCard";
+import MainCategory from "./MainCategory";
+import ViewDetail from "./ViewDetail";
+import Footer from "./../../components/Footer";
 
-function test() {
-  const array = []
-  for (let i=0; i<3; i++) {
-    array.push(<StudyCard key={i}/>);
-  }
-  return array;
-}
+export default function Main({ list }) {
+  const [onDetail, setOnDetail] = useState(false);
 
-export default function Main() {
+  const handleViewDetail = (index, id) => {
+    if (index === id) {
+      setOnDetail(true);
+      return <ViewDetail />;
+    }
+  };
+
   return (
     <MainContainer>
       <Input />
+      <MainCategory />
       <PlusBtn />
-      {
-        <>{test()}</>
-      }
+      {list.map((el, idx) => {
+        return <StudyCard item={el} key={idx} onClick={handleViewDetail} />;
+      })}
+      <ViewDetail list={list} />
+      <Footer />
     </MainContainer>
   );
 }
