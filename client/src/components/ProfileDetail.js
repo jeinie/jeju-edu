@@ -25,7 +25,7 @@ export default function ProfileDetail({
                   <button className="matching">매칭</button>
                 </div>
               </div>
-              <div>
+              <div className="body">
                 <div className="bodyInfo">
                   <HiLocationMarker />
                   <p className="infoMiddle">place</p>
@@ -48,7 +48,7 @@ export default function ProfileDetail({
           return (
             <ListContainer key={idx}>
               <div className="header">
-                <div>
+                <div className="headerNames">
                   <p className="userName">{el.who_open}</p>
                   <p className="partyName">{el.study_name}</p>
                 </div>
@@ -58,11 +58,13 @@ export default function ProfileDetail({
               </div>
               <div className="body">
                 <div className="bodyInfo">
-                  <HiLocationMarker />
+                  <p>
+                    <HiLocationMarker />
+                  </p>
                   <p className="infoMiddle">place</p>
                   <p>{el.location}</p>
                 </div>
-                <div>
+                <div className="group">
                   <MdPeopleAlt />
                   <p className="member">{el.members}/10</p>
                 </div>
@@ -84,8 +86,8 @@ const Wrapper = styled.article`
 `;
 
 const ListContainer = styled.section`
-  padding: 0 12px 50px;
-  margin: 0 20px 23px;
+  padding: 0 12px 220px;
+  margin: 24px 20px 23px;
   width: 100%;
   height: 102px;
   background-color: #faf6f2;
@@ -97,6 +99,7 @@ const ListContainer = styled.section`
   align-items: center;
 
   .header {
+    margin-top: 30px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -134,16 +137,23 @@ const ListContainer = styled.section`
   }
 
   .body {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
+    align-items: center;
+    margin-top: 18px;
   }
 
   .bodyInfo {
     display: flex;
-    margin-top: 18px;
+    justify-content: center;
+    align-items: center;
   }
 
+  .group {
+    display: flex;
+    align-items: center;
+  }
   .infoMiddle {
     margin: 0 5px;
   }
