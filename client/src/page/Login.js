@@ -11,6 +11,7 @@ export default function Login() {
 
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
+
     const onUserIdHandler = (e) => {
         setUserId(e.currentTarget.value);
     }
@@ -42,6 +43,7 @@ export default function Login() {
     return (
         
         <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', width:'100%', height:'100vh'}}>
+            <button onClick={test}>테스트</button>
             <h1 style={{ display:'flex', flexDirection:'column', fontSize:'50px'}}>서비스명</h1>
             <p style={{display:'flex', flexDirection:'column', fontSize:'15px'}}>서비스 슬로건</p>
             <form style={{display:'flex', flexDirection:'column', marginTop:'20px'}} onSubmit={onSubmitHandler}>

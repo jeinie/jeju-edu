@@ -31,7 +31,7 @@ const AddressInput = () => {
         <input placeholder="00동 00구" className="inputBox" ref={location} />
         <SearchIcon color="white" onClick={() => handleAddress()}/>
       </div>
-      <p style={{marginLeft:'25px', marginRight:'25px'}} onClick={{}}><MyLocationIcon style={{marginRight:'10px'}}/>현재 위치로 설정</p>
+      <p style={{marginLeft:'25px', marginRight:'25px'}} ><MyLocationIcon style={{marginRight:'10px'}}/>현재 위치로 설정</p>
     </TestBox>
   );
 };
