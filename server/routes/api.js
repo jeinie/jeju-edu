@@ -66,27 +66,6 @@ router.post("/getStudyList", async (req, res, next) => {
  */
 router.get("/getStudyListMine/:id", async (req, res, next) => {
   try {
-    /*
-    const studyList = await StudyAttendsStatus.findAll({
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (studyList) {
-      let keyArr = [];
-      let resultArr = [];
-      console.log(`MyStudyList는 ${studyList}`);
-
-      Array.from(studyList).forEach((item) => {
-        keyArr.push(item.study_no);
-      });
-      
-      Array.from(keyArr).forEach((item)=>{
-        resultArr.push( item )
-      })
-      res.json(studyList[0]);
-    }
-    */
     const studyList = await Study.findAll({
       where: {
         who_open: req.params.id,
@@ -103,6 +82,10 @@ router.get("/getStudyListMine/:id", async (req, res, next) => {
     let deadline = "";
 
     Array.from(studyList).forEach((item) => {
+      let concat = item.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      item.location = result;
+
       if (item.closeDate != null) {
         closeDate = item.closeDate.replaceAll("-", "");
       }
@@ -151,6 +134,10 @@ router.get("/getStudyListNotMine/:id", async (req, res, next) => {
     let deadline = "";
 
     Array.from(studyList).forEach((item) => {
+      let concat = item.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      item.location = result;
+
       if (item.closeDate != null) {
         closeDate = item.closeDate.replaceAll("-", "");
       }
