@@ -19,6 +19,12 @@ router.post("/viewDetail/:study_no", async (req, res) => {
     if (studyInfo) {
       result["success"] = 200;
       result["msg"] = "studyInfo 전달 성공";
+
+      for (var i = 0; i < studyInfo.length; i++) {
+        let concat = studyInfo[i].location.split(" ");
+        let result = concat[1] + " " + concat[2];
+        studyInfo[i].location = result;
+      }
       result["studyInfo"] = studyInfo;
       res.json(result);
     } else {
