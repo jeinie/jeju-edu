@@ -44,7 +44,8 @@ router.get("/", async (req, res, next) => {
 */
 
 router.get("/", (req, res) => {
-  console.log("엥?");
+  res.sendFile("../public/index.html");
+  //console.log("엥?");
 });
 
 module.exports = router;
