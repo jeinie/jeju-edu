@@ -2,7 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const Study = require("../models/study");
 const StudyAttendsStatus = require("../models/studyAttendsStatus");
-
+const JejuAreaDB = require("../models/jejuAreaDB");
 let { Op } = require("sequelize");
 const { route } = require("./page");
 
@@ -27,18 +27,29 @@ router.get("/getStudyList", async (req, res, next) => {
   }
 });
 
-router.get("/getStudyList/:search", async (req, res, next) => {
+router.post("/getStudyList", async (req, res, next) => {
   try {
-    const search = req.params.search;
-    console.log(search);
+    const { area } = req.body;
+    //console.log(search);
 
-    const studyList = await Study.findAll({});
-    console.log(studyList);
-    Array.from(studyList).forEach((item) => {
-      let concat = item.location.split(" ");
-      let result = concat[1] + " " + concat[2];
-      item.location = result;
+    const studyList = await JejuAreaDB.findAll({
+      where:{
+        [Op.or]:[
+          keyword: {
+            [Op.like]: `%${area}%`,
+          }
+        ]
+      }
+
     });
+    console.log(studyList);
+    //Array.from(studyList).forEach((item) => {
+    for( var i = 0 ; i < 5 ; i++ ){
+      let concat = studyList[ i ].location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      studyList[ i ].location = result;
+    }
+    //});
 
     if (studyList) {
       res.json(studyList);
