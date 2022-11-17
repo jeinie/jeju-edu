@@ -6,10 +6,7 @@ module.exports = class StudyAttendsStatus extends Sequelize.Model {
       {
         idx: {
           type: Sequelize.INTEGER,
-<<<<<<< HEAD
-=======
           autoIncrement: true,
->>>>>>> back
           primaryKey: true,
         },
         study_no: {
