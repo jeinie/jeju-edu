@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const Study = require("../models/study");
 const StudyAttendsStatus = require("../models/studyAttendsStatus");
+const 
 const { Op } = require("sequelize");
 const { route } = require("./page");
 
@@ -25,6 +26,30 @@ router.get("/getStudyList", async (req, res, next) => {
     return next(error);
   }
 });
+
+router.get("/getStudyList/:search", async (req, res, next) => {
+  try {
+    const search = req.params.search;
+    console.log(search);
+    /*
+    const studyList = await Study.findAll({});
+    console.log(studyList);
+    Array.from(studyList).forEach((item) => {
+      let concat = item.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      item.location = result;
+    });
+
+    if (studyList) {
+      res.json(studyList);
+    }
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+  */
+});
+
 /*
  * 내가 개설한 스터디들만 보기
  */
