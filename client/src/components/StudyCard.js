@@ -18,7 +18,7 @@ export default function StudyCard({ item }) {
         </div>
         <div className="partyMembers">
           <MdPeopleAlt />
-          <p>{`${item.members} / 10`}</p>
+          <p>{`${item.members} / ${item.min_party}`}</p>
         </div>
       </div>
     </StudyBox>
