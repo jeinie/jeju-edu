@@ -19,6 +19,7 @@ router.get("/getStudyList", async (req, res, next) => {
 });
 
 router.post("/openStudy", async (req, res, next) => {
+  const result = {};
   const {
     study_name,
     who_open,
