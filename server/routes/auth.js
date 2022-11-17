@@ -65,34 +65,4 @@ router.get("/logout", (req, res) => {
   res.json(result);
 });
 
-router.get("/api/testDBInsertStudy", async (req, res, next) => {
-  const result = {};
-  try {
-    await Study.create({
-      study_name: "스터딩이름2",
-      who_open: "aaaa",
-      study_category: "gitar",
-      study_detail:
-        "studygital. \nfawfwafawf안녕 나는 지금\n.   띄어 \n 정말로? \n      콜론;   	\n정말이야.",
-      members: 7,
-      min_party: "5",
-      open_date: "2022-11-28",
-      close_date: "2022-11-30",
-      study_date: "2022-11-29",
-      location: "제주시",
-      tmX: 35,
-      tmY: 31,
-      deadline: "2022-11-30",
-      status: 0,
-    });
-
-    result["success"] = 200;
-    result["msg"] = "study 테이블 insert 성공";
-    res.json(result);
-  } catch (error) {
-    console.error(error);
-    return next(error);
-  }
-});
-
 module.exports = router;

@@ -50,6 +50,7 @@ module.exports = class Study extends Sequelize.Model {
         },
         status: {
           type: Sequelize.INTEGER,
+          defaultValue: 0,
         },
       },
       {
