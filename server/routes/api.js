@@ -69,8 +69,8 @@ router.post("/openStudy", async (req, res, next) => {
 
 router.post("/joinStudy", async (req, res, next) => {
   const result = {};
-  const { study_no, id } = req.body;
-
+  const { study_no , id } = req.body;
+  
   try {
     await StudyAttendsStatus.create({
       study_no: study_no,
@@ -82,7 +82,7 @@ router.post("/joinStudy", async (req, res, next) => {
   } catch (error) {
     result["success"] = 100;
     result["msg"] = `/joinStudy 에서 에러 발생 ${error}`;
-    res.json(result);
+	res.json(result);
     console.error(error);
     return next(error);
   }
