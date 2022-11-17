@@ -31,7 +31,7 @@ router.get("/getStudyList/:search", async (req, res, next) => {
   try {
     const search = req.params.search;
     console.log(search);
-    /*
+
     const studyList = await Study.findAll({});
     console.log(studyList);
     Array.from(studyList).forEach((item) => {
@@ -47,7 +47,6 @@ router.get("/getStudyList/:search", async (req, res, next) => {
     console.error(error);
     return next(error);
   }
-  */
 });
 
 /*
