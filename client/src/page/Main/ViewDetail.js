@@ -4,16 +4,15 @@ import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
 import axios from "axios";
 import BasicModal from "../../components/Modal";
+import { BsCalendar2WeekFill } from "react-icons/bs";
 
 export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
+  console.log(newData);
 
   const handleModalView = () => {
     console.log(id);
     axios.post("http://13.125.223.194:56742/api/joinStudy", {
-      header: {
-        "Content-Type": "application/json",
-      },
       body: {
         study_no: id,
         // id:
@@ -31,19 +30,28 @@ export default function ViewDetail({ list, id }) {
           <div className="headerLeft">
             <section className="headerLeftContent">
               <div className="headerTitle">
-                <p>{list.who_open}</p>
-                <p>{list.study_name}</p>
+                <p className="userName">{newData.who_open}</p>
+                <p className="studyName">{newData.study_name}</p>
               </div>
             </section>
             <section className="placeData">
               <div className="placeAddress">
                 <HiLocationMarker />
+                {/* 마커 아이콘 */}
                 <h6 className="addressTitle">place</h6>
                 <p className="address">{newData.location}</p>
               </div>
               <div className="memberContainer">
                 <MdPeopleAlt />
+                {/* 사람들 아이콘 */}
                 <p className="partyMembers">{`${newData.members}/10`}</p>
+              </div>
+              <div className="calender">
+                {/* 달력 아이콘 */}
+                <BsCalendar2WeekFill />
+                <p className="deathLine">
+                  {newData.createdAt} ~ {newData.close_date}
+                </p>
               </div>
             </section>
           </div>
@@ -52,11 +60,11 @@ export default function ViewDetail({ list, id }) {
         <pre className="partyDesc">{newData.study_detail}</pre>
         <section className="detailCreateBtn">
           <div className="btnBox">
-            <button
+            {/* <button
               className="joinBtn"
               onClick={handleModalView}
-            >{`J-JOIN`}</button>
-            {/* <BasicModal list={newData} /> */}
+            >{`J-JOIN`}</button> */}
+            <BasicModal list={newData} />
           </div>
         </section>
       </div>
@@ -71,7 +79,7 @@ const ViewDetailContainer = styled.section`
     font-size: 12px;
     margin: 0 20px;
     padding: 0 0 27px 17px;
-    box-shadow: 1px 1px 3px 1px #dadce0;
+    /* box-shadow: 1px 1px 3px 1px #dadce0; */
   }
   .containerHeader {
     display: flex;
@@ -89,6 +97,12 @@ const ViewDetailContainer = styled.section`
     width: 60%;
     flex-direction: column;
   }
+  .calender {
+    font-size: 10px;
+  }
+  .deathLine {
+    margin-left: 16px;
+  }
   .headerProfile {
     text-align: left;
     margin-right: 6px;
@@ -100,9 +114,21 @@ const ViewDetailContainer = styled.section`
   }
   .headerTitle {
     padding-left: 6px;
+    width: 24px;
     text-align: left;
     display: flex;
     flex-direction: column;
+  }
+
+  .userName {
+    font-size: 15px;
+    font-weight: 350;
+  }
+
+  .studyName {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
   }
   .headerCircle {
     text-align: right;
@@ -150,22 +176,6 @@ const ViewDetailContainer = styled.section`
     margin-top: 27px;
   }
 
-  .likeBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    background-color: #e47b00;
-    border-radius: 50%;
-  }
-
-  .likeBtn:before {
-    text-align: center;
-    content: "♡";
-    font-size: 16px;
-    color: white;
-  }
   .btnBox {
     text-align: center;
     display: flex;

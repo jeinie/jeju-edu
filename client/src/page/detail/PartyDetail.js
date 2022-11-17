@@ -33,9 +33,9 @@ export default function PartyDetail() {
   return (
     <div>
       <PartyMarker lat={local.tmX} lon={local.tmY} />
-      <SearchInputContainer>
+      {/* <SearchInputContainer>
         <Input />
-      </SearchInputContainer>
+      </SearchInputContainer> */}
       <ViewDetail list={personalList} id={id} />
     </div>
   );

@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { MdPeopleAlt } from "react-icons/md";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -23,10 +24,17 @@ export default function BasicModal({ list }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+
+  const moveMain = () => {
+    navigate("/");
+  };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>J-Join</Button>
+    <ModalContainer>
+      <Button onClick={handleOpen}>
+        <p className="join">J-Join</p>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -46,14 +54,25 @@ export default function BasicModal({ list }) {
             <p className="mixMember">{list.members}/10</p>
           </ModalMemberContainer>
           <PageButtonBox>
-            <MoreParty>다른 스터디 보러가기</MoreParty>
-            <CloseBtn>닫기</CloseBtn>
+            <MoreParty onClick={moveMain}>다른 스터디 보러가기</MoreParty>
+            <CloseBtn onClick={handleClose}>닫기</CloseBtn>
           </PageButtonBox>
         </Box>
       </Modal>
-    </div>
+    </ModalContainer>
   );
 }
+
+const ModalContainer = styled.section`
+  .join {
+    background-color: black;
+    color: white;
+    width: 279px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 25px;
+  }
+`;
 
 const ModalMemberContainer = styled.div`
   display: flex;
@@ -79,6 +98,8 @@ const MoreParty = styled.button`
   margin-top: 12px;
   border-radius: 25px;
   border: 1px solid black;
+  background-color: black;
+  color: white;
 `;
 
 const CloseBtn = styled.button`
@@ -86,5 +107,7 @@ const CloseBtn = styled.button`
   height: 33px;
   margin-top: 12px;
   border-radius: 25px;
-  border: 1px solid black;
+  border: 1px solid #e47b00;
+  background-color: #fff;
+  color: #e47b00;
 `;
