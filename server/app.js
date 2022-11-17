@@ -17,7 +17,7 @@ const { sequelize } = require("./models");
 
 const app = express();
 
-app.set("port", process.env.PORT || 80);
+app.set("port", process.env.PORT || 443);
 
 sequelize
   .sync({ force: false })
