@@ -73,12 +73,13 @@ const NavContainer = styled.nav`
   display: flex;
   color: #e47b00;
   .navBox {
+    margin: 0 2px;
     color: white;
     background-color: #e47b00;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px;
     text-align: center;
     flex-grow: 1;
   }

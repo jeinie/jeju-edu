@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import Input from "../../components/Input";
 import PlusBtn from "../../components/PlusBtn";
@@ -11,20 +12,25 @@ import Footer from "./../../components/Footer";
 export default function Main({ list }) {
   const [onDetail, setOnDetail] = useState(false);
 
-  const handleViewDetail = (index, id) => {
-    if (index === id) {
-      setOnDetail(true);
-      return <ViewDetail />;
-    }
+  const handleViewDetail = (e) => {
+    console.log(e.target.textContent);
   };
 
   return (
     <MainContainer>
       <Input />
       <MainCategory />
-      <PlusBtn />
       {list.map((el, idx) => {
-        return <StudyCard item={el} key={idx} onClick={handleViewDetail} />;
+        return (
+          <Link to={`/PartyDetail/:${el.study_no}`}>
+            <StudyCard
+              index={idx}
+              item={el}
+              key={idx}
+              handleViewDetail={handleViewDetail}
+            />
+          </Link>
+        );
       })}
       <ViewDetail list={list} />
       <Footer />
