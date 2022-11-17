@@ -61,4 +61,18 @@ router.post("/openStudy", async (req, res, next) => {
   }
 });
 
+router.post("/closeStudy", async (req, res, next) => {
+  const result = {};
+  const { study_no } = req.body;
+  try {
+    await Study.destroy({ where: { study_no: study_no } });
+    result["success"] = 200;
+    result["msg"] = "study 테이블 delete 성공";
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
 module.exports = router;
