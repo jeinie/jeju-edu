@@ -302,7 +302,8 @@ router.post("/openStudy", async (req, res, next) => {
 router.post("/joinStudy", async (req, res, next) => {
   const result = {};
   const { study_no, id } = req.body;
-
+  console.log(`study_no : ${study_no}`);
+  console.log(`id : ${id}`);
   try {
     await StudyAttendsStatus.create({
       study_no: study_no,
