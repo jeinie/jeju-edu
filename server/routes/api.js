@@ -46,6 +46,8 @@ router.post("/getStudyList", async (req, res, next) => {
     console.log(studyList);
     //Array.from(studyList).forEach((item) => {
     for (var i = 0; i < 5; i++) {
+      console.log("뭐지?");
+      console.log(studyList);
       let concat = studyList[i].areaName.split(" ");
       let result = concat[1] + " " + concat[2];
       studyList[i].areaName = result;
