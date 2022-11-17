@@ -84,6 +84,9 @@ router.post("/joinStudy", async (req, res, next) => {
     result["msg"] = "study 테이블 join 성공";
     res.json(result);
   } catch (error) {
+    result["success"] = 100;
+    result["msg"] = `/joinStudy 에서 에러 발생 ${error}`;
+	res.json(result);
     console.error(error);
     return next(error);
   }
