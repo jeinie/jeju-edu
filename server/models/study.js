@@ -9,6 +9,9 @@ module.exports = class Study extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
+        who_open: {
+          type: Sequelize.STRING(20),
+        },
         study_name: {
           type: Sequelize.STRING(200),
         },
@@ -19,7 +22,7 @@ module.exports = class Study extends Sequelize.Model {
           type: Sequelize.STRING(2000),
         },
         members: {
-          type: Sequelize.STRING(500),
+          type: Sequelize.INTEGER,
         },
         min_party: {
           type: Sequelize.INTEGER,
@@ -47,6 +50,7 @@ module.exports = class Study extends Sequelize.Model {
         },
         status: {
           type: Sequelize.INTEGER,
+          defaultValue: 0,
         },
       },
       {

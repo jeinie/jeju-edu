@@ -6,6 +6,7 @@ import Main from "./page/Main/Main";
 import PartyDetail from "./page/detail/PartyDetail";
 import PartySearch from "./page/PartySearch";
 import Profile from "./page/Profile";
+import Login from "./page/Login";
 
 const Router = () => {
   const [list, setList] = useState(null);

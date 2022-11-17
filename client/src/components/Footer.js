@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
+import PlusBtn from "./PlusBtn";
 
 export default function Footer() {
   const [onPage, setOnPage] = useState(true);
@@ -18,6 +19,7 @@ export default function Footer() {
       >
         <FiSearch />
       </div>
+      <PlusBtn/>
       <div
         className={onPage ? "iconBox" : "iconBox viewPage"}
         onClick={handleColor}

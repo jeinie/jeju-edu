@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Footer from "../../components/Footer";
 import Input from "../../components/Input";
 import PlusBtn from "../../components/PlusBtn";
 import StudyCard from "../../components/StudyCard";
 import MainCategory from "./MainCategory";
 import ViewDetail from "./ViewDetail";
+import Footer from "./../../components/Footer";
 
 export default function Main({ list }) {
   const [onDetail, setOnDetail] = useState(false);
 
-  // const handleViewDetail = (index, id) => {
-  //   if (index === id) {
-  //     setOnDetail(true);
-  //     return <ViewDetail />;
-  //   }
-  // };
+  const handleViewDetail = (index, id) => {
+    if (index === id) {
+      setOnDetail(true);
+      return <ViewDetail />;
+    }
+  };
 
   return (
     <MainContainer>
@@ -24,7 +24,7 @@ export default function Main({ list }) {
       <MainCategory />
       <PlusBtn />
       {list.map((el, idx) => {
-        return <StudyCard item={el} key={idx} />;
+        return <StudyCard item={el} key={idx} onClick={handleViewDetail} />;
       })}
       <ViewDetail list={list} />
       <Footer />

@@ -8,17 +8,16 @@ export default function ViewDetail({ list }) {
     return;
   }
   const first = list[0];
-  console.log(list);
   return (
     <ViewDetailContainer>
       <div className="wrapper">
         <div className="containerHeader">
           <div className="headerLeft">
             <section className="headerLeftContent">
-              <div className="headerProfile"></div>
+              {/* <div className="headerProfile"></div> */}
               <div className="headerTitle">
-                <p>{list.study_name}</p>
-                <p>party title</p>
+                <p>{list.who_open}</p>
+                <p>{first.study_name}</p>
               </div>
             </section>
             <section className="placeData">
