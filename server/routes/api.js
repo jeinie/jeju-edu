@@ -67,12 +67,10 @@ router.post("/openStudy", async (req, res, next) => {
 });
 
 router.post("/joinStudy", async (req, res, next) => {
+  console.log("header 내부");
+  console.log(req.headers);
   const result = {};
   const { study_no } = req.body;
-  console.log("0");
-  console.log(req.session.userInfo);
-  console.log("1");
-  console.log(req.session);
 
   try {
     await StudyAttendsStatus.create({
