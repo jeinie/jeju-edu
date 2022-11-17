@@ -70,9 +70,10 @@ router.get("/getStudyListMine/:id", async (req, res, next) => {
         deadline = item.deadline.replaceAll("-", "");
       }
       if (item.status == "수확완료") return;
-      if (item.status < 10) {
+      if (item.members < 10) {
         item.status = "대기";
-      } else if (item.status >= 10) {
+      } else if (item.members >= 10) {
+        item.members = 10;
         item.status = "매칭";
       } else if (todayDate > closeDate) {
         item.status = "실패";
@@ -117,9 +118,10 @@ router.get("/getStudyListNotMine/:id", async (req, res, next) => {
         deadline = item.deadline.replaceAll("-", "");
       }
       if (item.status == "수확완료") return;
-      if (item.status < 10) {
+      if (item.members < 10) {
         item.status = "대기";
-      } else if (item.status >= 10) {
+      } else if (item.members >= 10) {
+        item.members = 10;
         item.status = "매칭";
       } else if (todayDate > closeDate) {
         item.status = "실패";
