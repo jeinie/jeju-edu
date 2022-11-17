@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import ViewDetail from "../Main/ViewDetail";
 import PartyMarker from "../../components/PartyMarker";
 import Input from "./../../components/Input";
 
 export default function PartyDetail({ list }) {
+  // useEffect(() => {
+  //   axios.get("");
+  // });
   const { id } = useParams();
   console.log(id);
   return (
