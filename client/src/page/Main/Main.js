@@ -26,6 +26,7 @@ export default function Main({ list, update }) {
 
 const MainContainer = styled.div`
   padding-top: 56px;
+  margin-bottom: 100px;
 
   .test {
     height: 900px;

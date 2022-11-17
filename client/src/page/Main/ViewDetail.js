@@ -21,11 +21,10 @@ export default function ViewDetail({ list, id }) {
     console.log(id);
     console.log(userId);
     axios.post("http://13.125.223.194:56742/api/joinStudy", {
-        study_no: id,
-        id: userId
+      study_no: id,
+      id: userId,
     });
   };
-
 
   if (typeof list === "undefined") {
     return;
@@ -69,10 +68,20 @@ export default function ViewDetail({ list, id }) {
               className="joinBtn"
               onClick={handleModalView}
             >{`J-JOIN`}</button> */}
-            <button onClick={()=> { setOpen(true); handleModalView();}}>
+            <button
+              onClick={() => {
+                setOpen(true);
+                handleModalView();
+              }}
+            >
               <p className="join">J-Join</p>
             </button>
-            <Modal status={1} open={open} handleClose={setOpen} list={newData} />
+            <Modal
+              status={1}
+              open={open}
+              handleClose={setOpen}
+              list={newData}
+            />
           </div>
         </section>
       </div>
@@ -111,31 +120,22 @@ const ViewDetailContainer = styled.section`
   .deathLine {
     margin-left: 16px;
   }
-  .headerProfile {
-    text-align: left;
-    margin-right: 6px;
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
-    background-color: #d9d9d9;
-    border-radius: 50%;
-  }
+
   .headerTitle {
     padding-left: 6px;
-    width: 24px;
     text-align: left;
     display: flex;
     flex-direction: column;
   }
 
   .userName {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 350;
   }
 
   .studyName {
     width: 100%;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
   }
   .headerCircle {
