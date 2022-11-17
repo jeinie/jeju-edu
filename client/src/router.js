@@ -8,6 +8,7 @@ import PartySearch from "./page/PartySearch";
 import Profile from "./page/Profile";
 import Login from "./page/Login";
 import PartyJoin from "./page/detail/PartyJoin";
+import Footer from "./components/Footer";
 
 const Router = () => {
   const [list, setList] = useState(null);
@@ -20,6 +21,7 @@ const Router = () => {
     return <div>리스트가 없습니다 !</div>;
   }
   return (
+    <>
     <Routes>
       <Route path="/" element={<Main list={list} />} />
       <Route path="/login" element={<Login />} />
@@ -28,6 +30,8 @@ const Router = () => {
       <Route path="/Profile" element={<Profile />} />
       <Route path="/PartySearch" element={<PartySearch />} />
     </Routes>
+    <Footer/>
+    </>
   );
 };
 
