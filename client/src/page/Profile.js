@@ -44,9 +44,10 @@ export default function Profile() {
     setJoin(false);
     setCreate(true);
   };
-  if (joinList === null) {
+  if (joinList | (createList === null)) {
     return null;
   }
+  console.log(createList);
 
   return (
     <MainContainer>
