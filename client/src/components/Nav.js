@@ -1,27 +1,32 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 export default function Nav() {
   const [onCode, setOnCode] = useState(true);
   const [onSing, setOnSing] = useState(false);
   const [onDance, setOnDance] = useState(false);
+  const [APIdata, setAPIData] = useState(null);
   const codeEle = useRef();
   const singEle = useRef();
   const danceEle = useRef();
 
-  //   console.log(codeEle.current);
-
   const handlePageMenu = (e) => {
-    // console.log(e.target.textContent);
     if (e.target.textContent === "코드") {
+      console.log("코드");
+      // axios.get("").then((data) => setAPIData(data));
       setOnCode(true);
       setOnSing(false);
       setOnDance(false);
     } else if (e.target.textContent === "노래") {
+      console.log("노래");
+      // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(true);
       setOnDance(false);
     } else if (e.target.textContent === "춤") {
+      console.log("춤");
+      // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(false);
       setOnDance(true);
@@ -51,6 +56,7 @@ export default function Nav() {
       >
         춤
       </div>
+      <PartyList></PartyList>
     </NavContainer>
   );
 }
@@ -79,3 +85,5 @@ const NavContainer = styled.nav`
     background-color: white;
   }
 `;
+
+const PartyList = styled.section``;
