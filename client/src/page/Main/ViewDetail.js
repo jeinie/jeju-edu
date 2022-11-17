@@ -4,19 +4,23 @@ import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
 import axios from "axios";
 import BasicModal from "../../components/Modal";
+import { useSelector } from 'react-redux';
 
 export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
 
+  let userId = useSelector((state)=>{return state.user.id});
+
   const handleModalView = () => {
     console.log(id);
+    console.log(userId);
     axios.post("http://13.125.223.194:56742/api/joinStudy", {
       header: {
         "Content-Type": "application/json",
       },
       body: {
         study_no: id,
-        // id:
+        id:userId
       },
     });
   };
