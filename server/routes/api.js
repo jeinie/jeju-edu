@@ -9,11 +9,8 @@ const router = express.Router();
 
 router.get("/getStudyList", async (req, res, next) => {
   try {
-    const studyList = await StudyAttendsStatus.findAll({});
+    const studyList = await Study.findAll({});
     if (studyList) {
-      //console.log(`studyList는 ${studyList}`);
-      //console.log(studyList);
-      //res.send(JSON.stringify(studyList));
       res.json(studyList);
     }
   } catch (error) {

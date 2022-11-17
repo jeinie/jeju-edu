@@ -5,8 +5,7 @@ import axios from "axios";
 
 import ViewDetail from "../Main/ViewDetail";
 import PartyMarker from "../../components/PartyMarker";
-import Input from "./../../components/Input";
-import BasicModal from "../../components/Modal";
+import AddressInput from "../../components/AddressInput";
 
 export default function PartyDetail() {
   const { id } = useParams();
@@ -34,7 +33,7 @@ export default function PartyDetail() {
     <div>
       <PartyMarker lat={local.tmX} lon={local.tmY} />
       {/* <SearchInputContainer>
-        <Input />
+        <AddressInput />
       </SearchInputContainer> */}
       <ViewDetail list={personalList} id={id} />
     </div>
