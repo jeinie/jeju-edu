@@ -1,20 +1,38 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
+
+    const navigate = useNavigate();
 
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
 
     const onUserIdHandler = (e) => {
-        console.log('ji');
+        setUserId(e.currentTarget.value);
     }
   
     const onPasswordHandler = (e) => {
-        console.log('asdf');
+        setPassword(e.currentTarget.value);
     }
   
     const onSubmitHandler = (e) => {
         e.preventDefault();
+
+        let body = {
+            id: userId,
+            password: password
+        }
+
+        axios.post('http://13.125.223.194:56742/auth/api/login', body).then(response => {
+            console.log(response.data);
+            if(response.data.success === 200) {
+                navigate('/');
+            } else {
+                alert(response.data.msg);
+            }
+        });
     }
 
     return (
@@ -28,7 +46,7 @@ export default function Login() {
                 <label>PASSWORD</label>
                 <input style={{height:'30px', marginBottom:'50px', borderRadius:'15px', background:'#E47B00', border:'0px'}} type="password" value={password} onChange={onPasswordHandler}/>
                 <br/>
-                <button style={{height:'40px', borderRadius:'15px' ,background:'#E47B00', border:'0px', color:'white'}}>
+                <button style={{height:'40px', borderRadius:'30px' ,background:'#E47B00', border:'0px', color:'white'}}>
                 login
                 </button>
             </form>
