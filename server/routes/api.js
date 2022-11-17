@@ -52,7 +52,36 @@ router.get("/getStudyListMine/:id", async (req, res, next) => {
         who_open: req.params.id,
       },
     });
-    console.log(studyList);
+    console.log("오늘은");
+    let dayArr = JSON.stringify(new Date()).split("T")[0].substring(1, 11);
+    //.split("-");
+    //const todayDate = dayArr[0] + dayArr[1] + dayArr[2];
+    const todayDate = dayArr.replaceAll("-", "");
+    console.log(todayDate);
+
+    let closeDate = "";
+    let deadline = "";
+
+    Array.from(studyList).forEach((item) => {
+      if (item.closeDate != null) {
+        closeDate = item.closeDate.replaceAll("-", "");
+      }
+      if (item.deadline != null) {
+        deadline = item.deadline.replaceAll("-", "");
+      }
+      if (item.status == "수확완료") return;
+      if (item.status < 10) {
+        item.status = "대기";
+      } else if (item.status >= 10) {
+        item.status = "매칭";
+      } else if (todayDate > closeDate) {
+        item.status = "실패";
+      } else if (todayDate > deadline) {
+        item.status = "마감";
+      }
+    });
+
+    //console.log(studyList);
     res.json(studyList);
   } catch (error) {
     console.error(error);
@@ -70,11 +99,38 @@ router.get("/getStudyListNotMine/:id", async (req, res, next) => {
         who_open: { [Op.ne]: req.params.id },
       },
     });
-    if (studyList) {
-      console.log(`다른사람의studyList는 ${studyList}`);
-      console.log(studyList);
-      res.json(studyList);
-    }
+
+    let dayArr = JSON.stringify(new Date()).split("T")[0].substring(1, 11);
+    //.split("-");
+    //const todayDate = dayArr[0] + dayArr[1] + dayArr[2];
+    const todayDate = dayArr.replaceAll("-", "");
+    console.log(todayDate);
+
+    let closeDate = "";
+    let deadline = "";
+
+    Array.from(studyList).forEach((item) => {
+      if (item.closeDate != null) {
+        closeDate = item.closeDate.replaceAll("-", "");
+      }
+      if (item.deadline != null) {
+        deadline = item.deadline.replaceAll("-", "");
+      }
+      if (item.status == "수확완료") return;
+      if (item.status < 10) {
+        item.status = "대기";
+      } else if (item.status >= 10) {
+        item.status = "매칭";
+      } else if (todayDate > closeDate) {
+        item.status = "실패";
+      } else if (todayDate > deadline) {
+        item.status = "마감";
+      }
+    });
+
+    console.log(`다른사람의studyList는 ${studyList}`);
+    console.log(studyList);
+    res.json(studyList);
   } catch (error) {
     console.error(error);
     return next(error);
