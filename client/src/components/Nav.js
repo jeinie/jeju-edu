@@ -34,7 +34,7 @@ export default function MainCategory() {
   };
 
   return (
-    <NavContainer>
+    <NavContainer style={{marginLeft: '25px', marginRight: '25px'}}>
       <div
         className={onCode ? "navBox addColor" : "navBox"}
         ref={codeEle}
@@ -64,7 +64,6 @@ export default function MainCategory() {
 }
 
 const NavContainer = styled.nav`
-  width: 100%;
   height: 31px;
   margin-top: 48px;
 
