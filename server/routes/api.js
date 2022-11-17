@@ -26,16 +26,34 @@ router.get("/getStudyList", async (req, res, next) => {
  */
 router.get("/getStudyListMine/:id", async (req, res, next) => {
   try {
+    /*
     const studyList = await StudyAttendsStatus.findAll({
       where: {
         id: req.params.id,
       },
     });
     if (studyList) {
+      let keyArr = [];
+      let resultArr = [];
       console.log(`MyStudyList는 ${studyList}`);
-      console.log(studyList);
-      res.json(studyList);
+
+      Array.from(studyList).forEach((item) => {
+        keyArr.push(item.study_no);
+      });
+      
+      Array.from(keyArr).forEach((item)=>{
+        resultArr.push( item )
+      })
+      res.json(studyList[0]);
     }
+    */
+    const studyList = await Study.findAll({
+      where: {
+        who_open: req.params.id,
+      },
+    });
+    console.log(studyList);
+    res.json(studyList);
   } catch (error) {
     console.error(error);
     return next(error);
@@ -47,9 +65,9 @@ router.get("/getStudyListMine/:id", async (req, res, next) => {
  */
 router.get("/getStudyListNotMine/:id", async (req, res, next) => {
   try {
-    const studyList = await StudyAttendsStatus.findAll({
+    const studyList = await Study.findAll({
       where: {
-        id: { [Op.ne]: req.params.id },
+        who_open: { [Op.ne]: req.params.id },
       },
     });
     if (studyList) {
