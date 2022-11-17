@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import StudyCard from "./StudyCard";
+import ViewDetail from "../page/Main/ViewDetail";
 
-export default function Nav() {
+export default function MainCategory() {
   const [onCode, setOnCode] = useState(true);
   const [onSing, setOnSing] = useState(false);
   const [onDance, setOnDance] = useState(false);
-  const [APIdata, setAPIData] = useState(null);
+  // const [APIdata, setAPIData] = useState(null);
   const codeEle = useRef();
   const singEle = useRef();
   const danceEle = useRef();
@@ -57,7 +57,9 @@ export default function Nav() {
       >
         춤
       </div>
-      <PartyList></PartyList>
+      <PartyList>
+        <ViewDetail />
+      </PartyList>
     </NavContainer>
   );
 }
@@ -71,12 +73,13 @@ const NavContainer = styled.nav`
   display: flex;
   color: #e47b00;
   .navBox {
+    margin: 0 2px;
     color: white;
     background-color: #e47b00;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px;
     text-align: center;
     flex-grow: 1;
   }
