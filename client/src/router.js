@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -19,11 +19,13 @@ const Router = () => {
   if (list === null) {
     return <div>리스트가 없습니다 !</div>;
   }
-
   return (
     <Routes>
       <Route path="/" element={<Main list={list} />} />
-      <Route path="/PartyDetail" element={<PartyDetail />} />
+      <Route
+        path={`/PartyDetail/:${list.study_no}`}
+        element={<PartyDetail />}
+      />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/PartySearch" element={<PartySearch />} />
     </Routes>

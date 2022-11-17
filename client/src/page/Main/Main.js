@@ -12,27 +12,18 @@ import Footer from "./../../components/Footer";
 export default function Main({ list }) {
   const [onDetail, setOnDetail] = useState(false);
 
-  const handleViewDetail = (e) => {
-    console.log(e.target.textContent);
-  };
-
   return (
     <MainContainer>
       <Input />
       <MainCategory />
       {list.map((el, idx) => {
         return (
-          <Link to={`/PartyDetail/:${el.study_no}`}>
-            <StudyCard
-              index={idx}
-              item={el}
-              key={idx}
-              handleViewDetail={handleViewDetail}
-            />
+          <Link to={`/PartyDetail/:${el.study_no}`} key={idx}>
+            <StudyCard index={idx} item={el} />
           </Link>
         );
       })}
-      <ViewDetail list={list} />
+      {/* <ViewDetail list={list} /> */}
       <Footer />
     </MainContainer>
   );

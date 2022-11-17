@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { HeartFillIcon, LocationIcon } from "@goorm-dev/gds-goormthon";
 import { MdPeopleAlt } from "react-icons/md";
 
-export default function StudyCard({ index, item, handleViewDetail }) {
+export default function StudyCard({ item }) {
   return (
-    <StudyBox onClick={(e) => handleViewDetail(e)}>
+    <StudyBox>
       <IconBox style={{ float: "right" }}>
         <HeartFillIcon style={{ color: "lightGray" }} />
       </IconBox>
