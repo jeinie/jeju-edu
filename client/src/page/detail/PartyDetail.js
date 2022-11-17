@@ -8,11 +8,13 @@ import PartyMarker from "../../components/PartyMarker";
 import Input from "./../../components/Input";
 
 export default function PartyDetail({ list }) {
-  // useEffect(() => {
-  //   axios.get("");
-  // });
   const { id } = useParams();
-  console.log(id);
+  useEffect(() => {
+    axios
+      .post(`http://13.125.223.194:56742/viewDetail/${id}`)
+      .then((data) => console.log(data));
+  });
+  // console.log(id);
   return (
     <div>
       <PartyMarker lat="33.450317" lon="126.570764" />
