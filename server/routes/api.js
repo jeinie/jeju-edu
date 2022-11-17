@@ -35,7 +35,7 @@ router.post("/getStudyList", async (req, res, next) => {
     const studyList = await JejuAreaDB.findAll({
       where:{
         [Op.or]:[
-          keyword: {
+          areaName: {
             [Op.like]: `%${area}%`,
           }
         ]
