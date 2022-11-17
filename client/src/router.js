@@ -7,7 +7,6 @@ import PartyDetail from "./page/detail/PartyDetail";
 import PartySearch from "./page/PartySearch";
 import Profile from "./page/Profile";
 import Login from "./page/Login";
-import Footer from "./components/Footer";
 
 const Router = () => {
   const [list, setList] = useState(null);
@@ -23,6 +22,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Main list={list} />} />
+      <Route path="/login" element={<Login/>}/>
       <Route path="/PartyDetail" element={<PartyDetail />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/PartySearch" element={<PartySearch />} />
