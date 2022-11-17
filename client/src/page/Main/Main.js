@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import Input from "../../components/Input";
 import StudyCard from "../../components/StudyCard";
 import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
+import AddressInput from "../../components/AddressInput";
 
 export default function Main({ list }) {
   return (
     <MainContainer>
-      <Input />
+      <AddressInput/>
       <MainCategory />
       {list.map((el, idx) => {
         return (
