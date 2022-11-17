@@ -10,7 +10,7 @@ import AddressInput from "../../components/AddressInput";
 export default function Main({ list }) {
   return (
     <MainContainer>
-      <AddressInput/>
+      <AddressInput />
       <MainCategory />
       {list.map((el, idx) => {
         return (

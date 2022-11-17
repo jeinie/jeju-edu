@@ -21,7 +21,7 @@ export default function ProfileDetail({
           return (
             <ListContainer key={idx}>
               <div className="header">
-                <div>
+                <div className="headerTitleState">
                   <p className="userName">{el.who_open}</p>
                   <p className="partyName">{el.study_name}</p>
                 </div>
@@ -57,10 +57,10 @@ export default function ProfileDetail({
                   <p className="partyName">{el.study_name}</p>
                 </div>
                 <div>
-                  <button>매칭</button>
+                  <button className="matching">매칭</button>
                 </div>
               </div>
-              <div>
+              <div className="body">
                 <div>
                   <HiLocationMarker />
                   <p>place</p>
@@ -68,13 +68,12 @@ export default function ProfileDetail({
                 </div>
                 <div>
                   <MdPeopleAlt />
-                  <p>{el.members}</p>
+                  <p className="member">{el.members}/10</p>
                 </div>
               </div>
             </ListContainer>
           );
         })}
-        ;
       </Wrapper>
     );
   }
@@ -90,21 +89,32 @@ const Wrapper = styled.article`
 
 const ListContainer = styled.section`
   padding: 0 12px;
+  margin: 0 20px 23px;
   width: 100%;
   height: 102px;
   background-color: #faf6f2;
-  margin-bottom: 23px;
   padding-top: 24px;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
   .header {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .headerTitleState {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 
   .userName {
+    margin-bottom: 5px;
     font-weight: 350;
     font-size: 15px;
   }
@@ -112,5 +122,20 @@ const ListContainer = styled.section`
   .partyName {
     font-weight: 700;
     font-size: 18px;
+  }
+
+  .matching {
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+  }
+
+  .member {
+    margin-left: 6px;
+  }
+
+  .body {
+    display: flex;
+    justify-content: space-between;
   }
 `;
