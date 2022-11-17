@@ -28,6 +28,7 @@ router.post("/openStudy", async (req, res, next) => {
     min_party,
     open_date,
     close_date,
+    study_date,
     location,
     tmX,
     tmY,
