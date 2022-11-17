@@ -40,10 +40,10 @@ module.exports = class Study extends Sequelize.Model {
           type: Sequelize.STRING(200),
         },
         tmX: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.FLOAT,
         },
         tmY: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.FLOAT,
         },
         deadline: {
           type: Sequelize.DATEONLY,

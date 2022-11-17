@@ -5,7 +5,7 @@ import "./font.css";
 
 function App() {
   return (
-    <div className="App" style={{ fontFamily: "NanumSquare" }}>
+    <div className="App" style={{ fontFamily: "NanumSquare"}}>
       <Router />
     </div>
   );
