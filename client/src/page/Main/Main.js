@@ -4,13 +4,24 @@ import styled from "styled-components";
 import Footer from "../../components/Footer";
 import Input from "../../components/Input";
 import PlusBtn from "../../components/PlusBtn";
+import StudyCard from "../../components/StudyCard";
+
+function test() {
+  const array = []
+  for (let i=0; i<3; i++) {
+    array.push(<StudyCard key={i}/>);
+  }
+  return array;
+}
 
 export default function Main() {
   return (
     <MainContainer>
       <Input />
       <PlusBtn />
-      {/* <div className="test"></div> */}
+      {
+        <>{test()}</>
+      }
       <Footer />
     </MainContainer>
   );
