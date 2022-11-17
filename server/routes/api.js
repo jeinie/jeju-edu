@@ -3,7 +3,7 @@ const session = require("express-session");
 const Study = require("../models/study");
 const StudyAttendsStatus = require("../models/studyAttendsStatus");
 
-const { Op } = require("sequelize");
+let { Op } = require("sequelize");
 const { route } = require("./page");
 
 const router = express.Router();
