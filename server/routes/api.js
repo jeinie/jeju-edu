@@ -73,7 +73,7 @@ router.post("/joinStudy", async (req, res, next) => {
   try {
     await StudyAttendsStatus.create({
       study_no: study_no,
-      id: session.userInfo.id,
+      id: req.session.userInfo.id,
     });
     result["success"] = 200;
     result["msg"] = "study 테이블 join 성공";
