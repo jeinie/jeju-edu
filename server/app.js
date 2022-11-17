@@ -11,6 +11,7 @@ dotenv.config();
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+const apiRouter = require("./routes/api");
 
 const { sequelize } = require("./models");
 
@@ -51,6 +52,7 @@ app.use(
 app.use("/", pageRouter);
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/api", apiRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

@@ -1,6 +1,6 @@
 const express = require("express");
 const { User, Study } = require("../models");
-
+const path = require("path");
 const router = express.Router();
 /*
 router.use((req, res, next) => {
@@ -42,9 +42,22 @@ router.get("/", async (req, res, next) => {
   }
 });
 */
+/*
+router.get("/", (req, res) => {
+  res.sendFile("../public/index.html");
+  //console.log("엥?");
+});
+*/
 
 router.get("/", (req, res) => {
-  console.log("엥?");
+  console.log("여기까지옴1234");
+  try {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  } catch (e) {
+    console.log(`sendfile Error ${e}`);
+  }
+
+  return;
 });
 
 module.exports = router;
