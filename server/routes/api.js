@@ -2,17 +2,59 @@ const express = require("express");
 const session = require("express-session");
 const Study = require("../models/study");
 const StudyAttendsStatus = require("../models/studyAttendsStatus");
+const { Op } = require("sequelize");
 const { route } = require("./page");
 
 const router = express.Router();
 
 router.get("/getStudyList", async (req, res, next) => {
   try {
-    const studyList = await Study.findAll({});
+    const studyList = await StudyAttendsStatus.findAll({});
     if (studyList) {
       console.log(`studyList는 ${studyList}`);
       console.log(studyList);
       //res.send(JSON.stringify(studyList));
+      res.json(studyList);
+    }
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+/*
+ * 내가 개설한 스터디들만 보기
+ */
+router.get("/getStudyListMine/:id", async (req, res, next) => {
+  try {
+    const studyList = await StudyAttendsStatus.findAll({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (studyList) {
+      console.log(`MyStudyList는 ${studyList}`);
+      console.log(studyList);
+      res.json(studyList);
+    }
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
+/**
+ * 다른사람이 개설한 스터디들만 보기
+ */
+router.get("/getStudyListNotMine/:id", async (req, res, next) => {
+  try {
+    const studyList = await StudyAttendsStatus.findAll({
+      where: {
+        id: { [Op.ne]: req.params.id },
+      },
+    });
+    if (studyList) {
+      console.log(`다른사람의studyList는 ${studyList}`);
+      console.log(studyList);
       res.json(studyList);
     }
   } catch (error) {
