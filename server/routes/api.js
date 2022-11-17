@@ -201,6 +201,8 @@ router.post("/joinStudy", async (req, res, next) => {
       result["success"] = 100;
       result["msg"] = "이미 10명 이상입니다";
       result["members"] = 10;
+      res.send(result);
+      return;
     }
 
     if (studyInfo.members % 3 == 0) {
