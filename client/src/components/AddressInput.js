@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import { SearchIcon } from "@goorm-dev/gds-goormthon";
 import MyLocationIcon from '@mui/icons-material/MyLocation';
+import axios from "axios";
 
 const AddressInput = () => {
 
