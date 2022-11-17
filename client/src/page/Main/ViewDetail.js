@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
+import { HeartFillIcon } from "@goorm-dev/gds-goormthon";
 
 export default function ViewDetail() {
   return (
@@ -30,9 +31,16 @@ export default function ViewDetail() {
           </div>
           <div className="headerCircle"></div>
         </div>
-        {/* <textarea className="partyDesc" cols="30" row="5" readonly>
-          서버에서 통신받아온 qweqwe 데이터 넣기.
+        {/* <textarea
+          className="partyDesc"
+          cols="30"
+          row="5"
+          readOnly
+          placeholder="hello world"
+        >
+          HeartFillIcon world l l l l l www
         </textarea> */}
+        <pre>hello world</pre>
         <div>주황색 동그라미 안에 하트</div>
         <div>
           <div>하트아이콘</div>
