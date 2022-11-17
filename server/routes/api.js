@@ -119,6 +119,12 @@ router.post("/joinStudy", async (req, res, next) => {
       id: id,
     });
 
+    const studyInfo = await Study.findOne({ where: { study_no: study_no } });
+
+    if (studyInfo.members % 3 == 0) {
+      await Study.increment({ status: 1 }, { where: { study_no: study_no } });
+    }
+
     await Study.increment({ members: 1 }, { where: { study_no: study_no } });
 
     result["success"] = 200;
