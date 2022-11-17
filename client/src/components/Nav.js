@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import StudyCard from "./StudyCard";
 
 export default function Nav() {
   const [onCode, setOnCode] = useState(true);
