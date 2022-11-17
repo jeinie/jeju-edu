@@ -1,12 +1,18 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import { SearchIcon } from "@goorm-dev/gds-goormthon";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import axios from "axios";
 
-const AddressInput = () => {
+const AddressInput = ({update}) => {
   const { kakao } = window;
   const [userAddress, setUserAddress] = useState(null);
   const location = useRef();
+
+  const handleClick = () => {
+    axios.post("http://13.125.223.194:56742/api/getStudyList", {area:"성산읍"}).then(
+      (data) => update(data.data));
+  }
 
   const handleAddress = () => {
     let geocoder = new kakao.maps.services.Geocoder();
@@ -30,7 +36,7 @@ const AddressInput = () => {
         <input placeholder="00동 00구" className="inputBox" ref={location} />
         <SearchIcon color="white" onClick={() => handleAddress()} />
       </div>
-      <p style={{ marginLeft: "25px", marginRight: "25px" }}>
+      <p style={{ marginLeft: "25px", marginRight: "25px"}} onClick={handleClick}>
         {/* 위도경도를 주소로 변환하는 함수 적용 */}
         <MyLocationIcon style={{ marginRight: "10px" }} />
         현재 위치로 설정

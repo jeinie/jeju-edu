@@ -23,7 +23,7 @@ const Router = () => {
   return (
     <>
     <Routes>
-      <Route path="/" element={<Main list={list} />} />
+      <Route path="/" element={<Main list={list} update={setList} />} />
       <Route path="/login" element={<Login />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/PartyJoin" element={<PartyJoin />} />
