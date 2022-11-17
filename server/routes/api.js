@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/getStudyList", async (req, res, next) => {
   try {
-    const studyList = await Study.findAll({});
+    let studyList = await Study.findAll({});
     console.log(studyList);
     Array.from(studyList).forEach((item) => {
       let concat = item.location.split(" ");
