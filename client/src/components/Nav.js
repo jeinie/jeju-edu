@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import ViewDetail from "../page/Main/ViewDetail";
 
 export default function MainCategory() {
@@ -71,11 +70,11 @@ const NavContainer = styled.nav`
 
   /* border: 1px solid black; */
   display: flex;
-  color: #e47b00;
+  color: #FAF6F2;
   .navBox {
     margin: 0 2px;
-    color: white;
-    background-color: #e47b00;
+    color: #000000;
+    background-color: #FAF6F2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,8 +84,8 @@ const NavContainer = styled.nav`
   }
 
   .addColor {
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: black;
   }
 `;
 

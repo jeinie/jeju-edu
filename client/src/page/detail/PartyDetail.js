@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Input from "../../components/Input";
 import PartyMarker from "../../components/PartyMarker";
-import MainCategory from "../Main/MainCategory";
+import Nav from "../../components/Nav";
 
 export default function PartyDetail() {
   return (
@@ -12,7 +12,7 @@ export default function PartyDetail() {
       <SearchInputContainer>
         <Input />
       </SearchInputContainer>
-      <MainCategory />
+      <Nav />
     </div>
   );
 }
