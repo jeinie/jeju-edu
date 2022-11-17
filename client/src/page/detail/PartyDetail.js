@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
+import ViewDetail from "../Main/ViewDetail";
 import Input from "../../components/Input";
 import PartyMarker from "../../components/PartyMarker";
-// import MainCategory from "../Main/MainCategory";
 
 export default function PartyDetail() {
   return (
@@ -13,7 +13,6 @@ export default function PartyDetail() {
       <SearchInputContainer>
         <Input />
       </SearchInputContainer>
-      {/* <MainCategory /> */}
     </div>
   );
 }
