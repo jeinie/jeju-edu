@@ -26,18 +26,18 @@ export default function ProfileDetail({
                   <p className="partyName">{el.study_name}</p>
                 </div>
                 <div>
-                  <button>매칭</button>
+                  <button className="matching">매칭</button>
                 </div>
               </div>
               <div>
-                <div>
+                <div className="bodyInfo">
                   <HiLocationMarker />
-                  <p>place</p>
+                  <p className="infoMiddle">place</p>
                   <p>{el.location}</p>
                 </div>
-                <div>
+                <div className="footerInfo">
                   <MdPeopleAlt />
-                  <p>{el.members}</p>
+                  <p className="footerMember">{el.members}</p>
                 </div>
               </div>
             </ListContainer>
@@ -61,9 +61,9 @@ export default function ProfileDetail({
                 </div>
               </div>
               <div className="body">
-                <div>
+                <div className="bodyInfo">
                   <HiLocationMarker />
-                  <p>place</p>
+                  <p className="infoMiddle">place</p>
                   <p>{el.location}</p>
                 </div>
                 <div>
@@ -88,7 +88,7 @@ const Wrapper = styled.article`
 `;
 
 const ListContainer = styled.section`
-  padding: 0 12px;
+  padding: 0 12px 50px;
   margin: 0 20px 23px;
   width: 100%;
   height: 102px;
@@ -104,17 +104,18 @@ const ListContainer = styled.section`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
   }
 
   .headerTitleState {
     text-align: left;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: space-around;
   }
 
   .userName {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-weight: 350;
     font-size: 15px;
   }
@@ -128,6 +129,8 @@ const ListContainer = styled.section`
     background-color: black;
     color: white;
     border-radius: 8px;
+    width: 80px;
+    height: 27px;
   }
 
   .member {
@@ -137,5 +140,23 @@ const ListContainer = styled.section`
   .body {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .bodyInfo {
+    display: flex;
+    margin-top: 18px;
+  }
+
+  .infoMiddle {
+    margin: 0 5px;
+  }
+
+  .footerInfo {
+    display: flex;
+  }
+
+  .footerMember {
+    margin-left: 6px;
   }
 `;
