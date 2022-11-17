@@ -69,16 +69,12 @@ router.post("/openStudy", async (req, res, next) => {
 
 router.post("/joinStudy", async (req, res, next) => {
   const result = {};
-  const { study_no } = req.body;
-  console.log("0");
-  console.log(req.session.userInfo);
-  console.log("1");
-  console.log(req.session);
+  const { study_no, id } = req.body;
 
   try {
     await StudyAttendsStatus.create({
       study_no: study_no,
-      id: req.session.userInfo.id,
+      id: id,
     });
     result["success"] = 200;
     result["msg"] = "study 테이블 join 성공";
@@ -86,7 +82,7 @@ router.post("/joinStudy", async (req, res, next) => {
   } catch (error) {
     result["success"] = 100;
     result["msg"] = `/joinStudy 에서 에러 발생 ${error}`;
-	res.json(result);
+    res.json(result);
     console.error(error);
     return next(error);
   }

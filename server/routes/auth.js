@@ -40,10 +40,10 @@ router.post("/api/login", async (req, res, next) => {
       where: { id: id, password: password },
     });
     if (exUser) {
-      req.session.userInfo = exUser.dataValues;
+      //req.session.userInfo = exUser.dataValues;
       result["success"] = 200;
       result["msg"] = "로그인 성공";
-      result["userInfo"] = req.session.userInfo;
+      result["userInfo"] = exUser.dataValues;
       //console.log(`로그인 확인 ${JSON.stringify(req.session.userInfo)}`);
       res.json(result);
     } else {
