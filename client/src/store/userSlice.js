@@ -9,10 +9,13 @@ const user = createSlice({
         },
         increaseBadCnt(state) {
             state.bad_cnt += 1;
+        },
+        saveUser(state, action) {
+            return {...action.payload};
         }
     }
 });
 
-export const { increaseGoodCnt, increaseBadCnt } = user.actions;
+export const { increaseGoodCnt, increaseBadCnt, saveUser } = user.actions;
 
 export default user;

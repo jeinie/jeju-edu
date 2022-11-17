@@ -1,30 +1,43 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import PlusBtn from "./PlusBtn";
 
 export default function Footer() {
-  const [onPage, setOnPage] = useState(true);
+  const [onSearch, setOnSearch] = useState(true);
+  const [onProfile, setOnProFile] = useState(false);
 
   const handleColor = () => {
-    setOnPage(!onPage);
+    setOnSearch(!onSearch);
+    setOnProFile(!onProfile);
+  };
+
+  const handlePage = () => {
+    setOnSearch(!onSearch);
+    setOnProFile(!onProfile);
   };
 
   return (
     <FooterContainer>
-      <div
-        className={onPage ? "iconBox viewPage" : "iconBox"}
-        onClick={handleColor}
-      >
-        <FiSearch />
-      </div>
-      <PlusBtn/>
-      <div
-        className={onPage ? "iconBox" : "iconBox viewPage"}
-      >
-        <BsFillPersonFill />
-      </div>
+      <Link to="/" className="footerLink">
+        <div
+          className={onSearch ? "iconBox viewPage" : "iconBox"}
+          onClick={handleColor}
+        >
+          <FiSearch />
+        </div>
+      </Link>
+      <PlusBtn />
+      <Link to="/Profile">
+        <div
+          className={onProfile ? "iconBox viewPage" : "iconBox"}
+          onClick={handlePage}
+        >
+          <BsFillPersonFill />
+        </div>
+      </Link>
     </FooterContainer>
   );
 }
@@ -36,10 +49,17 @@ const FooterContainer = styled.footer`
   width: 100%;
   height: 10%;
   font-size: 48px;
-  color: #cbcbcb;
+  color: #bababa;
   position: fixed;
   top: 90%;
   background: white;
+  a {
+    color: black;
+  }
+
+  .footerLink {
+    color: black;
+  }
 
   .iconBox {
     flex-grow: 1;
@@ -50,6 +70,6 @@ const FooterContainer = styled.footer`
   }
 
   .viewPage {
-    color: #e47b00;
+    color: #bababa;
   }
 `;

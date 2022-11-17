@@ -4,11 +4,10 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 export default function PlusBtn() {
-
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
 
   return (
-    <PlusContainer onClick={() => naviagate('/PartyJoin')}>
+    <PlusContainer onClick={() => navigate("/PartyJoin")}>
       <div className="plus">
         <AiOutlinePlus />
       </div>
@@ -21,7 +20,7 @@ const PlusContainer = styled.div`
   height: 48px;
   border-radius: 50%;
   color: white;
-  background-color: #e47b00;
+  background-color: black;
   font-size: 40px;
   position: fixed;
   top: 90%;
@@ -37,15 +36,3 @@ const PlusContainer = styled.div`
     align-items: center;
   }
 `;
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
