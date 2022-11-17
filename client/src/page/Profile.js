@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import ProfileDetail from "../components/ProfileDetail";
 
 export default function Profile() {
   const [join, setJoin] = useState(true); //참여버튼 상태
@@ -14,21 +15,25 @@ export default function Profile() {
   let userId = useSelector((state) => {
     return state.user.id;
   });
-  console.log(userId);
 
   useEffect(() => {
     axios
       .get(`http://13.125.223.194:56742/api/getStudyListNotMine/${userId}`)
-      .then((data) => setJoinList(data.data));
-    // join 버튼 list
-
-    axios
-      .get(`http://13.125.223.194:56742/api/getStudyListMine/${userId}`)
-      .then((data) => setCreateList(data.data));
-    // create 버튼 list
+      .then((data) => {
+        setJoinList(data);
+        return null;
+      })
+      .then(() => {
+        return axios.get(
+          `http://13.125.223.194:56742/api/getStudyListMine/${userId}`
+        );
+      })
+      .then((data) => {
+        setCreateList(data);
+      });
   }, []);
-  console.log(createList);
-  console.log(joinList);
+  // console.log(createList);
+  // console.log(joinList);
 
   const handleJoin = () => {
     setJoin(true);
@@ -39,22 +44,29 @@ export default function Profile() {
     setJoin(false);
     setCreate(true);
   };
+  if (joinList === null) {
+    return null;
+  }
 
-  const ListContent = () => {
-    return (
-      <ListContainer>
-        <div className="header">
-          <div>
-            <p>userName</p>
-            <p>studyTitle</p>
-          </div>
-          <div>
-            <button>매칭</button>
-          </div>
-        </div>
-      </ListContainer>
-    );
-  };
+  // const ListContent = ({ items }) => {
+  //   return (
+  //     <ListContainer>
+  //       <div className="header">
+  //         <div>
+  //           <p>{items}</p>
+  //           <p>studyTitle</p>
+  //         </div>
+  //         <div>
+  //           <button>매칭</button>
+  //         </div>
+  //       </div>
+  //       <div>
+  //         <div>{/* <MdPeopleAlt /> */}</div>
+  //         <div></div>
+  //       </div>
+  //     </ListContainer>
+  //   );
+  // };
   return (
     <MainContainer>
       <div className="pageBtn">
@@ -66,17 +78,21 @@ export default function Profile() {
           개설
         </div>
       </div>
+      {join ? (
+        <ProfileDetail items={joinList} />
+      ) : (
+        <ProfileDetail items={createList} />
+      )}
 
       {/* list 뿌려주는 container */}
-      <div>
-        {join
-          ? joinList.map((el, idx) => {
+      {/* 
+        {join ? joinList.map((el, idx) => {
               return <ListContent key={idx} items={el} />;
             })
           : createList.map((el, idx) => {
               return <ListContent key={idx} items={el} />;
             })}
-      </div>
+       */}
     </MainContainer>
   );
 }
@@ -108,12 +124,12 @@ const MainContainer = styled.section`
   }
 `;
 
-const ListContainer = styled.section`
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  .header {
-    display: flex;
-  }
-`;
+// const ListContainer = styled.section`
+//   text-align: center;
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   .header {
+//     display: flex;
+//   }
+// `;
