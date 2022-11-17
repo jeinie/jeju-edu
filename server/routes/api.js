@@ -8,10 +8,78 @@ const { route } = require("./page");
 
 const router = express.Router();
 
-router.get("/getStudyList", async (req, res, next) => {
+router.get("/getStudyList/code", async (req, res, next) => {
   try {
-    let studyList = await Study.findAll({});
-    console.log(studyList);
+    //let studyList = await Study.findAll({});
+    const studyList = await Study.findAll({
+      where: {
+        [Op.or]: [
+          {
+            study_category: {
+              [Op.like]: `%코드%`,
+            },
+          },
+        ],
+      },
+    });
+    Array.from(studyList).forEach((item) => {
+      let concat = item.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      item.location = result;
+    });
+
+    if (studyList) {
+      res.json(studyList);
+    }
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
+router.get("/getStudyList/sing", async (req, res, next) => {
+  try {
+    //let studyList = await Study.findAll({});
+    const studyList = await Study.findAll({
+      where: {
+        [Op.or]: [
+          {
+            study_category: {
+              [Op.like]: `%노래%`,
+            },
+          },
+        ],
+      },
+    });
+    Array.from(studyList).forEach((item) => {
+      let concat = item.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      item.location = result;
+    });
+
+    if (studyList) {
+      res.json(studyList);
+    }
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
+
+router.get("/getStudyList/dance", async (req, res, next) => {
+  try {
+    //let studyList = await Study.findAll({});
+    const studyList = await Study.findAll({
+      where: {
+        [Op.or]: [
+          {
+            study_category: {
+              [Op.like]: `%춤%`,
+            },
+          },
+        ],
+      },
+    });
     Array.from(studyList).forEach((item) => {
       let concat = item.location.split(" ");
       let result = concat[1] + " " + concat[2];
