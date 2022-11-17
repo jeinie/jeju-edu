@@ -6,27 +6,37 @@ import axios from "axios";
 import ViewDetail from "../Main/ViewDetail";
 import PartyMarker from "../../components/PartyMarker";
 import Input from "./../../components/Input";
+import BasicModal from "../../components/Modal";
 
-export default function PartyDetail({ list }) {
+export default function PartyDetail() {
   const { id } = useParams();
   const [personalList, setPersonalList] = useState(null);
+  // const [openModal, setOpenModal] = useState(false);
+
+  // const handleModalView = () => {
+  //   setOpenModal(!openModal);
+  // };
+
   useEffect(() => {
     axios
       .post(`http://13.125.223.194:56742/viewDetail/${id}`)
       .then((data) => setPersonalList(data));
-  }, []);
-  console.log(personalList);
+  }, [id]);
+
   if (personalList === null) {
     return <div>리스트가 없습니다 !</div>;
   }
 
+  console.log(personalList);
+  const local = personalList.data.studyInfo;
+
   return (
     <div>
-      <PartyMarker lat="33.450317" lon="126.570764" />
+      <PartyMarker lat={local.tmX} lon={local.tmY} />
       <SearchInputContainer>
         <Input />
       </SearchInputContainer>
-      {/* <ViewDetail list={personalList} /> */}
+      <ViewDetail list={personalList} id={id} />
     </div>
   );
 }

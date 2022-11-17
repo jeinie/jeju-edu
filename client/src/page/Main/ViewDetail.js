@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
+import axios from "axios";
+import BasicModal from "../../components/Modal";
 
-export default function ViewDetail({ list }) {
+export default function ViewDetail({ list, id }) {
+  const newData = list.data.studyInfo;
+
+  const handleModalView = () => {
+    console.log(id);
+    axios.post("http://13.125.223.194:56742/api/joinStudy", {
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: {
+        study_no: id,
+        // id:
+      },
+    });
+  };
+
   if (typeof list === "undefined") {
     return;
   }
@@ -13,7 +30,6 @@ export default function ViewDetail({ list }) {
         <div className="containerHeader">
           <div className="headerLeft">
             <section className="headerLeftContent">
-              {/* <div className="headerProfile"></div> */}
               <div className="headerTitle">
                 <p>{list.who_open}</p>
                 <p>{list.study_name}</p>
@@ -23,21 +39,24 @@ export default function ViewDetail({ list }) {
               <div className="placeAddress">
                 <HiLocationMarker />
                 <h6 className="addressTitle">place</h6>
-                <p className="address">{list.location}</p>
+                <p className="address">{newData.location}</p>
               </div>
               <div className="memberContainer">
                 <MdPeopleAlt />
-                <p className="partyMembers">{`${list.members}/10`}</p>
+                <p className="partyMembers">{`${newData.members}/10`}</p>
               </div>
             </section>
           </div>
           <div className="headerCircle"></div>
         </div>
-        <pre className="partyDesc">{list.study_detail}</pre>
+        <pre className="partyDesc">{newData.study_detail}</pre>
         <section className="detailCreateBtn">
           <div className="btnBox">
-            <div className="likeBtn"></div>
-            <button className="joinBtn">{`J-JOIN(D-1)`}</button>
+            <button
+              className="joinBtn"
+              onClick={handleModalView}
+            >{`J-JOIN`}</button>
+            {/* <BasicModal list={newData} /> */}
           </div>
         </section>
       </div>
@@ -157,7 +176,7 @@ const ViewDetailContainer = styled.section`
     height: 28px;
     color: white;
     margin-left: 9px;
-    background-color: #e47b00;
+    background-color: black;
     border: none;
     border-radius: 25px;
   }

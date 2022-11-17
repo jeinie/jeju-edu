@@ -56,9 +56,7 @@ export default function MainCategory() {
       >
         춤
       </div>
-      <PartyList>
-        <ViewDetail />
-      </PartyList>
+      <PartyList>{/* <ViewDetail /> */}</PartyList>
     </NavContainer>
   );
 }
@@ -70,11 +68,11 @@ const NavContainer = styled.nav`
 
   /* border: 1px solid black; */
   display: flex;
-  color: #FAF6F2;
+  color: #faf6f2;
   .navBox {
     margin: 0 2px;
     color: #000000;
-    background-color: #FAF6F2;
+    background-color: #faf6f2;
     display: flex;
     justify-content: center;
     align-items: center;

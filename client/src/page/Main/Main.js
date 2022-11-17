@@ -6,12 +6,10 @@ import Input from "../../components/Input";
 import PlusBtn from "../../components/PlusBtn";
 import StudyCard from "../../components/StudyCard";
 import MainCategory from "../../components/Nav";
-import ViewDetail from "./ViewDetail";
+// import ViewDetail from "./ViewDetail";
 import Footer from "./../../components/Footer";
 
 export default function Main({ list }) {
-  const [onDetail, setOnDetail] = useState(false);
-
   return (
     <MainContainer>
       <Input />
