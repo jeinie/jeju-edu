@@ -5,17 +5,23 @@ import { MdPeopleAlt } from "react-icons/md";
 import axios from "axios";
 import BasicModal from "../../components/Modal";
 import { BsCalendar2WeekFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
   console.log(newData);
 
+  let userId = useSelector((state) => {
+    return state.user.id;
+  });
+
   const handleModalView = () => {
     console.log(id);
+    console.log(userId);
     axios.post("http://13.125.223.194:56742/api/joinStudy", {
       body: {
         study_no: id,
-        // id:
+        id: userId,
       },
     });
   };
@@ -49,9 +55,7 @@ export default function ViewDetail({ list, id }) {
               <div className="calender">
                 {/* 달력 아이콘 */}
                 <BsCalendar2WeekFill />
-                <p className="deathLine">
-                  {newData.createdAt} ~ {newData.close_date}
-                </p>
+                <p className="deathLine">~ {newData.close_date}</p>
               </div>
             </section>
           </div>

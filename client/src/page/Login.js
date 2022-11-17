@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { saveUser } from '../store/userSlice';
+import { useDispatch } from 'react-redux';
 
 export default function Login() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
-
     const onUserIdHandler = (e) => {
         setUserId(e.currentTarget.value);
     }
@@ -19,6 +21,7 @@ export default function Login() {
   
     const onSubmitHandler = (e) => {
         e.preventDefault();
+        
 
         let body = {
             id: userId,
@@ -28,6 +31,7 @@ export default function Login() {
         axios.post('http://13.125.223.194:56742/auth/api/login', body).then(response => {
             console.log(response.data);
             if(response.data.success === 200) {
+                dispatch(saveUser(response.data.userInfo));
                 navigate('/');
             } else {
                 alert(response.data.msg);

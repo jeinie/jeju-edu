@@ -27,7 +27,7 @@ export default function BasicModal({ list }) {
   const navigate = useNavigate();
 
   const moveMain = () => {
-    navigate("/");
+    navigate("/Profile");
   };
 
   return (
