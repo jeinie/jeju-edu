@@ -12,7 +12,7 @@ router.post("/viewDetail/:study_no", async (req, res) => {
 
     //studyInfo.createdAt = studyInfo.createdAt.split(" ")[0];
     //studyInfo.updatedAt = studyInfo.updatedAt.split(" ")[0];
-    console.log(`처리1 ${studyInfo}`);
+    console.log(`처리1 ${studyInfo.location}`);
     console.log(`처리2 ${studyInfo.createdAt}`);
     console.log(`처리3 ${studyInfo.updatedAt}`);
 
@@ -20,11 +20,11 @@ router.post("/viewDetail/:study_no", async (req, res) => {
       result["success"] = 200;
       result["msg"] = "studyInfo 전달 성공";
 
-      for (var i = 0; i < studyInfo.length; i++) {
-        let concat = studyInfo[i].location.split(" ");
-        let result = concat[1] + " " + concat[2];
-        studyInfo[i].location = result;
-      }
+      //for (var i = 0; i < studyInfo.length; i++) {
+      let concat = studyInfo.location.split(" ");
+      let result = concat[1] + " " + concat[2];
+      studyInfo.location = result;
+      //}
       result["studyInfo"] = studyInfo;
       res.json(result);
     } else {
