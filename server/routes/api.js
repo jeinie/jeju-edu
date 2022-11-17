@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const Study = require("../models/study");
 const StudyAttendsStatus = require("../models/studyAttendsStatus");
 const { route } = require("./page");
@@ -68,11 +69,11 @@ router.post("/openStudy", async (req, res, next) => {
 
 router.post("/joinStudy", async (req, res, next) => {
   const result = {};
-  const { study_no, id } = req.body;
+  const { study_no } = req.body;
   try {
     await StudyAttendsStatus.create({
       study_no: study_no,
-      id: id,
+      id: session.userInfo.id,
     });
     result["success"] = 200;
     result["msg"] = "study 테이블 join 성공";
