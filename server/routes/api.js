@@ -90,7 +90,7 @@ router.post("/openStudy", async (req, res, next) => {
       who_open: who_open,
       study_category: study_category,
       study_detail: study_detail,
-      members: members,
+      members: 0,
       min_party: min_party,
       open_date: open_date,
       close_date: close_date,
