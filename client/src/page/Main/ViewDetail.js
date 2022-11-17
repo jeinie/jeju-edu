@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
-import { HeartFillIcon } from "@goorm-dev/gds-goormthon";
 
-export default function ViewDetail() {
+export default function ViewDetail({ list }) {
+  if (typeof list === "undefined") {
+    return;
+  }
+  const first = list[0];
+  console.log(list);
   return (
     <ViewDetailContainer>
       <div className="wrapper">
@@ -13,7 +17,7 @@ export default function ViewDetail() {
             <section className="headerLeftContent">
               <div className="headerProfile"></div>
               <div className="headerTitle">
-                <p>user name</p>
+                <p>{list.study_name}</p>
                 <p>party title</p>
               </div>
             </section>
@@ -21,31 +25,23 @@ export default function ViewDetail() {
               <div className="placeAddress">
                 <HiLocationMarker />
                 <h6 className="addressTitle">place</h6>
-                <p className="address">00동</p>
+                <p className="address">{first.location}</p>
               </div>
               <div className="memberContainer">
                 <MdPeopleAlt />
-                <p className="partyMembers">{`member/10`}</p>
+                <p className="partyMembers">{`${first.members}/10`}</p>
               </div>
             </section>
           </div>
           <div className="headerCircle"></div>
         </div>
-        {/* <textarea
-          className="partyDesc"
-          cols="30"
-          row="5"
-          readOnly
-          placeholder="hello world"
-        >
-          HeartFillIcon world l l l l l www
-        </textarea> */}
-        <pre>hello world</pre>
-        <div>주황색 동그라미 안에 하트</div>
-        <div>
-          <div>하트아이콘</div>
-          <button>{`J-JOIN(D-1)`}</button>
-        </div>
+        <pre className="partyDesc">{list.study_detail}</pre>
+        <section className="detailCreateBtn">
+          <div className="btnBox">
+            <div className="likeBtn"></div>
+            <button className="joinBtn">{`J-JOIN(D-1)`}</button>
+          </div>
+        </section>
       </div>
     </ViewDetailContainer>
   );
@@ -111,21 +107,60 @@ const ViewDetailContainer = styled.section`
 
   .placeAddress {
     display: flex;
-    /* margin-bottom: 4px; */
+    align-items: center;
   }
 
   .addressTitle {
     margin: 0 6px 0 18px;
   }
+
   .memberContainer {
     display: flex;
   }
+
   .partyMembers {
     margin-left: 18px;
   }
+
   .partyDesc {
     width: 208px;
     height: 60px;
-    border: 1px solid red;
+  }
+
+  .detailCreateBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 27px;
+  }
+
+  .likeBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: #e47b00;
+    border-radius: 50%;
+  }
+
+  .likeBtn:before {
+    text-align: center;
+    content: "♡";
+    font-size: 16px;
+    color: white;
+  }
+  .btnBox {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+  }
+  .joinBtn {
+    width: 219px;
+    height: 28px;
+    color: white;
+    margin-left: 9px;
+    background-color: #e47b00;
+    border: none;
+    border-radius: 25px;
   }
 `;

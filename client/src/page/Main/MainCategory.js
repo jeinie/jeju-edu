@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import ViewDetail from "./ViewDetail";
 
 export default function MainCategory() {
   const [onCode, setOnCode] = useState(true);
   const [onSing, setOnSing] = useState(false);
   const [onDance, setOnDance] = useState(false);
-  const [APIdata, setAPIData] = useState(null);
+  // const [APIdata, setAPIData] = useState(null);
   const codeEle = useRef();
   const singEle = useRef();
   const danceEle = useRef();
@@ -56,7 +57,9 @@ export default function MainCategory() {
       >
         춤
       </div>
-      <PartyList></PartyList>
+      <PartyList>
+        <ViewDetail />
+      </PartyList>
     </NavContainer>
   );
 }

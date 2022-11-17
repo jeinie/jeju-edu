@@ -8,30 +8,25 @@ import StudyCard from "../../components/StudyCard";
 import MainCategory from "./MainCategory";
 import ViewDetail from "./ViewDetail";
 
-function test() {
-  const array = [];
-  for (let i = 0; i < 3; i++) {
-    array.push(<StudyCard key={i} />);
-  }
-  return array;
-}
-
-export default function Main() {
+export default function Main({ list }) {
   const [onDetail, setOnDetail] = useState(false);
 
-  const handleviewDetail = (index, id) => {
-    if (index === id) {
-      setOnDetail(true);
-      return <ViewDetail />;
-    }
-  };
+  // const handleViewDetail = (index, id) => {
+  //   if (index === id) {
+  //     setOnDetail(true);
+  //     return <ViewDetail />;
+  //   }
+  // };
+
   return (
     <MainContainer>
       <Input />
       <MainCategory />
       <PlusBtn />
-      <ViewDetail />
-      {/* {<>{test()}</>} */}
+      {list.map((el, idx) => {
+        return <StudyCard item={el} key={idx} />;
+      })}
+      <ViewDetail list={list} />
       <Footer />
     </MainContainer>
   );
