@@ -67,15 +67,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/api/testDBInsertStudy", async (req, res, next) => {
   const result = {};
-  //const { id, password, name } = req.body;
   try {
-    // const exUser = await User.findOne({ where: { id } });
-    // if (exUser) {
-    //   result["success"] = 100;
-    //   result["msg"] = "아이디 중복입니다";
-    //   res.json(result);
-    //   return;
-    // }
     await Study.create({
       study_name: "스터딩이름2",
       who_open: "aaaa",
@@ -90,7 +82,7 @@ router.get("/api/testDBInsertStudy", async (req, res, next) => {
       location: "제주시",
       tmX: 35,
       tmY: 31,
-      deadline: "2022-11-31",
+      deadline: "2022-11-30",
       status: 0,
     });
 
