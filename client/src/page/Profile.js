@@ -1,37 +1,43 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
   const [join, setJoin] = useState(true); //참여버튼 상태
   const [create, setCreate] = useState(false); //개설버튼 상태
   const [joinList, setJoinList] = useState(null);
   const [createList, setCreateList] = useState(null);
+  // let user = useSelector(state=>{return state})
+  // console.log(user)
+
+  let userId = useSelector((state) => {
+    return state.user.id;
+  });
+  console.log(userId);
 
   useEffect(() => {
-    // axios
-    // .get()
-    // .then((data) => setJoinList(data))
-    // // join 버튼 list
-    // .then(() => {
     axios
-      .get("http://13.125.223.194:56742/api/getStudyListNotMine/:id")
-      // })
+      .get(`http://13.125.223.194:56742/api/getStudyListNotMine/${userId}`)
+      .then((data) => setJoinList(data.data));
+    // join 버튼 list
+
+    axios
+      .get(`http://13.125.223.194:56742/api/getStudyListMine/${userId}`)
       .then((data) => setCreateList(data.data));
     // create 버튼 list
   }, []);
   console.log(createList);
+  console.log(joinList);
 
   const handleJoin = () => {
     setJoin(true);
     setCreate(false);
-    console.log("join");
   };
 
   const handleCreate = () => {
     setJoin(false);
     setCreate(true);
-    console.log("create");
   };
 
   const ListContent = () => {
@@ -63,20 +69,20 @@ export default function Profile() {
 
       {/* list 뿌려주는 container */}
       <div>
-        {join ? (
-          <div>join</div>
-        ) : (
-          createList.map((el, idx) => {
-            return <ListContent />;
-          })
-        )}
+        {join
+          ? joinList.map((el, idx) => {
+              return <ListContent key={idx} items={el} />;
+            })
+          : createList.map((el, idx) => {
+              return <ListContent key={idx} items={el} />;
+            })}
       </div>
     </MainContainer>
   );
 }
 
 const MainContainer = styled.section`
-  padding-top: 50px;
+  margin-top: 100px;
   .pageBtn {
     display: flex;
     justify-content: space-around;
@@ -105,7 +111,8 @@ const MainContainer = styled.section`
 const ListContainer = styled.section`
   text-align: center;
   display: flex;
-  justify-content: ;
+  justify-content: space-around;
+  align-items: center;
   .header {
     display: flex;
   }

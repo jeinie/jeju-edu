@@ -51,7 +51,7 @@ export default function BasicModal({ list }) {
           </Typography>
           <ModalMemberContainer>
             <MdPeopleAlt />
-            <p className="mixMember">{list.members}/10</p>
+            {list ? <p className="mixMember">{list.members}/10</p> : null}
           </ModalMemberContainer>
           <PageButtonBox>
             <MoreParty onClick={moveMain}>다른 스터디 보러가기</MoreParty>
