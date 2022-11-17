@@ -1,6 +1,6 @@
 const express = require("express");
 const { User, Study } = require("../models");
-const path = require('path');
+const path = require("path");
 const router = express.Router();
 /*
 router.use((req, res, next) => {
@@ -49,16 +49,15 @@ router.get("/", (req, res) => {
 });
 */
 
+router.get("/", (req, res) => {
+  console.log("여기까지옴1234");
+  try {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  } catch (e) {
+    console.log(`sendfile Error ${e}`);
+  }
 
-router.get("*", (req,res)=>{
-	console.log("여기까지옴1234");
-	try{
-		res.sendFile(path.join(__dirname , "../public/index.html"));	
-	}catch (e){
-		console.log(`sendfile Error ${e}`);
-	}
-	
-	return;
-})
+  return;
+});
 
 module.exports = router;
