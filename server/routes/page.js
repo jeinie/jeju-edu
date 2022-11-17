@@ -4,7 +4,6 @@ const path = require("path");
 const router = express.Router();
 
 router.post("/viewDetail/:study_no", async (req, res) => {
-  const result = {};
   try {
     const studyInfo = await Study.findOne({
       where: { study_no: req.params.study_no },
@@ -17,6 +16,7 @@ router.post("/viewDetail/:study_no", async (req, res) => {
     console.log(`처리3 ${studyInfo.updatedAt}`);
 
     if (studyInfo) {
+      const result = {};
       result["success"] = 200;
       result["msg"] = "studyInfo 전달 성공";
 
