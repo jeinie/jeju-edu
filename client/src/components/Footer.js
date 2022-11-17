@@ -9,8 +9,8 @@ export default function Footer() {
 
   const handleColor = () => {
     setOnPage(!onPage);
-    return;
   };
+
   return (
     <FooterContainer>
       <div
@@ -22,7 +22,6 @@ export default function Footer() {
       <PlusBtn/>
       <div
         className={onPage ? "iconBox" : "iconBox viewPage"}
-        onClick={handleColor}
       >
         <BsFillPersonFill />
       </div>

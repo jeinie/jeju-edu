@@ -19,6 +19,7 @@ router.get("/getStudyList", async (req, res, next) => {
 });
 
 router.post("/openStudy", async (req, res, next) => {
+  const result = {};
   const {
     study_name,
     who_open,
@@ -28,6 +29,7 @@ router.post("/openStudy", async (req, res, next) => {
     min_party,
     open_date,
     close_date,
+    study_date,
     location,
     tmX,
     tmY,
