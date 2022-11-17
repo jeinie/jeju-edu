@@ -2,32 +2,39 @@ import { useState } from "react";
 import Nav from "../../components/Nav";
 import DateTime from "../../components/DateTime";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import BasicModal from "../../components/Modal";
+import { useSelector } from "react-redux";
 
 export default function PartyJoin() {
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  let userId = useSelector((state) => {
+    return state.user.id;
+  });
+
   const [formData, setFormData] = useState({
-    study_name: "",
-    who_open: "",
-    study_category: "",
-    study_detail: "",
+    study_name: "testse",
+    who_open: userId,
+    study_category: "코드",
+    study_detail: "피아노를 가르켜줄게요",
     members: "",
-    min_party: "",
+    min_party: 6,
     open_date: new Date(),
     close_date: null,
     study_date: null,
     location: "",
-    tmX: "",
-    tmY: "",
+    tmX: 35.124823,
+    tmY: 126.123124,
     deadline: new Date(),
   });
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
     axios
-      .post("http://13.125.223.194:56742/openStudy", formData)
+      .post("http://13.125.223.194:56742/api/openStudy", formData)
       .then((response) => {
-        console.log(response.data);
-        navigate(`/Profile`);
+        console.log(response);
+        setOpen(true);
       });
   };
 
@@ -80,6 +87,7 @@ export default function PartyJoin() {
           </button>
         </form>
       </div>
+      <BasicModal open={open} handleClose={setOpen} />
     </div>
   );
 }

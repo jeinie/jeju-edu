@@ -11,6 +11,8 @@ export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
   console.log(newData);
 
+  const [open, setOpen] = useState(false);
+
   let userId = useSelector((state) => {
     return state.user.id;
   });
@@ -25,6 +27,7 @@ export default function ViewDetail({ list, id }) {
       },
     });
   };
+
 
   if (typeof list === "undefined") {
     return;
@@ -68,7 +71,10 @@ export default function ViewDetail({ list, id }) {
               className="joinBtn"
               onClick={handleModalView}
             >{`J-JOIN`}</button> */}
-            <BasicModal list={newData} />
+            <button onClick={()=>setOpen(true)}>
+              <p className="join">J-Join</p>
+            </button>
+            <BasicModal open={open} handleClose={setOpen} list={newData} />
           </div>
         </section>
       </div>

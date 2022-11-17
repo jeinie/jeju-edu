@@ -8,6 +8,9 @@ export default function PartyMarker({ lat, lon }) {
   const markerPosition = new kakao.maps.LatLng(lat, lon);
   // 마커(스터디장소)를 찍기 위한 변수
 
+  let a;
+  let b;
+
   const imageSrc =
     "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
   const imageSize = new kakao.maps.Size(24, 35);

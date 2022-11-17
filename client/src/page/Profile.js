@@ -9,7 +9,9 @@ export default function Profile() {
   const [create, setCreate] = useState(false); //개설버튼 상태
   const [joinList, setJoinList] = useState(null);
   const [createList, setCreateList] = useState(null);
-  // let user = useSelector(state=>{return state})
+  let user = useSelector((state) => {
+    return state;
+  });
   // console.log(user)
 
   let userId = useSelector((state) => {
@@ -31,9 +33,7 @@ export default function Profile() {
       .then((data) => {
         setCreateList(data);
       });
-  }, []);
-  // console.log(createList);
-  // console.log(joinList);
+  }, [userId]);
 
   const handleJoin = () => {
     setJoin(true);
@@ -48,25 +48,6 @@ export default function Profile() {
     return null;
   }
 
-  // const ListContent = ({ items }) => {
-  //   return (
-  //     <ListContainer>
-  //       <div className="header">
-  //         <div>
-  //           <p>{items}</p>
-  //           <p>studyTitle</p>
-  //         </div>
-  //         <div>
-  //           <button>매칭</button>
-  //         </div>
-  //       </div>
-  //       <div>
-  //         <div>{/* <MdPeopleAlt /> */}</div>
-  //         <div></div>
-  //       </div>
-  //     </ListContainer>
-  //   );
-  // };
   return (
     <MainContainer>
       <div className="pageBtn">
@@ -78,21 +59,12 @@ export default function Profile() {
           개설
         </div>
       </div>
-      {join ? (
-        <ProfileDetail items={joinList} />
-      ) : (
-        <ProfileDetail items={createList} />
-      )}
-
-      {/* list 뿌려주는 container */}
-      {/* 
-        {join ? joinList.map((el, idx) => {
-              return <ListContent key={idx} items={el} />;
-            })
-          : createList.map((el, idx) => {
-              return <ListContent key={idx} items={el} />;
-            })}
-       */}
+      <ProfileDetail
+        join={joinList.data}
+        create={createList.data}
+        joinState={join}
+        createState={create}
+      />
     </MainContainer>
   );
 }
