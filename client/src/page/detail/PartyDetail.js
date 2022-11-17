@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 import ViewDetail from "../Main/ViewDetail";
-import Input from "../../components/Input";
 import PartyMarker from "../../components/PartyMarker";
+import Input from "./../../components/Input";
 
 export default function PartyDetail() {
   return (
