@@ -9,7 +9,8 @@ router.get("/getStudyList", async (req, res, next) => {
     if (studyList) {
       console.log(`studyList는 ${studyList}`);
       console.log(studyList);
-      res.send(JSON.stringify(studyList));
+      //res.send(JSON.stringify(studyList));
+      res.json(studyList);
     }
   } catch (error) {
     console.error(error);
