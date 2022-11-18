@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -9,6 +9,8 @@ import tree_1_1x from "../img/tree_1_1x.png";
 import tree_2_1x from "../img/tree_2_1x.png";
 import tree_3_1x from "../img/tree_3_1x.png";
 import tree_4_1x from "../img/tree_4_1x.png";
+import axios from "axios";
+import {useSelector} from 'react-redux';
 
 const statusList = [
   {
@@ -49,9 +51,23 @@ const style = {
 
 export default function BasicModal(props) {
   const navigate = useNavigate();
-  const move = () => {
-    navigate(statusList[props.status]['link']);
-  };
+  const move = () => navigate(statusList[props.status]['link']);
+  const [members, setMembers] = useState(props.list? props.list.members : 0);
+  let userId = useSelector((state) => {
+    return state.user.id;
+  });
+  console.log(userId)
+
+  useEffect(() => {
+    axios.post("http://13.125.223.194:56742/api/joinStudy", {
+      study_no: props.list?.study_no,
+      id: userId,
+    }).then((response)=>{
+        if(response.data.success === 200) {
+          setMembers(response.data.members);
+        }
+    });
+  }, []);
 
   const handleImage = (num) => {
     switch (Math.floor(num/4)) {
@@ -78,14 +94,14 @@ export default function BasicModal(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {statusList[props.status]['title']}
           </Typography>
-          <img src={handleImage(props.list.members)} />
+          <img src={handleImage(members)} />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {statusList[props.status]['detail']}<br/>{statusList[props.status]['detail2']}
           </Typography>
           <ModalMemberContainer>
             <MdPeopleAlt />
             {props.list ? (
-              <p className="mixMember">{props.list.members}/{props.list.min_party}</p>
+              <p className="mixMember">{members}/{props.list.min_party}</p>
             ) : (
               <></>
             )}

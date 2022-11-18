@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { saveUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -63,40 +65,18 @@ export default function Login() {
         style={{ display: "flex", flexDirection: "column", marginTop: "20px" }}
         onSubmit={onSubmitHandler}
       >
-        <label>USERNAME</label>
-        <input
-          style={{
-            height: "30px",
-            marginBottom: "40px",
-            borderRadius: "15px",
-            borderBottom: "1px solid black",
-            lineHeight: "0.5",
-          }}
-          type="userId"
-          value={userId}
-          onChange={onUserIdHandler}
-        />
-        <label>PASSWORD</label>
-        <input
-          style={{
-            height: "30px",
-            marginBottom: "50px",
-            borderRadius: "15px",
-            background: "#E47B00",
-            border: "0px",
-          }}
-          type="password"
-          value={password}
-          onChange={onPasswordHandler}
-        />
+        <TextField id="standard-basic" label="USERNAME" variant="standard" onChange={onUserIdHandler} style={{margin:'66px 42px 32px 42px'}}/>
+        <TextField id="standard-basic" type="password" label="PASSWORD" variant="standard" onChange={onPasswordHandler} style={{marginLeft:'42px', marginRight:"42px"}}/>
+        
         <br />
         <button
           style={{
             height: "40px",
             borderRadius: "30px",
-            background: "#E47B00",
+            background: "black",
             border: "0px",
             color: "white",
+            margin:'46px 42px 147px 42px'
           }}
         >
           login

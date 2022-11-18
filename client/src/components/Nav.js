@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import ViewDetail from "../page/Main/ViewDetail";
 
-export default function MainCategory() {
+export default function MainCategory({updateCategory}) {
   const [onCode, setOnCode] = useState(true);
   const [onSing, setOnSing] = useState(false);
   const [onDance, setOnDance] = useState(false);
@@ -18,18 +18,21 @@ export default function MainCategory() {
       setOnCode(true);
       setOnSing(false);
       setOnDance(false);
+      updateCategory(0);
     } else if (e.target.textContent === "노래") {
       console.log("노래");
       // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(true);
       setOnDance(false);
+      updateCategory(1);
     } else if (e.target.textContent === "춤") {
       console.log("춤");
       // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(false);
       setOnDance(true);
+      updateCategory(2);
     }
   };
 
