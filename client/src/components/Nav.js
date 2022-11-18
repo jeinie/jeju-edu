@@ -12,22 +12,19 @@ export default function MainCategory({updateCategory}) {
   const danceEle = useRef();
 
   const handlePageMenu = (e) => {
-    if (e.target.textContent === "코드") {
-      console.log("코드");
+    if (e.target.textContent === "프로그래밍") {
       // axios.get("").then((data) => setAPIData(data));
       setOnCode(true);
       setOnSing(false);
       setOnDance(false);
       updateCategory(0);
-    } else if (e.target.textContent === "노래") {
-      console.log("노래");
+    } else if (e.target.textContent === "보컬댄스") {
       // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(true);
       setOnDance(false);
       updateCategory(1);
-    } else if (e.target.textContent === "춤") {
-      console.log("춤");
+    } else if (e.target.textContent === "디자인") {
       // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(false);
@@ -43,21 +40,21 @@ export default function MainCategory({updateCategory}) {
         ref={codeEle}
         onClick={handlePageMenu}
       >
-        코드
+        프로그래밍
       </div>
       <div
         className={onSing ? "navBox addColor" : "navBox"}
         ref={singEle}
         onClick={handlePageMenu}
       >
-        노래
+        보컬댄스
       </div>
       <div
         className={onDance ? "navBox addColor" : "navBox"}
         ref={danceEle}
         onClick={handlePageMenu}
       >
-        춤
+        디자인
       </div>
       <PartyList>{/* <ViewDetail /> */}</PartyList>
     </NavContainer>

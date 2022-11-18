@@ -28,7 +28,6 @@ export default function ProfileDetail({
               <div className="body">
                 <div className="bodyInfo">
                   <HiLocationMarker />
-                  <p className="infoMiddle">place</p>
                   <p>{el.location}</p>
                 </div>
                 <div className="footerInfo">
@@ -61,7 +60,6 @@ export default function ProfileDetail({
                   <p>
                     <HiLocationMarker />
                   </p>
-                  <p className="infoMiddle">place</p>
                   <p>{el.location}</p>
                 </div>
                 <div className="group">

@@ -14,7 +14,7 @@ export default function PartyJoin() {
   const [formData, setFormData] = useState({
     study_name: "testse",
     who_open: userId,
-    study_category: "코드",
+    study_category: "프로그래밍",
     study_detail: "피아노를 가르켜줄게요",
     members: "",
     min_party: 4,

@@ -56,7 +56,6 @@ export default function BasicModal(props) {
   let userId = useSelector((state) => {
     return state.user.id;
   });
-  console.log(members);
 
   useEffect(() => {
     axios.post("http://13.125.223.194:56742/api/joinStudy", {

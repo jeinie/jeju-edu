@@ -13,7 +13,6 @@ export default function StudyCard({ item }) {
       <div className="partyInfo">
         <div className="partyLocation">
           <LocationIcon />
-          <h6>place</h6>
           <p>{item.location}</p>
         </div>
         <div className="partyMembers">
