@@ -12,11 +12,11 @@ export default function PartyJoin() {
   });
 
   const [formData, setFormData] = useState({
-    study_name: "testse",
+    study_name: "피아노",
     who_open: userId,
-    study_category: "프로그래밍",
+    study_category: "보컬댄스",
     study_detail: "피아노를 가르켜줄게요",
-    members: "",
+    members: 0,
     min_party: 4,
     open_date: new Date(),
     close_date: null,

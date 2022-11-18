@@ -11,7 +11,7 @@ import PartyJoin from "./page/detail/PartyJoin";
 import Footer from "./components/Footer";
 import { useSelector } from "react-redux";
 
-const categoryList = ['code', 'sing', 'dance'];
+const categoryList = ['code', 'sing', 'design'];
 
 const Router = () => {
   const [list, setList] = useState(null);
