@@ -88,7 +88,7 @@ const ListContainer = styled.section`
   margin: 24px 20px 23px;
   width: 100%;
   height: 102px;
-  background-color: #faf6f2;
+  background-color: #F4EDE7;
   padding-top: 24px;
   text-align: center;
   display: flex;
