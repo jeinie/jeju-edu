@@ -67,11 +67,11 @@ const NavContainer = styled.nav`
 
   /* border: 1px solid black; */
   display: flex;
-  color: #faf6f2;
+  color: #F4EDE7;
   .navBox {
     margin: 0 2px;
     color: #000000;
-    background-color: #faf6f2;
+    background-color: #F4EDE7;
     display: flex;
     justify-content: center;
     align-items: center;
