@@ -22,8 +22,8 @@ export default function PartyJoin() {
     close_date: null,
     study_date: null,
     location: "",
-    tmX: 35.124823,
-    tmY: 126.123124,
+    tmX: 33.449794,
+    tmY: 126.918436,
     deadline: new Date(),
   });
 

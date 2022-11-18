@@ -82,7 +82,7 @@ const MainContainer = styled.section`
     text-align: center;
     line-height: 30px;
     border-radius: 25px;
-    background-color: #faf6f2;
+    background-color: #F4EDE7;
     color: black;
   }
   .changeStyle {
