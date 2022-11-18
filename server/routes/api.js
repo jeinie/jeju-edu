@@ -85,7 +85,7 @@ router.get("/getStudyList/sing", async (req, res, next) => {
   }
 });
 
-router.get("/getStudyList/dance", async (req, res, next) => {
+router.get("/getStudyList/design", async (req, res, next) => {
   try {
     //let studyList = await Study.findAll({});
     const studyList = await Study.findAll({
@@ -93,7 +93,7 @@ router.get("/getStudyList/dance", async (req, res, next) => {
         [Op.or]: [
           {
             study_category: {
-              [Op.like]: `%춤%`,
+              [Op.like]: `%디자인%`,
             },
           },
         ],
