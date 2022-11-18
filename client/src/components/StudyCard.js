@@ -27,8 +27,9 @@ export default function StudyCard({ item }) {
 const StudyBox = styled.div`
   height: 75px;
   margin: 20px;
-  border: 1px solid black;
   padding: 0 35px;
+  background: #F4EDE7;
+  border-radius:15px;
 
   .partyInfo {
     margin-left: -2px;

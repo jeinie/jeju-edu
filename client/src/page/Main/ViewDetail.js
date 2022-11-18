@@ -18,8 +18,6 @@ export default function ViewDetail({ list, id }) {
   });
 
   const handleModalView = () => {
-    console.log(id);
-    console.log(userId);
     axios.post("http://13.125.223.194:56742/api/joinStudy", {
       study_no: id,
       id: userId,
