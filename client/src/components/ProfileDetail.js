@@ -84,7 +84,7 @@ const Wrapper = styled.article`
 `;
 
 const ListContainer = styled.section`
-  padding: 0 12px 220px;
+  padding: 20px 12px 100px;
   margin: 24px 20px 23px;
   width: 100%;
   height: 102px;
@@ -97,7 +97,7 @@ const ListContainer = styled.section`
   align-items: center;
 
   .header {
-    margin-top: 30px;
+    margin-top: 70px;
     display: flex;
     justify-content: space-between;
     width: 100%;

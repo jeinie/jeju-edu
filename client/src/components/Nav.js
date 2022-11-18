@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import ViewDetail from "../page/Main/ViewDetail";
 
-export default function MainCategory({updateCategory}) {
+export default function MainCategory({ updateCategory }) {
   const [onCode, setOnCode] = useState(true);
   const [onSing, setOnSing] = useState(false);
   const [onDance, setOnDance] = useState(false);
@@ -34,7 +34,7 @@ export default function MainCategory({updateCategory}) {
   };
 
   return (
-    <NavContainer style={{marginLeft: '25px', marginRight: '25px'}}>
+    <NavContainer style={{ marginLeft: "25px", marginRight: "25px" }}>
       <div
         className={onCode ? "navBox addColor" : "navBox"}
         ref={codeEle}
@@ -63,7 +63,7 @@ export default function MainCategory({updateCategory}) {
 
 const NavContainer = styled.nav`
   height: 31px;
-  margin-top: 48px;
+  margin-top: 20px;
 
   /* border: 1px solid black; */
   display: flex;

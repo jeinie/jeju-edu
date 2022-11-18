@@ -8,7 +8,7 @@ export default function StudyCard({ item }) {
       <IconBox style={{ float: "right" }}>
         <HeartFillIcon style={{ color: "lightGray" }} />
       </IconBox>
-      <UserName className="font">{item.study_name}</UserName>
+      <UserName>{item.study_name}</UserName>
       <StudyTitle className="font-bold">스터디</StudyTitle>
       <div className="partyInfo">
         <div className="partyLocation">
@@ -28,9 +28,12 @@ const StudyBox = styled.div`
   height: 75px;
   margin: 20px;
   padding: 0 35px;
-  background: #F4EDE7;
-  border-radius:15px;
+  background: #f4ede7;
+  border-radius: 15px;
 
+  .font {
+    margin-top: 20px;
+  }
   .partyInfo {
     margin-left: -2px;
     text-align: left;
@@ -65,6 +68,7 @@ const UserName = styled.p`
   text-align: left;
   font-size: 4px;
   font-weight: 200;
+  padding-top: 10px;
 `;
 
 const StudyTitle = styled.p`

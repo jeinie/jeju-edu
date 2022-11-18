@@ -6,8 +6,8 @@ import { FiSearch } from "react-icons/fi";
 import PlusBtn from "./PlusBtn";
 
 export default function Footer() {
-  const [onSearch, setOnSearch] = useState(true);
-  const [onProfile, setOnProFile] = useState(false);
+  const [onSearch, setOnSearch] = useState(false);
+  const [onProfile, setOnProFile] = useState(true);
 
   const handleColor = () => {
     setOnSearch(!onSearch);

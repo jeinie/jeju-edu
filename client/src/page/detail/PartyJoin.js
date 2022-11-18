@@ -4,6 +4,8 @@ import DateTime from "../../components/DateTime";
 import axios from "axios";
 import Modal from "../../components/Modal";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
 
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
@@ -39,7 +41,8 @@ export default function PartyJoin() {
   };
 
   return (
-    <div>
+    <MainStyle>
+      <p className="title">스터디 개설하기</p>
       <Nav />
       <div style={{ marginLeft: "25px", marginRight: "25px" }}>
         <form onSubmit={onSubmitHandler} style={{ marginTop: "20px" }}>
@@ -49,7 +52,7 @@ export default function PartyJoin() {
             placeholder="스터디 이름을 입력해주세요"
             style={{ marginTop: "15px" }}
           />
-          <label>스터디 날짜</label>
+          <label className="studyDate">스터디 날짜</label>
           <DateTime
             name="study_date"
             labelName="스터디 날짜"
@@ -69,7 +72,7 @@ export default function PartyJoin() {
           />
           <label style={{ marginTop: "25px" }}>스터디 상세설명</label>
           <textarea
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "117px" }}
             placeholder="스터디를 설명해주세요"
           />
           <button
@@ -87,8 +90,13 @@ export default function PartyJoin() {
           </button>
         </form>
       </div>
-      <Modal open={open} handleClose={setOpen} status={0}/>
-    </div>
+      <div className="modalLayout">
+        <Modal open={open} handleClose={setOpen} status={0} />
+      </div>
+      <div className="layout">
+        <Footer />
+      </div>
+    </MainStyle>
   );
 }
 
@@ -108,3 +116,46 @@ const Input = (props) => {
     </>
   );
 };
+
+const MainStyle = styled.main`
+  background-color: white;
+
+  .modalLayout {
+    width: 100%;
+    height: auto;
+    padding-bottom: 100px;
+  }
+
+  .title {
+    margin: 0 20px;
+    width: 90%;
+    text-align: center;
+    font-weight: bold;
+    padding: 25px 0 9px 0;
+    /* border-bottom: 1px solid black; */
+  }
+  input {
+    background-color: #faf6f2;
+    width: 100%;
+    border-radius: 16px;
+    padding: 15px;
+    border: none;
+  }
+
+  .layout {
+    /* transform: translateY(100px); */
+  }
+  div {
+    border: none;
+  }
+
+  .studyDate {
+    margin-top: 8px;
+    transform: translateY(20px);
+  }
+  textarea {
+    background-color: #faf6f2;
+    border: none;
+    padding: 15px;
+  }
+`;

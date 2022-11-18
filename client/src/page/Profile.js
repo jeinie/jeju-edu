@@ -51,6 +51,7 @@ export default function Profile() {
 
   return (
     <MainContainer>
+      <p className="myProfile">My page</p>
       <div className="pageBtn">
         {/* 상단의 Page 바꾸는 버튼 */}
         <div className={join ? "changeStyle" : "base"} onClick={handleJoin}>
@@ -71,29 +72,43 @@ export default function Profile() {
 }
 
 const MainContainer = styled.section`
-  margin-top: 100px;
+  margin-top: 50px;
+  background-color: white;
   .pageBtn {
+    padding: 0 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .base {
-    width: 134px;
-    height: 30px;
+    width: 200px;
+    height: 40px;
     text-align: center;
-    line-height: 30px;
+    line-height: 40px;
     border-radius: 25px;
     background-color: #faf6f2;
     color: black;
+    font-weight: 600;
   }
   .changeStyle {
-    width: 134px;
-    height: 30px;
+    width: 200px;
+    height: 40px;
     text-align: center;
-    line-height: 30px;
+    line-height: 40px;
     border-radius: 25px;
 
     background-color: black;
     color: white;
+  }
+
+  .myProfile {
+    text-align: center;
+    width: 90%;
+    margin: 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 11px;
+    margin-bottom: 20px;
+    /* border-bottom: 1px solid black; */
   }
 `;
 

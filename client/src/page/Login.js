@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { saveUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import fir from "../img/fir.png";
+import sec from "../img/sec.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -56,18 +58,31 @@ export default function Login() {
       <h1
         style={{ display: "flex", flexDirection: "column", fontSize: "50px" }}
       >
-        서비스명
+        <img src={fir} alt="서비스 이름" />
       </h1>
       <p style={{ display: "flex", flexDirection: "column", fontSize: "15px" }}>
-        서비스 슬로건
+        <img src={sec} alt="서비스 슬로건" />
       </p>
       <form
         style={{ display: "flex", flexDirection: "column", marginTop: "20px" }}
         onSubmit={onSubmitHandler}
       >
-        <TextField id="standard-basic" label="USERNAME" variant="standard" onChange={onUserIdHandler} style={{margin:'66px 42px 32px 42px'}}/>
-        <TextField id="standard-basic" type="password" label="PASSWORD" variant="standard" onChange={onPasswordHandler} style={{marginLeft:'42px', marginRight:"42px"}}/>
-        
+        <TextField
+          id="standard-basic"
+          label="USERNAME"
+          variant="standard"
+          onChange={onUserIdHandler}
+          style={{ margin: "66px 42px 32px 42px" }}
+        />
+        <TextField
+          id="standard-basic"
+          type="password"
+          label="PASSWORD"
+          variant="standard"
+          onChange={onPasswordHandler}
+          style={{ marginLeft: "42px", marginRight: "42px" }}
+        />
+
         <br />
         <button
           style={{
@@ -76,7 +91,7 @@ export default function Login() {
             background: "black",
             border: "0px",
             color: "white",
-            margin:'46px 42px 147px 42px'
+            margin: "46px 42px 147px 42px",
           }}
         >
           login
