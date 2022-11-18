@@ -6,6 +6,10 @@ import axios from "axios";
 import Modal from "../../components/Modal";
 import { BsCalendar2WeekFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import tree_2_1x from "../../img/tree_2_1x.png";
+import tree_3_1x from "../../img/tree_3_1x.png";
+import tree_4_1x from "../../img/tree_4_1x.png";
+import tree_1_1x from "../../img/tree_1_1x.png";
 
 export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
@@ -23,6 +27,19 @@ export default function ViewDetail({ list, id }) {
       id: userId,
     });
   };
+
+  const handleImage = (num) => {
+    switch (Math.floor(num/4)) {
+      case 1 : 
+        return tree_2_1x;
+      case 2 :
+        return tree_3_1x;
+      case 3: 
+        return tree_4_1x;
+      default : 
+        return tree_1_1x;
+    }
+  }
 
   if (typeof list === "undefined") {
     return;
@@ -57,7 +74,9 @@ export default function ViewDetail({ list, id }) {
               </div>
             </section>
           </div>
-          <div className="headerCircle"></div>
+          <div className="headerCircle" style={{background:"#E47B00"}}>
+            <img src={handleImage(newData.members)} style={{width:'100px', height:"100px"}}/>
+          </div>
         </div>
         <p className="partyDesc">{newData.study_detail}</p>
         {newData.members >= newData.min_party ? <p style={{textAlign:"center", color:"red"}}>모집인원이 가득 찼습니다!</p>: ""}
