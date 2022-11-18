@@ -50,7 +50,7 @@ export default function ViewDetail({ list, id }) {
               <div className="memberContainer">
                 <MdPeopleAlt />
                 {/* 사람들 아이콘 */}
-                <p className="partyMembers">{`${newData.members}/10`}</p>
+                <p className="partyMembers">{`${newData.members}/${newData.min_party}`}</p>
               </div>
               <div className="calender">
                 {/* 달력 아이콘 */}
@@ -62,16 +62,18 @@ export default function ViewDetail({ list, id }) {
           <div className="headerCircle"></div>
         </div>
         <p className="partyDesc">{newData.study_detail}</p>
+        {newData.members >= newData.min_party ? <p style={{textAlign:"center", color:"red"}}>모집인원이 가득 찼습니다!</p>: ""}
         <section className="detailCreateBtn">
-          <div className="btnBox">
+          <div className="btnBox"> 
             <button
               className="joinBtn"
+              disabled={newData.members >= newData.min_party} 
               onClick={() => {
                 setOpen(true);
                 handleModalView();
               }}
             >
-              <p className="join">J-Join</p>
+              <p className="join" >J-Join</p>
             </button>
             <Modal
               status={1}

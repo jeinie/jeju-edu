@@ -56,13 +56,14 @@ export default function BasicModal(props) {
   let userId = useSelector((state) => {
     return state.user.id;
   });
-  console.log(userId)
+  console.log(members);
 
   useEffect(() => {
     axios.post("http://13.125.223.194:56742/api/joinStudy", {
       study_no: props.list?.study_no,
       id: userId,
     }).then((response)=>{
+        console.log(response);
         if(response.data.success === 200) {
           setMembers(response.data.members);
         }
