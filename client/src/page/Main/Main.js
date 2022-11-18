@@ -7,10 +7,10 @@ import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
 import AddressInput from "../../components/AddressInput";
 
-export default function Main({ list }) {
+export default function Main({ list, update }) {
   return (
     <MainContainer>
-      <AddressInput />
+      <AddressInput update={update} />
       <MainCategory />
       {list.map((el, idx) => {
         return (
@@ -26,6 +26,7 @@ export default function Main({ list }) {
 
 const MainContainer = styled.div`
   padding-top: 56px;
+  margin-bottom: 100px;
 
   .test {
     height: 900px;

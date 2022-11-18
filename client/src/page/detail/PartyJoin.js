@@ -17,7 +17,7 @@ export default function PartyJoin() {
     study_category: "코드",
     study_detail: "피아노를 가르켜줄게요",
     members: "",
-    min_party: 6,
+    min_party: 4,
     open_date: new Date(),
     close_date: null,
     study_date: null,
