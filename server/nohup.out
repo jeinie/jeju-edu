@@ -4377,3 +4377,4 @@ id : admin
 Executing (default): INSERT INTO `studyattendsstatus` (`idx`,`study_no`,`id`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?);
 Executing (default): SELECT `study_no`, `who_open`, `study_name`, `study_category`, `study_detail`, `members`, `min_party`, `open_date`, `close_date`, `study_date`, `location`, `tmX`, `tmY`, `deadline`, `status`, `createdAt`, `updatedAt`, `deletedAt` FROM `study` AS `Study` WHERE (`Study`.`deletedAt` IS NULL AND `Study`.`study_no` = '1');
 [0mPOST /api/joinStudy [32m200[0m 17.456 ms - 65[0m
+Killed

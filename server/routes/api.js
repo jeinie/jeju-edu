@@ -35,7 +35,7 @@ router.get("/getStudyList/code", async (req, res, next) => {
         [Op.or]: [
           {
             study_category: {
-              [Op.like]: `%코드%`,
+              [Op.like]: `%프로그래밍%`,
             },
           },
         ],
@@ -64,7 +64,7 @@ router.get("/getStudyList/sing", async (req, res, next) => {
         [Op.or]: [
           {
             study_category: {
-              [Op.like]: `%노래%`,
+              [Op.like]: `%보컬댄스%`,
             },
           },
         ],
