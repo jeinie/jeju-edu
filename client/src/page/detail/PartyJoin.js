@@ -33,7 +33,7 @@ export default function PartyJoin() {
     e.preventDefault();
 
     axios
-      .post("http://13.125.223.194:56742/api/openStudy", formData)
+      .post("http://3.36.68.46:56526/api/openStudy", formData)
       .then((response) => {
         console.log(response);
         setOpen(true);

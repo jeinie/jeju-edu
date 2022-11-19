@@ -11,7 +11,7 @@ import PartyJoin from "./page/detail/PartyJoin";
 import Footer from "./components/Footer";
 import { useSelector } from "react-redux";
 
-const categoryList = ['code', 'sing', 'design'];
+const categoryList = ["code", "sing", "design"];
 
 const Router = () => {
   const [list, setList] = useState(null);
@@ -24,7 +24,7 @@ const Router = () => {
 
   useEffect(() => {
     axios
-      .get(`http://13.125.223.194:56742/api/getStudyList/${categoryList[category]}`)
+      .get(`http://3.36.68.46:56526/api/getStudyList/${categoryList[category]}`)
       .then((data) => setList(data.data));
   }, [category]);
   if (list === null) {
@@ -32,15 +32,20 @@ const Router = () => {
   }
   return (
     <>
-    <Routes>
-      <Route path="/" element={<Main list={list} update={setList} updateCategory={setCategory}/>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/Profile" element={<Profile />} />
-      <Route path="/PartyJoin" element={<PartyJoin />} />
-      <Route path={`/PartyDetail/:id`} element={<PartyDetail />} />
-      <Route path="/PartySearch" element={<PartySearch />} />
-    </Routes>
-    { userId ? <Footer/> : <></> }
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Main list={list} update={setList} updateCategory={setCategory} />
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/PartyJoin" element={<PartyJoin />} />
+        <Route path={`/PartyDetail/:id`} element={<PartyDetail />} />
+        <Route path="/PartySearch" element={<PartySearch />} />
+      </Routes>
+      {userId ? <Footer /> : <></>}
     </>
   );
 };

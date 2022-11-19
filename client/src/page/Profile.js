@@ -20,14 +20,14 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get(`http://13.125.223.194:56742/api/getStudyListNotMine/${userId}`)
+      .get(`http://3.36.68.46:56526/api/getStudyListNotMine/${userId}`)
       .then((data) => {
         setJoinList(data);
         return null;
       })
       .then(() => {
         return axios.get(
-          `http://13.125.223.194:56742/api/getStudyListMine/${userId}`
+          `http://3.36.68.46:56526/api/getStudyListMine/${userId}`
         );
       })
       .then((data) => {
@@ -85,7 +85,7 @@ const MainContainer = styled.section`
     text-align: center;
     line-height: 40px;
     border-radius: 25px;
-    background-color: #F4EDE7;
+    background-color: #f4ede7;
     color: black;
     font-weight: 600;
   }

@@ -22,24 +22,24 @@ export default function ViewDetail({ list, id }) {
   });
 
   const handleModalView = () => {
-    axios.post("http://13.125.223.194:56742/api/joinStudy", {
+    axios.post("http://3.36.68.46:56526/api/joinStudy", {
       study_no: id,
       id: userId,
     });
   };
 
   const handleImage = (num) => {
-    switch (Math.floor(num/4)) {
-      case 1 : 
+    switch (Math.floor(num / 4)) {
+      case 1:
         return tree_2_1x;
-      case 2 :
+      case 2:
         return tree_3_1x;
-      case 3: 
+      case 3:
         return tree_4_1x;
-      default : 
+      default:
         return tree_1_1x;
     }
-  }
+  };
 
   if (typeof list === "undefined") {
     return;
@@ -74,23 +74,32 @@ export default function ViewDetail({ list, id }) {
               </div>
             </section>
           </div>
-          <div className="headerCircle" style={{background:"#E47B00"}}>
-            <img src={handleImage(newData.members)} style={{width:'100px', height:"100px"}}/>
+          <div className="headerCircle" style={{ background: "#E47B00" }}>
+            <img
+              src={handleImage(newData.members)}
+              style={{ width: "100px", height: "100px" }}
+            />
           </div>
         </div>
         <p className="partyDesc">{newData.study_detail}</p>
-        {newData.members >= newData.min_party ? <p style={{textAlign:"center", color:"red"}}>모집인원이 가득 찼습니다!</p>: ""}
+        {newData.members >= newData.min_party ? (
+          <p style={{ textAlign: "center", color: "red" }}>
+            모집인원이 가득 찼습니다!
+          </p>
+        ) : (
+          ""
+        )}
         <section className="detailCreateBtn">
-          <div className="btnBox"> 
+          <div className="btnBox">
             <button
               className="joinBtn"
-              disabled={newData.members >= newData.min_party} 
+              disabled={newData.members >= newData.min_party}
               onClick={() => {
                 setOpen(true);
                 handleModalView();
               }}
             >
-              <p className="join" >J-Join</p>
+              <p className="join">J-Join</p>
             </button>
             <Modal
               status={1}

@@ -32,7 +32,7 @@ export default function Login() {
     };
 
     axios
-      .post("http://13.125.223.194:56742/auth/api/login", body)
+      .post("http://3.36.68.46:56526/auth/api/login", body)
       .then((response) => {
         console.log(response.data);
         if (response.data.success === 200) {
