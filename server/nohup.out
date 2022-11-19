@@ -4378,3 +4378,314 @@ Executing (default): INSERT INTO `studyattendsstatus` (`idx`,`study_no`,`id`,`cr
 Executing (default): SELECT `study_no`, `who_open`, `study_name`, `study_category`, `study_detail`, `members`, `min_party`, `open_date`, `close_date`, `study_date`, `location`, `tmX`, `tmY`, `deadline`, `status`, `createdAt`, `updatedAt`, `deletedAt` FROM `study` AS `Study` WHERE (`Study`.`deletedAt` IS NULL AND `Study`.`study_no` = '1');
 [0mPOST /api/joinStudy [32m200[0m 17.456 ms - 65[0m
 Killed
+
+> server@1.0.0 start
+> node app.js
+
+80 번 포트에서 대기중
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.tableExists (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:102:17)
+    at async Function.sync (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:939:21)
+    at async Sequelize.sync (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:376:9) {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+
+> server@1.0.0 start
+> node app.js
+
+80 번 포트에서 대기중
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.tableExists (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:102:17)
+    at async Function.sync (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:939:21)
+    at async Sequelize.sync (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:376:9) {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.select (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Function.findAll (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:1134:21)
+    at async /workspace/firstContainer/jeju-edu/server/routes/api.js:13:21 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+[0mGET /api/getStudyList/code [0m-[0m - ms - -[0m
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+[0mGET /api/getStudyList/code [0m-[0m - ms - -[0m
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.select (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Function.findAll (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:1134:21)
+    at async /workspace/firstContainer/jeju-edu/server/routes/api.js:33:23 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.select (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Function.findAll (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:1134:21)
+    at async /workspace/firstContainer/jeju-edu/server/routes/api.js:33:23 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+[0mGET /api/getStudyList/code [0m-[0m - ms - -[0m
+[0mGET /api/getStudyList/code [0m-[0m - ms - -[0m
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.select (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Function.findAll (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:1134:21)
+    at async /workspace/firstContainer/jeju-edu/server/routes/api.js:33:23 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+[0mGET /api/getStudyList/code [0m-[0m - ms - -[0m
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.select (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Function.findAll (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:1134:21)
+    at async /workspace/firstContainer/jeju-edu/server/routes/api.js:33:23 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+[0mGET /api/getStudyList/code [0m-[0m - ms - -[0m
+ConnectionError [SequelizeConnectionError]: connect ETIMEDOUT
+    at ConnectionManager.connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async ConnectionManager._connect (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:220:24)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/sequelize.js:304:26
+    at async MySQLQueryInterface.select (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/dialects/abstract/query-interface.js:407:12)
+    at async Function.findAll (/workspace/firstContainer/jeju-edu/server/node_modules/sequelize/lib/model.js:1134:21)
+    at async /workspace/firstContainer/jeju-edu/server/routes/api.js:33:23 {
+  parent: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  },
+  original: Error: connect ETIMEDOUT
+      at Connection._handleTimeoutError (/workspace/firstContainer/jeju-edu/server/node_modules/mysql2/lib/connection.js:189:17)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7) {
+    errorno: 'ETIMEDOUT',
+    code: 'ETIMEDOUT',
+    syscall: 'connect',
+    fatal: true
+  }
+}
+Killed
+
+> server@1.0.0 start
+> node app.js
+
+80 번 포트에서 대기중
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'users' AND TABLE_SCHEMA = 'jejuDB'
+Executing (default): SHOW INDEX FROM `users` FROM `jejuDB`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'study' AND TABLE_SCHEMA = 'jejuDB'
+Executing (default): SHOW INDEX FROM `study` FROM `jejuDB`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'studyattendsstatus' AND TABLE_SCHEMA = 'jejuDB'
+Executing (default): SHOW INDEX FROM `studyattendsstatus` FROM `jejuDB`
+Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'jejuareadb' AND TABLE_SCHEMA = 'jejuDB'
+Executing (default): SHOW INDEX FROM `jejuareadb` FROM `jejuDB`
+데이터베이스 연결 성공

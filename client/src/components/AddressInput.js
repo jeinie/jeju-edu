@@ -6,7 +6,6 @@ import axios from "axios";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import Modal2 from "./Modal2";
 import serverIP from "../config/config";
-
 const AddressInput = ({ update }) => {
   const { kakao } = window;
   const [userAddress, setUserAddress] = useState(null);
