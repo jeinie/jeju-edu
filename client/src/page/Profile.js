@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import ProfileDetail from "../components/ProfileDetail";
-import serverIP from '../../config/config';
+import serverIP from '../config/config';
 export default function Profile() {
   const [join, setJoin] = useState(true); //참여버튼 상태
   const [create, setCreate] = useState(false); //개설버튼 상태

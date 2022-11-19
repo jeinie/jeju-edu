@@ -6,7 +6,7 @@ import Modal from "../../components/Modal";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../../components/Footer";
-import serverIP from '../../../config/config';
+import serverIP from '../../config/config';
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
   let userId = useSelector((state) => {
