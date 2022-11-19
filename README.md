@@ -1,5 +1,4 @@
-# Jenfra
-## 비행기가 필요없는 그 날 까지!
+<center><img src="https://user-images.githubusercontent.com/56211193/202861953-357a598b-689c-4cc8-b7ab-c8298a5eb935.png"></center>
 http://9oormthon.s3-website.ap-northeast-2.amazonaws.com
 
 ### 아방다리 팀원 소개 👩🏻‍💻🧑🏻‍💻
