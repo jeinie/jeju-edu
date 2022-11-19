@@ -7,6 +7,8 @@ import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
 import AddressInput from "../../components/AddressInput";
 
+import serverIP from '../../../config/config';
+
 export default function Main({ list, update, updateCategory }) {
   return (
     <MainContainer>

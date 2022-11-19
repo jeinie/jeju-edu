@@ -5,7 +5,7 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 import axios from "axios";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import Modal2 from "./Modal2";
-
+import serverIP from '../../config/config';
 const AddressInput = ({update}) => {
   const { kakao } = window;
   const [userAddress, setUserAddress] = useState(null);
@@ -13,7 +13,7 @@ const AddressInput = ({update}) => {
   const [ popup, setPopup ] = useState(false);
 
   const handleClick = () => {
-    axios.post("http://13.125.223.194:56742/api/getStudyList", {area:"성산읍"}).then(
+    axios.post("http://${serverIP.serverIP}/api/getStudyList", {area:"성산읍"}).then(
       (data) => update(data.data));
   }
 

@@ -10,7 +10,7 @@ import tree_2_1x from "../../img/tree_2_1x.png";
 import tree_3_1x from "../../img/tree_3_1x.png";
 import tree_4_1x from "../../img/tree_4_1x.png";
 import tree_1_1x from "../../img/tree_1_1x.png";
-
+import serverIP from '../../../config/config';
 export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
   console.log(newData);
@@ -22,7 +22,7 @@ export default function ViewDetail({ list, id }) {
   });
 
   const handleModalView = () => {
-    axios.post("http://13.125.223.194:56742/api/joinStudy", {
+    axios.post(`http://${serverIP.serverIP}/api/joinStudy`, {
       study_no: id,
       id: userId,
     });

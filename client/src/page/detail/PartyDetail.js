@@ -6,7 +6,7 @@ import axios from "axios";
 import ViewDetail from "../Main/ViewDetail";
 import PartyMarker from "../../components/PartyMarker";
 import AddressInput from "../../components/AddressInput";
-
+import serverIP from '../../../config/config';
 export default function PartyDetail() {
   const { id } = useParams();
   const [personalList, setPersonalList] = useState(null);
@@ -18,7 +18,7 @@ export default function PartyDetail() {
 
   useEffect(() => {
     axios
-      .post(`http://13.125.223.194:56742/viewDetail/${id}`)
+      .post(`http://${serverIP.serverIP}/viewDetail/${id}`)
       .then((data) => setPersonalList(data));
   }, [id]);
 
