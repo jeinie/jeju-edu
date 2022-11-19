@@ -6,7 +6,7 @@ import Modal from "../../components/Modal";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../../components/Footer";
-
+import serverIP from "../../config/config";
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
   let userId = useSelector((state) => {
@@ -33,7 +33,7 @@ export default function PartyJoin() {
     e.preventDefault();
 
     axios
-      .post("http://3.36.68.46:56526/api/openStudy", formData)
+      .post(`http://${serverIP.serverIP}/api/openStudy`, formData)
       .then((response) => {
         console.log(response);
         setOpen(true);

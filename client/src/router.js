@@ -10,9 +10,9 @@ import Login from "./page/Login";
 import PartyJoin from "./page/detail/PartyJoin";
 import Footer from "./components/Footer";
 import { useSelector } from "react-redux";
+import serverIP from "./config/config";
 
 const categoryList = ["code", "sing", "design"];
-
 const Router = () => {
   const [list, setList] = useState(null);
   const [category, setCategory] = useState(0);
@@ -24,7 +24,9 @@ const Router = () => {
 
   useEffect(() => {
     axios
-      .get(`http://3.36.68.46:56526/api/getStudyList/${categoryList[category]}`)
+      .get(
+        `http://${serverIP.serverIP}/api/getStudyList/${categoryList[category]}`
+      )
       .then((data) => setList(data.data));
   }, [category]);
   if (list === null) {

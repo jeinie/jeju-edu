@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import ProfileDetail from "../components/ProfileDetail";
-
+import serverIP from "../config/config";
 export default function Profile() {
   const [join, setJoin] = useState(true); //참여버튼 상태
   const [create, setCreate] = useState(false); //개설버튼 상태
@@ -20,14 +20,14 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get(`http://3.36.68.46:56526/api/getStudyListNotMine/${userId}`)
+      .get(`http://${serverIP.serverIP}/api/getStudyListNotMine/${userId}`)
       .then((data) => {
         setJoinList(data);
         return null;
       })
       .then(() => {
         return axios.get(
-          `http://3.36.68.46:56526/api/getStudyListMine/${userId}`
+          `http://${serverIP.serverIP}/api/getStudyListMine/${userId}`
         );
       })
       .then((data) => {

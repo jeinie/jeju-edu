@@ -7,11 +7,13 @@ import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
 import AddressInput from "../../components/AddressInput";
 
+import serverIP from "../../config/config";
+
 export default function Main({ list, update, updateCategory }) {
   return (
     <MainContainer>
       <AddressInput update={update} />
-      <MainCategory updateCategory={updateCategory}/>
+      <MainCategory updateCategory={updateCategory} />
       {list.map((el, idx) => {
         return (
           <Link to={`/PartyDetail/${el.study_no}`} key={idx}>
