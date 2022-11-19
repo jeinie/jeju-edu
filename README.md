@@ -26,5 +26,5 @@ http://9oormthon.s3-website.ap-northeast-2.amazonaws.com
 ## ⚡️ 백엔드 기술 스택 
 ![backend](https://user-images.githubusercontent.com/56211193/202865022-be625db1-1528-4e45-9d49-2b5586828a0e.png)
 
-## ⚙️ 인프라 구조
+## ⚙️ 개발/배포 환경
 ![infra](https://user-images.githubusercontent.com/56211193/202866075-46b3e8b7-4e40-4552-a826-72b791117308.png)
