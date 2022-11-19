@@ -18,8 +18,10 @@ http://9oormthon.s3-website.ap-northeast-2.amazonaws.com
 </div>
 
 ## ✨ 프론트엔드 기술 스택 
+![front](https://user-images.githubusercontent.com/56211193/202865016-24570b83-3c19-41a8-ab8f-81bd93df096b.png)
 
 ## ⚡️ 백엔드 기술 스택 
+![backend](https://user-images.githubusercontent.com/56211193/202865022-be625db1-1528-4e45-9d49-2b5586828a0e.png)
 
 ## ⚙️ 인프라 기술 스택 
 
