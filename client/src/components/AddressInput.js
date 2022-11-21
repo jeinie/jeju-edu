@@ -13,7 +13,7 @@ const AddressInput = ({update}) => {
   const [ popup, setPopup ] = useState(false);
 
   const handleClick = () => {
-    axios.post("http://${serverIP.serverIP}/api/getStudyList", {area:"성산읍"}).then(
+    axios.post("https://${serverIP.serverIP}/api/getStudyList", {area:"성산읍"}).then(
       (data) => update(data.data));
   }
 

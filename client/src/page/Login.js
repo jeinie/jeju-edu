@@ -32,7 +32,7 @@ export default function Login() {
     };
 
     axios
-      .post(`http://${serverIP.serverIP}/auth/api/login`, body)
+      .post(`https://${serverIP.serverIP}/auth/api/login`, body)
       .then((response) => {
         console.log(response.data);
         if (response.data.success === 200) {
