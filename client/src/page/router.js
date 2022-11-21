@@ -20,7 +20,7 @@ const Router = () => {
   let userId = useSelector((state) => {
     return state.user.id;
   });
-  // console.log(userId);
+  console.log(userId);
 
   useEffect(() => {
     axios

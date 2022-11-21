@@ -53,6 +53,7 @@ const FooterContainer = styled.footer`
   position: fixed;
   top: 90%;
   background: white;
+  padding: 0 48px;
   a {
     color: black;
   }
