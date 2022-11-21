@@ -1,5 +1,5 @@
 const Config = {
-	serverIP : "3.36.68.46:57703"
+	serverIP : "44.211.218.78:443"
 }
 
 export default Config;
