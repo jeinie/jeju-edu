@@ -5,7 +5,7 @@
       "database": "jejuDB",
       "host": "44.211.218.78",
       "dialect": "mysql",
-      "port":"33060"
+      "port":"3306"
     },
     "test": {
       "username": "root",
