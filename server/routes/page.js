@@ -1,45 +1,50 @@
 const express = require("express");
 const { User, Study } = require("../models");
-
+const path = require("path");
 const router = express.Router();
-/*
-router.use((req, res, next) => {
-  res.locals.user = req.user;
-  res.locals.followerCount = req.user ? req.user.Followers.length : 0;
-  res.locals.followingCount = req.user ? req.user.Followings.length : 0;
-  res.locals.followerIdList = req.user
-    ? req.user.Followings.map((f) => f.id)
-    : [];
-  next();
-});
-*/
 
-router.get("/", async (req, res, next) => {
+router.post("/viewDetail/:study_no", async (req, res) => {
   try {
-    const posts = await Post.findAll({
-      attributes: ["id", "content", "visibility"],
-      include: {
-        model: User,
-        attributes: ["id", "nick"],
-      },
-      order: [["createdAt", "DESC"]],
+    const studyInfo = await Study.findOne({
+      where: { study_no: req.params.study_no },
     });
 
-    const comments = await Comment.findAll({
-      attributes: ["contents", "UserId", "postId", "whoWrite"],
-    });
-    console.log("comments 확인");
-    console.log(comments);
+    //studyInfo.createdAt = studyInfo.createdAt.split(" ")[0];
+    //studyInfo.updatedAt = studyInfo.updatedAt.split(" ")[0];
+    console.log(`처리1 ${studyInfo.location}`);
+    console.log(`처리2 ${studyInfo.createdAt}`);
+    console.log(`처리3 ${studyInfo.updatedAt}`);
 
-    res.render("main", {
-      title: "prj-name",
-      twits: posts,
-      comments: comments,
-    });
-  } catch (err) {
-    console.error(err);
-    next(err);
+    if (studyInfo) {
+      const result = {};
+      result["success"] = 200;
+      result["msg"] = "studyInfo 전달 성공";
+
+      //for (var i = 0; i < studyInfo.length; i++) {
+      let concat = studyInfo.location.split(" ");
+      let result1 = concat[1] + " " + concat[2];
+      studyInfo.location = result1;
+      //}
+      result["studyInfo"] = studyInfo;
+      res.json(result);
+    } else {
+      result["success"] = 100;
+      result["msg"] = "studyInfo 조회 / 전달 실패";
+      res.json(result);
+    }
+  } catch (error) {
+    console.error(error);
+    return next(error);
   }
+});
+
+router.get("/", (req, res) => {
+  try {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  } catch (e) {
+    console.log(`sendfile Error ${e}`);
+  }
+  return;
 });
 
 module.exports = router;

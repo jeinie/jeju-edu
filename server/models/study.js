@@ -5,8 +5,12 @@ module.exports = class Study extends Sequelize.Model {
     return super.init(
       {
         study_no: {
-          type: Sequelize.STRING(20),
+          type: Sequelize.INTEGER,
+          autoIncrement: true,
           primaryKey: true,
+        },
+        who_open: {
+          type: Sequelize.STRING(20),
         },
         study_name: {
           type: Sequelize.STRING(200),
@@ -18,13 +22,35 @@ module.exports = class Study extends Sequelize.Model {
           type: Sequelize.STRING(2000),
         },
         members: {
-          type: Sequelize.STRING(500),
+          type: Sequelize.INTEGER,
         },
         min_party: {
           type: Sequelize.INTEGER,
         },
         open_date: {
           type: Sequelize.DATEONLY,
+        },
+        close_date: {
+          type: Sequelize.DATEONLY,
+        },
+        study_date: {
+          type: Sequelize.DATEONLY,
+        },
+        location: {
+          type: Sequelize.STRING(200),
+        },
+        tmX: {
+          type: Sequelize.FLOAT,
+        },
+        tmY: {
+          type: Sequelize.FLOAT,
+        },
+        deadline: {
+          type: Sequelize.DATEONLY,
+        },
+        status: {
+          type: Sequelize.INTEGER,
+          defaultValue: 0,
         },
       },
       {

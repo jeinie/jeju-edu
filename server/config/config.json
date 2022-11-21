@@ -1,10 +1,11 @@
 {
     "development": {
-      "username": "root",
-      "password": "1234",
-      "database": "prj-maindb",
-      "host": "127.0.0.1",
-      "dialect": "mysql"
+      "username": "dummy1",
+      "password": "dummy1234",
+      "database": "jejuDB",
+      "host": "3.36.68.46",
+      "dialect": "mysql",
+      "port":"55752"
     },
     "test": {
       "username": "root",

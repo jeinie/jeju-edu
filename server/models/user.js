@@ -16,9 +16,11 @@ module.exports = class User extends Sequelize.Model {
         },
         good_cnt: {
           type: Sequelize.INTEGER,
+          defaultValue: 0,
         },
         bad_cnt: {
           type: Sequelize.INTEGER,
+          defaultValue: 0,
         },
       },
       {
