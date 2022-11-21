@@ -1,16 +1,16 @@
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import Main from "./page/Main/Main";
-import PartyDetail from "./page/detail/PartyDetail";
-import PartySearch from "./page/PartySearch";
-import Profile from "./page/Profile";
-import Login from "./page/Login";
-import PartyJoin from "./page/detail/PartyJoin";
-import Footer from "./components/Footer";
+import Main from "./Main/Main";
+import PartyDetail from "./detail/PartyDetail";
+// import PartySearch from "./page/PartySearch";
+import Profile from "./profile/Profile";
+import Login from "./login/Login";
+import PartyJoin from "./detail/PartyJoin";
+import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
-import serverIP from "./config/config";
+import serverIP from "../config/config";
 
 const categoryList = ["code", "sing", "design"];
 const Router = () => {
@@ -20,7 +20,7 @@ const Router = () => {
   let userId = useSelector((state) => {
     return state.user.id;
   });
-  console.log(userId);
+  // console.log(userId);
 
   useEffect(() => {
     axios
@@ -45,7 +45,7 @@ const Router = () => {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/PartyJoin" element={<PartyJoin />} />
         <Route path={`/PartyDetail/:id`} element={<PartyDetail />} />
-        <Route path="/PartySearch" element={<PartySearch />} />
+        {/* <Route path="/PartySearch" element={<PartySearch />} /> */}
       </Routes>
       {userId ? <Footer /> : <></>}
     </>
