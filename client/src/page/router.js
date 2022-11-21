@@ -27,7 +27,10 @@ const Router = () => {
       .get(
         `http://${serverIP.serverIP}/api/getStudyList/${categoryList[category]}`
       )
-      .then((data) => setList(data.data));
+      .then((data) => {
+        console.log(data);
+        setList(data.data);
+      });
   }, [category]);
   if (list === null) {
     return <div>리스트가 없습니다 !</div>;

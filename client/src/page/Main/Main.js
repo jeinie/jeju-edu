@@ -10,6 +10,7 @@ import AddressInput from "../../components/AddressInput";
 // import serverIP from "../../config/config";
 
 export default function Main({ list, update, updateCategory }) {
+  console.log(list);
   return (
     <MainContainer>
       <AddressInput update={update} />

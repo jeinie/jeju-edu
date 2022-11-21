@@ -7,8 +7,8 @@ import TransformAddress from "./components/TransformAddress";
 function App() {
   return (
     <div className="App" style={{ fontFamily: "NanumSquare" }}>
-      <Router />
-      {/* <TransformAddress />; */}
+      {/* <Router /> */}
+      <TransformAddress lat="33.252984" lon="126.561100" />;
     </div>
   );
 }
