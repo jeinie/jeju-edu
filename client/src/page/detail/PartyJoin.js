@@ -8,7 +8,6 @@ import DateTime from "../../components/DateTime";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
 import serverIP from "../../config/config";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
