@@ -27,17 +27,7 @@ export default function PartyDetail() {
   return (
     <div>
       <PartyMarker lat={local.tmX} lon={local.tmY} />
-      {/* <SearchInputContainer>
-        <AddressInput />
-      </SearchInputContainer> */}
       <ViewDetail list={personalList} id={id} />
     </div>
   );
 }
-
-const SearchInputContainer = styled.div`
-  position: relative;
-  top: -15px;
-  left: 0;
-  z-index: 99;
-`;

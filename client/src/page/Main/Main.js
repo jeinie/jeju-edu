@@ -8,8 +8,6 @@ import Footer from "./../../components/Footer";
 import AddressInput from "../../components/maps/AddressInput";
 import MainHeader from "../../components/MainHeader";
 
-// import serverIP from "../../config/config";
-
 export default function Main({ list, update, updateCategory, userId }) {
   console.log(list);
   return (
@@ -19,7 +17,7 @@ export default function Main({ list, update, updateCategory, userId }) {
       <MainCategory updateCategory={updateCategory} />
       {list.map((el, idx) => {
         return (
-          <Link to={`/PartyDetail/${el.study_no}`} key={idx}>
+          <Link to={`/partydetail/${el.study_no}`} key={idx}>
             <StudyCard index={idx} item={el} />
           </Link>
         );
@@ -30,7 +28,6 @@ export default function Main({ list, update, updateCategory, userId }) {
 }
 
 const MainContainer = styled.div`
-  /* padding-top: 30px; */
   margin-bottom: 100px;
 
   .test {

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { MdPeopleAlt } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
 
@@ -9,7 +10,6 @@ export default function ProfileDetail({
   joinState,
   createState,
 }) {
-  // const stateArr = ["대기","매칭","마감기한 만료","","완료"]
   if (joinState === true) {
     return (
       <Wrapper>
@@ -88,7 +88,7 @@ const ListContainer = styled.section`
   margin: 24px 20px 23px;
   width: 100%;
   height: 102px;
-  background-color: #F4EDE7;
+  background-color: #f4ede7;
   padding-top: 24px;
   text-align: center;
   display: flex;

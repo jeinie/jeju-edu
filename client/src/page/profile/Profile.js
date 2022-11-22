@@ -51,7 +51,6 @@ export default function Profile() {
     <MainContainer>
       <p className="myProfile">My page</p>
       <div className="pageBtn">
-        {/* 상단의 Page 바꾸는 버튼 */}
         <div className={join ? "changeStyle" : "base"} onClick={handleJoin}>
           참여
         </div>
@@ -106,16 +105,5 @@ const MainContainer = styled.section`
     font-weight: bold;
     padding-bottom: 11px;
     margin-bottom: 20px;
-    /* border-bottom: 1px solid black; */
   }
 `;
-
-// const ListContainer = styled.section`
-//   text-align: center;
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-//   .header {
-//     display: flex;
-//   }
-// `;

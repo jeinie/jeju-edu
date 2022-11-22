@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
       </Link>
       <PlusBtn />
-      <Link to="/Profile">
+      <Link to="/profile">
         <div
           className={onProfile ? "iconBox viewPage" : "iconBox"}
           onClick={handlePage}

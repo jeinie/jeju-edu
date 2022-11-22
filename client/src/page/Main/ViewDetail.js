@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import styled from "styled-components";
+
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
-import axios from "axios";
-import Modal from "../../components/modals/Modal";
 import { BsCalendar2WeekFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
+
 import tree_2_1x from "../../img/tree_2_1x.png";
 import tree_3_1x from "../../img/tree_3_1x.png";
 import tree_4_1x from "../../img/tree_4_1x.png";
 import tree_1_1x from "../../img/tree_1_1x.png";
 import serverIP from "../../config/config";
+
+import Modal from "../../components/modals/Modal";
+
 export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
   console.log(newData);

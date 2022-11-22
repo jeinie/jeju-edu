@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { saveUser } from "../../store/userSlice";
 import { useDispatch } from "react-redux";
-// import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import fir from "../../img/fir.png";
 import sec from "../../img/sec.png";

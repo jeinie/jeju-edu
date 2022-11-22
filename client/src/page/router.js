@@ -49,10 +49,9 @@ const Router = () => {
           }
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/Profile" element={<Profile />} />
-        <Route path="/PartyJoin" element={<PartyJoin />} />
-        <Route path={`/PartyDetail/:id`} element={<PartyDetail />} />
-        {/* <Route path="/PartySearch" element={<PartySearch />} /> */}
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/partyjoin" element={<PartyJoin />} />
+        <Route path={`/partydetail/:id`} element={<PartyDetail />} />
       </Routes>
       {userId ? <Footer /> : <></>}
       {/* userId 가 null 값이여도 있음. 해당코드 수정필요. */}

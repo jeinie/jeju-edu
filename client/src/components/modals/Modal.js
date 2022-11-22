@@ -22,21 +22,21 @@ const statusList = [
     detail: "이제 내 나무에 물을 줄",
     detail2: "스터디원을 기다리면 돼요!",
     link_title: "링크로 홍보하기",
-    link: "/Profile",
+    link: "/profile",
   },
   {
     title: "스터디에 참여완료!",
     detail: "이제 내 나무에 물을 줄",
     detail2: "스터디원을 기다리면 돼요!",
     link_title: "다른 스터디 보러가기",
-    link: "/Profile",
+    link: "/profile",
   },
   {
     title: "스터디 종료!",
     detail: "오늘도 보람찬 하루를 보내셨군요:)",
     detail2: "수확에 성공했어요!",
     link_title: "수확 현황 확인하러가기",
-    link: "/Profile",
+    link: "/profile",
   },
 ];
 
@@ -100,7 +100,7 @@ export default function BasicModal(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {statusList[props.status]["title"]}
           </Typography>
-          <img src={handleImage(members)} />
+          <img src={handleImage(members)} alt="modal 이미지" />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {statusList[props.status]["detail"]}
             <br />

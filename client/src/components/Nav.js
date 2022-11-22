@@ -1,12 +1,10 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-// import ViewDetail from "../page/Main/ViewDetail";
 
 export default function MainCategory({ updateCategory }) {
   const [onCode, setOnCode] = useState(true);
   const [onSing, setOnSing] = useState(false);
   const [onDance, setOnDance] = useState(false);
-  // const [APIdata, setAPIData] = useState(null);
   const codeEle = useRef();
   const singEle = useRef();
   const danceEle = useRef();

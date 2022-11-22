@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { HeartFillIcon, LocationIcon } from "@goorm-dev/gds-goormthon";
 import { MdPeopleAlt } from "react-icons/md";
 

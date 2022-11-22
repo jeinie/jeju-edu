@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../../components/Footer";
 import serverIP from "../../config/config";
+
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
   let userId = useSelector((state) => {
@@ -93,7 +94,7 @@ export default function PartyJoin() {
       <div className="modalLayout">
         <Modal open={open} handleClose={setOpen} status={0} />
       </div>
-      <div className="layout">
+      <div>
         <Footer />
       </div>
     </MainStyle>
@@ -132,7 +133,6 @@ const MainStyle = styled.main`
     text-align: center;
     font-weight: bold;
     padding: 25px 0 9px 0;
-    /* border-bottom: 1px solid black; */
   }
   input {
     background-color: #faf6f2;
@@ -142,9 +142,6 @@ const MainStyle = styled.main`
     border: none;
   }
 
-  .layout {
-    /* transform: translateY(100px); */
-  }
   div {
     border: none;
   }
