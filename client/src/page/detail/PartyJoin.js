@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import styled from "styled-components";
+
 import Nav from "../../components/Nav";
 import DateTime from "../../components/DateTime";
-import axios from "axios";
 import Modal from "../../components/modals/Modal";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
 import Footer from "../../components/Footer";
 import serverIP from "../../config/config";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
+
+  const partyName = useRef(); // 스터디 이름
+  const partyDate = useRef(); // 스터디 모임 날짜
+  const partyClose = useRef(); // 스터디 모짐마감 날짜
+  const partyLocation = useRef(); // 스터디 모임 장소
+  const partyDesc = useRef(); // 스터디 상세설명
+
   let userId = useSelector((state) => {
     return state.user.id;
   });
@@ -41,24 +50,45 @@ export default function PartyJoin() {
       });
   };
 
+  const refCheck = () => {
+    console.log(
+      partyName.current.value,
+      // partyDate,
+      // partyClose,
+      partyLocation.current.value,
+      partyDesc.current.value
+    );
+  };
+
   return (
     <MainStyle>
       <p className="title">스터디 개설하기</p>
       <Nav />
+      <button onClick={refCheck}>ref 확인</button>
       <div className="wrapper">
         <form className="createParty" onSubmit={onSubmitHandler}>
-          <Input
+          <div className="partName">
+            <label htmlFor="study_name">스터디 이름</label>
+            <InputStyle
+              ref={partyName}
+              placeholder="스터디 이름을 입력해주세요"
+              name="study_name"
+            />
+          </div>
+          {/* <Input
             className="partyName"
             name="study_name"
             labelName="스터디 이름"
             placeholder="스터디 이름을 입력해주세요"
-          />
+          /> */}
+
           <label className="studyDate">스터디 날짜</label>
           <DateTime
             name="study_date"
             labelName="스터디 날짜"
             placeholder="스터디 날짜를 선택해주세요"
             margin={{ my: "25px" }}
+            ref={partyDate}
           />
           <label>모집 마감 날짜</label>
           <DateTime
@@ -66,13 +96,26 @@ export default function PartyJoin() {
             labelName="모집 마감 날짜"
             placeholder="모집 마감 날짜를 선택해주세요"
             margin={{ mb: "25px" }}
+            ref={partyClose}
           />
-          <Input
+          <div className="partName">
+            <label htmlFor="location">스터디 장소</label>
+            <InputStyle
+              ref={partyLocation}
+              placeholder="스터디 장소를 입력해주세요"
+              name="location"
+            />
+          </div>
+          {/* <Input
             labelName="스터디 장소"
             placeholder="스터디 장소를 알려주세요"
-          />
+          /> */}
           <label className="partyDescLabel">스터디 상세설명</label>
-          <textarea className="partyDesc" placeholder="스터디를 설명해주세요" />
+          <textarea
+            ref={partyDesc}
+            className="partyDesc"
+            placeholder="스터디를 설명해주세요"
+          />
           <button className="finish">스터디 개설 완료하기</button>
         </form>
       </div>

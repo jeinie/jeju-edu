@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { SearchIcon } from "@goorm-dev/gds-goormthon";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import axios from "axios";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+// import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import Modal2 from "../modals/Modal2";
 import serverIP from "../../config/config";
 
@@ -47,7 +47,7 @@ const AddressInput = ({ update }) => {
           <MyLocationIcon className="myLocation" />
           현재 위치로 설정
         </p>
-        <AccessAlarmIcon onClick={() => setPopup(true)} className="alarm" />
+        {/* <AccessAlarmIcon onClick={() => setPopup(true)} className="alarm" /> */}
         {popup && <Modal2 open={popup} setOpen={setPopup} />}
       </div>
     </TestBox>
