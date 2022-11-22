@@ -18,7 +18,7 @@ export default function PartyDetail() {
 
   useEffect(() => {
     axios
-      .post(`http://${serverIP.serverIP}/viewDetail/${id}`)
+      .post(`https://${serverIP.serverIP}/viewDetail/${id}`)
       .then((data) => setPersonalList(data));
   }, [id]);
 

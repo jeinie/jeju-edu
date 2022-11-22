@@ -1,11 +1,11 @@
 {
     "development": {
       "username": "dummy1",
-      "password": "dummy1234",
+      "password": "1234",
       "database": "jejuDB",
-      "host": "3.36.68.46",
+      "host": "44.211.218.78",
       "dialect": "mysql",
-      "port":"55752"
+      "port":"3306"
     },
     "test": {
       "username": "root",

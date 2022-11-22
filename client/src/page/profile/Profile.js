@@ -20,14 +20,14 @@ export default function Profile() {
 
   useEffect(() => {
     axios
-      .get(`http://${serverIP.serverIP}/api/getStudyListNotMine/${userId}`)
+      .get(`https://${serverIP.serverIP}/api/getStudyListNotMine/${userId}`)
       .then((data) => {
         setJoinList(data);
         return null;
       })
       .then(() => {
         return axios.get(
-          `http://${serverIP.serverIP}/api/getStudyListMine/${userId}`
+          `https://${serverIP.serverIP}/api/getStudyListMine/${userId}`
         );
       })
       .then((data) => {
