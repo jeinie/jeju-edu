@@ -6,7 +6,7 @@ import axios from "axios";
 import ViewDetail from "../Main/ViewDetail";
 import PartyMarker from "../../components/PartyMarker";
 import AddressInput from "../../components/AddressInput";
-import serverIP from '../../config/config';
+import serverIP from "../../config/config";
 export default function PartyDetail() {
   const { id } = useParams();
   const [personalList, setPersonalList] = useState(null);

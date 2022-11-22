@@ -10,77 +10,79 @@ import tree_2_1x from "../img/tree_2_1x.png";
 import tree_3_1x from "../img/tree_3_1x.png";
 import tree_4_1x from "../img/tree_4_1x.png";
 import axios from "axios";
-import {useSelector} from 'react-redux';
-import serverIP from '../config/config';
+import { useSelector } from "react-redux";
+import serverIP from "../config/config";
 const statusList = [
   {
-    "title":"스터디가 만들어졌어요!",
-    "detail":"이제 내 나무에 물을 줄",
-    "detail2":"스터디원을 기다리면 돼요!",
-    "link_title":"링크로 홍보하기",
-    "link":"/Profile"
+    title: "스터디가 만들어졌어요!",
+    detail: "이제 내 나무에 물을 줄",
+    detail2: "스터디원을 기다리면 돼요!",
+    link_title: "링크로 홍보하기",
+    link: "/Profile",
   },
   {
-    "title":"스터디에 참여완료!",
-    "detail":"이제 내 나무에 물을 줄",
-    "detail2":"스터디원을 기다리면 돼요!",
-    "link_title":"다른 스터디 보러가기",
-    "link":"/Profile"
+    title: "스터디에 참여완료!",
+    detail: "이제 내 나무에 물을 줄",
+    detail2: "스터디원을 기다리면 돼요!",
+    link_title: "다른 스터디 보러가기",
+    link: "/Profile",
   },
   {
-    "title":"스터디 종료!",
-    "detail":"오늘도 보람찬 하루를 보내셨군요:)",
-    "detail2":"수확에 성공했어요!",
-    "link_title":"수확 현황 확인하러가기",
-    "link":"/Profile"
-  }
+    title: "스터디 종료!",
+    detail: "오늘도 보람찬 하루를 보내셨군요:)",
+    detail2: "수확에 성공했어요!",
+    link_title: "수확 현황 확인하러가기",
+    link: "/Profile",
+  },
 ];
 
 const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    textAlign: "center",
-    p: 4,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  textAlign: "center",
+  p: 4,
 };
 
 export default function BasicModal(props) {
   const navigate = useNavigate();
-  const move = () => navigate(statusList[props.status]['link']);
-  const [members, setMembers] = useState(props.list? props.list.members : 0);
+  const move = () => navigate(statusList[props.status]["link"]);
+  const [members, setMembers] = useState(props.list ? props.list.members : 0);
   let userId = useSelector((state) => {
     return state.user.id;
   });
 
   useEffect(() => {
-    axios.post("https://${serverIP.serverIP}/api/joinStudy", {
-      study_no: props.list?.study_no,
-      id: userId,
-    }).then((response)=>{
+    axios
+      .post(`http://${serverIP.serverIP}/api/joinStudy`, {
+        study_no: props.list?.study_no,
+        id: userId,
+      })
+      .then((response) => {
         console.log(response);
-        if(response.data.success === 200) {
+        if (response.data.success === 200) {
           setMembers(response.data.members);
         }
-    });
+      });
   }, []);
 
   const handleImage = (num) => {
-    switch (Math.floor(num/4)) {
-      case 1 : 
+    switch (Math.floor(num / 4)) {
+      case 1:
         return tree_2_1x;
-      case 2 :
+      case 2:
         return tree_3_1x;
-      case 3: 
+      case 3:
         return tree_4_1x;
-      default : 
+      default:
         return tree_1_1x;
     }
-  }
+  };
 
   return (
     <ModalContainer>
@@ -92,16 +94,20 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {statusList[props.status]['title']}
+            {statusList[props.status]["title"]}
           </Typography>
           <img src={handleImage(members)} />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {statusList[props.status]['detail']}<br/>{statusList[props.status]['detail2']}
+            {statusList[props.status]["detail"]}
+            <br />
+            {statusList[props.status]["detail2"]}
           </Typography>
           <ModalMemberContainer>
             <MdPeopleAlt />
             {props.list ? (
-              <p className="mixMember">{members}/{props.list.min_party}</p>
+              <p className="mixMember">
+                {members}/{props.list.min_party}
+              </p>
             ) : (
               <></>
             )}

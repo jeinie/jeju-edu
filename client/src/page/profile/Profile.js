@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import ProfileDetail from "../components/ProfileDetail";
-import serverIP from '../config/config';
+import ProfileDetail from "../../components/ProfileDetail";
+import serverIP from "../../config/config";
 export default function Profile() {
   const [join, setJoin] = useState(true); //참여버튼 상태
   const [create, setCreate] = useState(false); //개설버튼 상태
   const [joinList, setJoinList] = useState(null);
   const [createList, setCreateList] = useState(null);
-  let user = useSelector((state) => {
-    return state;
-  });
+  // let user = useSelector((state) => {
+  //   return state;
+  // });
   // console.log(user)
 
   let userId = useSelector((state) => {
@@ -85,7 +85,7 @@ const MainContainer = styled.section`
     text-align: center;
     line-height: 40px;
     border-radius: 25px;
-    background-color: #F4EDE7;
+    background-color: #f4ede7;
     color: black;
     font-weight: 600;
   }

@@ -13,19 +13,16 @@ export default function MainCategory({ updateCategory }) {
 
   const handlePageMenu = (e) => {
     if (e.target.textContent === "프로그래밍") {
-      // axios.get("").then((data) => setAPIData(data));
       setOnCode(true);
       setOnSing(false);
       setOnDance(false);
       updateCategory(0);
     } else if (e.target.textContent === "보컬댄스") {
-      // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(true);
       setOnDance(false);
       updateCategory(1);
     } else if (e.target.textContent === "디자인") {
-      // axios.get("").then((data) => setAPIData(data));
       setOnCode(false);
       setOnSing(false);
       setOnDance(true);
@@ -67,11 +64,11 @@ const NavContainer = styled.nav`
 
   /* border: 1px solid black; */
   display: flex;
-  color: #F4EDE7;
+  color: #f4ede7;
   .navBox {
     margin: 0 2px;
     color: #000000;
-    background-color: #F4EDE7;
+    background-color: #f4ede7;
     display: flex;
     justify-content: center;
     align-items: center;
