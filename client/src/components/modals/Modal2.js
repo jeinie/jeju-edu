@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 
 // import Box from "@mui/material/Box";
 // import Button from "@mui/material/Button";
@@ -12,7 +13,7 @@ export default function Modal2(props) {
   const handleClose = () => props.setOpen(false);
 
   return (
-    <div>
+    <Modal2Container>
       <Modal
         open={props.open}
         onClose={handleClose}
@@ -64,6 +65,8 @@ export default function Modal2(props) {
           </button>
         </>
       </Modal>
-    </div>
+    </Modal2Container>
   );
 }
+
+const Modal2Container = styled.section``;

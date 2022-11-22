@@ -6,8 +6,8 @@ import { MdPeopleAlt } from "react-icons/md";
 export default function StudyCard({ item }) {
   return (
     <StudyBox>
-      <IconBox style={{ float: "right" }}>
-        <HeartFillIcon style={{ color: "lightGray" }} />
+      <IconBox>
+        <HeartFillIcon className="likeBtn" />
       </IconBox>
       <UserName>{item.who_open}</UserName>
       <StudyTitle className="font-bold">{item.study_name}</StudyTitle>
@@ -31,7 +31,9 @@ const StudyBox = styled.div`
   padding: 0 35px;
   background: #f4ede7;
   border-radius: 15px;
-
+  .likeBtn {
+    color: lightGray;
+  }
   .font {
     margin-top: 20px;
   }
@@ -44,7 +46,6 @@ const StudyBox = styled.div`
     justify-content: space-between;
     margin-top: 10px;
     align-items: center;
-    /* border: 1px solid black; */
   }
 
   .partyLocation {
@@ -58,6 +59,7 @@ const StudyBox = styled.div`
 `;
 
 const IconBox = styled.div`
+  float: right;
   width: 24px;
   height: 24px;
   margin: 10px -10px 0 0;

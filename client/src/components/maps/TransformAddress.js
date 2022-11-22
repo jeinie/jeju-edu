@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import styled from "styled-components";
 
 const TransformAddress = ({ lat, lon }) => {
   const { kakao } = window;
@@ -30,7 +31,17 @@ const TransformAddress = ({ lat, lon }) => {
     getAddr(lat, lon);
   }, []);
 
-  return <div id="map" style={{ height: "200px" }}></div>;
+  return (
+    <mapContainer>
+      <div id="map"></div>
+    </mapContainer>
+  );
 };
 
 export default TransformAddress;
+
+const mapContainer = styled.section`
+  #map {
+    height: 200px;
+  }
+`;

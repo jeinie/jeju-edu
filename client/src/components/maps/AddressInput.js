@@ -44,7 +44,7 @@ const AddressInput = ({ update }) => {
       <div className="btnContainer">
         <p className="myLocation" onClick={handleClick}>
           {/* 위도경도를 주소로 변환하는 함수 적용 */}
-          <MyLocationIcon style={{ marginRight: "10px" }} />
+          <MyLocationIcon className="myLocation" />
           현재 위치로 설정
         </p>
         <AccessAlarmIcon onClick={() => setPopup(true)} className="alarm" />
@@ -82,5 +82,8 @@ const TestBox = styled.div`
     border: none;
     background: black;
     color: white;
+  }
+  .myLocation {
+    margin-right: 10px;
   }
 `;

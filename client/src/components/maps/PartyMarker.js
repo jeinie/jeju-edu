@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
 
 // 개설된 스터디 상세페이지에서 사용될 지도 와 마커
 export default function PartyMarker({ lat, lon }) {
@@ -57,14 +58,20 @@ export default function PartyMarker({ lat, lon }) {
   ]);
 
   return (
-    <div>
-      <div className="Map" style={{ height: "150px" }}>
-        <div
-          className="MapContainer"
-          id="map"
-          style={{ height: "150px" }}
-        ></div>
+    <MapContainer>
+      <div className="map">
+        <div className="MapContainer" id="map"></div>
       </div>
-    </div>
+    </MapContainer>
   );
 }
+
+const MapContainer = styled.section`
+  .map {
+    height: 150px;
+  }
+
+  #map {
+    height: 150px;
+  }
+`;

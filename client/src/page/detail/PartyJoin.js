@@ -45,13 +45,13 @@ export default function PartyJoin() {
     <MainStyle>
       <p className="title">스터디 개설하기</p>
       <Nav />
-      <div style={{ marginLeft: "25px", marginRight: "25px" }}>
-        <form onSubmit={onSubmitHandler} style={{ marginTop: "20px" }}>
+      <div className="wrapper">
+        <form className="createParty" onSubmit={onSubmitHandler}>
           <Input
+            className="partyName"
             name="study_name"
             labelName="스터디 이름"
             placeholder="스터디 이름을 입력해주세요"
-            style={{ marginTop: "15px" }}
           />
           <label className="studyDate">스터디 날짜</label>
           <DateTime
@@ -71,24 +71,9 @@ export default function PartyJoin() {
             labelName="스터디 장소"
             placeholder="스터디 장소를 알려주세요"
           />
-          <label style={{ marginTop: "25px" }}>스터디 상세설명</label>
-          <textarea
-            style={{ width: "100%", height: "117px" }}
-            placeholder="스터디를 설명해주세요"
-          />
-          <button
-            style={{
-              height: "35px",
-              borderRadius: "30px",
-              background: "black",
-              border: "0px",
-              color: "white",
-              marginTop: "20px",
-              width: "100%",
-            }}
-          >
-            스터디 개설 완료하기
-          </button>
+          <label className="partyDescLabel">스터디 상세설명</label>
+          <textarea className="partyDesc" placeholder="스터디를 설명해주세요" />
+          <button className="finish">스터디 개설 완료하기</button>
         </form>
       </div>
       <div className="modalLayout">
@@ -105,21 +90,28 @@ const Input = (props) => {
   return (
     <>
       <label>{props.labelName}</label>
-      <input
-        style={{
-          width: "100%",
-          height: "33px",
-          borderRadius: "15px",
-          border: "0px",
-        }}
-        placeholder={props.placeholder}
-      ></input>
+      <InputStyle placeholder={props.placeholder} />
     </>
   );
 };
 
+const InputStyle = styled.input`
+  width: 100%;
+  height: 33px;
+  border-radius: 15px;
+  border: none;
+`;
+
 const MainStyle = styled.main`
   background-color: white;
+
+  .wrapper {
+    margin: 0 25px;
+  }
+
+  .createParty {
+    margin-top: 20px;
+  }
 
   .modalLayout {
     width: 100%;
@@ -154,5 +146,28 @@ const MainStyle = styled.main`
     background-color: #faf6f2;
     border: none;
     padding: 15px;
+  }
+
+  .partyName {
+    margin-top: 15px;
+  }
+
+  .partyDescLabel {
+    margin-top: 25px;
+  }
+
+  .partyDesc {
+    width: 100%;
+    height: 117px;
+  }
+
+  .finish {
+    width: 100%;
+    height: 35px;
+    border-radius: 30px;
+    background-color: black;
+    border: none;
+    color: white;
+    margin-top: 20px;
   }
 `;
