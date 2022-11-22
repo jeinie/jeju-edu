@@ -31,7 +31,7 @@ export default function MainCategory({ updateCategory }) {
   };
 
   return (
-    <NavContainer style={{ marginLeft: "25px", marginRight: "25px" }}>
+    <NavContainer>
       <div
         className={onCode ? "navBox addColor" : "navBox"}
         ref={codeEle}
@@ -53,18 +53,16 @@ export default function MainCategory({ updateCategory }) {
       >
         디자인
       </div>
-      <PartyList>{/* <ViewDetail /> */}</PartyList>
     </NavContainer>
   );
 }
 
 const NavContainer = styled.nav`
   height: 31px;
-  margin-top: 20px;
-
-  /* border: 1px solid black; */
   display: flex;
   color: #f4ede7;
+  margin-top: 24px;
+  padding: 0 20px;
   .navBox {
     margin: 0 2px;
     color: #000000;
@@ -82,5 +80,3 @@ const NavContainer = styled.nav`
     background-color: black;
   }
 `;
-
-const PartyList = styled.section``;

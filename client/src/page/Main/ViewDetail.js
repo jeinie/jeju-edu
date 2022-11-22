@@ -78,6 +78,7 @@ export default function ViewDetail({ list, id }) {
             <img
               src={handleImage(newData.members)}
               style={{ width: "100px", height: "100px" }}
+              alt="viewDetail.js 이미지"
             />
           </div>
         </div>

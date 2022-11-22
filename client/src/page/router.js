@@ -41,7 +41,12 @@ const Router = () => {
         <Route
           path="/"
           element={
-            <Main list={list} update={setList} updateCategory={setCategory} />
+            <Main
+              list={list}
+              update={setList}
+              updateCategory={setCategory}
+              userId={userId}
+            />
           }
         />
         <Route path="/login" element={<Login />} />
@@ -51,6 +56,7 @@ const Router = () => {
         {/* <Route path="/PartySearch" element={<PartySearch />} /> */}
       </Routes>
       {userId ? <Footer /> : <></>}
+      {/* userId 가 null 값이여도 있음. 해당코드 수정필요. */}
     </>
   );
 };

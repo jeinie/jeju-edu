@@ -6,12 +6,15 @@ import StudyCard from "../../components/StudyCard";
 import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
 import AddressInput from "../../components/AddressInput";
+import MainHeader from "../../components/MainHeader";
 
 // import serverIP from "../../config/config";
 
-export default function Main({ list, update, updateCategory }) {
+export default function Main({ list, update, updateCategory, userId }) {
+  console.log(list);
   return (
     <MainContainer>
+      <MainHeader userId={userId} />
       <AddressInput update={update} />
       <MainCategory updateCategory={updateCategory} />
       {list.map((el, idx) => {
@@ -27,7 +30,7 @@ export default function Main({ list, update, updateCategory }) {
 }
 
 const MainContainer = styled.div`
-  padding-top: 56px;
+  /* padding-top: 30px; */
   margin-bottom: 100px;
 
   .test {

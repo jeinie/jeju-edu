@@ -8,8 +8,8 @@ export default function StudyCard({ item }) {
       <IconBox style={{ float: "right" }}>
         <HeartFillIcon style={{ color: "lightGray" }} />
       </IconBox>
-      <UserName>{item.study_name}</UserName>
-      <StudyTitle className="font-bold">스터디</StudyTitle>
+      <UserName>{item.who_open}</UserName>
+      <StudyTitle className="font-bold">{item.study_name}</StudyTitle>
       <div className="partyInfo">
         <div className="partyLocation">
           <LocationIcon />
