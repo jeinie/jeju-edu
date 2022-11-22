@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import StudyCard from "../../components/StudyCard";
 import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
-import AddressInput from "../../components/AddressInput";
+import AddressInput from "../../components/maps/AddressInput";
 import MainHeader from "../../components/MainHeader";
 
 // import serverIP from "../../config/config";

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Nav from "../../components/Nav";
 import DateTime from "../../components/DateTime";
 import axios from "axios";
-import Modal from "../../components/Modal";
+import Modal from "../../components/modals/Modal";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../../components/Footer";

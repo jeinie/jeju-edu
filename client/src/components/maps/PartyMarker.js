@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 
 // 개설된 스터디 상세페이지에서 사용될 지도 와 마커
 export default function PartyMarker({ lat, lon }) {

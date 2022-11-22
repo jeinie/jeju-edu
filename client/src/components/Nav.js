@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import ViewDetail from "../page/Main/ViewDetail";
+// import ViewDetail from "../page/Main/ViewDetail";
 
 export default function MainCategory({ updateCategory }) {
   const [onCode, setOnCode] = useState(true);

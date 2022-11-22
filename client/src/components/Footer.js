@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
+
 import PlusBtn from "./PlusBtn";
 
 export default function Footer() {

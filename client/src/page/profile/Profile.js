@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import ProfileDetail from "../../components/ProfileDetail";
+
+import ProfileDetail from "./ProfileDetail";
 import serverIP from "../../config/config";
+
 export default function Profile() {
   const [join, setJoin] = useState(true); //참여버튼 상태
   const [create, setCreate] = useState(false); //개설버튼 상태
   const [joinList, setJoinList] = useState(null);
   const [createList, setCreateList] = useState(null);
-  // let user = useSelector((state) => {
-  //   return state;
-  // });
-  // console.log(user)
 
   let userId = useSelector((state) => {
     return state.user.id;

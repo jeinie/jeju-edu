@@ -4,8 +4,9 @@ import { SearchIcon } from "@goorm-dev/gds-goormthon";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import axios from "axios";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import Modal2 from "./Modal2";
-import serverIP from "../config/config";
+import Modal2 from "../modals/Modal2";
+import serverIP from "../../config/config";
+
 const AddressInput = ({ update }) => {
   const { kakao } = window;
   const [userAddress, setUserAddress] = useState(null);

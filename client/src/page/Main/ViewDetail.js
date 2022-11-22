@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
 import axios from "axios";
-import Modal from "../../components/Modal";
+import Modal from "../../components/modals/Modal";
 import { BsCalendar2WeekFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import tree_2_1x from "../../img/tree_2_1x.png";

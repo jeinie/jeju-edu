@@ -1,15 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import Main from "./Main/Main";
 import PartyDetail from "./detail/PartyDetail";
-// import PartySearch from "./page/PartySearch";
 import Profile from "./profile/Profile";
 import Login from "./login/Login";
 import PartyJoin from "./detail/PartyJoin";
 import Footer from "../components/Footer";
-import { useSelector } from "react-redux";
 import serverIP from "../config/config";
 
 const categoryList = ["code", "sing", "design"];

@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import styled from "styled-components";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { MdPeopleAlt } from "react-icons/md";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import tree_1_1x from "../img/tree_1_1x.png";
-import tree_2_1x from "../img/tree_2_1x.png";
-import tree_3_1x from "../img/tree_3_1x.png";
-import tree_4_1x from "../img/tree_4_1x.png";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import serverIP from "../config/config";
+
+import tree_1_1x from "../../img/tree_1_1x.png";
+import tree_2_1x from "../../img/tree_2_1x.png";
+import tree_3_1x from "../../img/tree_3_1x.png";
+import tree_4_1x from "../../img/tree_4_1x.png";
+
+import serverIP from "../../config/config";
+
 const statusList = [
   {
     title: "스터디가 만들어졌어요!",
