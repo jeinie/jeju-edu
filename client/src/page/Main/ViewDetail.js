@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import styled from "styled-components";
+
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
-import axios from "axios";
-import Modal from "../../components/Modal";
 import { BsCalendar2WeekFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
+
 import tree_2_1x from "../../img/tree_2_1x.png";
 import tree_3_1x from "../../img/tree_3_1x.png";
 import tree_4_1x from "../../img/tree_4_1x.png";
 import tree_1_1x from "../../img/tree_1_1x.png";
 import serverIP from "../../config/config";
+
+import Modal from "../../components/modals/Modal";
+
 export default function ViewDetail({ list, id }) {
   const newData = list.data.studyInfo;
   console.log(newData);
@@ -74,16 +78,24 @@ export default function ViewDetail({ list, id }) {
               </div>
             </section>
           </div>
-          <div className="headerCircle" style={{ background: "#E47B00" }}>
+          <div
+            className="headerCircle"
+            // style={{ background: "#E47B00" }}
+          >
             <img
+              className="Seed"
               src={handleImage(newData.members)}
-              style={{ width: "100px", height: "100px" }}
+              // style={{ width: "100px", height: "100px" }}
+              alt="viewDetail.js 이미지"
             />
           </div>
         </div>
         <p className="partyDesc">{newData.study_detail}</p>
         {newData.members >= newData.min_party ? (
-          <p style={{ textAlign: "center", color: "red" }}>
+          <p
+            className="fullParty"
+            // style={{ textAlign: "center", color: "red" }}
+          >
             모집인원이 가득 찼습니다!
           </p>
         ) : (
@@ -116,6 +128,16 @@ export default function ViewDetail({ list, id }) {
 
 const ViewDetailContainer = styled.section`
   padding-top: 35px;
+
+  .Seed {
+    width: 100px;
+    height: 100px;
+  }
+
+  .fullParty {
+    text-align: center;
+    color: red;
+  }
 
   .wrapper {
     font-size: 12px;
@@ -171,7 +193,7 @@ const ViewDetailContainer = styled.section`
     text-align: right;
     width: 78px;
     height: 78px;
-    background-color: #d9d9d9;
+    background-color: #e47b00;
     border-radius: 50%;
 
     position: relative;

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
+
 import PlusBtn from "./PlusBtn";
 
 export default function Footer() {
@@ -30,7 +31,7 @@ export default function Footer() {
         </div>
       </Link>
       <PlusBtn />
-      <Link to="/Profile">
+      <Link to="/profile">
         <div
           className={onProfile ? "iconBox viewPage" : "iconBox"}
           onClick={handlePage}

@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import styled from "styled-components";
+
 import Nav from "../../components/Nav";
 import DateTime from "../../components/DateTime";
-import axios from "axios";
-import Modal from "../../components/Modal";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
+import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
 import serverIP from "../../config/config";
+
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
+
+  const partyName = useRef(); // 스터디 이름
+  const partyDate = useRef(); // 스터디 모임 날짜
+  const partyClose = useRef(); // 스터디 모짐마감 날짜
+  const partyLocation = useRef(); // 스터디 모임 장소
+  const partyDesc = useRef(); // 스터디 상세설명
+
   let userId = useSelector((state) => {
     return state.user.id;
   });
@@ -40,24 +49,45 @@ export default function PartyJoin() {
       });
   };
 
+  const refCheck = () => {
+    console.log(
+      partyName.current.value,
+      // partyDate,
+      // partyClose,
+      partyLocation.current.value,
+      partyDesc.current.value
+    );
+  };
+
   return (
     <MainStyle>
       <p className="title">스터디 개설하기</p>
       <Nav />
-      <div style={{ marginLeft: "25px", marginRight: "25px" }}>
-        <form onSubmit={onSubmitHandler} style={{ marginTop: "20px" }}>
-          <Input
+      <button onClick={refCheck}>ref 확인</button>
+      <div className="wrapper">
+        <form className="createParty" onSubmit={onSubmitHandler}>
+          <div className="partName">
+            <label htmlFor="study_name">스터디 이름</label>
+            <InputStyle
+              ref={partyName}
+              placeholder="스터디 이름을 입력해주세요"
+              name="study_name"
+            />
+          </div>
+          {/* <Input
+            className="partyName"
             name="study_name"
             labelName="스터디 이름"
             placeholder="스터디 이름을 입력해주세요"
-            style={{ marginTop: "15px" }}
-          />
+          /> */}
+
           <label className="studyDate">스터디 날짜</label>
           <DateTime
             name="study_date"
             labelName="스터디 날짜"
             placeholder="스터디 날짜를 선택해주세요"
             margin={{ my: "25px" }}
+            ref={partyDate}
           />
           <label>모집 마감 날짜</label>
           <DateTime
@@ -65,35 +95,33 @@ export default function PartyJoin() {
             labelName="모집 마감 날짜"
             placeholder="모집 마감 날짜를 선택해주세요"
             margin={{ mb: "25px" }}
+            ref={partyClose}
           />
-          <Input
+          <div className="partName">
+            <label htmlFor="location">스터디 장소</label>
+            <InputStyle
+              ref={partyLocation}
+              placeholder="스터디 장소를 입력해주세요"
+              name="location"
+            />
+          </div>
+          {/* <Input
             labelName="스터디 장소"
             placeholder="스터디 장소를 알려주세요"
-          />
-          <label style={{ marginTop: "25px" }}>스터디 상세설명</label>
+          /> */}
+          <label className="partyDescLabel">스터디 상세설명</label>
           <textarea
-            style={{ width: "100%", height: "117px" }}
+            ref={partyDesc}
+            className="partyDesc"
             placeholder="스터디를 설명해주세요"
           />
-          <button
-            style={{
-              height: "35px",
-              borderRadius: "30px",
-              background: "black",
-              border: "0px",
-              color: "white",
-              marginTop: "20px",
-              width: "100%",
-            }}
-          >
-            스터디 개설 완료하기
-          </button>
+          <button className="finish">스터디 개설 완료하기</button>
         </form>
       </div>
       <div className="modalLayout">
         <Modal open={open} handleClose={setOpen} status={0} />
       </div>
-      <div className="layout">
+      <div>
         <Footer />
       </div>
     </MainStyle>
@@ -104,21 +132,28 @@ const Input = (props) => {
   return (
     <>
       <label>{props.labelName}</label>
-      <input
-        style={{
-          width: "100%",
-          height: "33px",
-          borderRadius: "15px",
-          border: "0px",
-        }}
-        placeholder={props.placeholder}
-      ></input>
+      <InputStyle placeholder={props.placeholder} />
     </>
   );
 };
 
+const InputStyle = styled.input`
+  width: 100%;
+  height: 33px;
+  border-radius: 15px;
+  border: none;
+`;
+
 const MainStyle = styled.main`
   background-color: white;
+
+  .wrapper {
+    margin: 0 25px;
+  }
+
+  .createParty {
+    margin-top: 20px;
+  }
 
   .modalLayout {
     width: 100%;
@@ -132,7 +167,6 @@ const MainStyle = styled.main`
     text-align: center;
     font-weight: bold;
     padding: 25px 0 9px 0;
-    /* border-bottom: 1px solid black; */
   }
   input {
     background-color: #faf6f2;
@@ -142,9 +176,6 @@ const MainStyle = styled.main`
     border: none;
   }
 
-  .layout {
-    /* transform: translateY(100px); */
-  }
   div {
     border: none;
   }
@@ -157,5 +188,28 @@ const MainStyle = styled.main`
     background-color: #faf6f2;
     border: none;
     padding: 15px;
+  }
+
+  .partyName {
+    margin-top: 15px;
+  }
+
+  .partyDescLabel {
+    margin-top: 25px;
+  }
+
+  .partyDesc {
+    width: 100%;
+    height: 117px;
+  }
+
+  .finish {
+    width: 100%;
+    height: 35px;
+    border-radius: 30px;
+    background-color: black;
+    border: none;
+    color: white;
+    margin-top: 20px;
   }
 `;
