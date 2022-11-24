@@ -50,6 +50,7 @@ export default function PartyJoin() {
   };
 
   const refCheck = () => {
+    // input 에 값을 입력하고 ref확인 버튼을 누르면 console창에서 값을 확인할 수 있음.
     console.log(
       partyName.current.value,
       // partyDate,
