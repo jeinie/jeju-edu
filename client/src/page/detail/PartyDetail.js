@@ -4,21 +4,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import ViewDetail from "../Main/ViewDetail";
-import PartyMarker from "../../components/PartyMarker";
-import AddressInput from "../../components/AddressInput";
+import PartyMarker from "../../components/maps/PartyMarker";
 import serverIP from "../../config/config";
+
 export default function PartyDetail() {
   const { id } = useParams();
   const [personalList, setPersonalList] = useState(null);
-  // const [openModal, setOpenModal] = useState(false);
-
-  // const handleModalView = () => {
-  //   setOpenModal(!openModal);
-  // };
 
   useEffect(() => {
     axios
-      .post(`http://${serverIP.serverIP}/viewDetail/${id}`)
+      .post(`https://${serverIP.serverIP}/viewDetail/${id}`)
       .then((data) => setPersonalList(data));
   }, [id]);
 
@@ -32,17 +27,7 @@ export default function PartyDetail() {
   return (
     <div>
       <PartyMarker lat={local.tmX} lon={local.tmY} />
-      {/* <SearchInputContainer>
-        <AddressInput />
-      </SearchInputContainer> */}
       <ViewDetail list={personalList} id={id} />
     </div>
   );
 }
-
-const SearchInputContainer = styled.div`
-  position: relative;
-  top: -15px;
-  left: 0;
-  z-index: 99;
-`;

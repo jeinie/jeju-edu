@@ -30,7 +30,7 @@ export default function Footer() {
         </div>
       </Link>
       <PlusBtn />
-      <Link to="/Profile">
+      <Link to="/profile">
         <div
           className={onProfile ? "iconBox viewPage" : "iconBox"}
           onClick={handlePage}
@@ -53,6 +53,7 @@ const FooterContainer = styled.footer`
   position: fixed;
   top: 90%;
   background: white;
+  padding: 0 48px;
   a {
     color: black;
   }

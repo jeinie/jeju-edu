@@ -7,7 +7,7 @@ export default function PlusBtn() {
   const navigate = useNavigate();
 
   return (
-    <PlusContainer onClick={() => navigate("/PartyJoin")}>
+    <PlusContainer onClick={() => navigate("/partyjoin")}>
       <div className="plus">
         <AiOutlinePlus />
       </div>
