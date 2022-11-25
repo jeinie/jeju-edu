@@ -4689,6 +4689,7 @@ Executing (default): SHOW INDEX FROM `studyattendsstatus` FROM `jejuDB`
 Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'jejuareadb' AND TABLE_SCHEMA = 'jejuDB'
 Executing (default): SHOW INDEX FROM `jejuareadb` FROM `jejuDB`
 데이터베이스 연결 성공
+<<<<<<< HEAD
 
 > server@1.0.0 start
 > node app.js
@@ -26916,3 +26917,5 @@ ConnectionRefusedError [SequelizeConnectionRefusedError]: connect ECONNREFUSED 3
     fatal: true
   }
 }
+=======
+>>>>>>> 21427dd26e579a9b108678e3c6dcb3f499348870
