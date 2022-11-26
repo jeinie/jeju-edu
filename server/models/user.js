@@ -14,6 +14,9 @@ module.exports = class User extends Sequelize.Model {
         name: {
           type: Sequelize.STRING(20),
         },
+        jwt: {
+          type: Sequelize.STRING(1000),
+        },
         good_cnt: {
           type: Sequelize.INTEGER,
           defaultValue: 0,
