@@ -91,7 +91,7 @@ module.exports = class Study extends Sequelize.Model {
      * 양방의 belongsToMany관게로 중계 테이블이 필요하다
      * through 속성으로 AllStudyList를 생성하여 중계테이블을 생성한다
      */
-    db.Study.belongToMany(db.User, {
+    db.Study.belongsToMany(db.User, {
       through: "AllStudyList",
     });
   }
