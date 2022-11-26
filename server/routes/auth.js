@@ -1,10 +1,11 @@
 const express = require("express");
-//const passport = require("passport");
-//const bcrypt = require("bcrypt");
-//const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
+const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const Study = require("../models/study");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const auth = require("./authMiddleWare");
+const userAgentMiddleWare = require("./userAgentMiddleWare");
 
 router.post("/api/join", async (req, res, next) => {
   const result = {};
@@ -32,29 +33,61 @@ router.post("/api/join", async (req, res, next) => {
   }
 });
 
-router.post("/api/login", async (req, res, next) => {
-  const { id, password } = req.body;
-  const result = {};
-  try {
-    const exUser = await User.findOne({
-      where: { id: id, password: password },
-    });
-    if (exUser) {
-      
-      result["success"] = 200;
-      result["msg"] = "로그인 성공";
-      result["userInfo"] = exUser.dataValues;
-      //console.log(`로그인 확인 ${JSON.stringify(req.session.userInfo)}`);
-      res.json(result);
-    } else {
-      result["success"] = 100;
-      result["msg"] = "로그인 실패";
-      res.json(result);
+router.post(
+  "/api/login",
+  userAgentMiddleWare("/api/login"),
+  async (req, res, next) => {
+    const { id, password } = req.body;
+    let token = "";
+    try {
+      const exUser = await User.findOne({
+        where: { id: id, password: password },
+      });
+      if (exUser != null) {
+        token = jwt.sign(
+          {
+            type: "JWT",
+            id: id,
+            profile: exUser.dataValues,
+          },
+          process.env.SECRET_KEY,
+          {
+            expiresIn: "15m",
+            issuer: "admin",
+          }
+        );
+        res.status(200).json({
+          code: 200,
+          message: "JWT Token is Created",
+          token: token,
+        });
+      } else {
+        res.status(200).json({
+          code: 100,
+          message: "Failed to Search User",
+        });
+      }
+    } catch (error) {
+      console.log(`/auth/api/login에서 에러발생 ${error}`);
+      res.status(200).json({
+        code: 101,
+        message: "Failed to create jwt token",
+      });
     }
-  } catch (error) {
-    console.error(error);
-    return next(error);
   }
+);
+
+router.get("/api/payload", auth, (req, res) => {
+  const id = req.decoded.id;
+  const profile = req.decoded.profile;
+  return res.status(200).json({
+    code: 200,
+    message: "토큰이 정상입니다.",
+    data: {
+      id: id,
+      profile: profile,
+    },
+  });
 });
 
 router.get("/logout", (req, res) => {
