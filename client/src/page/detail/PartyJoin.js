@@ -24,9 +24,11 @@ export default function PartyJoin() {
 
   const [formData, setFormData] = useState({
     study_name: "피아노",
+    // partyName
     who_open: userId,
     study_category: "보컬댄스",
     study_detail: "피아노를 가르켜줄게요",
+    //partyDesc
     members: 0,
     min_party: 4,
     open_date: new Date(),
@@ -55,6 +57,7 @@ export default function PartyJoin() {
       // partyDate,
       // partyClose,
       partyLocation.current.value,
+      // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
       partyDesc.current.value
     );
   };
