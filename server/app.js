@@ -17,12 +17,7 @@ const { sequelize } = require("./models");
 
 const app = express();
 
-<<<<<<< HEAD
-app.set("port", process.env.PORT || 443);
-=======
-app.set("port", process.env.PORT || 80);
->>>>>>> 21427dd26e579a9b108678e3c6dcb3f499348870
-
+app.set("port", process.env.PORT || 443 || 80);
 app.use(cors());
 
 sequelize
