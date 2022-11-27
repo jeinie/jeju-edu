@@ -99,7 +99,7 @@ router.post(
           },
           process.env.REFRESH_SECRET_KEY,
           {
-            expiresIn: "2m",
+            expiresIn: "30m",
             issuer: "admin",
           }
         );
@@ -157,25 +157,23 @@ router.post(
  * login페이지로 redirect를 유도하는 로직이 담겨있다
  */
 router.get("/api/payload", authMiddleWare, (req, res) => {
-  const id = req.decoded.id;
-  const profile = req.decoded.profile;
   return res.status(200).json({
     code: 200,
     message: "토큰이 정상입니다.",
     data: {
-      id: id,
-      profile: profile,
+      id: req.decoded.id,
+      profile: req.decoded.profile,
     },
   });
 });
 
-router.get("/logout", (req, res) => {
-  const result = {};
-  result["success"] = 200;
-  result["msg"] = "로그아웃 완료";
-  req.session.destroy();
-  console.log(`로그아웃 확인${req}`);
-  res.json(result);
+router.get("/api/logout", (req, res) => {
+  try {
+    res.cookie("accessToken", "");
+    res.status(200).json("Logout Success");
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 module.exports = router;
