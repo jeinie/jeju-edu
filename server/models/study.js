@@ -5,21 +5,25 @@ module.exports = class Study extends Sequelize.Model {
     return super.init(
       {
         study_no: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.INTEGER(100),
           autoIncrement: true,
           primaryKey: true,
         },
         who_open: {
           type: Sequelize.STRING(20),
+          allowNull: false,
         },
-        study_name: {
+        study_title: {
           type: Sequelize.STRING(200),
+          allowNull: false,
         },
         study_category: {
           type: Sequelize.STRING(500),
+          allowNull: false,
         },
-        study_detail: {
+        study_detail_description: {
           type: Sequelize.STRING(2000),
+          allowNull: false,
         },
         /**
          * 몇명의 멤버가 모인게 아니라 누가누가 모였는지 다른 테이블에 기록이 필요할듯 고로 멤버 테이블이 따로 필요하게 될것
@@ -29,8 +33,9 @@ module.exports = class Study extends Sequelize.Model {
           type: Sequelize.INTEGER,
         },
         */
-        min_party: {
+        min_member_cnt: {
           type: Sequelize.INTEGER,
+          allowNull: false,
         },
         /*open_date는 createdAt으로 대체될것
         open_date: {
@@ -43,18 +48,22 @@ module.exports = class Study extends Sequelize.Model {
         },
         */
         //공부하기로 잡힌 날짜는 따로 기록하는게 맞음으로 study_date는 살린다
-        study_date: {
+        studyAt_date: {
           type: Sequelize.DATEONLY,
+          allowNull: false,
         },
         //좌표를 따로 넣을건데 지역구 네임을 가지는 의미가 있을까 싶다.. 상의해봐야할듯하다
-        location: {
+        studyAt_location: {
           type: Sequelize.STRING(200),
+          allowNull: false,
         },
         tmX: {
           type: Sequelize.FLOAT,
+          allowNull: false,
         },
         tmY: {
           type: Sequelize.FLOAT,
+          allowNull: false,
         },
         /* deadLine를 가지면 서버에선 deadline이 지났는지를 주기적으로 어떠한 방식으로든 체크하는 로직이 필요하다
         흠..deadline의 개념이 "한번 스터디를 개설하면 7일 14일내에 만나서 스터디를 하는방식으로 하고, 매일 12시마다 한번씩 체크해서
@@ -62,6 +71,7 @@ module.exports = class Study extends Sequelize.Model {
         */
         deadline: {
           type: Sequelize.DATEONLY,
+          allowNull: false,
         },
         status: {
           type: Sequelize.INTEGER,
