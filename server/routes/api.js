@@ -1,31 +1,11 @@
 const express = require("express");
 const session = require("express-session");
 const Study = require("../models/study");
-const StudyAttendsStatus = require("../models/studyAttendsStatus");
 const JejuAreaDB = require("../models/jejuAreaDB");
 let { Op } = require("sequelize");
 const { route } = require("./page");
 
 const router = express.Router();
-
-router.get("/getStudyList", async (req, res, next) => {
-  try {
-    let studyList = await Study.findAll({});
-
-    Array.from(studyList).forEach((item) => {
-      let concat = item.location.split(" ");
-      let result = concat[1] + " " + concat[2];
-      item.location = result;
-    });
-
-    if (studyList) {
-      res.json(studyList);
-    }
-  } catch (error) {
-    console.error(error);
-    return next(error);
-  }
-});
 
 router.get("/getStudyList/code", async (req, res, next) => {
   try {
