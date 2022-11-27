@@ -17,11 +17,9 @@ const { sequelize } = require("./models");
 
 const app = express();
 
-<<<<<<< HEAD
 app.set("port", process.env.PORT || 443);
-=======
-app.set("port", process.env.PORT || 80);
->>>>>>> 21427dd26e579a9b108678e3c6dcb3f499348870
+
+//app.set("port", process.env.PORT || 80);
 
 app.use(cors());
 
@@ -70,7 +68,6 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
   res.status(err.status || 500);
-  //res.render("error");
 });
 
 app.listen(app.get("port"), () => {

@@ -1,7 +1,6 @@
 const express = require("express");
 const session = require("express-session");
 const Study = require("../models/study");
-const StudyAttendsStatus = require("../models/studyAttendsStatus");
 const JejuAreaDB = require("../models/jejuAreaDB");
 let { Op } = require("sequelize");
 const { route } = require("./page");
