@@ -9,11 +9,11 @@ const userAgentMiddleWare = require("./userAgentMiddleWare");
 
 router.post("/api/join", async (req, res, next) => {
   const result = {};
-  const { id, password, name } = req.body;
+  const { id, pw, name } = req.body;
   /**
    * 회원가입 시 비밀번호 암호화
    */
-  const hashPw = await bcrypt.hash(password, 12);
+  const hashPw = await bcrypt.hash(pw, 12);
   try {
     const exUser = await User.findOne({ where: { id: id } });
     if (exUser) {
@@ -45,8 +45,6 @@ router.post(
     /**
      * 로그인 시 비밀번호 암호화
      */
-    //const hashPw = await bcrypt.hash(password, 12);
-    //const hashPw = await bcrypt.compare(password);
 
     let accessToken = "";
     let refreshToken = "";
@@ -77,7 +75,8 @@ router.post(
       /**
        * 원래자리
        */
-      const { password, ...others } = exUser.dataValues;
+      const { password, createdAt, updatedAt, deletedAt, ...others } =
+        exUser.dataValues;
       if (exUser != null) {
         accessToken = jwt.sign(
           {
@@ -129,8 +128,10 @@ router.post(
         res.status(200).json({
           code: 200,
           message: "JWT Token is Created",
-          accessToken: accessToken,
-          refreshToken: refreshToken,
+          //accessToken: accessToken,
+          //refreshToken: refreshToken,
+          id: id,
+          userInfo: others,
         });
       } else {
         res.status(403).json({
