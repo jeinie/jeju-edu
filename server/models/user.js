@@ -32,10 +32,12 @@ module.exports = class User extends Sequelize.Model {
           defaultValue: 0,
           allowNull: true,
         },
-        jwt: {
+        /* 토큰은 오직 cookie에서만 처리하면 될듯하니.. db에는 없어도 되겠다
+        refresh_jwt: {
           type: Sequelize.STRING(1000),
           allowNull: true,
         },
+        */
       },
       {
         sequelize,
