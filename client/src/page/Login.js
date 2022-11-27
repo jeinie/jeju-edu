@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import fir from "../img/fir.png";
 import sec from "../img/sec.png";
-import serverIP from "../config/config";
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ export default function Login() {
     };
 
     axios
-      .post(`http://${serverIP.serverIP}/auth/api/login`, body)
+      .post(`/auth/api/login`, body)
       .then((response) => {
         console.log(response.data);
         if (response.data.success === 200) {

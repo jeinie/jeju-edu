@@ -9,7 +9,6 @@ import TextField from "@mui/material/TextField";
 import fir from "../../img/fir.png";
 import sec from "../../img/sec.png";
 
-import serverIP from "../../config/config";
 import { saveUser } from "../../store/userSlice";
 
 export default function Login() {
@@ -36,7 +35,7 @@ export default function Login() {
     };
 
     axios
-      .post(`https://${serverIP.serverIP}/auth/api/login`, body)
+      .post(`/auth/api/login`, body)
       .then((response) => {
         console.log(response.data);
         if (response.data.success === 200) {
