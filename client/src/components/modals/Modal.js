@@ -63,7 +63,7 @@ export default function BasicModal(props) {
 
   useEffect(() => {
     axios
-      .post(`http://${serverIP.serverIP}/api/joinStudy`, {
+      .post(`/api/joinStudy`, {
         study_no: props.list?.study_no,
         id: userId,
       })

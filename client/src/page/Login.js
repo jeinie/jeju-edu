@@ -31,17 +31,15 @@ export default function Login() {
       password: password,
     };
 
-    axios
-      .post(`http://${serverIP.serverIP}/auth/api/login`, body)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.success === 200) {
-          dispatch(saveUser(response.data.userInfo));
-          navigate("/");
-        } else {
-          alert(response.data.msg);
-        }
-      });
+    axios.post(`/api/auto/login`, body).then((response) => {
+      console.log(response.data);
+      if (response.data.success === 200) {
+        dispatch(saveUser(response.data.userInfo));
+        navigate("/");
+      } else {
+        alert(response.data.msg);
+      }
+    });
   };
 
   return (
