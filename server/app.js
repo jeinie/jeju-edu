@@ -52,6 +52,10 @@ app.use(cookieParser());
 
 app.use(cors());
 
+//swagger.js
+const { swaggerUi, specs } = require("./modules/swagger");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 app.use("/", pageRouter);
 app.use("/api/auth", authRouter);
 app.use("/user", userRouter);
