@@ -35,7 +35,7 @@ export default function Login() {
     };
 
     axios
-      .post(`/auth/api/login`, body)
+      .post(`/api/auth/login`, body)
       .then((response) => {
         console.log(response.data);
         if (response.data.success === 200) {
