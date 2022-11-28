@@ -24,9 +24,7 @@ const Router = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `http://${serverIP.serverIP}/api/getStudyList/${categoryList[category]}`
-      )
+      .get(`/api/getStudyList/${categoryList[category]}`)
       .then((data) => setList(data.data));
   }, [category]);
   if (list === null) {
