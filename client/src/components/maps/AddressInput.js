@@ -8,6 +8,7 @@ import Modal2 from "../modals/Modal2";
 import serverIP from "../../config/config";
 
 const AddressInput = ({ update }) => {
+  // 주소를 입력하면 좌표값으로 바꿔주는 컴포넌트
   const { kakao } = window;
   const [userAddress, setUserAddress] = useState(null);
   const location = useRef();
@@ -19,7 +20,7 @@ const AddressInput = ({ update }) => {
       .then((data) => update(data.data));
   };
 
-  const handleAddress = () => {
+  const handleChangeAddress = () => {
     let geocoder = new kakao.maps.services.Geocoder();
     geocoder.addressSearch(
       `${location.current.value}`,
@@ -39,7 +40,7 @@ const AddressInput = ({ update }) => {
     <TestBox>
       <div className="par_box">
         <input placeholder="00동 00구" className="inputBox" ref={location} />
-        <SearchIcon color="white" onClick={() => handleAddress()} />
+        <SearchIcon color="white" onClick={() => handleChangeAddress()} />
       </div>
       <div className="btnContainer">
         <p className="myLocation" onClick={handleClick}>
