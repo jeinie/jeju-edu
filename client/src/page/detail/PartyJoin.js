@@ -16,7 +16,7 @@ export default function PartyJoin() {
   const partyName = useRef(); // 스터디 이름
   const partyDate = useRef(); // 스터디 모임 날짜
   const partyClose = useRef(); // 스터디 모짐마감 날짜
-  const partyLocation = useRef(); // 스터디 모임 장소
+  const partyAddress = useRef(); // 스터디 모임 장소
   const partyDesc = useRef(); // 스터디 상세설명
   let latLng; // 사용자가 입력한 주소의 위도값
   let lonLng; // 사용자가 입력한 주소의 경도값.
@@ -44,7 +44,7 @@ export default function PartyJoin() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     // axios
-    //   .post(`https://${serverIP.serverIP}/api/openStudy`, formData)
+    //   .post(`/api/openStudy`, formData)
     //   .then((response) => {
     //     console.log(response);
     //     setOpen(true);
@@ -57,7 +57,7 @@ export default function PartyJoin() {
       partyName.current.value,
       partyDate.current.value,
       partyClose.current.value,
-      partyLocation.current.value,
+      partyAddress.current.value,
       // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
       partyDesc.current.value,
       "lat :",
@@ -69,13 +69,12 @@ export default function PartyJoin() {
   const { kakao } = window;
 
   const handleAddressTransformLocation = () => {
-    let location = partyLocation.current.value;
+    let location = partyAddress.current.value;
     let geocoder = new kakao.maps.services.Geocoder();
 
     geocoder.addressSearch(`${location}`, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        // setUserAddress(location);
         console.log(coords);
         latLng = coords.Ma;
         lonLng = coords.La;
@@ -141,7 +140,7 @@ export default function PartyJoin() {
           <div className="partName">
             <label htmlFor="location">스터디 장소</label>
             <InputStyle
-              ref={partyLocation}
+              ref={partyAddress}
               placeholder="스터디 장소를 입력해주세요"
               name="location"
             />

@@ -16,7 +16,7 @@ const AddressInput = ({ update }) => {
 
   const handleClick = () => {
     axios
-      .post(`http://${serverIP.serverIP}/api/getStudyList`, { area: "성산읍" })
+      .post(`/api/getStudyList`, { area: "성산읍" })
       .then((data) => update(data.data));
   };
 
