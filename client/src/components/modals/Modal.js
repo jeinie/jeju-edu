@@ -14,8 +14,6 @@ import tree_2_1x from "../../img/tree_2_1x.png";
 import tree_3_1x from "../../img/tree_3_1x.png";
 import tree_4_1x from "../../img/tree_4_1x.png";
 
-import serverIP from "../../config/config";
-
 const statusList = [
   {
     title: "스터디가 만들어졌어요!",

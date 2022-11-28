@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import fir from "../img/fir.png";
 import sec from "../img/sec.png";
-import serverIP from "../config/config";
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
