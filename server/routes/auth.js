@@ -156,11 +156,7 @@ router.post(
  * accessToken의 유효시간이 다되었을때 && refreshToken의 유효시간이 다되었을때 client에 특정값을 return하여
  * login페이지로 redirect를 유도하는 로직이 담겨있다
  */
-<<<<<<< HEAD
 router.get("/api/payload", authMiddleWare, (req, res) => {
-=======
-router.get("/payload", authMiddleWare, (req, res) => {
->>>>>>> 31212dee980ed975ae664314a4c016243904eab2
   return res.status(200).json({
     code: 200,
     message: "토큰이 정상입니다.",
@@ -171,11 +167,7 @@ router.get("/payload", authMiddleWare, (req, res) => {
   });
 });
 
-<<<<<<< HEAD
 router.get("/api/logout", (req, res) => {
-=======
-router.get("/logout", (req, res) => {
->>>>>>> 31212dee980ed975ae664314a4c016243904eab2
   try {
     res.cookie("accessToken", "");
     res.status(200).json("Logout Success");
