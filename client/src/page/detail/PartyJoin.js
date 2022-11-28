@@ -7,7 +7,6 @@ import Nav from "../../components/Nav";
 import DateTime from "../../components/DateTime";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
-import serverIP from "../../config/config";
 
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
@@ -44,7 +43,7 @@ export default function PartyJoin() {
     e.preventDefault();
 
     axios
-      .post(`https://${serverIP.serverIP}/api/openStudy`, formData)
+      .post(`/api/openStudy`, formData)
       .then((response) => {
         console.log(response);
         setOpen(true);

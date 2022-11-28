@@ -11,7 +11,6 @@ import tree_3_1x from "../img/tree_3_1x.png";
 import tree_4_1x from "../img/tree_4_1x.png";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import serverIP from "../config/config";
 const statusList = [
   {
     title: "스터디가 만들어졌어요!",
@@ -59,7 +58,7 @@ export default function BasicModal(props) {
 
   useEffect(() => {
     axios
-      .post(`http://${serverIP.serverIP}/api/joinStudy`, {
+      .post(`/api/joinStudy`, {
         study_no: props.list?.study_no,
         id: userId,
       })
