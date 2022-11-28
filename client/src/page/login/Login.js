@@ -31,18 +31,18 @@ export default function Login() {
 
     let body = {
       id: userId,
-      password: password,
+      pw: password,
     };
 
     axios
       .post(`/api/auth/login`, body)
       .then((response) => {
         console.log(response.data);
-        if (response.data.success === 200) {
+        if (response.data.code === 200) {
           dispatch(saveUser(response.data.userInfo));
           navigate("/");
         } else {
-          alert(response.data.msg);
+          alert(response.data.message);
         }
       });
   };
