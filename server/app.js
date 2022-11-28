@@ -54,7 +54,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use("/", pageRouter);
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
 

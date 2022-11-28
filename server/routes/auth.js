@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const authMiddleWare = require("./authMiddleWare");
 const userAgentMiddleWare = require("./userAgentMiddleWare");
 
-router.post("/api/join", async (req, res, next) => {
+router.post("/join", async (req, res, next) => {
   const result = {};
   const { id, pw, name } = req.body;
   /**
@@ -38,8 +38,8 @@ router.post("/api/join", async (req, res, next) => {
 });
 
 router.post(
-  "/api/login",
-  userAgentMiddleWare("/api/login"),
+  "/login",
+  userAgentMiddleWare("/api/auth/login"),
   async (req, res, next) => {
     const { id, pw } = req.body;
     /**
@@ -156,7 +156,7 @@ router.post(
  * accessToken의 유효시간이 다되었을때 && refreshToken의 유효시간이 다되었을때 client에 특정값을 return하여
  * login페이지로 redirect를 유도하는 로직이 담겨있다
  */
-router.get("/api/payload", authMiddleWare, (req, res) => {
+router.get("/payload", authMiddleWare, (req, res) => {
   return res.status(200).json({
     code: 200,
     message: "토큰이 정상입니다.",
@@ -167,7 +167,7 @@ router.get("/api/payload", authMiddleWare, (req, res) => {
   });
 });
 
-router.get("/api/logout", (req, res) => {
+router.get("/logout", (req, res) => {
   try {
     res.cookie("accessToken", "");
     res.status(200).json("Logout Success");
