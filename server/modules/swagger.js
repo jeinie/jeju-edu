@@ -141,6 +141,101 @@ const options = {
           },
         },
       },
+
+      "/api/getStudyList/code": {
+        get: {
+          tags: ["프로그래밍 스터디 모임 리스트 추출"],
+          summary:
+            "프로그래밍 주제 관련한 스터디 모임의 리스트를 서버로부터 받는다",
+          parameters: [
+            {
+              in: "",
+              name: "",
+              description:
+                "파라미터 아무것도 안보내고 그냥 보내면 프로그래밍 주제 관련한 스터디 모임의 리스트를 서버로부터 받을수가 있다",
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "성공적으로 프로그래밍 주제 관련한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListCode_ResponseForm_Success",
+              },
+            },
+            500: {
+              description:
+                "프로그래밍 관련 스터디 추출에 관한 서버에서의 에러발생",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListCode_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/getStudyList/sing": {
+        get: {
+          tags: ["보컬댄스 스터디 모임 리스트 추출"],
+          summary:
+            "보컬댄스 주제 관련한 스터디 모임의 리스트를 서버로부터 받는다",
+          parameters: [
+            {
+              in: "",
+              name: "",
+              description:
+                "파라미터 아무것도 안보내고 그냥 보내면 보컬댄스 주제 관련한 스터디 모임의 리스트를 서버로부터 받을수가 있다",
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "성공적으로 보컬댄스 주제 관련한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListSing_ResponseForm_Success",
+              },
+            },
+            500: {
+              description:
+                "보컬댄스 관련 스터디 추출에 관한 서버에서의 에러발생",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListSing_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/getStudyList/design": {
+        get: {
+          tags: ["디자인 스터디 모임 리스트 추출"],
+          summary:
+            "디자인 주제 관련한 스터디 모임의 리스트를 서버로부터 받는다",
+          parameters: [
+            {
+              in: "",
+              name: "",
+              description:
+                "파라미터 아무것도 안보내고 그냥 보내면 디자인 주제 관련한 스터디 모임의 리스트를 서버로부터 받을수가 있다",
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "성공적으로 디자인 주제 관련한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListDesign_ResponseForm_Success",
+              },
+            },
+            500: {
+              description: "디자인 관련 스터디 추출에 관한 서버에서의 에러발생",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListDesign_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
     },
     definitions: {
       DBuserTable: {
@@ -260,6 +355,9 @@ const options = {
               id: {
                 type: "string",
               },
+              nick: {
+                type: "string",
+              },
               name: {
                 type: "string",
               },
@@ -281,6 +379,7 @@ const options = {
         properties: {
           code: {
             type: "integer",
+            description: "로그아웃이 성공하면 코드 200이 리턴된다",
           },
           message: {
             type: "string",
@@ -292,6 +391,8 @@ const options = {
         properties: {
           code: {
             type: "integer",
+            description:
+              "로그아웃이 예상치못한 이유로 실패하면 코드 500이 리턴된다",
           },
           message: {
             type: "string",
@@ -309,6 +410,11 @@ const options = {
           },
           name: {
             type: "string",
+            description: "고객의 실명이 기입된다",
+          },
+          nick: {
+            type: "string",
+            description: "고객이 웹/앱상에서 사용할 닉네임이 입력된다",
           },
         },
       },
@@ -316,6 +422,7 @@ const options = {
         properties: {
           success: {
             type: "integer",
+            description: "회원가입 성공시에 success에 200이 리턴된다",
           },
           message: {
             type: "string",
@@ -326,36 +433,57 @@ const options = {
         properties: {
           code: {
             type: "integer",
+            description: "토큰이 아직 유효할시에 code는 200이 전달된다",
           },
           message: {
             type: "string",
+            description:
+              "토큰이 아직 유효할시에 '토큰이 정상입니다'메세지가 리턴된다",
           },
           data: {
             type: "object",
             properties: {
               id: {
                 type: "string",
+                description:
+                  "로그인할때 적는 유저의 id가 리턴된다 ex)monster , admin",
               },
               profile: {
                 type: "object",
                 properties: {
                   user_no: {
                     type: "integer",
+                    description:
+                      "db에 기록된 해당유저의 user_no 즉 그저 가입한 순서대로 기록되는 index가 리턴된다",
                   },
                   id: {
                     type: "string",
+                    description:
+                      "로그인할때 적는 유저의 id가 리턴된다 ex)monster , admin",
+                  },
+                  nick: {
+                    type: "string",
+                    description:
+                      "해당 유저가 가입할때 적는 nick 이다 , 실제 로그인할때 쓰는 id가 아닌 그냥 웹/앱상에서 사용하는 닉네임이다",
                   },
                   name: {
                     type: "string",
+                    description: "해당유저가 가입할때 적는 유저의 실명이다",
                   },
                   good_cnt: {
                     type: "integer",
+                    description:
+                      "해당 유저가 받아온 한라봉 등 스터디에 잘 참여했을때 받는 리워드의 누적 갯수이다",
                   },
                   bad_cnt: {
                     type: "integer",
+                    description:
+                      "해당 유저가 받아온 썩은 과일들 즉 스터디에 잘 참여하지 않았을때 받는 리워드의 누적 갯수이다",
                   },
                   StudyStudyNo: {
                     type: "integer",
+                    description:
+                      "sequelize때문에 만들어진 컬럼인데 , 추후 수정해야할듯한데.. 일단은 이게 있다고 front단에 문제는 없을듯하다",
                   },
                 },
               },
@@ -365,6 +493,321 @@ const options = {
       },
 
       apiAuthPayLoadResponseForm_VerifyFailed: {
+        properties: {
+          code: {
+            type: "integer",
+            description:
+              "토큰이 만료되었을시엔 419 코드가 리턴이 된다 고로 419가 리턴이되면 새로 로그인해야함으로 로그인페이지로 강제이동 시켜야한다",
+          },
+          message: {
+            type: "string",
+            description: "토큰이 만료되었습니다 메세지가 리턴된다",
+          },
+        },
+      },
+
+      apiGetStudyListCode_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "성공하면 프로그래밍 관련 스터디 추출 성공 이라는 메세지가 리턴된다",
+          },
+          studyList: {
+            type: "object",
+            properties: {
+              study_no: {
+                type: "integer",
+                description: "primary Key auto_increment 그저 index표시용 컬럼",
+              },
+              who_open: {
+                type: "string",
+                description:
+                  "누가 이 스터디를 개설했는지를 알수있는 컬럼 해당 유저의 nick 즉 닉네임이 들어간다",
+              },
+              study_title: {
+                type: "string",
+                description: "이 스터디의 제목이다. ex)Java 단체 스터디 모집",
+              },
+              study_category: {
+                type: "string",
+                description:
+                  "ex) 프로그래밍 , 보컬댄스 , 디자인 즉 그저 카테고리",
+              },
+              study_detail_description: {
+                type: "string",
+                description:
+                  "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
+              },
+              min_member_cnt: {
+                type: "integer",
+                description:
+                  "스터디가 시작하기위한 최소인원 설정, 현석이형이 db에 더미데이터를 집어넣을때 4의 배수로 설정해달라고 했었다",
+              },
+              studyAt_date: {
+                type: "date",
+                description:
+                  "말그대로 스터디가 이루어지는 날짜이다 ex) 2022-12-25 13:00:00 즉 딱 정해져있는 시간",
+              },
+              studyAt_location: {
+                type: "string",
+                description:
+                  "스터디가 이루어지는 지역구이다 ex) 제주특별시 서귀포구 즉 긴 주소에서 뒤는 다짤리고 앞의 간략정보만 server에서 front로 넘겨준다",
+              },
+              tmX: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              tmY: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              deadline: {
+                type: "date",
+                description:
+                  "해당 스터디가 열리던 말던 언제까지 유지할지를 결정하는 날짜 컬럼 ex ) 2022-12-30 이라하면 해당 스터디는 12월30일에 delete된다",
+              },
+              status: {
+                type: "integer",
+                description:
+                  "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
+              },
+              createdAt: {
+                type: "date",
+                description:
+                  "이 스터디가 언제 개설되었는지 그 '개설'버튼을 누른 즉시 날짜가 기록되는 컬럼",
+              },
+              updatedAt: {
+                type: "date",
+                description:
+                  "혹시나 스터디의 정보가 수정된다면 언제 update됬는지 update(수정)버튼을 누른 즉시 그 날짜가 기록되는 컬럼",
+              },
+              deletedAt: {
+                type: "date",
+                description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
+              },
+              UserUserNo: {
+                type: "date",
+                description:
+                  "해당 스터디를 누가 열었는지 그 유저의 user_no가 기록되는 컬럼",
+              },
+            },
+          },
+        },
+      },
+      apiGetStudyListCode_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+          },
+          message: {
+            type: "string",
+          },
+        },
+      },
+
+      apiGetStudyListSing_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "성공하면 보컬댄스 관련 스터디 추출 성공 이라는 메세지가 리턴된다",
+          },
+          studyList: {
+            type: "object",
+            properties: {
+              study_no: {
+                type: "integer",
+                description: "primary Key auto_increment 그저 index표시용 컬럼",
+              },
+              who_open: {
+                type: "string",
+                description:
+                  "누가 이 스터디를 개설했는지를 알수있는 컬럼 해당 유저의 nick 즉 닉네임이 들어간다",
+              },
+              study_title: {
+                type: "string",
+                description: "이 스터디의 제목이다. ex)Java 단체 스터디 모집",
+              },
+              study_category: {
+                type: "string",
+                description:
+                  "ex) 프로그래밍 , 보컬댄스 , 디자인 즉 그저 카테고리",
+              },
+              study_detail_description: {
+                type: "string",
+                description:
+                  "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
+              },
+              min_member_cnt: {
+                type: "integer",
+                description:
+                  "스터디가 시작하기위한 최소인원 설정, 현석이형이 db에 더미데이터를 집어넣을때 4의 배수로 설정해달라고 했었다",
+              },
+              studyAt_date: {
+                type: "date",
+                description:
+                  "말그대로 스터디가 이루어지는 날짜이다 ex) 2022-12-25 13:00:00 즉 딱 정해져있는 시간",
+              },
+              studyAt_location: {
+                type: "string",
+                description:
+                  "스터디가 이루어지는 지역구이다 ex) 제주특별시 서귀포구 즉 긴 주소에서 뒤는 다짤리고 앞의 간략정보만 server에서 front로 넘겨준다",
+              },
+              tmX: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              tmY: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              deadline: {
+                type: "date",
+                description:
+                  "해당 스터디가 열리던 말던 언제까지 유지할지를 결정하는 날짜 컬럼 ex ) 2022-12-30 이라하면 해당 스터디는 12월30일에 delete된다",
+              },
+              status: {
+                type: "integer",
+                description:
+                  "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
+              },
+              createdAt: {
+                type: "date",
+                description:
+                  "이 스터디가 언제 개설되었는지 그 '개설'버튼을 누른 즉시 날짜가 기록되는 컬럼",
+              },
+              updatedAt: {
+                type: "date",
+                description:
+                  "혹시나 스터디의 정보가 수정된다면 언제 update됬는지 update(수정)버튼을 누른 즉시 그 날짜가 기록되는 컬럼",
+              },
+              deletedAt: {
+                type: "date",
+                description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
+              },
+              UserUserNo: {
+                type: "date",
+                description:
+                  "해당 스터디를 누가 열었는지 그 유저의 user_no가 기록되는 컬럼",
+              },
+            },
+          },
+        },
+      },
+      apiGetStudyListSing_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+          },
+          message: {
+            type: "string",
+          },
+        },
+      },
+
+      apiGetStudyListDesign_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "성공하면 디자인 관련 스터디 추출 성공 이라는 메세지가 리턴된다",
+          },
+          studyList: {
+            type: "object",
+            properties: {
+              study_no: {
+                type: "integer",
+                description: "primary Key auto_increment 그저 index표시용 컬럼",
+              },
+              who_open: {
+                type: "string",
+                description:
+                  "누가 이 스터디를 개설했는지를 알수있는 컬럼 해당 유저의 nick 즉 닉네임이 들어간다",
+              },
+              study_title: {
+                type: "string",
+                description: "이 스터디의 제목이다. ex)Java 단체 스터디 모집",
+              },
+              study_category: {
+                type: "string",
+                description:
+                  "ex) 프로그래밍 , 보컬댄스 , 디자인 즉 그저 카테고리",
+              },
+              study_detail_description: {
+                type: "string",
+                description:
+                  "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
+              },
+              min_member_cnt: {
+                type: "integer",
+                description:
+                  "스터디가 시작하기위한 최소인원 설정, 현석이형이 db에 더미데이터를 집어넣을때 4의 배수로 설정해달라고 했었다",
+              },
+              studyAt_date: {
+                type: "date",
+                description:
+                  "말그대로 스터디가 이루어지는 날짜이다 ex) 2022-12-25 13:00:00 즉 딱 정해져있는 시간",
+              },
+              studyAt_location: {
+                type: "string",
+                description:
+                  "스터디가 이루어지는 지역구이다 ex) 제주특별시 서귀포구 즉 긴 주소에서 뒤는 다짤리고 앞의 간략정보만 server에서 front로 넘겨준다",
+              },
+              tmX: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              tmY: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              deadline: {
+                type: "date",
+                description:
+                  "해당 스터디가 열리던 말던 언제까지 유지할지를 결정하는 날짜 컬럼 ex ) 2022-12-30 이라하면 해당 스터디는 12월30일에 delete된다",
+              },
+              status: {
+                type: "integer",
+                description:
+                  "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
+              },
+              createdAt: {
+                type: "date",
+                description:
+                  "이 스터디가 언제 개설되었는지 그 '개설'버튼을 누른 즉시 날짜가 기록되는 컬럼",
+              },
+              updatedAt: {
+                type: "date",
+                description:
+                  "혹시나 스터디의 정보가 수정된다면 언제 update됬는지 update(수정)버튼을 누른 즉시 그 날짜가 기록되는 컬럼",
+              },
+              deletedAt: {
+                type: "date",
+                description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
+              },
+              UserUserNo: {
+                type: "date",
+                description:
+                  "해당 스터디를 누가 열었는지 그 유저의 user_no가 기록되는 컬럼",
+              },
+            },
+          },
+        },
+      },
+      apiGetStudyListDesign_ResponseForm_Failed: {
         properties: {
           code: {
             type: "integer",
