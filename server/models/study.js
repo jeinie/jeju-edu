@@ -9,6 +9,7 @@ module.exports = class Study extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
+        /**닉네임이 될것임 */
         who_open: {
           type: Sequelize.STRING(20),
           allowNull: false,
