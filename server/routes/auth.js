@@ -170,9 +170,15 @@ router.get("/api/payload", authMiddleWare, (req, res) => {
 router.get("/api/logout", (req, res) => {
   try {
     res.cookie("accessToken", "");
-    res.status(200).json("Logout Success");
+    res.status(200).json({
+      code: 200,
+      message: "Logout Success",
+    });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({
+      code: 500,
+      message: error,
+    });
   }
 });
 

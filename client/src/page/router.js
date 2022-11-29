@@ -20,6 +20,11 @@ const Router = () => {
   });
   console.log(userId);
 
+  useEffect(()=>{
+    console.log("dasd");
+    axios.get('/api/hello').then(res => console.log(res));
+  },[]);
+/*
   useEffect(() => {
     axios
       .get(
@@ -30,7 +35,7 @@ const Router = () => {
         setList(data.data);
       });
   }, [category]);
-  
+  */
   if (list === null) {
     return <div>리스트가 없습니다 !</div>;
   }

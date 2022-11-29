@@ -34,17 +34,15 @@ export default function Login() {
       pw: password,
     };
 
-    axios
-      .post(`/api/auth/login`, body)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.code === 200) {
-          dispatch(saveUser(response.data.userInfo));
-          navigate("/");
-        } else {
-          alert(response.data.message);
-        }
-      });
+    axios.post(`/api/auto/login`, body).then((response) => {
+      console.log(response.data);
+      if (response.data.success === 200) {
+        dispatch(saveUser(response.data.userInfo));
+        navigate("/");
+      } else {
+        alert(response.data.msg);
+      }
+    });
   };
 
   return (

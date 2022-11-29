@@ -11,9 +11,7 @@ export default function PartyDetail() {
   const [personalList, setPersonalList] = useState(null);
 
   useEffect(() => {
-    axios
-      .post(`/viewDetail/${id}`)
-      .then((data) => setPersonalList(data));
+    axios.post(`/api/viewDetail/${id}`).then((data) => setPersonalList(data));
   }, [id]);
 
   if (personalList === null) {
