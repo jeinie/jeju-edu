@@ -6,10 +6,12 @@ let { Op } = require("sequelize");
 const { route } = require("./page");
 const router = express.Router();
 const userAgentMiddleWare = require("./userAgentMiddleWare");
+const authMiddleWare = require("./authMiddleWare");
 
 router.get(
   "/getStudyList/code",
   userAgentMiddleWare("/api/getStudyList/code"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -50,6 +52,7 @@ router.get(
 router.get(
   "/getStudyList/sing",
   userAgentMiddleWare("/api/getStudyList/sing"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -90,6 +93,7 @@ router.get(
 router.get(
   "/getStudyList/design",
   userAgentMiddleWare("/api/getStudyList/design"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       //let studyList = await Study.findAll({});
@@ -133,6 +137,7 @@ router.get(
 router.post(
   "/getStudyList",
   userAgentMiddleWare("/api/getStudyList"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const { area } = req.body;
@@ -179,6 +184,7 @@ router.post(
 router.get(
   "/getStudyListMine/:id",
   userAgentMiddleWare("/api/getStudyListMine/:id"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -235,6 +241,7 @@ router.get(
 router.get(
   "/getStudyListNotMine/:id",
   userAgentMiddleWare("/api/getStudyListNotMine/:id"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -289,6 +296,7 @@ router.get(
 router.post(
   "/openStudy",
   userAgentMiddleWare("/api/openStudy"),
+  authMiddleWare,
   async (req, res, next) => {
     const result = {};
     const {
@@ -339,6 +347,7 @@ router.post(
 router.post(
   "/joinStudy",
   userAgentMiddleWare("/api/joinStudy"),
+  authMiddleWare,
   async (req, res, next) => {
     const result = {};
     const { study_no, id } = req.body;
@@ -385,6 +394,7 @@ router.post(
 router.post(
   "/closeStudy",
   userAgentMiddleWare("/api/closeStudy"),
+  authMiddleWare,
   async (req, res, next) => {
     const result = {};
     const { study_no } = req.body;

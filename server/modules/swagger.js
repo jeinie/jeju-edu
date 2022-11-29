@@ -102,11 +102,18 @@ const options = {
                 $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifySuccess",
               },
             },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/auth/payload로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
             419: {
               description:
                 "쿠키내의 JWT 토큰이 accessToken , refreshToken 모두 유효기간이 다함 -> 즉 다시 로그인해야하니 로그인페이지로 보내야함",
               schema: {
-                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed",
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed419",
               },
             },
           },
@@ -163,6 +170,13 @@ const options = {
                 $ref: "#/definitions/apiGetStudyListCode_ResponseForm_Success",
               },
             },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/code로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
             500: {
               description:
                 "프로그래밍 관련 스터디 추출에 관한 서버에서의 에러발생",
@@ -195,6 +209,13 @@ const options = {
                 $ref: "#/definitions/apiGetStudyListSing_ResponseForm_Success",
               },
             },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/sing로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
             500: {
               description:
                 "보컬댄스 관련 스터디 추출에 관한 서버에서의 에러발생",
@@ -225,6 +246,13 @@ const options = {
                 "성공적으로 디자인 주제 관련한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
               schema: {
                 $ref: "#/definitions/apiGetStudyListDesign_ResponseForm_Success",
+              },
+            },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/design로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
               },
             },
             500: {
@@ -492,7 +520,21 @@ const options = {
         },
       },
 
-      apiAuthPayLoadResponseForm_VerifyFailed: {
+      apiAuthPayLoadResponseForm_VerifyFailed401: {
+        properties: {
+          code: {
+            type: "integer",
+            description:
+              "토큰이 만료되었을시엔 419 코드가 리턴이 된다 고로 401이 리턴이되면 새로 로그인해야함으로 로그인페이지로 강제이동 시켜야한다",
+          },
+          message: {
+            type: "string",
+            description: "유효하지 않은 토큰입니다",
+          },
+        },
+      },
+
+      apiAuthPayLoadResponseForm_VerifyFailed419: {
         properties: {
           code: {
             type: "integer",
