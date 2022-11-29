@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -8,13 +8,17 @@ import Footer from "./../../components/Footer";
 import AddressInput from "../../components/maps/AddressInput";
 import MainHeader from "../../components/MainHeader";
 
-export default function Main({ list, update, updateCategory, userId }) {
-  console.log(list);
+const categoryList = ["code", "sing", "design"];
+
+export default function Main() {
+
+  const [list, setList] = useState([]);
+
   return (
     <MainContainer>
-      <MainHeader userId={userId} />
-      <AddressInput update={update} />
-      <MainCategory updateCategory={updateCategory} />
+      <MainHeader/>
+      <AddressInput update={setList}/>
+      <MainCategory/>
       {list.map((el, idx) => {
         return (
           <Link to={`/partydetail/${el.study_no}`} key={idx}>
