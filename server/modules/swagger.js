@@ -380,6 +380,46 @@ const options = {
           },
         },
       },
+
+      "/api/joinStudy": {
+        post: {
+          tags: ["다른사람이 개설한 스터디에 참가하는 API"],
+          summary: "다른사람이 개설한 스터디에 참가하는 API이다",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "현석이형이 전에 스터디를 참여한후에 바로 인원수가 변하는걸 볼수있게 response에 즉각적으로 바뀐 참가인원수를 담아보내달라해서 보냄!",
+              schema: {
+                $ref: "#/definitions/apiJoinStudyRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "성공적으로 내가 개설한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
+              schema: {
+                $ref: "#/definitions/apiJoinStudy_ResponseForm_Success",
+              },
+            },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/code로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
+            500: {
+              description: "내가 개설한 스터디 추출에 관한 서버에서의 에러발생",
+              schema: {
+                $ref: "#/definitions/apiJoinStudy_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
     },
     definitions: {
       DBuserTable: {
@@ -1271,6 +1311,53 @@ const options = {
             type: "string",
             description:
               "실패 알수없는 서버내의 이유로 내가 개설한 스터디 목록 추출 실패 라는 메서지가 전달된다",
+          },
+        },
+      },
+
+      apiJoinStudyRequestForm: {
+        properties: {
+          study_no: {
+            type: "integer",
+            description:
+              "누가 어떤 스터디에 참여하는지를 알아야하니 study_no 즉 스터디의 고유 DB Index번호를 알아야한다",
+          },
+          user_no: {
+            type: "integer",
+            description:
+              "누가 어떤 스터디에 참여하는지를 알아야하니 user_no 즉 유저의 고유 DB Index번호를 알아야한다",
+          },
+        },
+      },
+
+      apiJoinStudy_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: "성공 하면 해당 스터디에 참여 성공 이란 메세지 전달",
+          },
+          updated_current_member_cnt: {
+            type: "integer",
+            description:
+              "참가 하자마자 갱신된 해당 스터디의 현재 멤버수를 return해준다",
+          },
+        },
+      },
+
+      apiJoinStudy_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "실패 하면 알수없는 서버내의 이유로 스터디 참여 실패 라는 메서지가 전달된다",
           },
         },
       },

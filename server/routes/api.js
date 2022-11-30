@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const StudyAllList = require("../models/studyAllList");
 const Study = require("../models/study");
 const JejuAreaDB = require("../models/jejuAreaDB");
 let { Op } = require("sequelize");
@@ -336,43 +337,41 @@ router.post(
   userAgentMiddleWare("/api/joinStudy"),
   authMiddleWare,
   async (req, res, next) => {
-    const result = {};
-    const { study_no, id } = req.body;
-    console.log(`study_no : ${study_no}`);
-    console.log(`id : ${id}`);
+    const { user_no, study_no } = req.body;
     try {
-      await StudyAttendsStatus.create({
+      await StudyAllList.create({
         study_no: study_no,
-        id: id,
+        user_no: user_no,
       });
 
       const studyInfo = await Study.findOne({ where: { study_no: study_no } });
 
-      if (studyInfo.members >= studyInfo.min_party) {
-        result["success"] = 100;
-        result["msg"] = `이미 ${studyInfo.min_party}명 이상입니다`;
-        result["members"] = studyInfo.min_party;
-        res.send(result);
+      /**
+       * study의 상태가 모집중( 0 )이 아니라면 더 참가할수가 없겠다
+       */
+      if (studyInfo.status != 0) {
+        res.status(500).json({
+          code: 500,
+          message: `프론트에서 미리 막아두겠지만 혹시나해서 만든 에러 처리 코드 : 스터디가 모집중인 상태가 아님으로 참여 실패 error : ${error}`,
+        });
         return;
       }
 
-      if (studyInfo.members % 3 == 0) {
-        await Study.increment({ status: 1 }, { where: { study_no: study_no } });
-      }
+      await Study.increment(
+        { current_member_cnt: 1 },
+        { where: { study_no: study_no } }
+      );
 
-      await Study.increment({ members: 1 }, { where: { study_no: study_no } });
-
-      result["success"] = 200;
-      result["msg"] = "study 테이블 join 성공";
-      result["members"] = (
-        await Study.findOne({ where: { study_no: study_no } })
-      ).members;
-      res.json(result);
+      res.status(200).json({
+        code: 200,
+        message: `해당 스터디에 참여 성공`,
+        updated_current_member_cnt: studyInfo.current_member_cnt + 1,
+      });
     } catch (error) {
-      result["success"] = 100;
-      result["msg"] = `/joinStudy 에서 에러 발생 ${error}`;
-      res.json(result);
-      console.error(error);
+      res.status(500).json({
+        code: 500,
+        message: `알수없는 서버내의 이유로 스터디 참여 실패 error : ${error}`,
+      });
       return next(error);
     }
   }
