@@ -60,7 +60,7 @@ module.exports = class User extends Sequelize.Model {
     /*
      * 한명의 유저가 여러개의 스터디에 참여할수있거나 개설할수있는 이유로 hasMany
      */
-    db.User.hasMany(db.Study);
+    //db.User.hasMany(db.Study);
     /**
      * 여러명의 유저가 한 스터디에 속해있을수가 있고 , 그 반대역시 가능하니
      * 양방의 belongsToMany관게로 중계 테이블이 필요하다
