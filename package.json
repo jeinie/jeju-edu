@@ -6,7 +6,7 @@
   "scripts": {
     "backend": "nodemon server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"sudo npm run backend\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "repository": {
     "type": "git",
