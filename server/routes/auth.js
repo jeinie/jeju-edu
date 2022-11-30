@@ -39,6 +39,9 @@ router.post(
       result["msg"] = "회원가입 성공";
       res.json(result);
     } catch (error) {
+      result["success"] = 500;
+      result["msg"] = `회원가입 실패 error : ${error}`;
+      res.json(result);
       console.error(error);
       return next(error);
     }
@@ -144,14 +147,14 @@ router.post(
       } else {
         res.status(403).json({
           code: 403,
-          message: "Failed to Search User",
+          message: `Failed to Search User error : ${error}`,
         });
       }
     } catch (error) {
       console.log(`/auth/api/login에서 에러발생 ${error}`);
       res.status(500).json({
         code: 500,
-        message: "Failed to create jwt token",
+        message: `Failed to create jwt token error : ${error}`,
       });
     }
   }

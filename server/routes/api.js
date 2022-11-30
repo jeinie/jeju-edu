@@ -6,10 +6,12 @@ let { Op } = require("sequelize");
 const { route } = require("./page");
 const router = express.Router();
 const userAgentMiddleWare = require("./userAgentMiddleWare");
+const authMiddleWare = require("./authMiddleWare");
 
 router.get(
   "/getStudyList/code",
   userAgentMiddleWare("/api/getStudyList/code"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -40,7 +42,7 @@ router.get(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `프로그래밍 관련 스터디 추출에 관한 서버 에러발생`,
+        message: `프로그래밍 관련 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -50,6 +52,7 @@ router.get(
 router.get(
   "/getStudyList/sing",
   userAgentMiddleWare("/api/getStudyList/sing"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -80,7 +83,7 @@ router.get(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `보컬댄스 관련 스터디 추출에 관한 서버 에러발생`,
+        message: `보컬댄스 관련 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -90,6 +93,7 @@ router.get(
 router.get(
   "/getStudyList/design",
   userAgentMiddleWare("/api/getStudyList/design"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       //let studyList = await Study.findAll({});
@@ -120,7 +124,7 @@ router.get(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `디자인 관련 스터디 추출에 관한 서버 에러발생`,
+        message: `디자인 관련 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -133,6 +137,7 @@ router.get(
 router.post(
   "/getStudyList",
   userAgentMiddleWare("/api/getStudyList"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const { area } = req.body;
@@ -166,7 +171,7 @@ router.post(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `${area}지역범위 내의 스터디 추출에 관한 서버 에러발생`,
+        message: `${area}지역범위 내의 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -179,6 +184,7 @@ router.post(
 router.get(
   "/getStudyListMine/:id",
   userAgentMiddleWare("/api/getStudyListMine/:id"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -235,6 +241,7 @@ router.get(
 router.get(
   "/getStudyListNotMine/:id",
   userAgentMiddleWare("/api/getStudyListNotMine/:id"),
+  authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -289,22 +296,21 @@ router.get(
 router.post(
   "/openStudy",
   userAgentMiddleWare("/api/openStudy"),
+  authMiddleWare,
   async (req, res, next) => {
     const result = {};
     const {
-      study_name,
       who_open,
+      study_title,
       study_category,
-      study_detail,
-      members,
-      min_party,
-      open_date,
-      close_date,
-      study_date,
-      location,
+      study_detail_description,
+      min_member_cnt,
+      studyAt_date,
+      studyAt_location,
       tmX,
       tmY,
       deadline,
+      status,
     } = req.body;
 
     console.log(tmX);
@@ -312,25 +318,27 @@ router.post(
 
     try {
       await Study.create({
-        study_name: study_name,
         who_open: who_open,
+        study_title: study_title,
         study_category: study_category,
-        study_detail: study_detail,
-        members: 0,
-        min_party: min_party,
-        open_date: open_date,
-        close_date: close_date,
-        study_date: study_date,
-        location: location,
+        study_detail_description: study_detail_description,
+        min_member_cnt: min_member_cnt,
+        studyAt_date: studyAt_date,
+        studyAt_location: studyAt_location,
         tmX: tmX,
         tmY: tmY,
         deadline: deadline,
+        status: status,
       });
-      result["success"] = 200;
-      result["msg"] = "study 테이블 insert 성공";
-      res.json(result);
+      res.status(200).json({
+        code: 200,
+        message: `스터디 개설 성공`,
+      });
     } catch (error) {
-      console.error(error);
+      res.status(500).json({
+        code: 500,
+        message: `알수없는 서버내의 이유로 스터디 개설 실패${error}`,
+      });
       return next(error);
     }
   }
@@ -339,6 +347,7 @@ router.post(
 router.post(
   "/joinStudy",
   userAgentMiddleWare("/api/joinStudy"),
+  authMiddleWare,
   async (req, res, next) => {
     const result = {};
     const { study_no, id } = req.body;
@@ -385,6 +394,7 @@ router.post(
 router.post(
   "/closeStudy",
   userAgentMiddleWare("/api/closeStudy"),
+  authMiddleWare,
   async (req, res, next) => {
     const result = {};
     const { study_no } = req.body;

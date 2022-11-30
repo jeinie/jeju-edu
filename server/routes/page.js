@@ -3,10 +3,12 @@ const { User, Study } = require("../models");
 const path = require("path");
 const router = express.Router();
 const userAgentMiddleWare = require("./userAgentMiddleWare");
+const authMiddleWare = require("./authMiddleWare");
 
 router.post(
   "/viewDetail/:study_no",
   userAgentMiddleWare("/viewDetail/:study_no"),
+  authMiddleWare,
   async (req, res) => {
     try {
       const studyInfo = await Study.findOne({
@@ -43,7 +45,7 @@ router.post(
   }
 );
 
-router.get("/", userAgentMiddleWare("/"), (req, res) => {
+router.get("/", userAgentMiddleWare("/"), authMiddleWare, (req, res) => {
   try {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   } catch (e) {
