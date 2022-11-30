@@ -180,7 +180,7 @@ router.get(
   }
 );
 
-router.get("/logout", (req, res) => {
+router.get("/api/logout", (req, res) => {
   try {
     res.cookie("accessToken", "");
     res.status(200).json({

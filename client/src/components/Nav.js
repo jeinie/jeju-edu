@@ -1,53 +1,25 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
-export default function MainCategory({ updateCategory }) {
-  const [onCode, setOnCode] = useState(true);
-  const [onSing, setOnSing] = useState(false);
-  const [onDance, setOnDance] = useState(false);
-  const codeEle = useRef();
-  const singEle = useRef();
-  const danceEle = useRef();
-
-  const handlePageMenu = (e) => {
-    if (e.target.textContent === "프로그래밍") {
-      setOnCode(true);
-      setOnSing(false);
-      setOnDance(false);
-      updateCategory(0);
-    } else if (e.target.textContent === "보컬댄스") {
-      setOnCode(false);
-      setOnSing(true);
-      setOnDance(false);
-      updateCategory(1);
-    } else if (e.target.textContent === "디자인") {
-      setOnCode(false);
-      setOnSing(false);
-      setOnDance(true);
-      updateCategory(2);
-    }
-  };
+export default function MainCategory({ selected, changeCategory }) {
 
   return (
     <NavContainer>
       <div
-        className={onCode ? "navBox addColor" : "navBox"}
-        ref={codeEle}
-        onClick={handlePageMenu}
+        className={selected === "code" ? "navBox addColor" : "navBox"}
+        onClick={()=>changeCategory("code")}
       >
         프로그래밍
       </div>
       <div
-        className={onSing ? "navBox addColor" : "navBox"}
-        ref={singEle}
-        onClick={handlePageMenu}
+        className={selected === "sing" ? "navBox addColor" : "navBox"}
+        onClick={()=>changeCategory("sing")}
       >
         보컬댄스
       </div>
       <div
-        className={onDance ? "navBox addColor" : "navBox"}
-        ref={danceEle}
-        onClick={handlePageMenu}
+        className={selected === "design" ? "navBox addColor" : "navBox"}
+        onClick={()=>changeCategory("design")}
       >
         디자인
       </div>
