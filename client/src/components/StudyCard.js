@@ -9,15 +9,15 @@ export default function StudyCard({ item }) {
         <HeartFillIcon className="likeBtn" />
       </IconBox>
       <UserName>{item.who_open}</UserName>
-      <StudyTitle className="font-bold">{item.study_name}</StudyTitle>
+      <StudyTitle className="font-bold">{item.study_title}</StudyTitle>
       <div className="partyInfo">
         <div className="partyLocation">
           <LocationIcon />
-          <p>{item.location}</p>
+          <p>{item.location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
         </div>
         <div className="partyMembers">
           <MdPeopleAlt />
-          <p>{`${item.members} / ${item.min_party}`}</p>
+          <p>{`${item.members} / ${item.min_member_cnt}`}</p>
         </div>
       </div>
     </StudyBox>
