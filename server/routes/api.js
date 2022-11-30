@@ -42,7 +42,7 @@ router.get(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `프로그래밍 관련 스터디 추출에 관한 서버 에러발생`,
+        message: `프로그래밍 관련 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -83,7 +83,7 @@ router.get(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `보컬댄스 관련 스터디 추출에 관한 서버 에러발생`,
+        message: `보컬댄스 관련 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -124,7 +124,7 @@ router.get(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `디자인 관련 스터디 추출에 관한 서버 에러발생`,
+        message: `디자인 관련 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -171,7 +171,7 @@ router.post(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `${area}지역범위 내의 스터디 추출에 관한 서버 에러발생`,
+        message: `${area}지역범위 내의 스터디 추출에 관한 서버 에러발생 error : ${error}`,
       });
       return next(error);
     }
@@ -300,19 +300,17 @@ router.post(
   async (req, res, next) => {
     const result = {};
     const {
-      study_name,
       who_open,
+      study_title,
       study_category,
-      study_detail,
-      members,
-      min_party,
-      open_date,
-      close_date,
-      study_date,
-      location,
+      study_detail_description,
+      min_member_cnt,
+      studyAt_date,
+      studyAt_location,
       tmX,
       tmY,
       deadline,
+      status,
     } = req.body;
 
     console.log(tmX);
@@ -320,25 +318,27 @@ router.post(
 
     try {
       await Study.create({
-        study_name: study_name,
         who_open: who_open,
+        study_title: study_title,
         study_category: study_category,
-        study_detail: study_detail,
-        members: 0,
-        min_party: min_party,
-        open_date: open_date,
-        close_date: close_date,
-        study_date: study_date,
-        location: location,
+        study_detail_description: study_detail_description,
+        min_member_cnt: min_member_cnt,
+        studyAt_date: studyAt_date,
+        studyAt_location: studyAt_location,
         tmX: tmX,
         tmY: tmY,
         deadline: deadline,
+        status: status,
       });
-      result["success"] = 200;
-      result["msg"] = "study 테이블 insert 성공";
-      res.json(result);
+      res.status(200).json({
+        code: 200,
+        message: `스터디 개설 성공`,
+      });
     } catch (error) {
-      console.error(error);
+      res.status(500).json({
+        code: 500,
+        message: `알수없는 서버내의 이유로 스터디 개설 실패${error}`,
+      });
       return next(error);
     }
   }
