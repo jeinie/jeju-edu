@@ -14,7 +14,6 @@ export default function MainHeader() {
   return (
     <MainHeaderContainer>
       <img className="headerImg" src={HeaderImg} alt="상단 더미 이미지" />
-      {userId}
     </MainHeaderContainer>
   );
 }
@@ -24,8 +23,9 @@ const MainHeaderContainer = styled.section`
   margin-bottom: 20px;
   border-radius: 25px;
   margin: 20px 21px;
+  height: 38px;
   .headerImg {
-    padding: 10px;
     width: 100%;
+    top: -1px;
   }
 `;

@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
-import { SearchIcon } from "@goorm-dev/gds-goormthon";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import axios from "axios";
-// import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import Modal2 from "../modals/Modal2";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const AddressInput = ({ update }) => {
   const { kakao } = window;
@@ -38,7 +37,7 @@ const AddressInput = ({ update }) => {
     <TestBox>
       <div className="par_box">
         <input placeholder="00동 00구" className="inputBox" ref={location} />
-        <SearchIcon color="white" onClick={() => handleAddress()} />
+        <AiOutlineSearch color="white" style={{ fontSize: '24px'}} onClick={() => handleAddress()} />
       </div>
       <div className="btnContainer">
         <p className="myLocation" onClick={handleClick}>
@@ -46,7 +45,6 @@ const AddressInput = ({ update }) => {
           <MyLocationIcon className="myLocation" />
           현재 위치로 설정
         </p>
-        {/* <AccessAlarmIcon onClick={() => setPopup(true)} className="alarm" /> */}
         {popup && <Modal2 open={popup} setOpen={setPopup} />}
       </div>
     </TestBox>
@@ -72,7 +70,7 @@ const TestBox = styled.div`
     align-items: center;
     padding: 0 10px;
     margin: 0 21px 12px 21px;
-    height: 29px;
+    height: 36px;
     border-radius: 25px;
     background: black;
   }
@@ -81,6 +79,7 @@ const TestBox = styled.div`
     border: none;
     background: black;
     color: white;
+    font-weight:bolder;
   }
   .myLocation {
     margin-right: 10px;
