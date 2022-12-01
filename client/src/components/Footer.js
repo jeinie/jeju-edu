@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
@@ -9,6 +9,7 @@ import PlusBtn from "./PlusBtn";
 export default function Footer() {
   const [onSearch, setOnSearch] = useState(false);
   const [onProfile, setOnProFile] = useState(true);
+  const {pathname} = useLocation();
 
   const handleColor = () => {
     setOnSearch(!onSearch);
@@ -20,6 +21,7 @@ export default function Footer() {
     setOnProFile(!onProfile);
   };
 
+  if (pathname === "/login") return;
   return (
     <FooterContainer>
       <Link to="/" className="footerLink">

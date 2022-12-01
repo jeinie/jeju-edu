@@ -1,9 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import HeaderImg from "../img/pro.png";
 
-export default function MainHeader({ userId }) {
+export default function MainHeader() {
+
+  const userId = useSelector((state) => {
+    return state.user.id;
+  });
+
   // 로그인 성공시, 사용자가 갖고있는 열매 갯수를 보여준다.
   return (
     <MainHeaderContainer>
