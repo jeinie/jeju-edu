@@ -186,6 +186,7 @@ router.get(
 router.get("/logout", (req, res) => {
   try {
     res.cookie("accessToken", "");
+    res.cookie("refreshToken", "");
     res.status(200).json({
       code: 200,
       message: "Logout Success",
