@@ -4,7 +4,6 @@ const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
 
 dotenv.config();
 
@@ -20,8 +19,6 @@ const app = express();
 app.set("port", process.env.PORT || 443);
 
 //app.set("port", process.env.PORT || 80);
-
-app.use(cors());
 
 sequelize
   .sync({ force: false })
@@ -40,21 +37,27 @@ app.use("/img", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    secret: process.env.COOKIE_SECRET,
-    cookie: {
-      httpOnly: false,
-      secure: false,
-    },
-  })
-);
+app.use(cookieParser());
+/** client 즉 React서버가 자리잡으면 해당 url만 cors를 허용해줄 예정임
+ * app.use(
+ *  cors({
+ *     origin: "http://localhost:3000",
+ *    method: ["GET", "POST"],
+ *    credentials: true,
+ *  })
+ * );
+ *
+ * 다만 지금은 dev단계이니 모두 허용
+ */
+
+app.use(cors());
+
+//swagger.js
+const { swaggerUi, specs } = require("./modules/swagger");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use("/", pageRouter);
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
 

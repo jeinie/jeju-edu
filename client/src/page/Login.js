@@ -7,7 +7,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import fir from "../img/fir.png";
 import sec from "../img/sec.png";
-import serverIP from "../config/config";
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,17 +30,15 @@ export default function Login() {
       password: password,
     };
 
-    axios
-      .post(`http://${serverIP.serverIP}/auth/api/login`, body)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.success === 200) {
-          dispatch(saveUser(response.data.userInfo));
-          navigate("/");
-        } else {
-          alert(response.data.msg);
-        }
-      });
+    axios.post(`/api/auto/login`, body).then((response) => {
+      console.log(response.data);
+      if (response.data.success === 200) {
+        dispatch(saveUser(response.data.userInfo));
+        navigate("/");
+      } else {
+        alert(response.data.msg);
+      }
+    });
   };
 
   return (

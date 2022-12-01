@@ -9,7 +9,6 @@ import Profile from "./profile/Profile";
 import Login from "./login/Login";
 import PartyJoin from "./detail/PartyJoin";
 import Footer from "../components/Footer";
-import serverIP from "../config/config";
 
 const categoryList = ["code", "sing", "design"];
 const Router = () => {
@@ -21,16 +20,22 @@ const Router = () => {
   });
   console.log(userId);
 
+  useEffect(()=>{
+    console.log("dasd");
+    axios.get('/api/hello').then(res => console.log(res));
+  },[]);
+/*
   useEffect(() => {
     axios
       .get(
-        `http://${serverIP.serverIP}/api/getStudyList/${categoryList[category]}`
+        `/api/getStudyList/${categoryList[category]}`
       )
       .then((data) => {
         console.log(data);
         setList(data.data);
       });
   }, [category]);
+  */
   if (list === null) {
     return <div>리스트가 없습니다 !</div>;
   }

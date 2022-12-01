@@ -5,16 +5,13 @@ import axios from "axios";
 
 import ViewDetail from "../Main/ViewDetail";
 import PartyMarker from "../../components/maps/PartyMarker";
-import serverIP from "../../config/config";
 
 export default function PartyDetail() {
   const { id } = useParams();
   const [personalList, setPersonalList] = useState(null);
 
   useEffect(() => {
-    axios
-      .post(`https://${serverIP.serverIP}/viewDetail/${id}`)
-      .then((data) => setPersonalList(data));
+    axios.post(`/api/viewDetail/${id}`).then((data) => setPersonalList(data));
   }, [id]);
 
   if (personalList === null) {

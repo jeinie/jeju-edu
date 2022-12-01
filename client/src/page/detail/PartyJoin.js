@@ -1,13 +1,12 @@
 import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
-// import axios from "axios";
+import axios from "axios";
 import styled from "styled-components";
 
 import Nav from "../../components/Nav";
 import DateTime from "../../components/DateTime";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
-import serverIP from "../../config/config";
 
 export default function PartyJoin() {
   const [open, setOpen] = useState(false);
@@ -43,12 +42,11 @@ export default function PartyJoin() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    // axios
-    //   .post(`/api/openStudy`, formData)
-    //   .then((response) => {
-    //     console.log(response);
-    //     setOpen(true);
-    //   });
+
+    axios.post(`/api/openStudy`, formData).then((response) => {
+      console.log(response);
+      setOpen(true);
+    });
   };
 
   const refCheck = () => {

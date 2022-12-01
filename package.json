@@ -1,0 +1,29 @@
+{
+  "name": "jeju-edu",
+  "version": "1.0.0",
+  "description": "<div align=center><img src=\"https://user-images.githubusercontent.com/56211193/202861953-357a598b-689c-4cc8-b7ab-c8298a5eb935.png\">",
+  "main": "index.js",
+  "scripts": {
+    "backend": "nodemon server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"sudo npm run backend\" \"npm run start --prefix client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JadeHyun/jeju-edu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JadeHyun/jeju-edu/issues"
+  },
+  "homepage": "https://github.com/JadeHyun/jeju-edu#readme",
+  "nodemonConfig": {
+    "ignore": ["server/models/*"]
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}

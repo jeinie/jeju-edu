@@ -9,7 +9,6 @@ import TextField from "@mui/material/TextField";
 import fir from "../../img/fir.png";
 import sec from "../../img/sec.png";
 
-import serverIP from "../../config/config";
 import { saveUser } from "../../store/userSlice";
 
 export default function Login() {
@@ -35,17 +34,15 @@ export default function Login() {
       password: password,
     };
 
-    axios
-      .post(`https://${serverIP.serverIP}/auth/api/login`, body)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.success === 200) {
-          dispatch(saveUser(response.data.userInfo));
-          navigate("/");
-        } else {
-          alert(response.data.msg);
-        }
-      });
+    axios.post(`/api/auto/login`, body).then((response) => {
+      console.log(response.data);
+      if (response.data.success === 200) {
+        dispatch(saveUser(response.data.userInfo));
+        navigate("/");
+      } else {
+        alert(response.data.msg);
+      }
+    });
   };
 
   return (
