@@ -183,7 +183,7 @@ router.get(
   }
 );
 
-router.get("/api/logout", (req, res) => {
+router.get("/logout", (req, res) => {
   try {
     res.cookie("accessToken", "");
     res.cookie("refreshToken", "");
@@ -198,5 +198,6 @@ router.get("/api/logout", (req, res) => {
     });
   }
 });
+
 
 module.exports = router;
