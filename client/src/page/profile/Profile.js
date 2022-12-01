@@ -12,6 +12,7 @@ export default function Profile() {
   const [createList, setCreateList] = useState(null);
 
   let userId = useSelector((state) => {
+    console.log(state);
     return state.user.id;
   });
 
@@ -19,6 +20,7 @@ export default function Profile() {
     axios
       .get(`/api/getStudyListNotMine/${userId}`)
       .then((data) => {
+        console.log(data);
         setJoinList(data);
         return null;
       })
