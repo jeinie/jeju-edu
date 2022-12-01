@@ -2,69 +2,43 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
 import ProfileDetail from "./ProfileDetail";
 
 export default function Profile() {
-  const [join, setJoin] = useState(true); //참여버튼 상태
-  const [create, setCreate] = useState(false); //개설버튼 상태
-  const [joinList, setJoinList] = useState(null);
-  const [createList, setCreateList] = useState(null);
+  const [selected, setSelected] = useState("join");
+  const [studyList, setStudyList] = useState([]);
 
   let userId = useSelector((state) => {
-    console.log(state);
     return state.user.id;
   });
 
-  useEffect(() => {
-    axios
-      .get(`/api/getStudyListNotMine/${userId}`)
-      .then((data) => {
-        console.log(data);
-        setJoinList(data);
-        return null;
-      })
-      .then(() => {
-        return axios.get(
-          `/api/getStudyListMine/${userId}`
-        );
-      })
-      .then((data) => {
-        setCreateList(data);
-      });
-  }, [userId]);
-
   const handleJoin = () => {
-    setJoin(true);
-    setCreate(false);
-  };
+    setSelected("join");
+    axios.get(`/api/getStudyListNotMine/${userId}`).then((res) => {
+      setStudyList(res.data.studyListNotMine);
+    })
+  }
 
   const handleCreate = () => {
-    setJoin(false);
-    setCreate(true);
-  };
-  if (joinList | (createList === null)) {
-    return null;
+    setSelected("create");
+    axios.get(`/api/getStudyListMine/${userId}`).then((res) => {
+      setStudyList(res.data.studyListNotMine);
+    })
   }
-  console.log(createList);
+
+  useEffect(()=>{
+    handleJoin();
+  }, [])
 
   return (
     <MainContainer>
       <p className="myProfile">My page</p>
       <div className="pageBtn">
-        <div className={join ? "changeStyle" : "base"} onClick={handleJoin}>
-          참여
-        </div>
-        <div className={create ? "changeStyle" : "base"} onClick={handleCreate}>
-          개설
-        </div>
+        {/* 상단의 Page 바꾸는 버튼 */}
+        <div className={selected === "join" ? "changeStyle" : "base"} onClick={handleJoin}>참여</div>
+        <div className={selected === "create" ? "changeStyle" : "base"} onClick={handleCreate}>개설</div>
       </div>
-      <ProfileDetail
-        join={joinList.data}
-        create={createList.data}
-        joinState={join}
-        createState={create}
-      />
+      {studyList ? <ProfileDetail list={studyList}/> : <></> }
     </MainContainer>
   );
 }
@@ -106,5 +80,16 @@ const MainContainer = styled.section`
     font-weight: bold;
     padding-bottom: 11px;
     margin-bottom: 20px;
+    /* border-bottom: 1px solid black; */
   }
 `;
+
+// const ListContainer = styled.section`
+//   text-align: center;
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   .header {
+//     display: flex;
+//   }
+// `;
