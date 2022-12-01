@@ -382,15 +382,19 @@ router.post(
   userAgentMiddleWare("/api/closeStudy"),
   authMiddleWare,
   async (req, res, next) => {
-    const result = {};
     const { study_no } = req.body;
     try {
       await Study.destroy({ where: { study_no: study_no } });
-      result["success"] = 200;
-      result["msg"] = "study 테이블 delete 성공";
-      res.json(result);
+
+      res.status(200).json({
+        code: 200,
+        message: `study delete success`,
+      });
     } catch (error) {
-      console.error(error);
+      res.status(500).json({
+        code: 500,
+        message: `study delete 중 알수없는 에러가 서버내에서 발생 : ${error} 또는 이미 삭제된 데이터일수 있습니다`,
+      });
       return next(error);
     }
   }
