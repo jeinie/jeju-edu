@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
