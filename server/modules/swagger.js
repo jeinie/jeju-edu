@@ -8,7 +8,7 @@ const options = {
       version: "1.0.0",
       description: "Janfra API with express",
     },
-    host: "localhost:443",
+    host: "localhost:80",
     basePath: "/",
     tags: [
       {
@@ -102,11 +102,18 @@ const options = {
                 $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifySuccess",
               },
             },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/auth/payload로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
             419: {
               description:
                 "쿠키내의 JWT 토큰이 accessToken , refreshToken 모두 유효기간이 다함 -> 즉 다시 로그인해야하니 로그인페이지로 보내야함",
               schema: {
-                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed",
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed419",
               },
             },
           },
@@ -163,6 +170,13 @@ const options = {
                 $ref: "#/definitions/apiGetStudyListCode_ResponseForm_Success",
               },
             },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/code로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
             500: {
               description:
                 "프로그래밍 관련 스터디 추출에 관한 서버에서의 에러발생",
@@ -193,6 +207,13 @@ const options = {
                 "성공적으로 보컬댄스 주제 관련한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
               schema: {
                 $ref: "#/definitions/apiGetStudyListSing_ResponseForm_Success",
+              },
+            },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/sing로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
               },
             },
             500: {
@@ -227,10 +248,173 @@ const options = {
                 $ref: "#/definitions/apiGetStudyListDesign_ResponseForm_Success",
               },
             },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/design로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
             500: {
               description: "디자인 관련 스터디 추출에 관한 서버에서의 에러발생",
               schema: {
                 $ref: "#/definitions/apiGetStudyListDesign_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/openStudy": {
+        post: {
+          tags: ["스터디 모임 개설"],
+          summary: "스터디 모임을 일정 양식에 따라 개설한다",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "body내에 스터디 개설에 필요한 데이터들을 집어넣고 서버로 Http Request를 보내야 한다",
+              schema: {
+                $ref: "#/definitions/apiOpenStudyRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description: "성공적으로 스터디 개설 성공",
+              schema: {
+                $ref: "#/definitions/apiOpenStudy_ResponseForm_Success",
+              },
+            },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/openStudy로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
+            500: {
+              description: "스터디 개설 관련 서버내의 에러 발생",
+              schema: {
+                $ref: "#/definitions/apiOpenStudy_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/getStudyListNotMine/:id": {
+        get: {
+          tags: [
+            "내가 개설한것이 아닌 다른 사람이 개설한 스터디 목록을 불러오는 API",
+          ],
+          summary: "다른사람이 개설한 스터디 목록을 불러와준다",
+          parameters: [
+            {
+              in: "",
+              name: "",
+              description:
+                "파라미터 아무것도 안보내고 그냥 보내면 다른사람이 개설한 스터디 모임의 리스트를 서버로부터 받을수가 있다",
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "성공적으로 다른사람이 개설한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListNotMine_ResponseForm_Success",
+              },
+            },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/code로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
+            500: {
+              description:
+                "다른사람이 개설한 스터디 추출에 관한 서버에서의 에러발생",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListNotMine_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/getStudyListMine/:id": {
+        get: {
+          tags: ["내가 개설한 스터디 목록을 불러오는 API"],
+          summary: "내가 개설한 스터디 목록을 불러와준다",
+          parameters: [
+            {
+              in: "",
+              name: "",
+              description:
+                "파라미터 아무것도 안보내고 그냥 보내면 내가 개설한 스터디 모임의 리스트를 서버로부터 받을수가 있다",
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "성공적으로 내가 개설한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListMine_ResponseForm_Success",
+              },
+            },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/code로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
+            500: {
+              description: "내가 개설한 스터디 추출에 관한 서버에서의 에러발생",
+              schema: {
+                $ref: "#/definitions/apiGetStudyListMine_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/joinStudy": {
+        post: {
+          tags: ["다른사람이 개설한 스터디에 참가하는 API"],
+          summary: "다른사람이 개설한 스터디에 참가하는 API이다",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "현석이형이 전에 스터디를 참여한후에 바로 인원수가 변하는걸 볼수있게 response에 즉각적으로 바뀐 참가인원수를 담아보내달라해서 보냄!",
+              schema: {
+                $ref: "#/definitions/apiJoinStudyRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "성공적으로 내가 개설한 스터디 모임의 리스트 추출 및 서버로부터 응답 받음",
+              schema: {
+                $ref: "#/definitions/apiJoinStudy_ResponseForm_Success",
+              },
+            },
+            401: {
+              description:
+                "로그인하지않고 그냥 /api/getStudyList/code로 뭔가를 쏠 시에 받는 에러메세지이다 프론트단에선 이걸받으면 로그인창으로 가게해야함",
+              schema: {
+                $ref: "#/definitions/apiAuthPayLoadResponseForm_VerifyFailed401",
+              },
+            },
+            500: {
+              description: "내가 개설한 스터디 추출에 관한 서버에서의 에러발생",
+              schema: {
+                $ref: "#/definitions/apiJoinStudy_ResponseForm_Failed",
               },
             },
           },
@@ -286,8 +470,14 @@ const options = {
           study_detail_description: {
             type: "string",
           },
+          current_member_cnt: {
+            type: "integer",
+            description: "현재 참여하고있는 멤버 인원수의 총계이다",
+          },
           min_member_cnt: {
             type: "integer",
+            description:
+              "이거 최소 기준점을 정해놔야겠는데..적어도 2인 이상으로 1인만 안되게",
           },
           studyAt_date: {
             type: "date",
@@ -365,9 +555,6 @@ const options = {
                 type: "integer",
               },
               bad_cnt: {
-                type: "integer",
-              },
-              StudyStudyNo: {
                 type: "integer",
               },
             },
@@ -492,7 +679,21 @@ const options = {
         },
       },
 
-      apiAuthPayLoadResponseForm_VerifyFailed: {
+      apiAuthPayLoadResponseForm_VerifyFailed401: {
+        properties: {
+          code: {
+            type: "integer",
+            description:
+              "토큰이 만료되었을시엔 419 코드가 리턴이 된다 고로 401이 리턴이되면 새로 로그인해야함으로 로그인페이지로 강제이동 시켜야한다",
+          },
+          message: {
+            type: "string",
+            description: "유효하지 않은 토큰입니다",
+          },
+        },
+      },
+
+      apiAuthPayLoadResponseForm_VerifyFailed419: {
         properties: {
           code: {
             type: "integer",
@@ -543,6 +744,10 @@ const options = {
                 description:
                   "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
               },
+              current_member_cnt: {
+                type: "integer",
+                description: "현재 참가해있는 멤버들의 수 총계",
+              },
               min_member_cnt: {
                 type: "integer",
                 description:
@@ -589,11 +794,6 @@ const options = {
               deletedAt: {
                 type: "date",
                 description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
-              },
-              UserUserNo: {
-                type: "date",
-                description:
-                  "해당 스터디를 누가 열었는지 그 유저의 user_no가 기록되는 컬럼",
               },
             },
           },
@@ -647,6 +847,10 @@ const options = {
                 description:
                   "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
               },
+              current_member_cnt: {
+                type: "integer",
+                description: "현재 참가해있는 멤버들의 수 총계",
+              },
               min_member_cnt: {
                 type: "integer",
                 description:
@@ -693,11 +897,6 @@ const options = {
               deletedAt: {
                 type: "date",
                 description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
-              },
-              UserUserNo: {
-                type: "date",
-                description:
-                  "해당 스터디를 누가 열었는지 그 유저의 user_no가 기록되는 컬럼",
               },
             },
           },
@@ -751,6 +950,10 @@ const options = {
                 description:
                   "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
               },
+              current_member_cnt: {
+                type: "integer",
+                description: "현재 참가해있는 멤버들의 수 총계",
+              },
               min_member_cnt: {
                 type: "integer",
                 description:
@@ -798,15 +1001,11 @@ const options = {
                 type: "date",
                 description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
               },
-              UserUserNo: {
-                type: "date",
-                description:
-                  "해당 스터디를 누가 열었는지 그 유저의 user_no가 기록되는 컬럼",
-              },
             },
           },
         },
       },
+
       apiGetStudyListDesign_ResponseForm_Failed: {
         properties: {
           code: {
@@ -814,6 +1013,351 @@ const options = {
           },
           message: {
             type: "string",
+          },
+        },
+      },
+
+      apiOpenStudyRequestForm: {
+        properties: {
+          who_open: {
+            type: "string",
+            description:
+              "스터디를 개설한 사람이 누구인지 그 사람의 nick 을 기록한다 , 절대 로그인할때의 id가 아니라 웹/앱 상에서 사용하는 nickname이다",
+          },
+          study_title: {
+            type: "string",
+            description:
+              "스터디를 개설할때에 해당 스터디의 제목을 적는다 ex) 힙합댄스 스터디 모집합니다~ 12명이상되면 바로 시작해요~",
+          },
+          study_category: {
+            type: "string",
+            description:
+              "스터디 개설시에 어떤 스터디인지 카테고리를 기록한다 ex) 보컬댄스 , 프로그래밍 , 디자인",
+          },
+          study_detail_description: {
+            type: "string",
+            description:
+              "스터디 모집글에 대한 상세설명이다. ex) 20살 이하만 신청가능해요! , 18:00~19:00까지 진행합니다~",
+          },
+          min_member_cnt: {
+            type: "string",
+            description: "스터디가 시작되기 위한 최소인원수",
+          },
+          studyAt_date: {
+            type: "date",
+            description:
+              "스터디가 이루어지는 실제 날짜이다 , 절대 스터디를 개설한 날짜가 아닌 , 개설시에 언제 스터디를 진행할지 기록한 그 날짜이다",
+          },
+          studyAt_location: {
+            type: "string",
+            description:
+              "스터디가 이루어지는 지역구이다 . ex) 제주특별시 서귀포구 성산읍 플레이 스테이션",
+          },
+          tmX: {
+            type: "float",
+            description: "스터디가 이루어지는 장소의 위경도",
+          },
+          tmY: {
+            type: "float",
+            description: "스터디가 이루어지는 장소의 위경도",
+          },
+          deadline: {
+            type: "date",
+            description:
+              "해당 스터디가 열리던 말던 언제까지 유지할지를 결정하는 날짜 컬럼 ex ) 2022-12-30 이라하면 해당 스터디는 12월30일에 delete된다",
+          },
+          status: {
+            type: "integer",
+            description:
+              "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
+          },
+        },
+      },
+
+      apiOpenStudy_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: "성공하면 스터디 개설 성공 메세지가 전달된다 ",
+          },
+        },
+      },
+
+      apiOpenStudy_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "실패 알수없는 서버내의 이유로 스터디 개설 실패 라는 메서지가 전달된다",
+          },
+        },
+      },
+
+      apiGetStudyListNotMine_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "성공하면 성공적으로 다른 유저가 개설한 스터디 목록 불러오기가 성공했습니다 라는 메세지가 리턴된다",
+          },
+          studyListNotMine: {
+            type: "object",
+            properties: {
+              study_no: {
+                type: "integer",
+                description: "primary Key auto_increment 그저 index표시용 컬럼",
+              },
+              who_open: {
+                type: "string",
+                description:
+                  "누가 이 스터디를 개설했는지를 알수있는 컬럼 해당 유저의 nick 즉 닉네임이 들어간다",
+              },
+              study_title: {
+                type: "string",
+                description: "이 스터디의 제목이다. ex)Java 단체 스터디 모집",
+              },
+              study_category: {
+                type: "string",
+                description:
+                  "ex) 프로그래밍 , 보컬댄스 , 디자인 즉 그저 카테고리",
+              },
+              study_detail_description: {
+                type: "string",
+                description:
+                  "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
+              },
+              current_member_cnt: {
+                type: "integer",
+                description: "현재 참가해있는 멤버들의 수 총계",
+              },
+              min_member_cnt: {
+                type: "integer",
+                description:
+                  "스터디가 시작하기위한 최소인원 설정, 현석이형이 db에 더미데이터를 집어넣을때 4의 배수로 설정해달라고 했었다",
+              },
+              studyAt_date: {
+                type: "date",
+                description:
+                  "말그대로 스터디가 이루어지는 날짜이다 ex) 2022-12-25 13:00:00 즉 딱 정해져있는 시간",
+              },
+              studyAt_location: {
+                type: "string",
+                description:
+                  "스터디가 이루어지는 지역구이다 ex) 제주특별시 서귀포구 즉 긴 주소에서 뒤는 다짤리고 앞의 간략정보만 server에서 front로 넘겨준다",
+              },
+              tmX: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              tmY: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              deadline: {
+                type: "date",
+                description:
+                  "해당 스터디가 열리던 말던 언제까지 유지할지를 결정하는 날짜 컬럼 ex ) 2022-12-30 이라하면 해당 스터디는 12월30일에 delete된다",
+              },
+              status: {
+                type: "integer",
+                description:
+                  "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
+              },
+              createdAt: {
+                type: "date",
+                description:
+                  "이 스터디가 언제 개설되었는지 그 '개설'버튼을 누른 즉시 날짜가 기록되는 컬럼",
+              },
+              updatedAt: {
+                type: "date",
+                description:
+                  "혹시나 스터디의 정보가 수정된다면 언제 update됬는지 update(수정)버튼을 누른 즉시 그 날짜가 기록되는 컬럼",
+              },
+              deletedAt: {
+                type: "date",
+                description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
+              },
+            },
+          },
+        },
+      },
+
+      apiGetStudyListNotMine_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "실패 알수없는 서버내의 이유로 다른사람이 개설한 스터디 목록 추출 실패 라는 메서지가 전달된다",
+          },
+        },
+      },
+
+      apiGetStudyListMine_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "성공하면 성공적으로 내가 개설한 스터디 목록 불러오기가 성공했습니다 라는 메세지가 리턴된다",
+          },
+          studyListNotMine: {
+            type: "object",
+            properties: {
+              study_no: {
+                type: "integer",
+                description: "primary Key auto_increment 그저 index표시용 컬럼",
+              },
+              who_open: {
+                type: "string",
+                description:
+                  "누가 이 스터디를 개설했는지를 알수있는 컬럼 해당 유저의 nick 즉 닉네임이 들어간다",
+              },
+              study_title: {
+                type: "string",
+                description: "이 스터디의 제목이다. ex)Java 단체 스터디 모집",
+              },
+              study_category: {
+                type: "string",
+                description:
+                  "ex) 프로그래밍 , 보컬댄스 , 디자인 즉 그저 카테고리",
+              },
+              study_detail_description: {
+                type: "string",
+                description:
+                  "ex) 나랑같이 Java스터디하실분~ 8명모이면 바로시작~ 즉 그냥 스터디에 관한 설명",
+              },
+              current_member_cnt: {
+                type: "integer",
+                description: "현재 참가해있는 멤버들의 수 총계",
+              },
+              min_member_cnt: {
+                type: "integer",
+                description:
+                  "스터디가 시작하기위한 최소인원 설정, 현석이형이 db에 더미데이터를 집어넣을때 4의 배수로 설정해달라고 했었다",
+              },
+              studyAt_date: {
+                type: "date",
+                description:
+                  "말그대로 스터디가 이루어지는 날짜이다 ex) 2022-12-25 13:00:00 즉 딱 정해져있는 시간",
+              },
+              studyAt_location: {
+                type: "string",
+                description:
+                  "스터디가 이루어지는 지역구이다 ex) 제주특별시 서귀포구 즉 긴 주소에서 뒤는 다짤리고 앞의 간략정보만 server에서 front로 넘겨준다",
+              },
+              tmX: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              tmY: {
+                type: "float",
+                description: "스터디가 이루어지는 장소의 위도 경도",
+              },
+              deadline: {
+                type: "date",
+                description:
+                  "해당 스터디가 열리던 말던 언제까지 유지할지를 결정하는 날짜 컬럼 ex ) 2022-12-30 이라하면 해당 스터디는 12월30일에 delete된다",
+              },
+              status: {
+                type: "integer",
+                description:
+                  "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
+              },
+              createdAt: {
+                type: "date",
+                description:
+                  "이 스터디가 언제 개설되었는지 그 '개설'버튼을 누른 즉시 날짜가 기록되는 컬럼",
+              },
+              updatedAt: {
+                type: "date",
+                description:
+                  "혹시나 스터디의 정보가 수정된다면 언제 update됬는지 update(수정)버튼을 누른 즉시 그 날짜가 기록되는 컬럼",
+              },
+              deletedAt: {
+                type: "date",
+                description: "스터디가 언제 삭제되었는지 기록되는 컬럼",
+              },
+            },
+          },
+        },
+      },
+
+      apiGetStudyListMine_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "실패 알수없는 서버내의 이유로 내가 개설한 스터디 목록 추출 실패 라는 메서지가 전달된다",
+          },
+        },
+      },
+
+      apiJoinStudyRequestForm: {
+        properties: {
+          study_no: {
+            type: "integer",
+            description:
+              "누가 어떤 스터디에 참여하는지를 알아야하니 study_no 즉 스터디의 고유 DB Index번호를 알아야한다",
+          },
+          user_no: {
+            type: "integer",
+            description:
+              "누가 어떤 스터디에 참여하는지를 알아야하니 user_no 즉 유저의 고유 DB Index번호를 알아야한다",
+          },
+        },
+      },
+
+      apiJoinStudy_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: "성공 하면 해당 스터디에 참여 성공 이란 메세지 전달",
+          },
+          updated_current_member_cnt: {
+            type: "integer",
+            description:
+              "참가 하자마자 갱신된 해당 스터디의 현재 멤버수를 return해준다",
+          },
+        },
+      },
+
+      apiJoinStudy_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "실패 하면 알수없는 서버내의 이유로 스터디 참여 실패 라는 메서지가 전달된다",
           },
         },
       },

@@ -63,8 +63,7 @@ module.exports = async (req, res, next) => {
         );
         res.status(500).json({
           code: 500,
-          message:
-            "authMiddleWare에서 refreshToken이 유효한 상태에서 accessToken재발행시 에러발생",
+          message: `authMiddleWare에서 refreshToken이 유효한 상태에서 accessToken재발행시 에러발생 error : ${error}`,
         });
       }
 
@@ -83,14 +82,14 @@ module.exports = async (req, res, next) => {
       if (error.name === "TokenExpiredError") {
         return res.status(419).json({
           code: 419,
-          message: "토큰이 만료되었습니다.",
+          message: `토큰이 만료되었습니다. error : ${error}`,
         });
       }
       // 토큰의 비밀키가 일치하지 않는 경우
       if (error.name === "JsonWebTokenError") {
         return res.status(401).json({
           code: 401,
-          message: "유효하지 않은 토큰입니다.",
+          message: `유효하지 않은 토큰입니다. error : ${error}`,
         });
       }
     }

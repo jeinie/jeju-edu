@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { HeartFillIcon, LocationIcon } from "@goorm-dev/gds-goormthon";
-import { MdPeopleAlt } from "react-icons/md";
+import { HeartFillIcon } from "@goorm-dev/gds-goormthon";
+import { MdPeopleAlt, MdLocationOn } from "react-icons/md";
 
 export default function StudyCard({ item }) {
   return (
@@ -9,15 +9,15 @@ export default function StudyCard({ item }) {
         <HeartFillIcon className="likeBtn" />
       </IconBox>
       <UserName>{item.who_open}</UserName>
-      <StudyTitle className="font-bold">{item.study_name}</StudyTitle>
+      <StudyTitle className="font-bold">{item.study_title}</StudyTitle>
       <div className="partyInfo">
         <div className="partyLocation">
-          <LocationIcon />
-          <p>{item.location}</p>
+          <MdLocationOn size={16}/>
+          <p>{item.location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
         </div>
         <div className="partyMembers">
-          <MdPeopleAlt />
-          <p>{`${item.members} / ${item.min_party}`}</p>
+          <MdPeopleAlt style={{marginRight:"5px"}}/>
+          <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
         </div>
       </div>
     </StudyBox>
@@ -25,9 +25,10 @@ export default function StudyCard({ item }) {
 }
 
 const StudyBox = styled.div`
-  height: 75px;
+  height: 102px;
   margin: 20px;
-  padding: 0 35px;
+  padding: 14px 20px;
+  position: relative;
   background: #f4ede7;
   border-radius: 15px;
   .likeBtn {
@@ -37,23 +38,26 @@ const StudyBox = styled.div`
     margin-top: 20px;
   }
   .partyInfo {
-    margin-left: -2px;
-    text-align: left;
-    width: 100%;
     font-size: 12px;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    align-items: center;
+    margin-top: 25px;
   }
 
   .partyLocation {
-    display: flex;
-    align-items: center;
+    float:left;
   }
 
   .partyMembers {
-    display: flex;
+    float:right;
+    height:16px;
+    font-size:16px;
+  }
+
+  .partyMembers svg {
+    float:left;
+  }
+
+  .partyMembers p {
+    float:left;
   }
 `;
 
@@ -66,11 +70,9 @@ const IconBox = styled.div`
 
 const UserName = styled.p`
   color: #000000;
-  margin: 10px 0 5px 0;
   text-align: left;
-  font-size: 4px;
+  font-size: 15px;
   font-weight: 200;
-  padding-top: 10px;
 `;
 
 const StudyTitle = styled.p`
