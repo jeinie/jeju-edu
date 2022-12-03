@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
+// import MyLocationIcon from "@mui/icons-material/MyLocation";
 import axios from "axios";
 import Modal2 from "../modals/Modal2";
 import { AiOutlineSearch } from "react-icons/ai";
+import { MdMyLocation } from "react-icons/md";
 
 const AddressInput = ({ update }) => {
   const { kakao } = window;
@@ -37,12 +38,17 @@ const AddressInput = ({ update }) => {
     <TestBox>
       <div className="par_box">
         <input placeholder="00동 00구" className="inputBox" ref={location} />
-        <AiOutlineSearch color="white" style={{ fontSize: '24px'}} onClick={() => handleAddress()} />
+        <AiOutlineSearch
+          color="white"
+          style={{ fontSize: "24px" }}
+          onClick={() => handleAddress()}
+        />
       </div>
       <div className="btnContainer">
         <p className="myLocation" onClick={handleClick}>
           {/* 위도경도를 주소로 변환하는 함수 적용 */}
-          <MyLocationIcon className="myLocation" />
+          {/* <MyLocationIcon className="myLocation" /> */}
+          <MdMyLocation className="myLocation locationIcon" />
           현재 위치로 설정
         </p>
         {popup && <Modal2 open={popup} setOpen={setPopup} />}
@@ -79,9 +85,13 @@ const TestBox = styled.div`
     border: none;
     background: black;
     color: white;
-    font-weight:bolder;
+    font-weight: bolder;
   }
   .myLocation {
     margin-right: 10px;
+  }
+
+  .locationIcon {
+    font-size: 25px;
   }
 `;

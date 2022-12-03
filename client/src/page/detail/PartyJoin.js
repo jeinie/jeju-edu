@@ -9,13 +9,16 @@ import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
 
 export default function PartyJoin() {
+  const { kakao } = window;
   const [open, setOpen] = useState(false);
 
   const partyName = useRef(); // 스터디 이름
   const partyDate = useRef(); // 스터디 모임 날짜
   const partyClose = useRef(); // 스터디 모짐마감 날짜
-  const partyLocation = useRef(); // 스터디 모임 장소
+  const partyAddress = useRef(); // 스터디 모임 장소
   const partyDesc = useRef(); // 스터디 상세설명
+  let latLng; // 사용자가 입력한 주소의 위도값
+  let lonLng; // 사용자가 입력한 주소의 경도값.
 
   let userId = useSelector((state) => {
     return state.user.id;
@@ -42,23 +45,41 @@ export default function PartyJoin() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    axios
-      .post(`/api/openStudy`, formData)
-      .then((response) => {
-        console.log(response);
-        setOpen(true);
-      });
+    axios.post(`/api/openStudy`, formData).then((response) => {
+      console.log(response);
+      setOpen(true);
+    });
   };
 
   const refCheck = () => {
     console.log(
       partyName.current.value,
-      // partyDate,
-      // partyClose,
-      partyLocation.current.value,
+      partyDate.current.value,
+      partyClose.current.value,
+      partyAddress.current.value,
       // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
-      partyDesc.current.value
+      partyDesc.current.value,
+      latLng,
+      lonLng
     );
+  };
+
+  const handleAddressTransformLocation = (e) => {
+    e.preventDefault();
+    let location = partyAddress.current.value;
+    let geocoder = new kakao.maps.services.Geocoder();
+
+    geocoder.addressSearch(`${location}`, function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        console.log(coords);
+        latLng = coords.Ma;
+        lonLng = coords.La;
+        console.log(latLng, lonLng);
+      } else {
+        console.log("err");
+      }
+    });
   };
 
   return (
@@ -67,7 +88,7 @@ export default function PartyJoin() {
       <Nav />
       <button onClick={refCheck}>ref 확인</button>
       <div className="wrapper">
-        <form className="createParty" onSubmit={onSubmitHandler}>
+        <form className="createParty">
           <div className="partName">
             <label htmlFor="study_name">스터디 이름</label>
             <InputStyle
@@ -76,48 +97,67 @@ export default function PartyJoin() {
               name="study_name"
             />
           </div>
-          {/* <Input
-            className="partyName"
-            name="study_name"
-            labelName="스터디 이름"
-            placeholder="스터디 이름을 입력해주세요"
-          /> */}
 
-          <label className="studyDate">스터디 날짜</label>
+          {/* 확인필요 - 스터디 모집날짜 input 변경 */}
+          <label className="studyDate" htmlFor="studyDate">
+            스터디 날짜
+          </label>
+          <input
+            ref={partyDate}
+            placeholder="테스트용 input"
+            name="studyDate"
+            type="datetime-local"
+          />
+          {/* <label className="studyDate">스터디 날짜</label>
           <DateTime
             name="study_date"
             labelName="스터디 날짜"
             placeholder="스터디 날짜를 선택해주세요"
             margin={{ my: "25px" }}
             ref={partyDate}
+          /> */}
+
+          {/* 확인필요 - 스터디 마감날짜 input 변경 */}
+          <label htmlFor="studyClose">모집 마감 날짜</label>
+          <input
+            name="studyClose"
+            ref={partyClose}
+            placeholder="테스트용 input"
+            type="datetime-local"
           />
-          <label>모집 마감 날짜</label>
+          {/* <label>모집 마감 날짜</label>
           <DateTime
             name="deadline"
             labelName="모집 마감 날짜"
             placeholder="모집 마감 날짜를 선택해주세요"
             margin={{ mb: "25px" }}
             ref={partyClose}
-          />
+          /> */}
+
           <div className="partName">
             <label htmlFor="location">스터디 장소</label>
             <InputStyle
-              ref={partyLocation}
+              ref={partyAddress}
               placeholder="스터디 장소를 입력해주세요"
               name="location"
             />
+            <button
+              className="addressChecked"
+              onClick={(e) => handleAddressTransformLocation(e)}
+            >
+              주소확인
+            </button>
           </div>
-          {/* <Input
-            labelName="스터디 장소"
-            placeholder="스터디 장소를 알려주세요"
-          /> */}
+
           <label className="partyDescLabel">스터디 상세설명</label>
           <textarea
             ref={partyDesc}
             className="partyDesc"
             placeholder="스터디를 설명해주세요"
           />
-          <button className="finish">스터디 개설 완료하기</button>
+          <button className="finish" onClick={onSubmitHandler}>
+            스터디 개설 완료하기
+          </button>
         </form>
       </div>
       <div className="modalLayout">
@@ -129,15 +169,6 @@ export default function PartyJoin() {
     </MainStyle>
   );
 }
-
-const Input = (props) => {
-  return (
-    <>
-      <label>{props.labelName}</label>
-      <InputStyle placeholder={props.placeholder} />
-    </>
-  );
-};
 
 const InputStyle = styled.input`
   width: 100%;
