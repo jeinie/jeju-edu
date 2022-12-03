@@ -367,7 +367,7 @@ const options = {
         },
       },
 
-      "/viewDetail/:study_no": {
+      "/api/viewDetail/:study_no": {
         post: {
           tags: ["스터디 목록중 하나를 선택해 상세페이지로 들어가는 API"],
           summary:

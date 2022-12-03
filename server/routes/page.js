@@ -6,7 +6,7 @@ const userAgentMiddleWare = require("./userAgentMiddleWare");
 const authMiddleWare = require("./authMiddleWare");
 
 router.post(
-  "/viewDetail/:study_no",
+  "/api/viewDetail/:study_no",
   userAgentMiddleWare("/viewDetail/:study_no"),
   authMiddleWare,
   async (req, res) => {
