@@ -9,6 +9,7 @@ import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
 
 export default function PartyJoin() {
+  const { kakao } = window;
   const [open, setOpen] = useState(false);
   const [dateState, setDateState] = useState(false);
 
@@ -58,15 +59,13 @@ export default function PartyJoin() {
       partyAddress.current.value,
       // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
       partyDesc.current.value,
-      "lat :",
       latLng,
-      "lon :",
       lonLng
     );
   };
-  const { kakao } = window;
 
-  const handleAddressTransformLocation = () => {
+  const handleAddressTransformLocation = (e) => {
+    e.preventDefault();
     let location = partyAddress.current.value;
     let geocoder = new kakao.maps.services.Geocoder();
 
@@ -89,7 +88,7 @@ export default function PartyJoin() {
       <Nav />
       <button onClick={refCheck}>ref 확인</button>
       <div className="wrapper">
-        <form className="createParty" onSubmit={onSubmitHandler}>
+        <form className="createParty">
           <div className="partName">
             <label htmlFor="study_name">스터디 이름</label>
             <InputStyle
@@ -98,13 +97,8 @@ export default function PartyJoin() {
               name="study_name"
             />
           </div>
-          {/* <Input
-            className="partyName"
-            name="study_name"
-            labelName="스터디 이름"
-            placeholder="스터디 이름을 입력해주세요"
-          /> */}
 
+          {/* 확인필요 - 스터디 모집날짜 input 변경 */}
           <label className="studyDate" htmlFor="studyDate">
             스터디 날짜
           </label>
@@ -114,13 +108,16 @@ export default function PartyJoin() {
             name="studyDate"
             type="datetime-local"
           />
-          {/* <DateTime
+          {/* <label className="studyDate">스터디 날짜</label>
+          <DateTime
             name="study_date"
             labelName="스터디 날짜"
             placeholder="스터디 날짜를 선택해주세요"
             margin={{ my: "25px" }}
             ref={partyDate}
           /> */}
+
+          {/* 확인필요 - 스터디 마감날짜 input 변경 */}
           <label htmlFor="studyClose">모집 마감 날짜</label>
           <input
             name="studyClose"
@@ -128,7 +125,8 @@ export default function PartyJoin() {
             placeholder="테스트용 input"
             type="datetime-local"
           />
-          {/* <DateTime
+          {/* <label>모집 마감 날짜</label>
+          <DateTime
             name="deadline"
             labelName="모집 마감 날짜"
             placeholder="모집 마감 날짜를 선택해주세요"
@@ -149,17 +147,16 @@ export default function PartyJoin() {
               주소확인
             </button>
           </div>
-          {/* <Input
-            labelName="스터디 장소"
-            placeholder="스터디 장소를 알려주세요"
-          /> */}
+
           <label className="partyDescLabel">스터디 상세설명</label>
           <textarea
             ref={partyDesc}
             className="partyDesc"
             placeholder="스터디를 설명해주세요"
           />
-          <button className="finish">스터디 개설 완료하기</button>
+          <button className="finish" onClick={onSubmitHandler}>
+            스터디 개설 완료하기
+          </button>
         </form>
       </div>
       <div className="modalLayout">
@@ -171,15 +168,6 @@ export default function PartyJoin() {
     </MainStyle>
   );
 }
-
-const Input = (props) => {
-  return (
-    <>
-      <label>{props.labelName}</label>
-      <InputStyle placeholder={props.placeholder} />
-    </>
-  );
-};
 
 const InputStyle = styled.input`
   width: 100%;

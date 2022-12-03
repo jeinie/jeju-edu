@@ -60,17 +60,17 @@ export default function BasicModal(props) {
   });
 
   useEffect(() => {
-    axios
-      .post(`/api/joinStudy`, {
-        study_no: props.list?.study_no,
-        id: userId,
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.data.success === 200) {
-          setMembers(response.data.members);
-        }
-      });
+    // axios
+    //   .post(`/api/joinStudy`, {
+    //     study_no: props.list?.study_no,
+    //     id: userId,
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (response.data.success === 200) {
+    //       setMembers(response.data.members);
+    //     }
+    //   });
   }, []);
 
   const handleImage = (num) => {

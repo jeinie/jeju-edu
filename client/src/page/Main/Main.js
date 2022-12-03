@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import StudyCard from "../../components/StudyCard";
@@ -13,11 +13,15 @@ export default function Main() {
 
   const [category, setCategory] = useState("code");
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-     axios.get(`/api/getStudyList/${category}`).then((data) => {
-        setList(data.data);
-     });
+      axios.get(`/api/getStudyList/${category}`).then((res) => {
+          console.log(res.data);
+          setList(res.data.studyList);
+      }).catch(function (error) {
+          navigate("/login");
+      })
   }, [category]);
 
   return (

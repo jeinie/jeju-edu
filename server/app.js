@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
@@ -16,10 +16,9 @@ const { sequelize } = require("./models");
 
 const app = express();
 
+//app.set("port", process.env.PORT || 443);
 
-app.set("port", process.env.PORT || 443);
-
-//app.set("port", process.env.PORT || 80);
+app.set("port", process.env.PORT || 80);
 
 sequelize
   .sync({ force: false })

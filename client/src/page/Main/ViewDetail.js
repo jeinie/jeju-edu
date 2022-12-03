@@ -25,10 +25,10 @@ export default function ViewDetail({ list, id }) {
   });
 
   const handleModalView = () => {
-    axios.post(`/api/joinStudy`, {
-      study_no: id,
-      id: userId,
-    });
+    // axios.post(`/api/joinStudy`, {
+    //   study_no: id,
+    //   id: userId,
+    // });
   };
 
   const handleImage = (num) => {

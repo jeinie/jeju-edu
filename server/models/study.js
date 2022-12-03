@@ -30,10 +30,11 @@ module.exports = class Study extends Sequelize.Model {
          * 몇명의 멤버가 모인게 아니라 누가누가 모였는지 다른 테이블에 기록이 필요할듯 고로 멤버 테이블이 따로 필요하게 될것
          * 이거 양방 belongsToMany 관계로 / through 속성으로 해결된듯 멤버 삭제해도 될듯
          * AllStudyList 모델에 다 기록될듯 테이블도 생겨나나?
-        members: {
+         */
+        current_member_cnt: {
           type: Sequelize.INTEGER,
+          defaultValue: 1,
         },
-        */
         min_member_cnt: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -96,14 +97,14 @@ module.exports = class Study extends Sequelize.Model {
     /**
      * 하나의 스터디에 여러 유저가 몰릴수있으니 당연하게도 hasMany 성립
      */
-    db.Study.hasMany(db.User);
+    //db.Study.hasMany(db.User);
     /**
      * 여러명의 유저가 한 스터디에 속해있을수가 있고 , 그 반대역시 가능하니
      * 양방의 belongsToMany관게로 중계 테이블이 필요하다
      * through 속성으로 AllStudyList를 생성하여 중계테이블을 생성한다
      */
-    db.Study.belongsToMany(db.User, {
-      through: "AllStudyList",
-    });
+    // db.Study.belongsToMany(db.User, {
+    //   through: "AllStudyList",
+    // });
   }
 };

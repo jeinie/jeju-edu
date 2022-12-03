@@ -7,14 +7,14 @@ import PartyMarker from "../../components/maps/PartyMarker";
 
 export default function PartyDetail() {
   const { id } = useParams();
-  const [personalList, setPersonalList] = useState(null);
+  const [personalList, setPersonalList] = useState([]);
 
   useEffect(() => {
     axios.post(`/api/viewDetail/${id}`).then((data) => setPersonalList(data));
   }, [id]);
 
-  if (personalList === null) {
-    return <div>리스트가 없습니다 !</div>;
+  if (personalList.length === 0) {
+    return <div> 지금은 공사중 !</div>;
   }
 
   console.log(personalList);
