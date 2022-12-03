@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { BsSuitHeartFill } from "react-icons/bs";
 import { MdPeopleAlt, MdLocationOn } from "react-icons/md";
 
