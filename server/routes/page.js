@@ -15,31 +15,20 @@ router.post(
         where: { study_no: req.params.study_no },
       });
 
-      //studyInfo.createdAt = studyInfo.createdAt.split(" ")[0];
-      //studyInfo.updatedAt = studyInfo.updatedAt.split(" ")[0];
-      console.log(`처리1 ${studyInfo.location}`);
-      console.log(`처리2 ${studyInfo.createdAt}`);
-      console.log(`처리3 ${studyInfo.updatedAt}`);
+      let concat = studyInfo.studyAt_location.split(" ");
+      let result1 = concat[1] + " " + concat[2];
+      studyInfo.studyAt_location = result1;
 
-      if (studyInfo) {
-        const result = {};
-        result["success"] = 200;
-        result["msg"] = "studyInfo 전달 성공";
-
-        //for (var i = 0; i < studyInfo.length; i++) {
-        let concat = studyInfo.location.split(" ");
-        let result1 = concat[1] + " " + concat[2];
-        studyInfo.location = result1;
-        //}
-        result["studyInfo"] = studyInfo;
-        res.json(result);
-      } else {
-        result["success"] = 100;
-        result["msg"] = "studyInfo 조회 / 전달 실패";
-        res.json(result);
-      }
+      res.status(200).json({
+        code: 200,
+        message: "studyInfo 전달 성공",
+        study_Detail_Info: studyInfo,
+      });
     } catch (error) {
-      console.error(error);
+      res.status(500).json({
+        code: 500,
+        message: `studyInfo 추출중에 서버내 알수없는 에러발생 error : ${error}`,
+      });
       return next(error);
     }
   }
