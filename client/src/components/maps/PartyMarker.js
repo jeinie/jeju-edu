@@ -15,24 +15,24 @@ export default function PartyMarker({ lat, lon }) {
       const imageSize = new kakao.maps.Size(24, 35);
       const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-      const displayMarker = (localPosition, message) => {
-        const marker = new kakao.maps.Marker({
-          map: map,
-          position: localPosition,
-          image: markerImage,
-        });
+      // const displayMarker = (localPosition, message) => {
+      //   const marker = new kakao.maps.Marker({
+      //     map: map,
+      //     position: localPosition,
+      //     image: markerImage,
+      //   });
 
-        let markerMessage = message;
-        let markerRemoveAble = true;
+      //   let markerMessage = message;
+      //   let markerRemoveAble = true;
 
-        const infoWindow = new kakao.maps.InfoWindow({
-          content: markerMessage,
-          removable: markerRemoveAble,
-        });
+      //   const infoWindow = new kakao.maps.InfoWindow({
+      //     content: markerMessage,
+      //     removable: markerRemoveAble,
+      //   });
 
-        infoWindow.open(map, marker);
-        map.setCenter(localPosition);
-      };
+      //   infoWindow.open(map, marker);
+      //   map.setCenter(localPosition);
+      // };
 
       const marker = new kakao.maps.Marker({
         position: markerPosition,

@@ -17,7 +17,7 @@ export default function StudyCard({ item }) {
           <p>{item.location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
         </div>
         <div className="partyMembers">
-          <MdPeopleAlt style={{ marginRight: "5px" }} />
+          <MdPeopleAlt className="people" />
           <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
         </div>
       </div>
@@ -59,6 +59,10 @@ const StudyBox = styled.div`
 
   .partyMembers p {
     float: left;
+  }
+
+  .people {
+    margin-right: 5px;
   }
 `;
 
