@@ -4,13 +4,15 @@ import axios from "axios";
 import styled from "styled-components";
 
 import Nav from "../../components/Nav";
-import DateTime from "../../components/DateTime";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
 
 export default function PartyJoin() {
   const { kakao } = window;
   const [open, setOpen] = useState(false);
+  // const [dateState, setDateState] = useState(false);
+
+  const [name, setName] = useState("");
 
   const partyName = useRef(); // 스터디 이름
   const partyDate = useRef(); // 스터디 모임 날짜
@@ -25,25 +27,44 @@ export default function PartyJoin() {
   });
 
   const [formData, setFormData] = useState({
-    study_name: "피아노",
-    // partyName
+    study_name: "피아노", // partyName
     who_open: userId,
-    study_category: "보컬댄스",
-    study_detail: "피아노를 가르켜줄게요",
-    //partyDesc
+    study_category: "보컬댄스", // 값을 받아낼 좋은 방법 추천좀.
+    study_detail: "피아노를 가르켜줄게요", //partyDesc
     members: 0,
     min_party: 4,
     open_date: new Date(),
     close_date: null,
     study_date: null,
-    location: "",
+    location: "", // 무슨 값을 보내줘야 할지 모르겠음.
     tmX: 33.449794,
     tmY: 126.918436,
     deadline: new Date(),
   });
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
+
+    // post 요청 보낼 때 사용 될 변수
+    let result = {
+      study_name: partyName.current.value, // partyName
+      who_open: userId,
+      study_category: "보컬댄스",
+      // 어떤 방법이 좋을지 고민 필요.
+      study_detail: partyDesc.current.value, //partyDesc
+      members: 0,
+      min_party: 4,
+      open_date: new Date(),
+      close_date: partyClose.current.value,
+      study_date: partyDate.current.value,
+      location: "",
+      // 무슨 값을 보내줘야 하는지 잘 모르겠음.
+      tmX: latLng,
+      tmY: lonLng,
+      deadline: new Date(),
+    };
+
+    setFormData(result);
 
     axios.post(`/api/openStudy`, formData).then((response) => {
       console.log(response);
@@ -52,6 +73,7 @@ export default function PartyJoin() {
   };
 
   const refCheck = () => {
+    // input 에 값을 입력하고 ref확인 버튼을 누르면 console창에서 값을 확인할 수 있음.
     console.log(
       partyName.current.value,
       partyDate.current.value,
@@ -59,7 +81,9 @@ export default function PartyJoin() {
       partyAddress.current.value,
       // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
       partyDesc.current.value,
+      "lat :",
       latLng,
+      "lon :",
       lonLng
     );
   };
@@ -92,6 +116,7 @@ export default function PartyJoin() {
           <div className="partName">
             <label htmlFor="study_name">스터디 이름</label>
             <InputStyle
+              id="studyName"
               ref={partyName}
               placeholder="스터디 이름을 입력해주세요"
               name="study_name"
@@ -133,7 +158,6 @@ export default function PartyJoin() {
             margin={{ mb: "25px" }}
             ref={partyClose}
           /> */}
-
           <div className="partName">
             <label htmlFor="location">스터디 장소</label>
             <InputStyle
@@ -225,6 +249,16 @@ const MainStyle = styled.main`
 
   .partyName {
     margin-top: 15px;
+  }
+
+  .addressChecked {
+    float: right;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 5px;
+    background-color: #faf6f2;
+    transform: translate(-10%, -110%);
+    cursor: pointer;
   }
 
   .partyDescLabel {

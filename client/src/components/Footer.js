@@ -1,45 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
+
 import PlusBtn from "./PlusBtn";
 
-export default function Footer() {
-  const [onSearch, setOnSearch] = useState(false);
-  const [onProfile, setOnProFile] = useState(true);
+export default function Footer({page, setPage}) {
   const {pathname} = useLocation();
-
-  const handleColor = () => {
-    setOnSearch(!onSearch);
-    setOnProFile(!onProfile);
-  };
-
-  const handlePage = () => {
-    setOnSearch(!onSearch);
-    setOnProFile(!onProfile);
-  };
 
   if (pathname === "/login") return;
   return (
     <FooterContainer>
       <Link to="/" className="footerLink">
         <div
-          className={onSearch ? "iconBox viewPage" : "iconBox"}
-          onClick={handleColor}
+          className={page !== "search" ? "iconBox viewPage" : "iconBox"}
+          onClick={()=>setPage("search")}
         >
           <FiSearch />
         </div>
       </Link>
       <PlusBtn />
-      <Link to="/profile">
-        <div
-          className={onProfile ? "iconBox viewPage" : "iconBox"}
-          onClick={handlePage}
-        >
-          <BsFillPersonFill />
-        </div>
-      </Link>
+      <BsFillPersonFill className={page !== "profile" ? "viewPage" : ""} onClick={()=>setPage("profile")}/>
     </FooterContainer>
   );
 }

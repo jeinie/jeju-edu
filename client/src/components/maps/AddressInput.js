@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
-// import MyLocationIcon from "@mui/icons-material/MyLocation";
 import axios from "axios";
+
 import Modal2 from "../modals/Modal2";
+
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdMyLocation } from "react-icons/md";
 
 const AddressInput = ({ update }) => {
+  // 주소를 입력하면 좌표값으로 바꿔주는 컴포넌트
   const { kakao } = window;
   const [userAddress, setUserAddress] = useState(null);
   const location = useRef();
@@ -18,7 +20,7 @@ const AddressInput = ({ update }) => {
       .then((data) => update(data.data));
   };
 
-  const handleAddress = () => {
+  const handleChangeAddress = () => {
     let geocoder = new kakao.maps.services.Geocoder();
     geocoder.addressSearch(
       `${location.current.value}`,
@@ -39,15 +41,12 @@ const AddressInput = ({ update }) => {
       <div className="par_box">
         <input placeholder="00동 00구" className="inputBox" ref={location} />
         <AiOutlineSearch
-          color="white"
-          style={{ fontSize: "24px" }}
-          onClick={() => handleAddress()}
+          className="searchIcon"
+          onClick={() => handleChangeAddress()}
         />
       </div>
       <div className="btnContainer">
         <p className="myLocation" onClick={handleClick}>
-          {/* 위도경도를 주소로 변환하는 함수 적용 */}
-          {/* <MyLocationIcon className="myLocation" /> */}
           <MdMyLocation className="myLocation locationIcon" />
           현재 위치로 설정
         </p>
@@ -60,6 +59,10 @@ const AddressInput = ({ update }) => {
 export default AddressInput;
 
 const TestBox = styled.div`
+  .searchIcon {
+    color: white;
+    font-size: 24px;
+  }
   .btnContainer {
     display: flex;
     flex-direction: row;
