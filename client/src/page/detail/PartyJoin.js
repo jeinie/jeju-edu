@@ -27,49 +27,50 @@ export default function PartyJoin() {
   });
 
   const [formData, setFormData] = useState({
-    study_name: "피아노", // partyName
     who_open: userId,
+    study_title: "피아노", // partyName
     study_category: "보컬댄스", // 값을 받아낼 좋은 방법 추천좀.
-    study_detail: "피아노를 가르켜줄게요", //partyDesc
-    members: 0,
-    min_party: 4,
-    open_date: new Date(),
-    close_date: null,
-    study_date: null,
-    location: "", // 무슨 값을 보내줘야 할지 모르겠음.
+    study_detail_description: "피아노를 가르켜줄게요", //partyDesc
+    min_member_cnt: 4,
+    studyAt_date: null,
+    studyAt_location: "", // 무슨 값을 보내줘야 할지 모르겠음.
     tmX: 33.449794,
     tmY: 126.918436,
     deadline: new Date(),
+    status: 0,
   });
 
   const onSubmitHandler = async (e) => {
+    console.log(userId);
     e.preventDefault();
 
     // post 요청 보낼 때 사용 될 변수
     let result = {
-      study_name: partyName.current.value, // partyName
       who_open: userId,
+      study_title: partyName.current.value, 
       study_category: "보컬댄스",
-      // 어떤 방법이 좋을지 고민 필요.
-      study_detail: partyDesc.current.value, //partyDesc
-      members: 0,
-      min_party: 4,
-      open_date: new Date(),
-      close_date: partyClose.current.value,
-      study_date: partyDate.current.value,
-      location: "",
-      // 무슨 값을 보내줘야 하는지 잘 모르겠음.
+      study_detail_description: partyDesc.current.value, //partyDesc
+      min_member_cnt: 4,
+      studyAt_date: partyDate.current.value,
+      studyAt_location: "",
       tmX: latLng,
       tmY: lonLng,
-      deadline: new Date(),
+      deadline: partyClose.current.value,
+      status: 0,
     };
 
     setFormData(result);
-
-    axios.post(`/api/openStudy`, formData).then((response) => {
-      console.log(response);
-      setOpen(true);
-    });
+    setTimeout(() => {
+      console.log(formData);
+      axios.post(`/api/openStudy`, formData).then((res) => {
+        if (res.OK) {
+          console.log(res);
+          setOpen(true);
+        } else {
+          console.log("err");
+        }
+      });
+    }, 500);
   };
 
   const refCheck = () => {

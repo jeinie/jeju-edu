@@ -41,7 +41,7 @@ app.use(cookieParser());
 /** client 즉 React서버가 자리잡으면 해당 url만 cors를 허용해줄 예정임
  * app.use(
  *  cors({
- *     origin: "http://localhost:3000",
+ *     origin: "http://:3000",
  *    method: ["GET", "POST"],
  *    credentials: true,
  *  })
