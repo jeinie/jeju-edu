@@ -1,79 +1,57 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 
-import PlusBtn from "./PlusBtn";
-
 export default function Footer() {
-  const [onSearch, setOnSearch] = useState(false);
-  const [onProfile, setOnProFile] = useState(true);
+  const [page, setPage] = useState("search");
   const {pathname} = useLocation();
+  const navigate = useNavigate();
 
-  const handleColor = () => {
-    setOnSearch(!onSearch);
-    setOnProFile(!onProfile);
-  };
+  const goSearch = () => {
+    setPage("search");
+    navigate("/");
+  }
 
-  const handlePage = () => {
-    setOnSearch(!onSearch);
-    setOnProFile(!onProfile);
-  };
+  const goJoin = () => {
+    navigate("/partyjoin");
+  }
+
+  const goProfile = () => {
+    setPage("profile");
+    navigate("/profile");
+  }
 
   if (pathname === "/login") return;
   return (
     <FooterContainer>
-      <Link to="/" className="footerLink">
-        <div
-          className={onSearch ? "iconBox viewPage" : "iconBox"}
-          onClick={handleColor}
-        >
-          <FiSearch />
-        </div>
-      </Link>
-      <PlusBtn />
-      <Link to="/profile">
-        <div
-          className={onProfile ? "iconBox viewPage" : "iconBox"}
-          onClick={handlePage}
-        >
-          <BsFillPersonFill />
-        </div>
-      </Link>
+        <FiSearch onClick={goSearch} color={page === 'search' ? '#000000' : '#bababa'}/>
+        <AiOutlinePlus className="plusbtn" onClick={goJoin}/>
+        <BsFillPersonFill onClick={goProfile} color={page === 'profile' ? '#000000' : '#bababa'}/>
     </FooterContainer>
   );
 }
 
 const FooterContainer = styled.footer`
   display: flex;
+  justify-content: space-around;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+
   width: 100%;
-  height: 10%;
+  height: 49px;
   font-size: 48px;
-  color: #bababa;
   position: fixed;
-  top: 90%;
+  bottom: 0;
   background: white;
-  padding: 0 48px;
-  a {
-    color: black;
-  }
 
-  .footerLink {
-    color: black;
-  }
-
-  .iconBox {
-    flex-grow: 1;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .viewPage {
-    color: #bababa;
+  .plusbtn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: white;
+    background-color: black;
   }
 `;
