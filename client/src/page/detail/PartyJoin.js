@@ -32,8 +32,8 @@ export default function PartyJoin() {
     study_category: "보컬댄스", // 값을 받아낼 좋은 방법 추천좀.
     study_detail_description: "피아노를 가르켜줄게요", //partyDesc
     min_member_cnt: 4,
-    studyAt_date: null,
-    studyAt_location: "", // 무슨 값을 보내줘야 할지 모르겠음.
+    studyAt_date: "2022-12-30 15:00:00",
+    studyAt_location: "서귀포시 태평로 529-1", // 무슨 값을 보내줘야 할지 모르겠음.
     tmX: 33.449794,
     tmY: 126.918436,
     deadline: new Date(),
@@ -47,11 +47,11 @@ export default function PartyJoin() {
     // post 요청 보낼 때 사용 될 변수
     let result = {
       who_open: userId,
-      study_title: partyName.current.value, 
+      study_title: partyName.current.value,
       study_category: "보컬댄스",
       study_detail_description: partyDesc.current.value, //partyDesc
       min_member_cnt: 4,
-      studyAt_date: partyDate.current.value,
+      studyAt_date: "2022-12-30 15:00:00",
       studyAt_location: "",
       tmX: latLng,
       tmY: lonLng,
@@ -62,14 +62,7 @@ export default function PartyJoin() {
     setFormData(result);
     setTimeout(() => {
       console.log(formData);
-      axios.post(`/api/openStudy`, formData).then((res) => {
-        if (res.OK) {
-          console.log(res);
-          setOpen(true);
-        } else {
-          console.log("err");
-        }
-      });
+      axios.post(`/api/openStudy`, formData).then((res) => console.log(res));
     }, 500);
   };
 
