@@ -108,7 +108,9 @@ export default function PartyJoin() {
       <div className="wrapper">
         <form className="createParty">
           <div className="partName">
-            <label htmlFor="study_name">스터디 이름</label>
+            <label className="labels" htmlFor="study_name">
+              스터디 이름
+            </label>
             <InputStyle
               id="studyName"
               ref={partyName}
@@ -117,43 +119,19 @@ export default function PartyJoin() {
             />
           </div>
 
-          {/* 확인필요 - 스터디 모집날짜 input 변경 */}
-          <label className="studyDate" htmlFor="studyDate">
+          <label className="labels" htmlFor="studyDate">
             스터디 날짜
           </label>
-          <input
-            ref={partyDate}
-            placeholder="테스트용 input"
-            name="studyDate"
-            type="datetime-local"
-          />
-          {/* <label className="studyDate">스터디 날짜</label>
-          <DateTime
-            name="study_date"
-            labelName="스터디 날짜"
-            placeholder="스터디 날짜를 선택해주세요"
-            margin={{ my: "25px" }}
-            ref={partyDate}
-          /> */}
+          <input ref={partyDate} name="studyDate" type="datetime-local" />
 
-          {/* 확인필요 - 스터디 마감날짜 input 변경 */}
-          <label htmlFor="studyClose">모집 마감 날짜</label>
-          <input
-            name="studyClose"
-            ref={partyClose}
-            placeholder="테스트용 input"
-            type="datetime-local"
-          />
-          {/* <label>모집 마감 날짜</label>
-          <DateTime
-            name="deadline"
-            labelName="모집 마감 날짜"
-            placeholder="모집 마감 날짜를 선택해주세요"
-            margin={{ mb: "25px" }}
-            ref={partyClose}
-          /> */}
+          <label className="labels" htmlFor="studyClose">
+            모집 마감 날짜
+          </label>
+          <input name="studyClose" ref={partyClose} type="datetime-local" />
           <div className="partName">
-            <label htmlFor="location">스터디 장소</label>
+            <label className="labels" htmlFor="location">
+              스터디 장소
+            </label>
             <InputStyle
               ref={partyAddress}
               placeholder="스터디 장소를 입력해주세요"
@@ -167,7 +145,7 @@ export default function PartyJoin() {
             </button>
           </div>
 
-          <label className="partyDescLabel">스터디 상세설명</label>
+          <label className="partyDescLabel labels">스터디 상세설명</label>
           <textarea
             ref={partyDesc}
             className="partyDesc"
@@ -189,7 +167,7 @@ export default function PartyJoin() {
 }
 
 const InputStyle = styled.input`
-  width: 100%;
+  width: 50%;
   height: 33px;
   border-radius: 15px;
   border: none;
@@ -197,9 +175,12 @@ const InputStyle = styled.input`
 
 const MainStyle = styled.main`
   background-color: white;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  padding: 0 10px;
 
   .wrapper {
-    margin: 0 25px;
+    margin: 0 20px;
   }
 
   .createParty {
@@ -208,7 +189,6 @@ const MainStyle = styled.main`
 
   .modalLayout {
     width: 100%;
-    height: auto;
     padding-bottom: 100px;
   }
 
@@ -221,7 +201,7 @@ const MainStyle = styled.main`
   }
   input {
     background-color: #faf6f2;
-    width: 100%;
+    width: 90%;
     border-radius: 16px;
     padding: 15px;
     border: none;
@@ -232,10 +212,11 @@ const MainStyle = styled.main`
   }
 
   .studyDate {
-    margin-top: 8px;
-    transform: translateY(20px);
+    /* margin-top: 100px; */
+    /* transform: translateY(20px); */
   }
   textarea {
+    /* width: 90%; */
     background-color: #faf6f2;
     border: none;
     padding: 15px;
@@ -260,7 +241,7 @@ const MainStyle = styled.main`
   }
 
   .partyDesc {
-    width: 100%;
+    width: 90%;
     height: 117px;
   }
 
@@ -272,5 +253,10 @@ const MainStyle = styled.main`
     border: none;
     color: white;
     margin-top: 20px;
+  }
+
+  .labels {
+    display: block;
+    margin: 20px 0;
   }
 `;

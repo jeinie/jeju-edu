@@ -48,8 +48,12 @@ export default function PartyDetail() {
   };
 
   useEffect(() => {
-    axios.post(`/api/viewDetail/${id}`).then((res) => setStudy(res.data.study_Detail_Info));
-  }, []);
+    axios
+      .post(`/api/viewDetail/${id}`)
+      .then((res) => setStudy(res.data.study_Detail_Info));
+  }, [id]);
+
+  console.log(study);
 
   return (
     <div>
@@ -65,12 +69,6 @@ export default function PartyDetail() {
                 </div>
               </section>
               <section className="placeData">
-                <div className="placeAddress">
-                  <HiLocationMarker />
-                  {/* 마커 아이콘 */}
-                  <h6 className="addressTitle">place</h6>
-                  <p className="address">{study.studyAt_location}</p>
-                </div>
                 <div className="memberContainer">
                   <MdPeopleAlt />
                   {/* 사람들 아이콘 */}
@@ -80,6 +78,12 @@ export default function PartyDetail() {
                   {/* 달력 아이콘 */}
                   <BsCalendar2WeekFill />
                   <p className="deathLine">~ {study.deadline}</p>
+                </div>
+                <div className="placeAddress">
+                  <HiLocationMarker />
+                  {/* 마커 아이콘 */}
+                  {/* <h6 className="addressTitle">place</h6> */}
+                  <p className="address">{study.studyAt_location}</p>
                 </div>
               </section>
             </div>
@@ -95,8 +99,8 @@ export default function PartyDetail() {
               />
             </div>
           </div>
-          <p className="partyDesc">{study.study_detail}</p>
-          {study.members >= study.min_party ? (
+          <p className="partyDesc">{study.study_detail_description}</p>
+          {study.study_no >= study.min_member_cnt ? (
             <p
               className="fullParty"
               // style={{ textAlign: "center", color: "red" }}
@@ -110,7 +114,7 @@ export default function PartyDetail() {
             <div className="btnBox">
               <button
                 className="joinBtn"
-                disabled={study.members >= study.min_party}
+                disabled={study.study_no >= study.min_member_cnt}
                 onClick={() => {
                   setOpen(true);
                   handleModalView();
@@ -216,10 +220,15 @@ const ViewDetailContainer = styled.section`
   .placeAddress {
     display: flex;
     align-items: center;
+    margin-top: 8px;
   }
 
   .addressTitle {
-    margin: 0 6px 0 18px;
+    margin: 0 6px 0 10px;
+  }
+
+  .address {
+    margin-left: 15px;
   }
 
   .memberContainer {
@@ -227,7 +236,7 @@ const ViewDetailContainer = styled.section`
   }
 
   .partyMembers {
-    margin-left: 18px;
+    margin-left: 15px;
   }
 
   .partyDesc {
