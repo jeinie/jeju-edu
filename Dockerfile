@@ -7,6 +7,7 @@ COPY server /usr/src/app/
 RUN pwd
 COPY client /usr/src/app/
 RUN pwd
+WORKDIR /usr/src/app
 RUN ls
 RUN mkdir /usr/src/app/server/public
 
