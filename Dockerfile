@@ -7,6 +7,7 @@ COPY client /usr/src/app/
 WORKDIR /usr/src/app/client
 RUN npm install --silent
 RUN npm install react-scripts@5.0.1 -g --silent
+RUN node --max-old-space-size=30000 app.js
 RUN npm run build
 
 #서버
@@ -15,7 +16,7 @@ COPY server /usr/src/app/
 RUN rm -rf /usr/src/app/server/public
 RUN mkdir /usr/src/app/server/public
 
-RUN node --max-old-space-size=30000 app.js
+
 
 COPY /usr/src/app/client/build/* /usr/src/app/server/public/
 
