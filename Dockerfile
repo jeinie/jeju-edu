@@ -2,11 +2,12 @@ FROM node:latest
 MAINTAINER DHAPARK
 # 작업 폴더를 만들고 npm 설치
 RUN mkdir /usr/src/app
-
+RUN pwd
 COPY server /usr/src/app/
 COPY client /usr/src/app/
 
 RUN mkdir /usr/src/app/server/public
+RUN pwd
 #RUN rm -rf /usr/src/app/server/public
 
 
