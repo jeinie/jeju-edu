@@ -8,7 +8,7 @@ RUN pwd
 COPY client /usr/src/app/
 RUN pwd
 RUN mkdir /usr/src/app/server/public
-
+RUN tree
 #RUN rm -rf /usr/src/app/server/public
 
 
