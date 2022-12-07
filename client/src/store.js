@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+import { persistReducer, PURGE } from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 
 import user from './store/userSlice.js';
@@ -9,7 +9,7 @@ const reducers = combineReducers({
 })
 
 const persistConfig = {
-    key: 'root',
+    key: 'jenfra',
     storage,
     whitelist: ['user']
 };
@@ -21,7 +21,7 @@ export default configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
-                ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+                ignoreActions: [PURGE]
             }
         })
 })
