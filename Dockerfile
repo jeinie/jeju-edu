@@ -5,9 +5,9 @@ RUN mkdir /usr/src/app
 RUN pwd
 COPY server /usr/src/app/
 RUN pwd
-COPY client usr/src/app/
+COPY client /usr/src/app/
 RUN pwd
-RUN mkdir usr/src/app/server/public
+RUN mkdir /usr/src/app/server/public
 
 #RUN rm -rf /usr/src/app/server/public
 
