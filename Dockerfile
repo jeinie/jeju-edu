@@ -3,9 +3,9 @@ MAINTAINER DHAPARK
 # 작업 폴더를 만들고 npm 설치
 RUN mkdir /usr/src/app
 RUN pwd
-COPY server /usr/src/app/
+COPY server /usr/src/app/server/
 RUN pwd
-COPY client /usr/src/app/
+COPY client /usr/src/app/client/
 RUN pwd
 WORKDIR /usr/src/app
 RUN ls
