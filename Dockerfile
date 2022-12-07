@@ -3,11 +3,12 @@ MAINTAINER DHAPARK
 # 작업 폴더를 만들고 npm 설치
 RUN mkdir /usr/src/app
 
-COPY client /usr/src/app/
 COPY server /usr/src/app/
+COPY client /usr/src/app/
 
-RUN rm -rf /usr/src/app/server/public
 RUN mkdir /usr/src/app/server/public
+#RUN rm -rf /usr/src/app/server/public
+
 
 WORKDIR /usr/src/app/client
 RUN npm install --silent
