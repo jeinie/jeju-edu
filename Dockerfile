@@ -7,7 +7,7 @@ RUN mkdir /usr/src/app
 #COPY package.json /usr/src/app/package.json
 # 소스를 작업폴더로 복사하고 빌드
 #COPY . /usr/src/app
-COPY client/* /usr/src/app
+COPY client/* /usr/src/app/
 WORKDIR /usr/src/app/client
 RUN npm install --silent
 RUN npm install react-scripts@5.0.1 -g --silent
@@ -18,11 +18,11 @@ RUN npm run build
 
 
 WORKDIR /usr/src/app
-COPY server /usr/src/app
+COPY server /usr/src/app/
 RUN rm -rf /usr/src/app/server/public
 RUN mkdir /usr/src/app/server/public
 
-COPY /usr/src/app/build/* /usr/src/app/server/public
+COPY /usr/src/app/build/* /usr/src/app/server/public/
 #COPY package*.json ./
 WORKDIR /usr/src/app/server
 RUN npm install
