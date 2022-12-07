@@ -4,6 +4,7 @@ MAINTAINER DHAPARK
 RUN mkdir /usr/src/app
 RUN pwd
 COPY server /usr/src/app/
+RUN pwd
 COPY client /usr/src/app/
 RUN pwd
 RUN mkdir /usr/src/app/server/public
