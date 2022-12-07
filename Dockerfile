@@ -4,6 +4,11 @@ MAINTAINER DHAPARK
 RUN mkdir /usr/src/app
 
 COPY client /usr/src/app/
+COPY server /usr/src/app/
+
+RUN rm -rf /usr/src/app/server/public
+RUN mkdir /usr/src/app/server/public
+
 WORKDIR /usr/src/app/client
 RUN npm install --silent
 RUN npm install react-scripts@5.0.1 -g --silent
@@ -12,16 +17,14 @@ RUN export NODE_OPTIONS="--max-old-space-size=3072"
 RUN npm run build
 
 #서버
+#WORKDIR /usr/src/app/server
+#COPY server /usr/src/app/
+
+
 WORKDIR /usr/src/app
-COPY server /usr/src/app/
-RUN rm -rf server/public
-RUN mkdir server/public
+COPY client/build/* server/public/
 
-
-WORKDIR /
-
-COPY usr/src/app/client/build/* usr/src/app/server/public/
-
+#COPY usr/src/app/client/build/* usr/src/app/server/public/
 WORKDIR /usr/src/app/server
 RUN npm install
 
