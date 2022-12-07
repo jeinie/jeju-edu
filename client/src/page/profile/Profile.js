@@ -34,13 +34,13 @@ export default function Profile() {
   const handleImage = (num) => {
     switch (Math.floor(num / 4)) {
       case 1:
-        return "매칭";
+        return "대기";
       case 2:
         return "실패";
       case 3:
-        return "대기";
-      default:
         return "매칭";
+      default:
+        return "대기";
     }
   };
 
@@ -72,23 +72,23 @@ export default function Profile() {
           return (
             <ListWrapper key={idx}>
               <WrapperHeader>
-                <p>{el.who_open}</p>
-                <div>{handleImage(el.study_no)}</div>
+                <p className="headerUserName">{el.who_open}</p>
+                <div className="headerStatus">{handleImage(el.study_no)}</div>
               </WrapperHeader>
-              <div>{el.study_title}</div>
-              <div>
-                <div>
+              <div className="listTitle">{el.study_title}</div>
+              <LocationPeople>
+                <LocationContainer>
                   <HiLocationMarker />
                   <p>place</p>
                   <p>{el.studyAt_location}</p>
-                </div>
-                <div>
+                </LocationContainer>
+                <PeopleContainer>
                   <MdPeopleAlt />
-                  <p>
+                  <p className="peopleData">
                     {el.study_no}/{el.min_member_cnt}
                   </p>
-                </div>
-              </div>
+                </PeopleContainer>
+              </LocationPeople>
             </ListWrapper>
           );
         })}
@@ -96,6 +96,73 @@ export default function Profile() {
     </MainContainer>
   );
 }
+
+const LocationPeople = styled.div`
+  width: 100%;
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const LocationContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 47%;
+`;
+
+const PeopleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 13%;
+`;
+
+const ListWrapper = styled.div`
+  width: 90%;
+  padding: 12px;
+  margin: 20px 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4ede7;
+  border-radius: 7px;
+
+  .listTitle {
+    width: 100%;
+    text-align: left;
+    font-size: 23px;
+    font-weight: bold;
+  }
+`;
+
+const WrapperHeader = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .headerUserName {
+    font-size: 15px;
+  }
+
+  .headerStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 27px;
+    border-radius: 8px;
+    transform: translateY(10px);
+
+    background-color: black;
+    color: white;
+  }
+`;
 
 const MainContainer = styled.section`
   margin-top: 50px;
@@ -134,7 +201,6 @@ const MainContainer = styled.section`
     font-weight: bold;
     padding-bottom: 11px;
     margin-bottom: 20px;
-    /* border-bottom: 1px solid black; */
   }
 `;
 
@@ -144,23 +210,5 @@ const ListContainer = styled.section`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid red;
-`;
-
-const ListWrapper = styled.div`
-  border: 1px solid purple;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: space-between; */
-  margin-bottom: 20px;
-`;
-
-const WrapperHeader = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  /* border: 1px solid red; */
 `;

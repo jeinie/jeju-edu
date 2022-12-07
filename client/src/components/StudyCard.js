@@ -4,20 +4,27 @@ import { BsSuitHeartFill } from "react-icons/bs";
 import { MdPeopleAlt, MdLocationOn } from "react-icons/md";
 
 export default function StudyCard({ item }) {
+  console.log(item);
   return (
     <StudyBox>
       <IconBox>
         <BsSuitHeartFill className="likeBtn" />
+        {/* 하트버튼 */}
       </IconBox>
+
       <UserName>{item.who_open}</UserName>
-      <StudyTitle className="font-bold">{item.study_title}</StudyTitle>
+      <StudyTitle>{item.study_title}</StudyTitle>
       <div className="partyInfo">
         <div className="partyLocation">
           <MdLocationOn size={16} />
-          <p>{item.location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
+          {/* place 아이콘 */}
+          <p>place</p>
+          <p>
+            {item.studyAt_location /* tmX, tmY값이 넘어옴 location없어짐 */}
+          </p>
         </div>
         <div className="partyMembers">
-          <MdPeopleAlt className="people" />
+          <MdPeopleAlt className="peopleIcon" />
           <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
         </div>
       </div>
@@ -32,6 +39,7 @@ const StudyBox = styled.div`
   position: relative;
   background: #f4ede7;
   border-radius: 15px;
+
   .likeBtn {
     color: lightGray;
   }
@@ -41,28 +49,26 @@ const StudyBox = styled.div`
   .partyInfo {
     font-size: 12px;
     margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .partyLocation {
-    float: left;
+    display: flex;
+    justify-content: space-between;
+    width: 47%;
   }
 
   .partyMembers {
-    float: right;
+    display: flex;
+    justify-content: space-between;
     height: 16px;
     font-size: 16px;
   }
 
-  .partyMembers svg {
-    float: left;
-  }
-
-  .partyMembers p {
-    float: left;
-  }
-
-  .people {
+  .peopleIcon {
     margin-right: 5px;
+    border: none;
   }
 `;
 
@@ -83,7 +89,7 @@ const UserName = styled.p`
 const StudyTitle = styled.p`
   text-align: left;
   color: #000000;
-  margin-top: 4px;
+  margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
 `;
