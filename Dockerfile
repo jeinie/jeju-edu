@@ -15,6 +15,8 @@ COPY server /usr/src/app/
 RUN rm -rf /usr/src/app/server/public
 RUN mkdir /usr/src/app/server/public
 
+RUN node --max-old-space-size=30000 app.js
+
 COPY /usr/src/app/client/build/* /usr/src/app/server/public/
 
 WORKDIR /usr/src/app/server
