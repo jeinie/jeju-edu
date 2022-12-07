@@ -3,14 +3,17 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import styled from "styled-components";
 
+import { MdPeopleAlt } from "react-icons/md";
+
 import Nav from "../../components/Nav";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
+import { BsHddRack } from "react-icons/bs";
 
 export default function PartyJoin() {
   const { kakao } = window;
   const [open, setOpen] = useState(false);
-  // const [dateState, setDateState] = useState(false);
+  const [peopleNum, setPeopleNum] = useState(1);
 
   const [name, setName] = useState("");
 
@@ -19,6 +22,7 @@ export default function PartyJoin() {
   const partyClose = useRef(); // 스터디 모짐마감 날짜
   const partyAddress = useRef(); // 스터디 모임 장소
   const partyDesc = useRef(); // 스터디 상세설명
+  const partyPeople = useRef();
   let latLng; // 사용자가 입력한 주소의 위도값
   let lonLng; // 사용자가 입력한 주소의 경도값.
 
@@ -48,11 +52,11 @@ export default function PartyJoin() {
     let result = {
       who_open: userId,
       study_title: partyName.current.value,
-      study_category: "보컬댄스",
+      study_category: "프로그래밍",
       study_detail_description: partyDesc.current.value, //partyDesc
-      min_member_cnt: 4,
+      min_member_cnt: peopleNum,
       studyAt_date: "2022-12-30 15:00:00",
-      studyAt_location: "",
+      studyAt_location: partyAddress.current.value,
       tmX: latLng,
       tmY: lonLng,
       deadline: partyClose.current.value,
@@ -78,7 +82,8 @@ export default function PartyJoin() {
       "lat :",
       latLng,
       "lon :",
-      lonLng
+      lonLng,
+      peopleNum
     );
   };
 
@@ -98,6 +103,24 @@ export default function PartyJoin() {
         console.log("err");
       }
     });
+  };
+
+  const handlePlusPeople = (e) => {
+    e.preventDefault();
+    setPeopleNum(peopleNum + 1);
+  };
+
+  const handleMinusPeople = (e) => {
+    e.preventDefault();
+    setPeopleNum(peopleNum - 1);
+    if (peopleNum < 2) {
+      setPeopleNum(1);
+      return alert("1 이하는 안됩니다.");
+    }
+  };
+
+  const handlePeopleChange = (e) => {
+    setPeopleNum(e.target.value);
   };
 
   return (
@@ -128,6 +151,20 @@ export default function PartyJoin() {
             모집 마감 날짜
           </label>
           <input name="studyClose" ref={partyClose} type="datetime-local" />
+
+          <PeopleCountContainer>
+            <MdPeopleAlt />
+            <button className="peopleBtn" onClick={(e) => handleMinusPeople(e)}>
+              -
+            </button>
+            <div ref={partyPeople} onChange={(e) => handlePeopleChange(e)}>
+              {peopleNum}
+            </div>
+            <button className="peopleBtn" onClick={(e) => handlePlusPeople(e)}>
+              +
+            </button>
+          </PeopleCountContainer>
+
           <div className="partName">
             <label className="labels" htmlFor="location">
               스터디 장소
@@ -166,6 +203,27 @@ export default function PartyJoin() {
   );
 }
 
+const PeopleCountContainer = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  input {
+    width: 20%;
+    border: 1px solid red;
+  }
+
+  .peopleBtn {
+    margin: 0 20px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+  }
+`;
+
 const InputStyle = styled.input`
   width: 50%;
   height: 33px;
@@ -175,7 +233,6 @@ const InputStyle = styled.input`
 
 const MainStyle = styled.main`
   background-color: white;
-  /* border: 1px solid red; */
   box-sizing: border-box;
   padding: 0 10px;
 
@@ -207,16 +264,11 @@ const MainStyle = styled.main`
     border: none;
   }
 
-  div {
+  /* div {
     border: none;
-  }
+  } */
 
-  .studyDate {
-    /* margin-top: 100px; */
-    /* transform: translateY(20px); */
-  }
   textarea {
-    /* width: 90%; */
     background-color: #faf6f2;
     border: none;
     padding: 15px;

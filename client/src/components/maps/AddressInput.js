@@ -50,7 +50,7 @@ const AddressInput = ({ update }) => {
           <MdMyLocation className="myLocation locationIcon" />
           현재 위치로 설정
         </p>
-        {popup && <Modal2 open={popup} setOpen={setPopup} />}
+        {/* {popup && <Modal2 open={popup} setOpen={setPopup} />} */}
       </div>
     </TestBox>
   );
@@ -91,6 +91,8 @@ const TestBox = styled.div`
     font-weight: bolder;
   }
   .myLocation {
+    display: flex;
+    align-items: center;
     margin-right: 10px;
   }
 
