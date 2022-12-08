@@ -17,7 +17,6 @@ RUN npm install react-scripts@5.0.1 -g --silent
 
 RUN npm run build
 #서버
-
 WORKDIR /usr/src/app
 RUN pwd
 RUN ls
@@ -29,3 +28,4 @@ RUN npm install
 EXPOSE 80
 
 CMD ["node","app.js"]
+#Jenkins 완성
