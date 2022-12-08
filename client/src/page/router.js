@@ -6,13 +6,13 @@ import Profile from "./profile/Profile";
 import Login from "./login/Login";
 import PartyJoin from "./detail/PartyJoin";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Logout from "../components/Logout";
 
 const Router = () => {
 
   return (
     <>
-      <Header />
+      <Logout />
       <Routes>
         <Route path="/" element={ <Main/>} />
         <Route path="/login" element={<Login />} />

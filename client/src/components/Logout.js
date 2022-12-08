@@ -1,10 +1,14 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { persistor } from "..";
 
-const Header = () => {
+const Logout = () => {
     const navigate = useNavigate();
     const logout = () => {
-        axios.get("/api/auth/logout").then(()=>navigate("/login"));
+        axios.get("/api/auth/logout").then(()=>{
+            persistor.purge();
+            navigate("/login");
+        });
     }
 
     return (
@@ -12,4 +16,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export default Logout;
