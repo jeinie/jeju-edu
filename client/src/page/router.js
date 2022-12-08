@@ -9,12 +9,11 @@ import Footer from "../components/Footer";
 import Logout from "../components/Logout";
 
 const Router = () => {
-
   return (
     <>
-      <Logout />
+      {/* <Logout /> */}
       <Routes>
-        <Route path="/" element={ <Main/>} />
+        <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/partyjoin" element={<PartyJoin />} />
