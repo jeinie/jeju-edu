@@ -34,4 +34,4 @@ EXPOSE 80
 
 CMD ["node","app.js"]
 #Jenkins 완성
-#잠좀자자
+#왜안바뀌지
