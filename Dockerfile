@@ -20,7 +20,9 @@ RUN npm run build
 
 
 WORKDIR /usr/src/app
-COPY client/build server/public/
+RUN pwd
+RUN ls
+COPY client/build/* server/public
 
 WORKDIR /usr/src/app/server
 RUN npm install
