@@ -11,7 +11,7 @@ import Logout from "../components/Logout";
 const Router = () => {
   return (
     <>
-      <Logout />
+      {/* <Logout /> */}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
