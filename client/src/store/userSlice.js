@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { PURGE } from "redux-persist";
+const initialState = {id:'', name:'', good_cnt:0, bad_cnt:0};
 const user = createSlice({
     name : 'user',
-    initialState: {id:'', name:'', good_cnt:0, bad_cnt:0},
+    initialState,
     reducers : {
         increaseGoodCnt(state){
             state.good_cnt += 1;
@@ -13,6 +14,9 @@ const user = createSlice({
         saveUser(state, action) {
             return {...action.payload};
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(PURGE, () => initialState);
     }
 });
 
