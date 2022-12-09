@@ -74,5 +74,8 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(app.get("port"), () => {
-  console.log(app.get("port"), "번 포트에서 대기중");
+  console.log(
+    app.get("port"),
+    "번 포트에서 대기중...도커 젠킨스 확인 갱신확인겸"
+  );
 });
