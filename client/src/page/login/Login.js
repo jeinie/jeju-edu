@@ -72,6 +72,7 @@ export default function Login() {
 
         <br />
         <button className="loginBtn">login</button>
+        <button className="loginBtn">Sign Up</button>
       </form>
     </LoginContainer>
   );
@@ -117,6 +118,6 @@ const LoginContainer = styled.section`
     background-color: black;
     border: none;
     color: white;
-    margin: 46px 42px 147px;
+    margin: 2px 42px 2px;
   }
 `;
