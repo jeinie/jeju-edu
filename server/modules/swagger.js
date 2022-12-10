@@ -1515,7 +1515,7 @@ const options = {
           },
           message: {
             type: "string",
-            description: `실패 하면 study delete 중 알수없는 에러가 서버내에서 발생 : error 또는 이미 삭제된 데이터일수 있습니다 라는 메세지가 리턴된다 확인마지막 용량때문에..`,
+            description: `실패 하면 study delete 중 알수없는 에러가 서버내에서 발생 : error 또는 이미 삭제된 데이터일수 있습니다 라는 메세지가 리턴된다 확인마지막 용량때문에....`,
           },
         },
       },
