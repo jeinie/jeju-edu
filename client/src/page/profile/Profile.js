@@ -15,14 +15,11 @@ export default function Profile() {
   let user_No = useSelector((state) => {
     return state.user.user_no;
   });
-  // console.log(user_No);
 
   const handleJoin = () => {
     axios.get(`/api/getStudyListNotMine/${user_No}`).then((res) => {
       setStudyList(res.data.studyListNotMine);
       setSelected("join");
-      console.log("참여");
-      console.log(studyList);
     });
   };
 
@@ -30,8 +27,6 @@ export default function Profile() {
     axios.get(`/api/getStudyListMine/${user_No}`).then((res) => {
       setStudyList(res.data.studyListMine);
       setSelected("create");
-      console.log("개설");
-      console.log(studyList);
     });
   };
 
