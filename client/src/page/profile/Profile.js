@@ -12,25 +12,28 @@ export default function Profile() {
   const [selected, setSelected] = useState("join");
   const [studyList, setStudyList] = useState([]);
 
-  let userId = useSelector((state) => {
-    return state.user.id;
+  let user_No = useSelector((state) => {
+    return state.user.user_no;
   });
+  // console.log(user_No);
 
   const handleJoin = () => {
-    axios.get(`/api/getStudyListNotMine/${userId}`).then((res) => {
+    axios.get(`/api/getStudyListNotMine/${user_No}`).then((res) => {
       setStudyList(res.data.studyListNotMine);
       setSelected("join");
+      console.log("참여");
+      console.log(studyList);
     });
   };
 
   const handleCreate = () => {
-    axios.get(`/api/getStudyListMine/${userId}`).then((res) => {
-      setStudyList(res.data.studyListNotMine);
+    axios.get(`/api/getStudyListMine/${user_No}`).then((res) => {
+      setStudyList(res.data.studyListMine);
       setSelected("create");
+      console.log("개설");
+      console.log(studyList);
     });
   };
-
-  console.log(studyList.study_no);
 
   const handleImage = (num) => {
     switch (Math.floor(num / 4)) {

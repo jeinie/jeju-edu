@@ -8,7 +8,7 @@ const options = {
       version: "1.0.0",
       description: "Janfra API with express",
     },
-    host: "localhost:5000",
+    host: "localhost:3000",
     basePath: "/",
     tags: [
       {
