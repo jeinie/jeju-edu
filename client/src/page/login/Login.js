@@ -75,7 +75,6 @@ export default function Login() {
             />
           </PwContainer>
           <p className="lostPw">비밀번호를 잊으셨나요?</p>
-          {/* css display:none 되어 있습니다.  */}
         </div>
         <div className="BtnBox">
           <button className="loginBtn">로그인</button>
