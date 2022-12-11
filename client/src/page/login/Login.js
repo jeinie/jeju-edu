@@ -33,8 +33,6 @@ export default function Login() {
       id: userId,
       pw: password,
     };
-    // dispatch(saveUser({ id: "monster", name: "monster" }));
-    // navigate("/");
 
     axios.post(`/api/auth/login`, body).then((response) => {
       if (response.data.code === 200) {
