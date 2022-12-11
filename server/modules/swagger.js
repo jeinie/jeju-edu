@@ -436,6 +436,90 @@ const options = {
           },
         },
       },
+
+      "/api/auth/message/code": {
+        get: {
+          tags: ["회원가입시 SNS인증코드를 받는 API"],
+          summary:
+            "get요청이지만 END Point는 post 요청을 받게해놨음으로 그냥 BODY에 tel만 채워주면 됩니당",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "아무 형식 필요없어용 그냥 01011112222 이렇게 -도 ,도 띄어쓰기도 다필요없구 번호만 주세용",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgCodeRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "SMS 메세지가 정상적으로 갔을때 200코드가 리턴됩니당",
+              schema: {
+                $ref: "#/definitions/apiAuthMessageCode_ResponseForm_Success",
+              },
+            },
+            404: {
+              description:
+                "SMS메세지를 보내는 과정에서 상당히 많은 변수로 인해 문제가 발생했을때 404에러가 발생합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMessageCode_ResponseForm_Failed404",
+              },
+            },
+            500: {
+              description:
+                "SMS메세지가 정상적으로 전달되지 않았을때 500코드가 리턴됩니당",
+              schema: {
+                $ref: "#/definitions/apiAuthMessageCode_ResponseForm_Failed500",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/auth/message/verifySMSMsg": {
+        get: {
+          tags: ["회원가입시 받은 인증코드가 맞는지 확인시켜주는 API"],
+          summary:
+            "get요청이지만 END Point는 post 요청을 받게해놨음으로 그냥 BODY에 tel과 SMSMsg만 채워주면 됩니당",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "아무 형식 필요없어용 그냥 01011112222 이렇게 -도 ,도 띄어쓰기도 다필요없구 번호랑 , 그번호로 받은 SMSMsg(숫자6자리)만 주세용",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgVerifyRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "SMS 메세지가 간걸가지고 인증에 성공했을때 200코드를 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMessageVerify_ResponseForm_Success",
+              },
+            },
+            500: {
+              description:
+                "SMS메세지를 인증 확인하는 과정에서 상당히 많은 변수로 인해 문제가 발생했을때 500에러가 발생합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMessageVerify_ResponseForm_Failed500",
+              },
+            },
+            502: {
+              description:
+                "SMS메세지가 유효기간이 다 되었거나, 틀린 번호로 인증하려하면 502코드를 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMessageVerify_ResponseForm_Failed502",
+              },
+            },
+          },
+        },
+      },
     },
     definitions: {
       DBuserTable: {
@@ -1516,6 +1600,108 @@ const options = {
           message: {
             type: "string",
             description: `실패 하면 study delete 중 알수없는 에러가 서버내에서 발생 : error 또는 이미 삭제된 데이터일수 있습니다 라는 메세지가 리턴된다 확인마지막 용량때문에....`,
+          },
+        },
+      },
+
+      apiAuthMsgCodeRequestForm: {
+        properties: {
+          tel: {
+            type: "string",
+            description:
+              "더도덜도말고 01011112222 이렇게 -도 ,도 필요없이 번호만 딸랑 주세용",
+          },
+        },
+      },
+
+      apiAuthMessageCode_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `성공하면 sms sent 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+
+      apiAuthMessageCode_ResponseForm_Failed404: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 404이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패 하면 SMS not sent error 라는 메세지가 리턴된다 확인마지막 용량때문에....`,
+          },
+        },
+      },
+
+      apiAuthMessageCode_ResponseForm_Failed500: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패 하면 회원가입 인증 SMS sent 에서 알수없는 서버 에러발생 sms server returned...등 라는 메세지가 리턴된다 확인마지막 용량때문에....`,
+          },
+        },
+      },
+
+      apiAuthMsgVerifyRequestForm: {
+        properties: {
+          tel: {
+            type: "string",
+            description:
+              "더도덜도말고 01011112222 이렇게 -도 ,도 필요없이 번호만 딸랑 주세용",
+          },
+          SMSMsg: {
+            type: "string",
+            description: "인증번호 6자리 받은거 띡 주세용",
+          },
+        },
+      },
+
+      apiAuthMessageVerify_ResponseForm_Success: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `성공하면 회원가입 SMS메세지 인증 성공 ! 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+
+      apiAuthMessageVerify_ResponseForm_Failed500: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패 하면 회원가입 SMS메세지 인증에서 에러발생 message : e 라는 메세지가 리턴된다 확인마지막 용량때문에....`,
+          },
+        },
+      },
+
+      apiAuthMessageVerify_ResponseForm_Failed502: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 502이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패 하면 회원가입 SMS메세지 인증 실패 , 인증번호 불일치 라는 메세지가 리턴된다 확인마지막 용량때문에....`,
           },
         },
       },
