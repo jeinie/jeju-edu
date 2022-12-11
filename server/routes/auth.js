@@ -20,13 +20,48 @@ router.get(
   verifySMSMsg
 );
 
+/**
+ * 아이디 중복체크만 따로 분리
+ */
+router.post(
+  "/checkDupId",
+  userAgentMiddleWare("/api/auth/checkDupId"),
+  async (req, res, next) => {
+    /**
+     * 회원가입 시 비밀번호 암호화
+     */
+    try {
+      const { id } = req.body;
+      const exUser = await User.findOne({ where: { id: id } });
+      if (exUser) {
+        res.status(201).json({
+          code: 201,
+          message: "아이디 중복입니다",
+        });
+      } else {
+        console.log(`아이디 중복체크 여부${exUser}`);
+        res.status(200).json({
+          code: 200,
+          message: "사용 가능한 아이디입니다",
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        code: 500,
+        message: `아이디 중복체크 시도중 에러발생 ${error}`,
+      });
+      return next(error);
+    }
+  }
+);
+
 router.post(
   "/join",
   userAgentMiddleWare("/api/auth/join"),
   async (req, res, next) => {
     const result = {};
     //const { id, pw, name } = req.body;
-    const { id, pw, name, nick } = req.body;
+    const { id, pw, name, nick = "" } = req.body;
     /**
      * 회원가입 시 비밀번호 암호화
      */
