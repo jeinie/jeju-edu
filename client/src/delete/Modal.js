@@ -68,7 +68,7 @@ export default function BasicModal(props) {
           setMembers(response.data.members);
         }
       });
-  }, []);
+  }, [props.list, userId]);
 
   const handleImage = (num) => {
     switch (Math.floor(num / 4)) {

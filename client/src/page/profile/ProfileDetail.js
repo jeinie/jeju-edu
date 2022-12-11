@@ -1,43 +1,43 @@
 import React from "react";
 import styled from "styled-components";
+
 import { MdPeopleAlt } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
 
-export default function ProfileDetail({list}) {
+export default function ProfileDetail({ list }) {
   console.log(list);
   // const stateArr = ["대기","매칭","마감기한 만료","","완료"]
-    return (
-      <Wrapper>
-        {list.map((el, idx) => {
-          console.log(el);
-          return (
-            <ListContainer key={idx}>
-              <div className="header">
-                <div className="headerTitleState">
-                  <p className="userName">{el.who_open}</p>
-                  <p className="partyName">{el.study_name}</p>
-                </div>
-                <div>
-                  <button className="matching">매칭</button>
-                </div>
+  return (
+    <Wrapper>
+      {list.map((el, idx) => {
+        console.log(el);
+        return (
+          <ListContainer key={idx}>
+            <div className="header">
+              <div className="headerTitleState">
+                <p className="userName">{el.who_open}</p>
+                <p className="partyName">{el.study_name}</p>
               </div>
-              <div className="body">
-                <div className="bodyInfo">
-                  <HiLocationMarker />
-                  <p>{el.location}</p>
-                </div>
-                <div className="footerInfo">
-                  <MdPeopleAlt />
-                  <p className="footerMember">{el.members}</p>
-                </div>
+              <div>
+                <button className="matching">매칭</button>
               </div>
-            </ListContainer>
-          );
-        })}
-      </Wrapper>
-    );
+            </div>
+            <div className="body">
+              <div className="bodyInfo">
+                <HiLocationMarker />
+                <p>{el.location}</p>
+              </div>
+              <div className="footerInfo">
+                <MdPeopleAlt />
+                <p className="footerMember">{el.members}</p>
+              </div>
+            </div>
+          </ListContainer>
+        );
+      })}
+    </Wrapper>
+  );
 }
-
 
 const Wrapper = styled.article`
   padding: 24px 12px 0;
@@ -52,7 +52,7 @@ const ListContainer = styled.section`
   margin: 24px 20px 23px;
   width: 100%;
   height: 102px;
-  background-color: #F4EDE7;
+  background-color: #f4ede7;
   padding-top: 24px;
   text-align: center;
   display: flex;

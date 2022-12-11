@@ -65,25 +65,48 @@ export default function PartyJoin() {
 
     setFormData(result);
     setTimeout(() => {
-      console.log(formData);
-      axios.post(`/api/openStudy`, formData).then((res) => console.log(res));
+      console.log(result);
+      axios.post(`/api/openStudy`, result).then((res) => console.log(res));
     }, 500);
   };
 
   const refCheck = () => {
     // input 에 값을 입력하고 ref확인 버튼을 누르면 console창에서 값을 확인할 수 있음.
     console.log(
+      "who_open",
+      userId,
+      "study_title",
       partyName.current.value,
-      partyDate.current.value,
-      partyClose.current.value,
+      "study_category",
+      "프로그래밍",
+      "study_detail_description",
+      partyDesc.current.value, //partyDesc
+      "min_member_cnt",
+      peopleNum,
+      "studyAt_date",
+      "2022-12-30 15:00:00",
+      "studyAt_location",
       partyAddress.current.value,
-      // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
-      partyDesc.current.value,
-      "lat :",
+      "tmX",
       latLng,
-      "lon :",
+      "tmY",
       lonLng,
-      peopleNum
+      "deadline",
+      partyClose.current.value,
+      "status",
+      0
+
+      // partyName.current.value,
+      // partyDate.current.value,
+      // partyClose.current.value,
+      // partyAddress.current.value,
+      // // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
+      // partyDesc.current.value,
+      // "lat :",
+      // latLng,
+      // "lon :",
+      // lonLng,
+      // peopleNum
     );
   };
 

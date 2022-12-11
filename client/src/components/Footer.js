@@ -7,29 +7,35 @@ import { FiSearch } from "react-icons/fi";
 
 export default function Footer() {
   const [page, setPage] = useState("search");
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const goSearch = () => {
     setPage("search");
     navigate("/");
-  }
+  };
 
   const goJoin = () => {
     navigate("/partyjoin");
-  }
+  };
 
   const goProfile = () => {
     setPage("profile");
     navigate("/profile");
-  }
+  };
 
   if (pathname === "/login" || pathname === "/join") return;
   return (
     <FooterContainer>
-        <FiSearch onClick={goSearch} color={page === 'search' ? '#000000' : '#bababa'}/>
-        <AiOutlinePlus className="plusbtn" onClick={goJoin}/>
-        <BsFillPersonFill onClick={goProfile} color={page === 'profile' ? '#000000' : '#bababa'}/>
+      <FiSearch
+        onClick={goSearch}
+        color={page === "search" ? "#000000" : "#bababa"}
+      />
+      <AiOutlinePlus className="plusbtn" onClick={goJoin} />
+      <BsFillPersonFill
+        onClick={goProfile}
+        color={page === "profile" ? "#000000" : "#bababa"}
+      />
     </FooterContainer>
   );
 }
@@ -37,13 +43,13 @@ export default function Footer() {
 const FooterContainer = styled.footer`
   display: flex;
   justify-content: space-around;
-  flex-direction: row;
   align-items: center;
 
   width: 100%;
   height: 49px;
   font-size: 48px;
   position: fixed;
+  left: 0;
   bottom: 0;
   background: white;
 

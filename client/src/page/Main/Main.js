@@ -1,39 +1,42 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import StudyCard from "../../components/StudyCard";
 import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
 import AddressInput from "../../components/maps/AddressInput";
-import MainHeader from "../../components/MainHeader";
+import StudyCard from "../../components/StudyCard";
+import Lending from "../Lending";
 
 export default function Main() {
-
   const [category, setCategory] = useState("code");
   const [list, setList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-      axios.get(`/api/getStudyList/${category}`).then((res) => {
-          console.log(res.data);
-          setList(res.data.studyList);
-      }).catch(function (error) {
-          navigate("/login");
+    axios
+      .get(`/api/getStudyList/${category}`)
+      .then((res) => {
+        console.log(res.data);
+        setList(res.data.studyList);
       })
-  }, [category]);
+      .catch(function (error) {
+        navigate("/login");
+      });
+  }, [category, navigate]);
 
   return (
     <MainContainer>
-      <MainHeader/>
-      <AddressInput update={setList}/>
-      <MainCategory selected={category} changeCategory={setCategory}/>
+      <AddressInput update={setList} />
+      <MainCategory selected={category} changeCategory={setCategory} />
       {list.map((el, idx) => {
         return (
+          // <Suspense fallback={<Lending />}>
           <Link to={`/partydetail/${el.study_no}`} key={idx}>
-            <StudyCard index={idx} item={el} />
+            <StudyCard item={el} />
           </Link>
+          // {/* </Suspense> */}
         );
       })}
       <Footer />

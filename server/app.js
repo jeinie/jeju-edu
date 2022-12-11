@@ -18,7 +18,7 @@ const app = express();
 
 //app.set("port", process.env.PORT || 443);
 
-app.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 4000);
 
 sequelize
   .sync({ force: false })

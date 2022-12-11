@@ -51,7 +51,7 @@ export default function PartyDetail() {
     axios
       .post(`/api/viewDetail/${id}`)
       .then((res) => setStudy(res.data.study_Detail_Info));
-  }, [id]);
+  }, []);
 
   console.log(study);
 
