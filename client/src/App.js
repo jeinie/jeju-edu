@@ -1,18 +1,34 @@
-import Router from "./page/router";
-import "./app.css";
+import React from "react";
+import { Suspense, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import Lending from "./page/Lending";
 import "./reset.css";
+import "./app.css";
 import "./font.css";
-import TransformAddress from "./components/TransformAddress";
-import AddressInput from "./components/maps/AddressInput";
-import StudyCard from "./components/StudyCard";
 
 function App() {
+  const Main = lazy(() => import("./page/Main/Main"));
+  const Login = lazy(() => import("./page/login/Login"));
+  const Profile = lazy(() => import("./page/profile/Profile"));
+  const PartyJoin = lazy(() => import("./page/detail/PartyJoin"));
+  const PartyDetail = lazy(() =>
+    lazy(() => import("./page/detail/PartyDetail"))
+  );
+  const Footer = lazy(() => import("./components/Footer"));
+
   return (
     <div className="App" style={{ fontFamily: "NanumSquare" }}>
-      <Router />
-      {/* <TransformAddress lat="33.252984" lon="126.561100" />; */}
-      {/* <AddressInput /> */}
-      {/* <StudyCard /> */}
+      <Suspense fallback={<Lending />}>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/partyjoin" element={<PartyJoin />} />
+          <Route path="/partydetail/:id" element={<PartyDetail />} />
+        </Routes>
+        <Footer />
+      </Suspense>
     </div>
   );
 }

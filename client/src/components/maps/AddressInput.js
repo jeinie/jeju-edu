@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-import Modal2 from "../modals/Modal2";
+// import Modal2 from "../modals/Modal2";
 
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdMyLocation } from "react-icons/md";

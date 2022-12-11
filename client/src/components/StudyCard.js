@@ -90,6 +90,6 @@ const StudyTitle = styled.p`
   text-align: left;
   color: #000000;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 23px;
   font-weight: bold;
 `;
