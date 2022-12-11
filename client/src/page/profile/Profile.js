@@ -30,7 +30,7 @@ export default function Profile() {
     });
   };
 
-  console.log(studyList);
+  console.log(studyList.study_no);
 
   const handleImage = (num) => {
     switch (Math.floor(num / 4)) {
