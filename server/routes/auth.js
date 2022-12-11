@@ -6,6 +6,19 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const authMiddleWare = require("./authMiddleWare");
 const userAgentMiddleWare = require("./userAgentMiddleWare");
+const { sendVerificationsSMS, verifySMSMsg } = require("../dto/NVsens");
+
+router.get(
+  "/message/code",
+  userAgentMiddleWare("/api/auth/message/code"),
+  sendVerificationsSMS
+);
+
+router.get(
+  "/message/verifySMSMsg",
+  userAgentMiddleWare("/api/auth/message/verifySMSMsg"),
+  verifySMSMsg
+);
 
 router.post(
   "/join",
@@ -198,6 +211,5 @@ router.get("/logout", (req, res) => {
     });
   }
 });
-
 
 module.exports = router;

@@ -12,6 +12,10 @@
 .env
 .npmrc
 
+#SMS SENS NV
+/server/dto/NVsens.js
+/server/config/*
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
