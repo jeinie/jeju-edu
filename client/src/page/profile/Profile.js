@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
-import ProfileDetail from "./ProfileDetail";
+// import ProfileDetail from "./ProfileDetail";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
 
@@ -16,16 +17,16 @@ export default function Profile() {
   });
 
   const handleJoin = () => {
-    setSelected("join");
     axios.get(`/api/getStudyListNotMine/${userId}`).then((res) => {
       setStudyList(res.data.studyListNotMine);
+      setSelected("join");
     });
   };
 
   const handleCreate = () => {
-    setSelected("create");
     axios.get(`/api/getStudyListMine/${userId}`).then((res) => {
       setStudyList(res.data.studyListNotMine);
+      setSelected("create");
     });
   };
 
@@ -66,29 +67,30 @@ export default function Profile() {
           개설
         </div>
       </div>
-      {/* {studyList ? <ProfileDetail list={studyList} /> : <></>} */}
       <ListContainer>
         {studyList.map((el, idx) => {
           return (
             <ListWrapper key={idx}>
-              <WrapperHeader>
-                <p className="headerUserName">{el.who_open}</p>
-                <div className="headerStatus">{handleImage(el.study_no)}</div>
-              </WrapperHeader>
-              <div className="listTitle">{el.study_title}</div>
-              <LocationPeople>
-                <LocationContainer>
-                  <HiLocationMarker />
-                  <p>place</p>
-                  <p>{el.studyAt_location}</p>
-                </LocationContainer>
-                <PeopleContainer>
-                  <MdPeopleAlt />
-                  <p className="peopleData">
-                    {el.study_no}/{el.min_member_cnt}
-                  </p>
-                </PeopleContainer>
-              </LocationPeople>
+              <Link to={`/partyDetail/${el.study_no}`} className="LinkWrapper">
+                <WrapperHeader>
+                  <p className="headerUserName">{el.who_open}</p>
+                  <div className="headerStatus">{handleImage(el.study_no)}</div>
+                </WrapperHeader>
+                <div className="listTitle">{el.study_title}</div>
+                <LocationPeople>
+                  <LocationContainer>
+                    <HiLocationMarker />
+                    <p>place</p>
+                    <p>{el.studyAt_location}</p>
+                  </LocationContainer>
+                  <PeopleContainer>
+                    <MdPeopleAlt />
+                    <p className="peopleData">
+                      {el.study_no}/{el.min_member_cnt}
+                    </p>
+                  </PeopleContainer>
+                </LocationPeople>
+              </Link>
             </ListWrapper>
           );
         })}
@@ -136,6 +138,12 @@ const ListWrapper = styled.div`
     text-align: left;
     font-size: 23px;
     font-weight: bold;
+  }
+
+  .LinkWrapper {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 `;
 
