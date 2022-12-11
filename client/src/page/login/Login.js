@@ -28,7 +28,7 @@ export default function Login() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
+    
     let body = {
       id: userId,
       pw: password,
@@ -71,8 +71,8 @@ export default function Login() {
         />
 
         <br />
-        <button className="loginBtn">login</button>
-        <button className="loginBtn">Sign Up</button>
+        <input type="submit" className="loginBtn" value="Login"/>
+        <input type="button" className="loginBtn" value="Sign Up" onClick={()=>navigate("/join")}/>
       </form>
     </LoginContainer>
   );
