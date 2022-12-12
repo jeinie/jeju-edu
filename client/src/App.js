@@ -4,13 +4,6 @@ import { Route, Routes } from "react-router-dom";
 
 import Lending from "./page/Lending";
 
-// import Main from "./page/Main/Main";
-// import Login from "./page/login/Login";
-// import Profile from "./page/profile/Profile";
-// import PartyJoin from "./page/detail/PartyJoin";
-// import PartyDetail from "./page/detail/PartyDetail";
-// import Footer from "./components/Footer";
-
 import "./reset.css";
 import "./app.css";
 import "./font.css";
@@ -18,7 +11,6 @@ import "./font.css";
 function App() {
   const Main = React.lazy(() => import("./page/Main/Main"));
   const Login = React.lazy(() => import("./page/login/Login"));
-  // const Join = React.lazy(() => import("./page/Join"));
   const Join = React.lazy(() => import("./page/Join"));
   const Profile = React.lazy(() => import("./page/profile/Profile"));
   const PartyJoin = React.lazy(() => import("./page/detail/PartyJoin"));
