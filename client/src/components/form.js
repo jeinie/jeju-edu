@@ -29,11 +29,12 @@ const InputWithBtn = (props) => {
 };
 
 const Checkbox = (props) => {
+    const [check, setCheck] = useState(false);
     return (
         <CheckboxContainer style={props.style}>
             <CustomCheckbox>
-                <input type="checkbox" checked="checked"/>
-                <span class="checkmark"></span>
+                <input type="checkbox" checked={check} readOnly/>
+                <span className="checkmark" onClick={()=>setCheck(!check)}></span>
             </CustomCheckbox>
             <label dangerouslySetInnerHTML={{__html:props?.label}} />
         </CheckboxContainer>
@@ -42,7 +43,7 @@ const Checkbox = (props) => {
 
 const Button = (props) => {
     return (
-        <CustomButton marginTop={props.marginTop}>{props?.text}</CustomButton>
+        <CustomButton marginTop={props.marginTop} disabled={props.disabled}>{props?.text}</CustomButton>
     );
 };
 
@@ -119,8 +120,8 @@ const CustomButton = styled.button`
     width: 100%;
     height: 36px;
     border-radius: 25px;
-    border: 1px solid #e47b00;
-    color: #e47b00;
+    border: 1px solid ${props=> `${props.disabled ? 'lightgray' : '#e47b00'}`};
+    color: ${props=> `${props.disabled ? 'lightgray' : '#e47b00'}`};
     margin-top: ${props=> `${props.marginTop}`};
 `;
 

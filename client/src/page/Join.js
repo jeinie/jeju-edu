@@ -6,13 +6,29 @@ import { useNavigate } from 'react-router-dom';
 import fir from '../img/fir.png';
 import axios from 'axios';
 
+/**
+ * 2022-12-12 hssuh
+ * 회원가입
+ */
 export default function Join() {
     
     const navigate = useNavigate();
+    const [validationArr, setValidationArr] = useState([false, false, false, false, false, false]);
 
     const handleConfirmId = (id) => {
-        //TODO id중복체크
+        axios.post("/api/auth/checkDupId", {id:id}).then((res)=>{
+            if( res.data?.code === 200 ) {
+                alert(res.data?.message);
+            } else {
+                alert(res.data?.message);
+            }
+        })
     };
+
+    const handleValidation = (i, isOk) => {
+        validationArr[i] = isOk;
+        setValidationArr([...validationArr]);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,13 +59,14 @@ export default function Join() {
                 <ImageContainer>
                     <img src={fir} alt="logo" />
                 </ImageContainer>
-                <Input label="이름*" name="name" placeholder="이름을 입력해주세요." style={{marginBottom:"20px"}} maxLength={10}/>
-                <LoginInput label="아이디*" name="id" placeholder="아이디를 입력해주세요." description="6~20자의 영문,숫자만 입력해주세요." style={{marginBottom:"20px"}} btnTitle="중복확인" onClick={(id)=>handleConfirmId(id)}/>
-                <Input label="비밀번호*" name="pw" placeholder="비밀번호를 입력해주세요." description="8~16자의 영문,숫자, 특수문자를 사용해주세요." password style={{marginBottom:"20px"}}/>
-                <Input label="비밀번호 확인*" placeholder="비밀번호를 다시 입력해주세요." password style={{marginBottom:"20px"}}/>
-                <InputWithBtn label="휴대폰인증*" placeholder="'-' 없이 입력해주세요." btnTitle="인증요청"/>
-                <Checkbox label={"젠프라의 <b>서비스이용약관, 개인정보 취급 방침</b>에 동의합니다. (필수)"} style={{marginTop:"50px"}}/>
-                <Button text="회원가입 완료하기" marginTop="44px"/>
+                <Input label="이름*" name="name" placeholder="이름을 입력해주세요." style={{marginBottom:"20px"}} maxLength={10} valid={(isOk)=>handleValidation(0, isOk)}/>
+                <Input label="닉네임*" name="nick" placeholder="활동명으로 사용할 닉네임을 입력해주세요." style={{marginBottom:"20px"}} maxLength={10} valid={(isOk)=>handleValidation(1, isOk)}/>
+                <LoginInput label="아이디*" name="id" placeholder="아이디를 입력해주세요." description="6~20자의 영문,숫자만 입력해주세요." style={{marginBottom:"20px"}} btnTitle="중복확인" onClick={(id)=>handleConfirmId(id)} valid={(isOk)=>handleValidation(2, isOk)}/>
+                <Input label="비밀번호*" name="pw" placeholder="비밀번호를 입력해주세요." description="8~16자의 영문,숫자, 특수문자를 사용해주세요." password style={{marginBottom:"20px"}} valid={(isOk)=>handleValidation(3, isOk)}/>
+                <Input label="비밀번호 확인*" placeholder="비밀번호를 다시 입력해주세요." password style={{marginBottom:"20px"}} valid={(isOk)=>handleValidation(4, isOk)}/>
+                {/*<InputWithBtn label="휴대폰인증*" placeholder="'-' 없이 입력해주세요." btnTitle="인증요청"/>*/}
+                <Checkbox label={"젠프라의 <b>서비스이용약관, 개인정보 취급 방침</b>에 동의합니다. (필수)"} style={{marginTop:"50px"}} valid={(isOk)=>handleValidation(5, isOk)}/>
+                <Button text="회원가입 완료하기" marginTop="44px" disabled={validationArr?.find(e=>e === false) ? true : false}/>
             </JoinForm>
         </JoinContainer>
     );
@@ -62,8 +79,9 @@ const LoginInput = (props) => {
     const [value, setValue] = useState("");
 
     const validationCheck = (e) => {
+        setValue(e.target.value);
         if(e.target.value) {
-
+            //TODO id validation check
         }
     }
 
