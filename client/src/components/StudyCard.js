@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 import { BsSuitHeartFill } from "react-icons/bs";
 import { MdPeopleAlt, MdLocationOn } from "react-icons/md";
+import React from "react";
+
+const Lending = React.lazy(() => import("../page/Lending"));
 
 export default function StudyCard({ item }) {
   console.log(item);
@@ -57,6 +60,7 @@ const StudyBox = styled.div`
     display: flex;
     justify-content: space-between;
     width: 47%;
+    margin-top: 100px;
   }
 
   .partyMembers {
@@ -82,7 +86,7 @@ const IconBox = styled.div`
 const UserName = styled.p`
   color: #000000;
   text-align: left;
-  font-size: 15px;
+  font-size: 10px;
   font-weight: 200;
 `;
 
@@ -90,6 +94,6 @@ const StudyTitle = styled.p`
   text-align: left;
   color: #000000;
   margin-top: 10px;
-  font-size: 23px;
+  font-size: 15px;
   font-weight: bold;
 `;

@@ -32,11 +32,9 @@ export default function Main() {
       <MainCategory selected={category} changeCategory={setCategory} />
       {list.map((el, idx) => {
         return (
-          // <Suspense fallback={<Lending />}>
           <Link to={`/partydetail/${el.study_no}`} key={idx}>
             <StudyCard item={el} />
           </Link>
-          // {/* </Suspense> */}
         );
       })}
       <Footer />
