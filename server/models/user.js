@@ -11,8 +11,8 @@ module.exports = class User extends Sequelize.Model {
         },
         id: {
           type: Sequelize.STRING(50),
-          //unique: ,
           primaryKey: true,
+          allowNull: false,
         },
         nick: {
           type: Sequelize.STRING(50),

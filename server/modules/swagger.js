@@ -83,6 +83,45 @@ const options = {
         },
       },
 
+      "/api/auth/checkDupId": {
+        post: {
+          tags: ["회원가입시에 아이디 중복체크"],
+          summary: "회원가입시에 아이디 중복체크",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description: "회원가입할때 아이디 중복체크를 위해 존재하는 API",
+              schema: {
+                $ref: "#/definitions/apiAuthCheckDupIdRequestForm",
+              },
+            },
+          ],
+          responses: {
+            201: {
+              description: "아이디가 중복될때 리턴되는 코드는 201입니다",
+              schema: {
+                $ref: "#/definitions/apiAuthCheckDupId_ResponseForm_Success201",
+              },
+            },
+            200: {
+              description:
+                "아이디가 중복이 없고 사용 가능한 아이디일때 코드는 200입니다",
+              schema: {
+                $ref: "#/definitions/apiAuthCheckDupId_ResponseForm_Success200",
+              },
+            },
+            500: {
+              description:
+                "아이디 중복을 체크하는도중 예기치 못한 에러가 발생한다면 500입니다 (body에 id를 안보내거나 하면 발생)",
+              schema: {
+                $ref: "#/definitions/apiAuthCheckDupId_ResponseForm_Failed",
+              },
+            },
+          },
+        },
+      },
+
       "/api/auth/payload": {
         get: {
           tags: ["PayLoad"],
@@ -699,10 +738,10 @@ const options = {
             type: "string",
             description: "고객의 실명이 기입된다",
           },
-          nick: {
+          /*nick: {
             type: "string",
             description: "고객이 웹/앱상에서 사용할 닉네임이 입력된다",
-          },
+          },*/
         },
       },
       apiAuthJoinResponseForm: {
@@ -1458,6 +1497,55 @@ const options = {
             type: "string",
             description:
               "실패 하면 알수없는 서버내의 이유로 스터디 참여 실패 라는 메서지가 전달된다",
+          },
+        },
+      },
+
+      apiAuthCheckDupIdRequestForm: {
+        properties: {
+          id: {
+            type: "string",
+            description:
+              "중복체크를 할 (DB에 있나 검사를 할) ID를 서버로 보낸다",
+          },
+        },
+      },
+
+      apiAuthCheckDupId_ResponseForm_Success200: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: "성공 하면 사용 가능한 아이디 입니다 이란 메세지 전달",
+          },
+        },
+      },
+      apiAuthCheckDupId_ResponseForm_Success201: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 201이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "중복체크에서 201코드가 리턴되는 동시에 아이디 중복입니다 라는 메세지 전달",
+          },
+        },
+      },
+      apiAuthCheckDupId_ResponseForm_Failed: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description:
+              "실패 하면 아이디 중복체크 시도중 에러발생 이라는 메서지가 전달된다",
           },
         },
       },
