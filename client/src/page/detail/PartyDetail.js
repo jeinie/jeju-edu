@@ -56,61 +56,51 @@ export default function PartyDetail() {
   console.log(study);
 
   return (
-    <div>
+    <OutputContainer>
       <PartyMarker lat={study.tmX} lon={study.tmY} />
       <ViewDetailContainer>
         <div className="wrapper">
-          <div className="containerHeader">
-            <div className="headerLeft">
-              <section className="headerLeftContent">
-                <div className="headerTitle">
-                  <p className="userName">{study.who_open}</p>
-                  <p className="studyName">{study.study_title}</p>
-                </div>
-              </section>
-              <section className="placeData">
-                <div className="memberContainer">
-                  <MdPeopleAlt />
-                  {/* 사람들 아이콘 */}
-                  <p className="partyMembers">{`${study.current_member_cnt}/${study.min_member_cnt}`}</p>
-                </div>
-                <div className="calender">
-                  {/* 달력 아이콘 */}
-                  <BsCalendar2WeekFill />
-                  <p className="deathLine">~ {study.deadline}</p>
-                </div>
-                <div className="placeAddress">
-                  <HiLocationMarker />
-                  {/* 마커 아이콘 */}
-                  {/* <h6 className="addressTitle">place</h6> */}
-                  <p className="address">{study.studyAt_location}</p>
-                </div>
-              </section>
-            </div>
-            <div
-              className="headerCircle"
-              // style={{ background: "#E47B00" }}
-            >
-              <img
-                className="Seed"
-                src={handleImage(study.members)}
-                // style={{ width: "100px", height: "100px" }}
-                alt="viewDetail.js 이미지"
-              />
-            </div>
+          <div className="headerLeft">
+            {/* <section className="headerLeftContent"> */}
+            <ContainerHeader>
+              <div className="headerText">
+                <p className="userName">@{study.who_open}</p>
+                <p className="studyName">{study.study_title}</p>
+              </div>
+              <div className="headerCircle">
+                <img
+                  className="Seed"
+                  src={handleImage(study.members)}
+                  alt="viewDetail.js 이미지"
+                />
+              </div>
+            </ContainerHeader>
+            {/* </section> */}
+            <PlaceData>
+              <div className="memberContainer">
+                <MdPeopleAlt />
+                {/* 사람들 아이콘 */}
+                <p className="partyMembers">{`${study.current_member_cnt}/${study.min_member_cnt}`}</p>
+              </div>
+              <div className="calender">
+                {/* 달력 아이콘 */}
+                <BsCalendar2WeekFill />
+                <p className="deathLine">{study.deadline}</p>
+              </div>
+              <div className="placeAddress">
+                <HiLocationMarker />
+                {/* 마커 아이콘 */}
+                <p className="address">{study.studyAt_location}</p>
+              </div>
+            </PlaceData>
           </div>
           <p className="partyDesc">{study.study_detail_description}</p>
           {study.study_no >= study.min_member_cnt ? (
-            <p
-              className="fullParty"
-              // style={{ textAlign: "center", color: "red" }}
-            >
-              모집인원이 가득 찼습니다!
-            </p>
+            <p className="fullParty">모집인원이 가득 찼습니다!</p>
           ) : (
             ""
           )}
-          <section className="detailCreateBtn">
+          <DetailCreateBtnBox>
             <div className="btnBox">
               <button
                 className="joinBtn"
@@ -129,20 +119,133 @@ export default function PartyDetail() {
                 list={study}
               />
             </div>
-          </section>
+          </DetailCreateBtnBox>
         </div>
       </ViewDetailContainer>
-    </div>
+    </OutputContainer>
   );
 }
 
-const ViewDetailContainer = styled.section`
-  padding-top: 35px;
+const OutputContainer = styled.section`
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  padding-bottom: 40px;
+`;
+
+const ContainerHeader = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .headerText {
+    width: 70%;
+  }
+
+  .userName {
+    margin-bottom: 15px;
+    font-size: 12px;
+    font-weight: 350;
+  }
+
+  .studyName {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+  }
 
   .Seed {
-    width: 100px;
-    height: 100px;
+    width: 87px;
+    height: 90px;
   }
+
+  .headerCircle {
+    text-align: right;
+    width: 78px;
+    height: 78px;
+    background-color: #e47b00;
+    border-radius: 50%;
+  }
+`;
+
+const PlaceData = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+  .partyMembers {
+    margin-left: 15px;
+  }
+
+  .memberContainer {
+    margin-top: 15px;
+    padding: 0 0 10px 6px;
+    display: flex;
+    align-items: top;
+    justify-content: left;
+    font-size: 15px;
+    border-bottom: 1px solid #727272;
+  }
+  /* 여기까지 인원수 */
+
+  .calender {
+    margin-top: 15px;
+    padding: 5px 0 10px 6px;
+    display: flex;
+    align-items: top;
+    justify-content: left;
+    font-size: 15px;
+    border-bottom: 1px solid #727272;
+  }
+
+  .deathLine {
+    margin-left: 16px;
+  }
+  /* 여기까지 달력 */
+
+  .placeAddress {
+    margin-top: 15px;
+    padding: 5px 0 10px 6px;
+    display: flex;
+    align-items: top;
+    justify-content: left;
+    font-size: 15px;
+    border-bottom: 1px solid #727272;
+  }
+
+  .address {
+    font-size: 15px;
+    margin-left: 15px;
+  }
+`;
+
+const DetailCreateBtnBox = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 27px;
+  width: 90%;
+
+  .btnBox {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .joinBtn {
+    width: 100%;
+    height: 28px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 25px;
+  }
+`;
+
+const ViewDetailContainer = styled.section`
+  padding-top: 35px;
 
   .fullParty {
     text-align: center;
@@ -153,32 +256,16 @@ const ViewDetailContainer = styled.section`
     font-size: 12px;
     margin: 0 20px;
     padding: 0 0 27px 17px;
-    /* box-shadow: 1px 1px 3px 1px #dadce0; */
   }
-  .containerHeader {
-    display: flex;
-    margin-top: 16px;
-    align-items: top;
-    padding-top: 16px;
-    justify-content: space-between;
-  }
+
   .headerLeftContent {
     display: flex;
     margin-bottom: 10px;
   }
   .headerLeft {
     display: flex;
-    width: 60%;
+    width: 90%;
     flex-direction: column;
-  }
-  .calender {
-    padding: 5px 0 0 1px;
-    display: flex;
-    align-items: center;
-    font-size: 10px;
-  }
-  .deathLine {
-    margin-left: 16px;
   }
 
   .headerTitle {
@@ -188,81 +275,10 @@ const ViewDetailContainer = styled.section`
     flex-direction: column;
   }
 
-  .userName {
-    margin-bottom: 5px;
-    font-size: 12px;
-    font-weight: 350;
-  }
-
-  .studyName {
-    width: 100%;
-    font-size: 15px;
-    font-weight: 700;
-  }
-  .headerCircle {
-    text-align: right;
-    width: 78px;
-    height: 78px;
-    background-color: #e47b00;
-    border-radius: 50%;
-
-    position: relative;
-    top: -20px;
-    left: 0;
-  }
-
-  .placeData {
-    padding-left: 6px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .placeAddress {
-    display: flex;
-    align-items: center;
-    margin-top: 8px;
-  }
-
-  .addressTitle {
-    margin: 0 6px 0 10px;
-  }
-
-  .address {
-    margin-left: 15px;
-  }
-
-  .memberContainer {
-    display: flex;
-  }
-
-  .partyMembers {
-    margin-left: 15px;
-  }
-
   .partyDesc {
-    margin-top: 47px;
+    margin-top: 30px;
     width: 280px;
-    height: 129px;
-  }
-
-  .detailCreateBtn {
-    display: flex;
-    justify-content: center;
-    margin-top: 27px;
-  }
-
-  .btnBox {
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-  }
-  .joinBtn {
-    width: 219px;
-    height: 28px;
-    color: white;
-    margin-left: 9px;
-    background-color: black;
-    border: none;
-    border-radius: 25px;
+    height: auto;
+    padding: 10px;
   }
 `;

@@ -4,13 +4,6 @@ import { Route, Routes } from "react-router-dom";
 
 import Lending from "./page/Lending";
 
-// import Main from "./page/Main/Main";
-// import Login from "./page/login/Login";
-// import Profile from "./page/profile/Profile";
-// import PartyJoin from "./page/detail/PartyJoin";
-// import PartyDetail from "./page/detail/PartyDetail";
-// import Footer from "./components/Footer";
-
 import "./reset.css";
 import "./app.css";
 import "./font.css";
@@ -30,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/join" element={<Join />}/>
+          <Route path="/join" element={<Join />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/partyjoin" element={<PartyJoin />} />
           <Route path={`/partydetail/:id`} element={<PartyDetail />} />
