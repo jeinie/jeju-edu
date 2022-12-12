@@ -28,7 +28,7 @@ export default function Login() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
+    
     let body = {
       id: userId,
       pw: password,
@@ -77,8 +77,8 @@ export default function Login() {
           <p className="lostPw">비밀번호를 잊으셨나요?</p>
         </div>
         <div className="BtnBox">
-          <button className="loginBtn">로그인</button>
-          <button className="signInBtn">회원가입</button>
+          <input type="submit" className="loginBtn" value="로그인"/>
+          <input type="button" className="signInBtn" value="회원가입" onClick={()=>navigate("/join")}/>
         </div>
       </form>
     </LoginContainer>

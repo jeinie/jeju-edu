@@ -24,7 +24,7 @@ export default function Footer() {
     navigate("/profile");
   };
 
-  if (pathname === "/login") return;
+  if (pathname === "/login" || pathname === "/join") return;
   return (
     <FooterContainer>
       <FiSearch
