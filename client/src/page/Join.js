@@ -39,14 +39,14 @@ export default function Join() {
     };
     
     const idValidCheck = () => {
-        if (id.length < 6) {
-            setIdOk(false);
-            setIdDesc("6자 이상 입력해주세요.");
-        } else if (!idOk) setIdDesc("아이디 중복확인을 해주세요.");
+        if (id.length < 6) setIdDesc("6자 이상 입력해주세요.");
+        else setIdDesc("아이디 중복확인을 해주세요.");
+        setIdOk(false);
     }
 
     const pwValidCheck = () => {
         setPwConfirmDesc("");
+        setPwConfirmOk(false);
         if (password.length < 8) {
             setPwOk(false);
             setPwDesc("8자 이상 입력해주세요.");
