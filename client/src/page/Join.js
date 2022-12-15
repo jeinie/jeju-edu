@@ -20,9 +20,9 @@ export default function Join() {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [check, setCheck] = useState(false);
 
-    const [idDesc, setIdDesc] = useState(""); //6~20자의 영문,숫자만 입력해주세요.
-    const [pwDesc, setPwDesc] = useState(""); //8~16자의 영문,숫자, 특수문자를 사용해주세요.
-    const [pwConfirmDesc, setPwConfirmDesc] = useState("");
+    const [idDesc, setIdDesc] = useState({}); //6~20자의 영문,숫자만 입력해주세요.
+    const [pwDesc, setPwDesc] = useState({}); //8~16자의 영문,숫자, 특수문자를 사용해주세요.
+    const [pwConfirmDesc, setPwConfirmDesc] = useState({});
 
     const [idOk, setIdOk] = useState(false);
     const [pwOk, setPwOk] = useState(false);
@@ -39,40 +39,40 @@ export default function Join() {
     };
     
     const idValidCheck = () => {
-        if (id.length < 6) setIdDesc("6자 이상 입력해주세요.");
-        else setIdDesc("아이디 중복확인을 해주세요.");
+        if (id.length < 6) setIdDesc({type:"WARN", text:"6자 이상 입력해주세요."});
+        else setIdDesc({type:"WARN", text:"아이디 중복확인을 해주세요."});
         setIdOk(false);
     }
 
     const pwValidCheck = () => {
-        setPwConfirmDesc("");
+        setPwConfirmDesc({});
         setPwConfirmOk(false);
         if (password.length < 8) {
             setPwOk(false);
-            setPwDesc("8자 이상 입력해주세요.");
+            setPwDesc({type:"WARN", text:"8자 이상 입력해주세요."});
         } else {
             setPwOk(true);
-            setPwDesc("적합한 비밀번호 입니다.")
+            setPwDesc({type:"SUCCESS", text:"적합한 비밀번호 입니다."});
         }
     }
 
     const pwConfirmCheck = () => {
         if (password !== passwordConfirm) {
             setPwConfirmOk(false);
-            setPwConfirmDesc("비밀번호가 일치하지 않습니다.");
+            setPwConfirmDesc({type:"WARN", text:"비밀번호가 일치하지 않습니다."});
         } else {
             setPwConfirmOk(true);
-            setPwConfirmDesc("비밀번호가 일치합니다.");
+            setPwConfirmDesc({type:"SUCCESS", text:"비밀번호가 일치합니다."});
         }
     }
 
     const handleConfirmId = () => {
         axios.post("/api/auth/checkDupId", {id:id}).then((res)=>{
             if( res.data?.code === 200 ) {
-                setIdDesc("사용 가능한 아이디입니다.");
+                setIdDesc({type:"SUCCESS", text:"사용 가능한 아이디입니다."});
                 setIdOk(true);
             } else {
-                setIdDesc("중복된 아이디입니다.");
+                setIdDesc({type:"WARN", text:"중복된 아이디입니다."});
             }
         })
     };

@@ -15,7 +15,7 @@ const Input = (props) => {
                 value={props.value}
                 onChange={(e)=>props.setValue(e.target.value)}
             />
-            <p>{props?.desc}</p>
+            <p style={props?.desc?.type === "WARN" ? {color:"red"}:{color:"green"}}>{props?.desc?.text}</p>
         </InputContainer>
     );
 };
@@ -42,7 +42,7 @@ const InputWithBtn = (props) => {
                     value={props.btnTitle}
                 />
             </div>
-            <p>{props?.desc}</p>
+            <p style={props?.desc?.type === "WARN" ? {color:"red"}:{color:"green"}}>{props?.desc?.text}</p>
         </InputWithBtnContainer>
     );
 };
