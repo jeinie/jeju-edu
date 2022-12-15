@@ -29,4 +29,5 @@
 
 ## ⚙️ 개발/배포 환경
 
-![infra](https://user-images.githubusercontent.com/56211193/202866075-46b3e8b7-4e40-4552-a826-72b791117308.png)
+![현재아키텍처](https://user-images.githubusercontent.com/37052379/207784192-f72411d6-e023-4cce-9ca1-a23cb731e1fd.png)
+
