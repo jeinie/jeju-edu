@@ -25,7 +25,8 @@
 
 ## ⚡️ 백엔드 기술 스택
 
-![backend](https://user-images.githubusercontent.com/56211193/202865022-be625db1-1528-4e45-9d49-2b5586828a0e.png)
+![백엔드기술](https://user-images.githubusercontent.com/37052379/207785147-737c4f92-1d8d-45b3-a434-262e5d502cb2.png)
+
 
 ## ⚙️ 개발/배포 환경
 
