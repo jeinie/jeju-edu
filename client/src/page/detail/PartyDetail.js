@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -14,6 +14,7 @@ import tree_2_1x from "../../img/tree_2_1x.png";
 import tree_3_1x from "../../img/tree_3_1x.png";
 import tree_4_1x from "../../img/tree_4_1x.png";
 import tree_1_1x from "../../img/tree_1_1x.png";
+import backspace from "../../img/back.svg";
 
 import Modal from "../../components/modals/Modal";
 
@@ -22,7 +23,7 @@ export default function PartyDetail() {
   const [study, setStudy] = useState({});
 
   const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate();
   let userId = useSelector((state) => {
     return state.user.id;
   });
@@ -48,76 +49,64 @@ export default function PartyDetail() {
   };
 
   useEffect(() => {
-    axios
-      .post(`/api/viewDetail/${id}`)
-      .then((res) => setStudy(res.data.study_Detail_Info));
+    axios.post(`/api/viewDetail/${id}`).then((res) => setStudy(res.data.study_Detail_Info));
   }, []);
 
   console.log(study);
 
   return (
     <OutputContainer>
+      <Backspace onClick={() => navigate(-1)}>
+        <img src={backspace} alt='뒤로가기'></img>
+      </Backspace>
       <PartyMarker lat={study.tmX} lon={study.tmY} />
       <ViewDetailContainer>
-        <div className="wrapper">
-          <div className="headerLeft">
+        <div className='wrapper'>
+          <div className='headerLeft'>
             {/* <section className="headerLeftContent"> */}
             <ContainerHeader>
-              <div className="headerText">
-                <p className="userName">@{study.who_open}</p>
-                <p className="studyName">{study.study_title}</p>
+              <div className='headerText'>
+                <p className='userName'>@{study.who_open}</p>
+                <p className='studyName'>{study.study_title}</p>
               </div>
-              <div className="headerCircle">
-                <img
-                  className="Seed"
-                  src={handleImage(study.members)}
-                  alt="viewDetail.js 이미지"
-                />
+              <div className='headerCircle'>
+                <img className='Seed' src={handleImage(study.members)} alt='viewDetail.js 이미지' />
               </div>
             </ContainerHeader>
             {/* </section> */}
             <PlaceData>
-              <div className="memberContainer">
+              <div className='memberContainer'>
                 <MdPeopleAlt />
                 {/* 사람들 아이콘 */}
-                <p className="partyMembers">{`${study.current_member_cnt}/${study.min_member_cnt}`}</p>
+                <p className='partyMembers'>{`${study.current_member_cnt}/${study.min_member_cnt}`}</p>
               </div>
-              <div className="calender">
+              <div className='calender'>
                 {/* 달력 아이콘 */}
                 <BsCalendar2WeekFill />
-                <p className="deathLine">{study.deadline}</p>
+                <p className='deathLine'>{study.deadline}</p>
               </div>
-              <div className="placeAddress">
+              <div className='placeAddress'>
                 <HiLocationMarker />
                 {/* 마커 아이콘 */}
-                <p className="address">{study.studyAt_location}</p>
+                <p className='address'>{study.studyAt_location}</p>
               </div>
             </PlaceData>
           </div>
-          <p className="partyDesc">{study.study_detail_description}</p>
-          {study.study_no >= study.min_member_cnt ? (
-            <p className="fullParty">모집인원이 가득 찼습니다!</p>
-          ) : (
-            ""
-          )}
+          <p className='partyDesc'>{study.study_detail_description}</p>
+          {study.study_no >= study.min_member_cnt ? <p className='fullParty'>모집인원이 가득 찼습니다!</p> : ""}
           <DetailCreateBtnBox>
-            <div className="btnBox">
+            <div className='btnBox'>
               <button
-                className="joinBtn"
+                className='joinBtn'
                 disabled={study.study_no >= study.min_member_cnt}
                 onClick={() => {
                   setOpen(true);
                   handleModalView();
                 }}
               >
-                <p className="join">J-Join</p>
+                <p className='join'>J-Join</p>
               </button>
-              <Modal
-                status={1}
-                open={open}
-                handleClose={setOpen}
-                list={study}
-              />
+              <Modal status={1} open={open} handleClose={setOpen} list={study} />
             </div>
           </DetailCreateBtnBox>
         </div>
@@ -125,6 +114,13 @@ export default function PartyDetail() {
     </OutputContainer>
   );
 }
+
+const Backspace = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 101;
+`;
 
 const OutputContainer = styled.section`
   width: 100%;
