@@ -8,6 +8,7 @@ import Footer from "./../../components/Footer";
 import AddressInput from "../../components/maps/AddressInput";
 import StudyCard from "../../components/StudyCard";
 import Lending from "../Lending";
+import Titlebar from "../../components/Titlebar.js"
 
 export default function Main() {
   const [category, setCategory] = useState("code");
@@ -28,6 +29,7 @@ export default function Main() {
 
   return (
     <MainContainer>
+      <Titlebar/>
       <AddressInput update={setList} />
       <MainCategory selected={category} changeCategory={setCategory} />
       {list.map((el, idx) => {
@@ -43,6 +45,7 @@ export default function Main() {
 }
 
 const MainContainer = styled.div`
+  margin-top: 100px;
   margin-bottom: 100px;
 
   .test {

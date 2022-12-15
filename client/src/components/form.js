@@ -6,24 +6,43 @@ const Input = (props) => {
     return (
         <InputContainer style={props?.style}>
             <label>{props?.label}</label>
-            <input type={props.password ? "password":"text"} name={props?.name} placeholder={props?.placeholder} ref={inputRef} maxLength={props.maxLength} />
-            <p>{props?.description}</p>
+            <input
+                type={props.password ? "password":"text"}
+                name={props?.name}
+                placeholder={props?.placeholder}
+                ref={inputRef}
+                maxLength={props.maxLength}
+                value={props.value}
+                onChange={(e)=>props.setValue(e.target.value)}
+            />
+            <p>{props?.desc}</p>
         </InputContainer>
     );
 };
 
 const InputWithBtn = (props) => {
     const inputRef = useRef();
-    const [value, setValue] = useState("");
 
     return (
         <InputWithBtnContainer style={props?.style}>
             <label>{props?.label}</label>
             <div>
-                <input name={props?.name} className="input" placeholder={props?.placeholder} ref={inputRef} onChange={(e)=>setValue(e.target.value)}/>
-                <input type="button" className="btn-sm" onClick={()=>props.onClick(value)} value={props.btnTitle} />
+                <input
+                    className="input"
+                    name={props?.name}
+                    placeholder={props?.placeholder}
+                    ref={inputRef}
+                    value={props.value}
+                    onChange={(e)=>props.setValue(e.target.value)}
+                />
+                <input
+                    className="btn-sm"
+                    type="button"
+                    onClick={props.onClick}
+                    value={props.btnTitle}
+                />
             </div>
-            <p>{props?.description}</p>
+            <p>{props?.desc}</p>
         </InputWithBtnContainer>
     );
 };
@@ -32,8 +51,8 @@ const Checkbox = (props) => {
     return (
         <CheckboxContainer style={props.style}>
             <CustomCheckbox>
-                <input type="checkbox" checked="checked"/>
-                <span class="checkmark"></span>
+                <input type="checkbox" checked={props.value} readOnly/>
+                <span className="checkmark" onClick={()=>props.setValue(!props.value)}></span>
             </CustomCheckbox>
             <label dangerouslySetInnerHTML={{__html:props?.label}} />
         </CheckboxContainer>
@@ -42,7 +61,7 @@ const Checkbox = (props) => {
 
 const Button = (props) => {
     return (
-        <CustomButton marginTop={props.marginTop}>{props?.text}</CustomButton>
+        <CustomButton marginTop={props.marginTop} disabled={props.disabled}>{props?.text}</CustomButton>
     );
 };
 
@@ -119,8 +138,8 @@ const CustomButton = styled.button`
     width: 100%;
     height: 36px;
     border-radius: 25px;
-    border: 1px solid #e47b00;
-    color: #e47b00;
+    border: 1px solid ${props=> `${props.disabled ? 'lightgray' : '#e47b00'}`};
+    color: ${props=> `${props.disabled ? 'lightgray' : '#e47b00'}`};
     margin-top: ${props=> `${props.marginTop}`};
 `;
 

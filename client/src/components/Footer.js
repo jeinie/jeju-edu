@@ -24,20 +24,22 @@ export default function Footer() {
     navigate("/profile");
   };
 
-  if (pathname === "/login" || pathname === "/join") return;
-  return (
-    <FooterContainer>
-      <FiSearch
-        onClick={goSearch}
-        color={page === "search" ? "#000000" : "#bababa"}
-      />
-      <AiOutlinePlus className="plusbtn" onClick={goJoin} />
-      <BsFillPersonFill
-        onClick={goProfile}
-        color={page === "profile" ? "#000000" : "#bababa"}
-      />
-    </FooterContainer>
-  );
+  if (pathname === "/" || pathname === "/profile" ) {
+    return (
+      <FooterContainer>
+        <FiSearch
+          onClick={goSearch}
+          color={page === "search" ? "#000000" : "#bababa"}
+        />
+        <AiOutlinePlus className="plusbtn" onClick={goJoin} />
+        <BsFillPersonFill
+          onClick={goProfile}
+          color={page === "profile" ? "#000000" : "#bababa"}
+        />
+      </FooterContainer>
+    );
+  } else return null;
+  
 }
 
 const FooterContainer = styled.footer`
