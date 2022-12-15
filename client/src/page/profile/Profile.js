@@ -8,6 +8,8 @@ import axios from "axios";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
 
+import Titlebar from "../../components/Titlebar.js"
+
 export default function Profile() {
   const [selected, setSelected] = useState("join");
   const [studyList, setStudyList] = useState([]);
@@ -49,6 +51,7 @@ export default function Profile() {
 
   return (
     <MainContainer>
+      <Titlebar/>
       <p className="myProfile">My page</p>
       <div className="pageBtn">
         {/* 상단의 Page 바꾸는 버튼 */}
@@ -171,7 +174,7 @@ const WrapperHeader = styled.div`
 `;
 
 const MainContainer = styled.section`
-  margin-top: 50px;
+  margin-top: 100px;
   background-color: white;
   .pageBtn {
     padding: 0 20px;

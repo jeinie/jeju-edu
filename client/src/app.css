@@ -24,3 +24,10 @@ a {
 body {
   background-color: white;
 }
+
+.scroll_lock {
+  position: fixed;
+  top: 0;
+  overflow: hidden !important;
+  width: 100%;
+}
