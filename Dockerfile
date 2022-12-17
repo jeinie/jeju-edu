@@ -18,7 +18,7 @@ RUN mkdir /usr/src/app/server/public
 
 WORKDIR /usr/src/app/client
 RUN npm install --silent
-RUN npm install react-scripts@5.0.1 -g --silent
+#RUN npm install react-scripts@5.0.1 -g --silent
 
 RUN npm run build
 #서버
