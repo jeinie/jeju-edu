@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -8,9 +9,10 @@ import { MdPeopleAlt } from "react-icons/md";
 import Nav from "../../components/Nav";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
-import { BsHddRack } from "react-icons/bs";
+import { BsChevronLeft } from "react-icons/bs";
 
 export default function PartyJoin() {
+  const navigate = useNavigate();
   const { kakao } = window;
   const [open, setOpen] = useState(false);
   const [peopleNum, setPeopleNum] = useState(1);
@@ -148,7 +150,9 @@ export default function PartyJoin() {
 
   return (
     <MainStyle>
-      <p className="title">스터디 개설하기</p>
+      <BsChevronLeft className='header-goback' onClick={()=>navigate(-1)}/>
+      <h1 className="header-title">스터디 개설하기</h1>
+      <hr/>
       <Nav />
       <button onClick={refCheck}>ref 확인</button>
       <div className="wrapper">
@@ -257,7 +261,15 @@ const InputStyle = styled.input`
 const MainStyle = styled.main`
   background-color: white;
   box-sizing: border-box;
-  padding: 0 10px;
+
+  margin:32px 32px;
+  .header-goback {
+      float:left;
+      color:#727272;
+  }
+  .header-title {
+      text-align:center;
+  }
 
   .wrapper {
     margin: 0 20px;
@@ -272,13 +284,6 @@ const MainStyle = styled.main`
     padding-bottom: 100px;
   }
 
-  .title {
-    margin: 0 20px;
-    width: 90%;
-    text-align: center;
-    font-weight: bold;
-    padding: 25px 0 9px 0;
-  }
   input {
     background-color: #faf6f2;
     width: 90%;
