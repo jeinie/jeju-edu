@@ -12,7 +12,7 @@ const authMiddleWare = require("./authMiddleWare");
 router.get(
   "/getStudyList/code",
   userAgentMiddleWare("/api/getStudyList/code"),
-  authMiddleWare,
+  //authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -53,7 +53,7 @@ router.get(
 router.get(
   "/getStudyList/sing",
   userAgentMiddleWare("/api/getStudyList/sing"),
-  authMiddleWare,
+  //authMiddleWare,
   async (req, res, next) => {
     try {
       const studyList = await Study.findAll({
@@ -94,7 +94,7 @@ router.get(
 router.get(
   "/getStudyList/design",
   userAgentMiddleWare("/api/getStudyList/design"),
-  authMiddleWare,
+  //authMiddleWare,
   async (req, res, next) => {
     try {
       //let studyList = await Study.findAll({});
