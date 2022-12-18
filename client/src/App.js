@@ -8,6 +8,7 @@ import "./reset.css";
 import "./app.css";
 import "./font.css";
 import styled from "styled-components";
+import KaKaoAddress from "./components/maps/mapAPI/KaKaoAddress";
 
 function App() {
   const Main = React.lazy(() => import("./page/Main/Main"));
@@ -33,6 +34,7 @@ function App() {
         </Routes>
         <Footer />
       </Suspense>
+      {/* <KaKaoAddress /> */}
     </AppContainer>
   );
 }

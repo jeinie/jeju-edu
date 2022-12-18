@@ -1,12 +1,11 @@
-import { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import styled from "styled-components";
 
 import { MdPeopleAlt } from "react-icons/md";
 
-import Nav from "../../components/Nav";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
 import { BsChevronLeft } from "react-icons/bs";
@@ -16,6 +15,7 @@ export default function PartyJoin() {
   const { kakao } = window;
   const [open, setOpen] = useState(false);
   const [peopleNum, setPeopleNum] = useState(1);
+  const [category, setCategory] = useState("");
 
   const [name, setName] = useState("");
 
@@ -25,8 +25,10 @@ export default function PartyJoin() {
   const partyAddress = useRef(); // 스터디 모임 장소
   const partyDesc = useRef(); // 스터디 상세설명
   const partyPeople = useRef();
-  let latLng; // 사용자가 입력한 주소의 위도값
-  let lonLng; // 사용자가 입력한 주소의 경도값.
+  const [latLng, setLatLng] = useState();
+  const [lonLng, setLonLng] = useState();
+  // let latLng; // 사용자가 입력한 주소의 위도값
+  // let lonLng; // 사용자가 입력한 주소의 경도값.
 
   let userId = useSelector((state) => {
     return state.user.id;
@@ -34,101 +36,113 @@ export default function PartyJoin() {
 
   const [formData, setFormData] = useState({
     who_open: userId,
-    study_title: "피아노", // partyName
-    study_category: "보컬댄스", // 값을 받아낼 좋은 방법 추천좀.
-    study_detail_description: "피아노를 가르켜줄게요", //partyDesc
-    min_member_cnt: 4,
-    studyAt_date: "2022-12-30 15:00:00",
-    studyAt_location: "서귀포시 태평로 529-1", // 무슨 값을 보내줘야 할지 모르겠음.
-    tmX: 33.449794,
-    tmY: 126.918436,
+    study_title: "", // partyName
+    study_category: "", // 값을 받아낼 좋은 방법 추천좀.
+    study_detail_description: "", //partyDesc
+    min_member_cnt: 0,
+    studyAt_date: "",
+    studyAt_location: "", // 무슨 값을 보내줘야 할지 모르겠음.
+    tmX: 0,
+    tmY: 0,
     deadline: new Date(),
     status: 0,
   });
 
+  const handleAddressTransformLocation = async (e) => {
+    e.preventDefault();
+    let location = partyAddress.current.value;
+    let geocoder = new kakao.maps.services.Geocoder();
+
+    await geocoder.addressSearch(`${location}`, function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        console.log(coords);
+        setLatLng(coords.Ma);
+        setLonLng(coords.La);
+      } else {
+        console.log("err");
+      }
+    });
+    // setFormData({
+    //   who_open: userId,
+    //   study_title: partyName.current.value,
+    //   study_category: category,
+    //   study_detail_description: partyDesc.current.value,
+    //   min_member_cnt: String(peopleNum),
+    //   studyAt_date: partyDate.current.value,
+    //   studyAt_location: partyAddress.current.value,
+    //   tmX: latLng,
+    //   tmY: lonLng,
+    //   deadline: partyClose.current.value,
+    //   status: 0,
+    // });
+  };
+
   const onSubmitHandler = async (e) => {
     console.log(userId);
     e.preventDefault();
-
-    // post 요청 보낼 때 사용 될 변수
-    let result = {
+    let a = handleAddressTransformLocation(e);
+    let b = setFormData({
       who_open: userId,
       study_title: partyName.current.value,
-      study_category: "프로그래밍",
-      study_detail_description: partyDesc.current.value, //partyDesc
-      min_member_cnt: peopleNum,
-      studyAt_date: "2022-12-30 15:00:00",
+      study_category: category,
+      study_detail_description: partyDesc.current.value,
+      min_member_cnt: String(peopleNum),
+      studyAt_date: partyDate.current.value,
       studyAt_location: partyAddress.current.value,
       tmX: latLng,
       tmY: lonLng,
       deadline: partyClose.current.value,
       status: 0,
-    };
-
-    setFormData(result);
-    setTimeout(() => {
-      console.log(result);
-      axios.post(`/api/openStudy`, result).then((res) => console.log(res));
-    }, 500);
-  };
-
-  const refCheck = () => {
-    // input 에 값을 입력하고 ref확인 버튼을 누르면 console창에서 값을 확인할 수 있음.
-    console.log(
-      "who_open",
-      userId,
-      "study_title",
-      partyName.current.value,
-      "study_category",
-      "프로그래밍",
-      "study_detail_description",
-      partyDesc.current.value, //partyDesc
-      "min_member_cnt",
-      peopleNum,
-      "studyAt_date",
-      "2022-12-30 15:00:00",
-      "studyAt_location",
-      partyAddress.current.value,
-      "tmX",
-      latLng,
-      "tmY",
-      lonLng,
-      "deadline",
-      partyClose.current.value,
-      "status",
-      0
-
-      // partyName.current.value,
-      // partyDate.current.value,
-      // partyClose.current.value,
-      // partyAddress.current.value,
-      // // 위도 경도는 받아오고, TransformAddress 함수 적용할것.
-      // partyDesc.current.value,
-      // "lat :",
-      // latLng,
-      // "lon :",
-      // lonLng,
-      // peopleNum
-    );
-  };
-
-  const handleAddressTransformLocation = (e) => {
-    e.preventDefault();
-    let location = partyAddress.current.value;
-    let geocoder = new kakao.maps.services.Geocoder();
-
-    geocoder.addressSearch(`${location}`, function (result, status) {
-      if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        console.log(coords);
-        latLng = coords.Ma;
-        lonLng = coords.La;
-        console.log(latLng, lonLng);
-      } else {
-        console.log("err");
-      }
     });
+    console.log(formData);
+    // setTimeout(() => {
+    // .then(() => {
+    // result = {
+    //   who_open: userId,
+    //   study_title: partyName.current.value,
+    //   study_category: category,
+    //   study_detail_description: partyDesc.current.value,
+    //   min_member_cnt: String(peopleNum),
+    //   studyAt_date: partyDate.current.value,
+    //   studyAt_location: partyAddress.current.value,
+    //   tmX: latLng,
+    //   tmY: lonLng,
+    //   deadline: partyClose.current.value,
+    //   status: 0,
+    // };
+    // return result;
+    // })
+    // .then((res) => {
+    // console.log(res);
+    // axios.post(`/api/openStudy`, result).then((res) => {
+    //   console.log(res);
+    //   navigate("/");
+    // });
+    // })
+    // }, 200);
+    // console.log(category);
+    // setTimeout(() => {
+    // console.log(result);
+    //   axios
+    //     .post(`/api/openStudy`, result)
+    //     .then((res) => {
+    //       console.log(res);
+    //       navigate("/");
+    //     })
+    //     .catch((err) => console.log(err));
+    // }, 500);
   };
+  // });
+
+  // post 요청 보낼 때 사용 될 변수
+  // setTimeout(() => {
+  //   console.log(formData);
+  //   axios.post(`/api/openStudy`, formData).then((res) => {
+  //     console.log(res);
+  //     navigate("/");
+  //   });
+  // }, 500);
 
   const handlePlusPeople = (e) => {
     e.preventDefault();
@@ -150,11 +164,37 @@ export default function PartyJoin() {
 
   return (
     <MainStyle>
-      <BsChevronLeft className='header-goback' onClick={()=>navigate(-1)}/>
+      <div className="titleBox">
+        <BsChevronLeft onClick={() => navigate(-1)} />
+        <p className="title">스터디 개설하기</p>
+      </div>
+      {/* Nav 대체품 */}
+      <NavContainer>
+        <div
+          className={category === "code" ? "navBox addColor" : "navBox"}
+          onClick={() => setCategory("code")}
+        >
+          프로그래밍
+        </div>
+        <div
+          className={category === "sing" ? "navBox addColor" : "navBox"}
+          onClick={() => setCategory("sing")}
+        >
+          보컬댄스
+        </div>
+        <div
+          className={category === "design" ? "navBox addColor" : "navBox"}
+          onClick={() => setCategory("design")}
+        >
+          디자인
+        </div>
+      </NavContainer>
+      {/* Nav 대채품 */}
+
+      {/* <BsChevronLeft className="header-goback" onClick={() => navigate(-1)} />
       <h1 className="header-title">스터디 개설하기</h1>
-      <hr/>
-      <Nav />
-      <button onClick={refCheck}>ref 확인</button>
+      <hr /> */}
+      {/* <Nav /> */}
       <div className="wrapper">
         <form className="createParty">
           <div className="partName">
@@ -201,12 +241,6 @@ export default function PartyJoin() {
               placeholder="스터디 장소를 입력해주세요"
               name="location"
             />
-            <button
-              className="addressChecked"
-              onClick={(e) => handleAddressTransformLocation(e)}
-            >
-              주소확인
-            </button>
           </div>
 
           <label className="partyDescLabel labels">스터디 상세설명</label>
@@ -229,6 +263,30 @@ export default function PartyJoin() {
     </MainStyle>
   );
 }
+
+const NavContainer = styled.nav`
+  height: 31px;
+  display: flex;
+  color: #f4ede7;
+  margin-top: 24px;
+  padding: 0 20px;
+  .navBox {
+    margin: 0 2px;
+    color: #000000;
+    background-color: #f4ede7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .addColor {
+    color: white;
+    background-color: black;
+  }
+`;
 
 const PeopleCountContainer = styled.div`
   margin-top: 20px;
@@ -253,22 +311,23 @@ const PeopleCountContainer = styled.div`
 
 const InputStyle = styled.input`
   width: 50%;
-  height: 33px;
+  height: 42px;
   border-radius: 15px;
   border: none;
+  /* padding: 0; */
 `;
 
 const MainStyle = styled.main`
   background-color: white;
   box-sizing: border-box;
 
-  margin:32px 32px;
+  margin: 32px 32px;
   .header-goback {
-      float:left;
-      color:#727272;
+    float: left;
+    color: #727272;
   }
   .header-title {
-      text-align:center;
+    text-align: center;
   }
 
   .wrapper {
@@ -284,12 +343,44 @@ const MainStyle = styled.main`
     padding-bottom: 100px;
   }
 
+  .titleBox {
+    width: 100%;
+    height: auto;
+    padding: 25px 0 5px;
+    display: flex;
+    align-items: center;
+    /* padding-bottom: 10px; */
+    justify-content: center;
+    border-bottom: 1px solid #727272;
+
+    /* border: 1px solid red; */
+  }
+
+  .backImg {
+    /* float: left; */
+    /* margin-bottom: 9px; */
+    width: 10px;
+  }
+
+  .title {
+    width: 90%;
+    /* height: 30px; */
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    /* padding: 0 0 9px 0; */
+
+    /* border: 1px solid black; */
+  }
+
   input {
     background-color: #faf6f2;
-    width: 90%;
     border-radius: 16px;
-    padding: 15px;
+    padding: 2px 10px;
     border: none;
+    font-size: 15px;
+    width: 90%;
+    height: 40px;
   }
 
   /* div {
@@ -299,7 +390,11 @@ const MainStyle = styled.main`
   textarea {
     background-color: #faf6f2;
     border: none;
-    padding: 15px;
+    border-radius: 16px;
+    font-size: 15px;
+    width: 90%;
+    height: 116px;
+    padding: 10px 10px;
   }
 
   .partyName {

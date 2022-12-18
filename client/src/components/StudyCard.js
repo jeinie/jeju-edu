@@ -4,31 +4,28 @@ import { BsSuitHeartFill } from "react-icons/bs";
 import { MdPeopleAlt, MdLocationOn } from "react-icons/md";
 import React from "react";
 
-const Lending = React.lazy(() => import("../page/Lending"));
-
 export default function StudyCard({ item }) {
   console.log(item);
   return (
     <StudyBox>
       <IconBox>
-        <BsSuitHeartFill className="likeBtn" />
-        {/* 하트버튼 */}
+        <StudyTitle>{item.study_title}</StudyTitle>
+        <div className="deadLine">D-</div>
       </IconBox>
-
-      <UserName>{item.who_open}</UserName>
-      <StudyTitle>{item.study_title}</StudyTitle>
       <div className="partyInfo">
         <div className="partyLocation">
-          <MdLocationOn size={16} />
+          <MdLocationOn />
           {/* place 아이콘 */}
-          <p>place</p>
-          <p>
-            {item.studyAt_location /* tmX, tmY값이 넘어옴 location없어짐 */}
-          </p>
+          <p className="partyLocationAddress">{item.studyAt_location}</p>
         </div>
         <div className="partyMembers">
-          <MdPeopleAlt className="peopleIcon" />
-          <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
+          <div className="peopleGraph">
+            <div className="peopleGraphCount"></div>
+          </div>
+          <div className="peopleCount">
+            <MdPeopleAlt className="peopleIcon" />
+            <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
+          </div>
         </div>
       </div>
     </StudyBox>
@@ -39,7 +36,6 @@ const StudyBox = styled.div`
   height: 102px;
   margin: 20px;
   padding: 14px 20px;
-  position: relative;
   background: #f4ede7;
   border-radius: 15px;
 
@@ -53,14 +49,19 @@ const StudyBox = styled.div`
     font-size: 12px;
     margin-top: 25px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
 
   .partyLocation {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: left;
     width: 47%;
-    margin-top: 100px;
+
+    .partyLocationAddress {
+      margin-left: 10px;
+    }
   }
 
   .partyMembers {
@@ -68,32 +69,58 @@ const StudyBox = styled.div`
     justify-content: space-between;
     height: 16px;
     font-size: 16px;
+    padding-top: 18px;
   }
 
   .peopleIcon {
-    margin-right: 5px;
     border: none;
+  }
+
+  .peopleCount {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .peopleGraph {
+    width: 75%;
+    border: 1px solid black;
+    border-radius: 3px;
+    box-sizing: border-box;
+    padding: 0;
+    overflow: hidden;
+  }
+  .peopleGraphCount {
+    width: 70%;
+    height: 120%;
+    background-color: black;
+    border-radius: 3px;
+    box-sizing: border-box;
   }
 `;
 
 const IconBox = styled.div`
-  float: right;
-  width: 24px;
-  height: 24px;
-  margin: 10px -10px 0 0;
-`;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 17px;
 
-const UserName = styled.p`
-  color: #000000;
-  text-align: left;
-  font-size: 10px;
-  font-weight: 200;
+  .deadLine {
+    color: white;
+    background-color: black;
+    border-radius: 8px;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+  }
 `;
 
 const StudyTitle = styled.p`
   text-align: left;
   color: #000000;
-  margin-top: 10px;
   font-size: 15px;
   font-weight: bold;
 `;
