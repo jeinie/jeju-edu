@@ -6,11 +6,18 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const authMiddleWare = require("./authMiddleWare");
 const userAgentMiddleWare = require("./userAgentMiddleWare");
+/*
 const {
   sendVerificationsSMS,
   verifySMSMsg,
   getNewPw,
 } = require("../dto/NVsens");
+*/
+const {
+  sendVerificationsSMS,
+  verifySMSMsg,
+  getNewPw,
+} = require("../../../configs/dto/NVsens");
 
 router.get(
   "/message/code",
