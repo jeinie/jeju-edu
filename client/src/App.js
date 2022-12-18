@@ -7,6 +7,7 @@ import Lending from "./page/Lending";
 import "./reset.css";
 import "./app.css";
 import "./font.css";
+import KaKaoAddress from "./components/maps/mapAPI/KaKaoAddress";
 
 function App() {
   const Main = React.lazy(() => import("./page/Main/Main"));
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <div className="App" style={{ fontFamily: "NanumSquare" }}>
-      <Suspense fallback={<Lending />}>
+      {/* <Suspense fallback={<Lending />}>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
@@ -29,7 +30,8 @@ function App() {
           <Route path={`/partydetail/:id`} element={<PartyDetail />} />
         </Routes>
         <Footer />
-      </Suspense>
+      </Suspense> */}
+      <KaKaoAddress />
     </div>
   );
 }
