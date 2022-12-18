@@ -559,6 +559,89 @@ const options = {
           },
         },
       },
+
+      "/api/auth/message/findPW": {
+        post: {
+          tags: ["SMS로 새로운 임시 비밀번호를 발급받는 API"],
+          summary:
+            "가입한 휴대폰 번호로 문자메세지를 통해 새로운 랜덤 임시 비밀번호를 발급받는다",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "id와 tel 즉 아이디와 휴대폰 번호(-나,없는 01011112222 쌩 번호)를 넘겨주세요",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgFindPwRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "새로운 비밀번호 발급 및 SMS로 전송에 성공했을때 200코드를 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgFindPw_ResponseForm_Success200",
+              },
+            },
+            500: {
+              description:
+                "SMS메세지를 전송하는 부분에서 서버의 알수없는 문제로 인해 에러가 발생했을때 500에러가 발생합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgFindPw_ResponseForm_Failed500",
+              },
+            },
+            404: {
+              description:
+                "SMS 메세지가 전송되지 않는 상황이 발생할때 404에러가 리턴됩니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgFindPw_ResponseForm_Failed404",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/auth/message/modifyPW": {
+        post: {
+          tags: ["기존의 비밀번호를 새로운 비밀번호로 변경하는 API"],
+          summary: "기존의 비밀번호를 새로운 비밀번호로 변경하는 API 입니다",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "id와 새로운 비밀번호 , 기존의 비밀번호를 넘겨주세요",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyPwRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "기존의 비밀번호로 본인인증이 되었고, 기존의 비밀번호가 새로운 비밀번호로 성공적으로 변경되었다면 코드 200을 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Success200",
+              },
+            },
+            202: {
+              description:
+                "id는 일치하지만 기존의 비밀번호를 맞추지 못해 본인인증에 실패하였을때에 코드 202를 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed202",
+              },
+            },
+            500: {
+              description:
+                "비밀번호 변경중 서버내의 알수없는 에러가 발생하였을때 코드 500이 리턴됩니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed500",
+              },
+            },
+          },
+        },
+      },
     },
     definitions: {
       DBuserTable: {
@@ -569,10 +652,16 @@ const options = {
           id: {
             type: "string",
           },
+          nick: {
+            type: "string",
+          },
           password: {
             type: "string",
           },
           name: {
+            type: "string",
+          },
+          tel: {
             type: "string",
           },
           good_cnt: {
@@ -640,10 +729,10 @@ const options = {
       },
       DBAllStudyListTable: {
         properties: {
-          StudyStudyNo: {
+          study_no: {
             type: "integer",
           },
-          UserUserNo: {
+          user_no: {
             type: "integer",
           },
           createdAt: {
@@ -688,6 +777,9 @@ const options = {
                 type: "string",
               },
               name: {
+                type: "string",
+              },
+              tel: {
                 type: "string",
               },
               good_cnt: {
@@ -737,6 +829,10 @@ const options = {
           name: {
             type: "string",
             description: "고객의 실명이 기입된다",
+          },
+          tel: {
+            type: "string",
+            description: "고객의 휴대폰 번호이다",
           },
           /*nick: {
             type: "string",
@@ -1790,6 +1886,109 @@ const options = {
           message: {
             type: "string",
             description: `실패 하면 회원가입 SMS메세지 인증 실패 , 인증번호 불일치 라는 메세지가 리턴된다 확인마지막 제발빌드되어줘 20`,
+          },
+        },
+      },
+
+      apiAuthMsgFindPwRequestForm: {
+        properties: {
+          id: {
+            type: "string",
+            description: "가입한 당시의 ID (로그인할때 쓰는거)",
+          },
+          tel: {
+            type: "string",
+            description: "휴대폰번호 (01011112222 와 같이 -나 ,없는 쌩 번호)",
+          },
+        },
+      },
+
+      apiAuthMsgFindPw_ResponseForm_Success200: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `성공하면 New Pw Genned & SMS sent 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgFindPw_ResponseForm_Failed500: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 패스워드 찾기/재발급 SMS sent 에서 알수없는 서버 에러발생 이라는 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgFindPw_ResponseForm_Failed404: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 404가 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 SMS not sent error 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+
+      apiAuthMsgModifyPwRequestForm: {
+        properties: {
+          id: {
+            type: "string",
+            description: "가입한 당시의 ID (로그인할때 쓰는거)",
+          },
+          newPw: {
+            type: "string",
+            description: "새롭게 변경을 원하는 비밀번호",
+          },
+          pw: {
+            type: "string",
+            description: "본인확인용 기존의 비밀번호",
+          },
+        },
+      },
+      apiAuthMsgModifyPw_ResponseForm_Success200: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `성공하면 비밀번호 변경 성공 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgModifyPw_ResponseForm_Failed202: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 202이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 현재 비밀번호 인증 실패 라는 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgModifyPw_ResponseForm_Failed500: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 비밀번호 변경 중 서버내 알수없는 에러발생 이란 메세지가 리턴된다`,
           },
         },
       },
