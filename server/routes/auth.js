@@ -6,12 +6,19 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const authMiddleWare = require("./authMiddleWare");
 const userAgentMiddleWare = require("./userAgentMiddleWare");
+
 const {
   sendVerificationsSMS,
   verifySMSMsg,
   getNewPw,
 } = require("../dto/NVsens");
-
+/*
+const {
+  sendVerificationsSMS,
+  verifySMSMsg,
+  getNewPw,
+} = require("../../../configs/dto/NVsens");
+*/
 router.get(
   "/message/code",
   userAgentMiddleWare("/api/auth/message/code"),
@@ -119,7 +126,7 @@ router.post(
      * 회원가입 시 비밀번호 암호화
      */
     try {
-      const { id, nick = "", pw, name, tel } = req.body;
+      const { id, nick = "", pw, name, tel = "" } = req.body;
       const hashPw = await bcrypt.hash(pw, 12);
       const exUser = await User.findOne({ where: { id: id } });
       if (exUser) {
