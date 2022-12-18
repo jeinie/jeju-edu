@@ -84,7 +84,7 @@ export default function Join() {
             id:e.target.id.value,
             pw:e.target.pw.value,
             name:e.target.name.value,
-            nick:e.target.name.value
+            nick:e.target.nick.value
         };
 
         axios.post(`/api/auth/join`, body)
