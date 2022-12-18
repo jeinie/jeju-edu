@@ -126,7 +126,7 @@ router.post(
      * 회원가입 시 비밀번호 암호화
      */
     try {
-      const { id, nick = "", pw, name, tel } = req.body;
+      const { id, nick = "", pw, name, tel = "" } = req.body;
       const hashPw = await bcrypt.hash(pw, 12);
       const exUser = await User.findOne({ where: { id: id } });
       if (exUser) {
