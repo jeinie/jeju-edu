@@ -6,6 +6,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 dotenv.config({ path: "../.env" });
+//dotenv.config({ path: "../../configs/.env" });
 
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
