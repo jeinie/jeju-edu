@@ -56,7 +56,7 @@ export default function ChangePw() {
     const newPwConfirmValidCheck = () => {
         if (newPw !== newPwConfirm) {
             setNewPwConfirmOk(false);
-            setNewPwConfirmDesc({type:"WARN", text:"두 비밀번호가 달라요 확인해보시겠어요?"});
+            setNewPwConfirmDesc({type:"WARN", text:"비밀번호가 일치하지 않습니다."});
         } else {
             setNewPwConfirmOk(true);
             setNewPwConfirmDesc({type:"SUCCESS", text:"비밀번호가 일치합니다."});
