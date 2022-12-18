@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
-const initialState = { id: "", name: "", good_cnt: 0, bad_cnt: 0, user_no: 0 };
+const initialState = { id: "", nick:"", name: "", good_cnt: 0, bad_cnt: 0, user_no: 0 };
 const user = createSlice({
   name: "user",
   initialState,
