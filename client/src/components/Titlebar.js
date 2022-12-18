@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled, { keyframes } from "styled-components"; // 1.컴포넌트 추가
-import { AiOutlinePlus } from "react-icons/ai";
-import { BsFillPersonFill } from "react-icons/bs";
-import { FiSearch } from "react-icons/fi";
+import { logout } from "./func";
 
 // 2.이미지 불러옴
 import fir from "../img/fir.png";
@@ -99,6 +98,8 @@ const StyledBurger = styled.div`
 
 //4.슬라이딩 박스 : 로고, 유저이름, 열매현황, 액션버튼, 유틸메뉴, 저작권표기
 const Menu = ({ open, setOpen }) => {
+  let user = useSelector((state) => state.user);
+  console.log(user);
   const navigate = useNavigate();
   const goJoin = () => {
     navigate("/partyjoin");
@@ -129,8 +130,7 @@ const Menu = ({ open, setOpen }) => {
             <div className='greeting-title'>반갑습니다!</div>
             <div className='greeting-name'>
               <p className='userName'>
-                {/* 데이터 가져와야함 */}
-                <span className='biColor'>외계공룡</span>님
+                <span className='biColor'>{user.nick}</span>님
               </p>
             </div>
           </div>
@@ -139,15 +139,14 @@ const Menu = ({ open, setOpen }) => {
             <div className='fruit-normal'>
               <p>수확 열매</p>
               <p>
-                {/* 데이터 가져와야함 */}
-                <b>20</b>개 
+                <b>{user.good_cnt}</b>개 
               </p>
             </div>
             <div className='fruit-sick'>
               <p>아픈 열매</p>
               <p>
                 {/* 데이터 가져와야함 */}
-                <b>20</b>개
+                <b>{user.bad_cnt}</b>개
               </p>
             </div>
           </div>
@@ -161,7 +160,7 @@ const Menu = ({ open, setOpen }) => {
             {/* 페이지 연결해야함 */}
             <LinkItem onClick={() => navigate("#")}>비밀번호 변경</LinkItem>
             {/* 로그아웃 기능 넣어야함 */}
-            <LinkItem onClick={() => navigate("#")}>로그아웃</LinkItem>
+            <LinkItem onClick={() => logout(navigate)}>로그아웃</LinkItem>
           </LinkItemGroup>
 
           <Copyright>Copyright © 2022 abang All Rights Reserved.</Copyright>
