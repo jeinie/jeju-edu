@@ -7,6 +7,7 @@ import Lending from "./page/Lending";
 import "./reset.css";
 import "./app.css";
 import "./font.css";
+import KaKaoAddress from "./components/maps/mapAPI/KaKaoAddress";
 
 function App() {
   const Main = React.lazy(() => import("./page/Main/Main"));
@@ -30,6 +31,7 @@ function App() {
         </Routes>
         <Footer />
       </Suspense>
+      {/* <KaKaoAddress /> */}
     </div>
   );
 }

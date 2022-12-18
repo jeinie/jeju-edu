@@ -7,8 +7,7 @@ import MainCategory from "../../components/Nav";
 import Footer from "./../../components/Footer";
 import AddressInput from "../../components/maps/AddressInput";
 import StudyCard from "../../components/StudyCard";
-import Lending from "../Lending";
-import Titlebar from "../../components/Titlebar.js"
+import Titlebar from "../../components/Titlebar.js";
 
 export default function Main() {
   const [category, setCategory] = useState("code");
@@ -29,7 +28,7 @@ export default function Main() {
 
   return (
     <MainContainer>
-      <Titlebar/>
+      <Titlebar />
       <AddressInput update={setList} />
       <MainCategory selected={category} changeCategory={setCategory} />
       {list.map((el, idx) => {
