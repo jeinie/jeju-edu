@@ -27,7 +27,7 @@ router.post(
     } catch (error) {
       res.status(500).json({
         code: 500,
-        message: `studyInfo 추출중에 서버내 알수없는 에러발생 error : ${error}`,
+        message: `studyInfo추출중에 서버내 알수없는 에러발생 error : ${error}`,
       });
       return next(error);
     }
