@@ -20,8 +20,8 @@ export default function Join() {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [check, setCheck] = useState(false);
 
-    const [idDesc, setIdDesc] = useState({}); //6~20자의 영문,숫자만 입력해주세요.
-    const [pwDesc, setPwDesc] = useState({}); //8~16자의 영문,숫자, 특수문자를 사용해주세요.
+    const [idDesc, setIdDesc] = useState({type:"DEFAULT", text:"6~20자의 영문,숫자만 입력해주세요."});
+    const [pwDesc, setPwDesc] = useState({type:"DEFAULT", text:"8~16자의 영문,숫자,특수문자를 사용해주세요."});
     const [pwConfirmDesc, setPwConfirmDesc] = useState({});
 
     const [idOk, setIdOk] = useState(false);
