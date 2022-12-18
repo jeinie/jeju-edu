@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 
 const Input = (props) => {
@@ -15,7 +15,7 @@ const Input = (props) => {
                 value={props.value}
                 onChange={(e)=>props.setValue(e.target.value)}
             />
-            <p style={props?.desc?.type === "WARN" ? {color:"red"}:{color:"green"}}>{props?.desc?.text}</p>
+            <p style={{color:descMappingColor(props?.desc?.type)}}>{props?.desc?.text}</p>
         </InputContainer>
     );
 };
@@ -42,7 +42,7 @@ const InputWithBtn = (props) => {
                     value={props.btnTitle}
                 />
             </div>
-            <p style={props?.desc?.type === "WARN" ? {color:"red"}:{color:"green"}}>{props?.desc?.text}</p>
+            <p style={{color:descMappingColor(props?.desc?.type)}}>{props?.desc?.text}</p>
         </InputWithBtnContainer>
     );
 };
@@ -61,8 +61,24 @@ const Checkbox = (props) => {
 
 const Button = (props) => {
     return (
-        <CustomButton marginTop={props.marginTop} disabled={props.disabled}>{props?.text}</CustomButton>
+        <CustomButton style={props.style} marginTop={props.marginTop} disabled={props.disabled}>{props?.text}</CustomButton>
     );
+};
+
+const descMappingColor = (type) => {
+    let color = "black";
+    switch (type) {
+        case "DEFAULT" :
+            color="light-gray";
+            break;
+        case "WARN" :
+            color="red";
+            break;
+        case "SUCCESS" :
+            color="green";
+            break;
+    }
+    return color;
 };
 
 const InputWithBtnContainer = styled.div`
@@ -135,6 +151,7 @@ const CheckboxContainer = styled.div`
 `;
 
 const CustomButton = styled.button`
+    ${props => props.style}
     width: 100%;
     height: 36px;
     border-radius: 25px;
