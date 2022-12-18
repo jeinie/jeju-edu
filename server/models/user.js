@@ -12,7 +12,6 @@ module.exports = class User extends Sequelize.Model {
         id: {
           type: Sequelize.STRING(50),
           primaryKey: true,
-          allowNull: false,
         },
         nick: {
           type: Sequelize.STRING(50),
@@ -24,6 +23,10 @@ module.exports = class User extends Sequelize.Model {
         },
         name: {
           type: Sequelize.STRING(50),
+          allowNull: false,
+        },
+        tel: {
+          type: Sequelize.STRING(100),
           allowNull: false,
         },
         good_cnt: {
