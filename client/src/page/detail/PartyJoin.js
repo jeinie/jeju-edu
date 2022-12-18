@@ -8,13 +8,13 @@ import { MdPeopleAlt } from "react-icons/md";
 
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
-import Back from "../../img/partyJoinBack.svg";
+import { BsChevronLeft } from "react-icons/bs";
 
 export default function PartyJoin() {
+  const navigate = useNavigate();
   const { kakao } = window;
   const [open, setOpen] = useState(false);
   const [peopleNum, setPeopleNum] = useState(1);
-  const navigate = useNavigate();
   const [category, setCategory] = useState("");
 
   const [name, setName] = useState("");
@@ -165,12 +165,7 @@ export default function PartyJoin() {
   return (
     <MainStyle>
       <div className="titleBox">
-        <img
-          src={Back}
-          alt="뒤로가기"
-          onClick={() => navigate(-1)}
-          className="backImg"
-        />
+        <BsChevronLeft onClick={() => navigate(-1)} />
         <p className="title">스터디 개설하기</p>
       </div>
       {/* Nav 대체품 */}
@@ -196,6 +191,10 @@ export default function PartyJoin() {
       </NavContainer>
       {/* Nav 대채품 */}
 
+      {/* <BsChevronLeft className="header-goback" onClick={() => navigate(-1)} />
+      <h1 className="header-title">스터디 개설하기</h1>
+      <hr /> */}
+      {/* <Nav /> */}
       <div className="wrapper">
         <form className="createParty">
           <div className="partName">
@@ -321,7 +320,15 @@ const InputStyle = styled.input`
 const MainStyle = styled.main`
   background-color: white;
   box-sizing: border-box;
-  padding: 0 10px;
+
+  margin: 32px 32px;
+  .header-goback {
+    float: left;
+    color: #727272;
+  }
+  .header-title {
+    text-align: center;
+  }
 
   .wrapper {
     margin: 0 20px;

@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App" style={{ fontFamily: "NanumSquare" }}>
-      {/* <Suspense fallback={<Lending />}>
+      <Suspense fallback={<Lending />}>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
@@ -30,8 +30,8 @@ function App() {
           <Route path={`/partydetail/:id`} element={<PartyDetail />} />
         </Routes>
         <Footer />
-      </Suspense> */}
-      <KaKaoAddress />
+      </Suspense>
+      {/* <KaKaoAddress /> */}
     </div>
   );
 }

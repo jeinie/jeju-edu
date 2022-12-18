@@ -6,19 +6,81 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const authMiddleWare = require("./authMiddleWare");
 const userAgentMiddleWare = require("./userAgentMiddleWare");
-// const { sendVerificationsSMS, verifySMSMsg } = require("../dto/NVsens");
 
-// router.get(
-//   "/message/code",
-//   userAgentMiddleWare("/api/auth/message/code"),
-//   sendVerificationsSMS
-// );
+const {
+  sendVerificationsSMS,
+  verifySMSMsg,
+  getNewPw,
+} = require("../dto/NVsens");
+/*
+const {
+  sendVerificationsSMS,
+  verifySMSMsg,
+  getNewPw,
+} = require("../../../configs/dto/NVsens");
+*/
+router.get(
+  "/message/code",
+  userAgentMiddleWare("/api/auth/message/code"),
+  sendVerificationsSMS
+);
 
-// router.get(
-//   "/message/verifySMSMsg",
-//   userAgentMiddleWare("/api/auth/message/verifySMSMsg"),
-//   verifySMSMsg
-// );
+router.get(
+  "/message/verifySMSMsg",
+  userAgentMiddleWare("/api/auth/message/verifySMSMsg"),
+  verifySMSMsg
+);
+
+/**
+ * 비번찾기 "휴대폰 문자"
+ * 가입한 휴대폰번호로 임시 비밀번호 발급해야함
+ * 1. 비밀번호 10자리 재발급 (알파벳 숫자 섞여서)
+ * 2. 재발급한 비밀번호 DB에 업데이트
+ * 3. 해당 비밀번호 문자로 전송
+ */
+
+router.post(
+  "/message/findPW",
+  userAgentMiddleWare("/api/auth/message/findPW"),
+  getNewPw
+);
+
+/**
+ * 비번 변경
+ *
+ */
+router.post(
+  "/message/modifyPW",
+  userAgentMiddleWare("/api/auth/message/modifyPW"),
+  async (req, res, next) => {
+    try {
+      const { id, newPw, pw } = req.body;
+      const exUser = await User.findOne({ where: { id: id } });
+      const Flag = await bcrypt.compare(pw, exUser.dataValues.password);
+      console.log(Flag);
+      if (Flag) {
+        await User.update(
+          { password: await bcrypt.hash(newPw, 12) },
+          { where: { id: id } }
+        );
+        res.status(200).json({
+          code: 200,
+          message: "비밀번호 변경 성공",
+        });
+      } else {
+        res.status(202).json({
+          code: 202,
+          message: "현재 비밀번호 인증 실패",
+        });
+      }
+    } catch (e) {
+      res.status(500).json({
+        code: 500,
+        message: `비밀번호 변경 중 서버내 알수없는 에러발생 ${e}`,
+      });
+    }
+  }
+);
 
 /**
  * 아이디 중복체크만 따로 분리
@@ -60,13 +122,12 @@ router.post(
   userAgentMiddleWare("/api/auth/join"),
   async (req, res, next) => {
     const result = {};
-    //const { id, pw, name } = req.body;
-    const { id, pw, name, nick = "" } = req.body;
     /**
      * 회원가입 시 비밀번호 암호화
      */
-    const hashPw = await bcrypt.hash(pw, 12);
     try {
+      const { id, nick = "", pw, name, tel = "" } = req.body;
+      const hashPw = await bcrypt.hash(pw, 12);
       const exUser = await User.findOne({ where: { id: id } });
       if (exUser) {
         result["success"] = 100;
@@ -76,9 +137,10 @@ router.post(
       }
       await User.create({
         id,
+        nick: nick,
         password: hashPw,
         name,
-        nick: nick,
+        tel: tel,
       });
       console.log(
         `회원가입 정보\nid : ${id}\npw : ${hashPw}\nname : ${name}\nnick : ${nick}`
