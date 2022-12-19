@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled, { keyframes } from "styled-components"; // 1.컴포넌트 추가
 import { logout } from "./func";
+import CommonModal from "./modals/CommonModal";
 
 // 2.이미지 불러옴
 import fir from "../img/fir.png";
+import normalFruit from "../img/normal_fruit.png";
+import sickFruit from "../img/sick_fruit.png";
+import iconWarning from "../img/icon-warning.png";
 
 // 3.타이틀바 : 로고(img), 메뉴(StyledBurger)
 export default function Titlebar() {
@@ -95,17 +99,25 @@ const StyledBurger = styled.div`
   }
 `;
 
-
 //4.슬라이딩 박스 : 로고, 유저이름, 열매현황, 액션버튼, 유틸메뉴, 저작권표기
 const Menu = ({ open, setOpen }) => {
   let user = useSelector((state) => state.user);
   console.log(user);
   const navigate = useNavigate();
-  const goJoin = () => {
+  const goPartyJoin = () => {
     navigate("/partyjoin");
   };
   const goJejuFruits = () => {
     navigate("#");
+  };
+  const gologin = () => {
+    navigate("/login");
+  };
+  const goJoin = () => {
+    navigate("/join");
+  };
+  const goAccount = () => {
+    navigate("/account");
   };
   const handleBackSpace = () => {
     setOpen(!open);
@@ -118,6 +130,16 @@ const Menu = ({ open, setOpen }) => {
       };
     }
   }, [open]);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleCommonModal = () => {
+    setOpenModal(!openModal);
+  };
+  const modalSubmit = () => {
+    logout(navigate);
+    window.location.reload();
+  };
   return (
     <>
       {open && <Dimmed onClick={handleBackSpace} />}
@@ -125,51 +147,99 @@ const Menu = ({ open, setOpen }) => {
         <MenuHead>
           <LogoImg src={fir} alt='logo' />
         </MenuHead>
-        <MenuContents>
-          <div className='greeting'>
-            <div className='greeting-title'>반갑습니다!</div>
-            <div className='greeting-name'>
-              <p className='userName'>
-                <span className='biColor'>{user.nick}</span>님
-              </p>
+        {/* 로그인 상태일 때 */}
+        {user.id && (
+          <MenuContents>
+            <div className='greeting'>
+              <div className='greeting-title'>반갑습니다!</div>
+              <div className='greeting-name'>
+                <p className='userName'>
+                  <span className='biColor'>{user.nick}</span>님
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className='fruit-dashboard'>
-            <div className='fruit-normal'>
-              <p>수확 열매</p>
-              <p>
-                <b>{user.good_cnt}</b>개 
-              </p>
+            <div className='fruit-dashboard'>
+              <div className='fruit-normal'>
+                <img className='fruit_badge' src={normalFruit} alt='수확 열매' width='40px' height='40px' />
+                <span className='fruit_type'>수확 열매</span>
+                <span className='fruit_count'>
+                  <b>{user.good_cnt}</b>개
+                </span>
+              </div>
+              <div className='fruit-sick'>
+                <img className='fruit_badge' src={sickFruit} alt='아픈 열매' width='40px' height='40px' />
+                <span className='fruit_type'>아픈 열매</span>
+                <span className='fruit_count'>
+                  <b>{user.bad_cnt}</b>개
+                </span>
+              </div>
             </div>
-            <div className='fruit-sick'>
-              <p>아픈 열매</p>
-              <p>
-                {/* 데이터 가져와야함 */}
-                <b>{user.bad_cnt}</b>개
-              </p>
+
+            <GoMainActionBtn onClick={goPartyJoin}>스터디 만들기</GoMainActionBtn>
+
+            <GoSubActionBtn onClick={goJejuFruits}>제주 열매 현황</GoSubActionBtn>
+
+            <LinkItemGroup>
+              <LinkItem onClick={() => navigate("#")}>이용약관</LinkItem>
+              {/* 페이지 연결해야함 */}
+              <LinkItem onClick={goAccount}>계정 관리</LinkItem>
+              {/* 로그아웃 기능 넣어야함 */}
+              <LinkItem onClick={() => handleCommonModal()}>로그아웃</LinkItem>
+            </LinkItemGroup>
+            <Copyright>Copyright © 2022 abang All Rights Reserved.</Copyright>
+          </MenuContents>
+        )}
+        {/* 로그인 안한 상태일 때 */}
+        {!user.id && (
+          <MenuContents>
+            <div className='greeting'>
+              <div className='greeting-title'>반갑습니다!</div>
+              <div className='greeting-name'>
+                <span className='biColor'>스터디</span>를 시작해보세요.
+              </div>
             </div>
-          </div>
 
-          <GoOpenStudyBtn onClick={goJoin}>스터디 만들기</GoOpenStudyBtn>
+            <div className='fruit-dashboard'>
+              <div className='fruit-normal'>
+                <img className='fruit_badge' src={normalFruit} alt='수확 열매' width='40px' height='40px' />
+                <span className='fruit_type'>수확 열매</span>
+                <span className='fruit_count'>
+                  <b>0</b>개
+                </span>
+              </div>
+              <div className='fruit-sick'>
+                <img className='fruit_badge' src={sickFruit} alt='아픈 열매' width='40px' height='40px' />
+                <span className='fruit_type'>아픈 열매</span>
+                <span className='fruit_count'>
+                  <b>0</b>개
+                </span>
+              </div>
+            </div>
 
-          <GoJejuFruitsBtn onClick={goJejuFruits}>제주 열매 현황</GoJejuFruitsBtn>
+            <GoMainActionBtn onClick={gologin}>로그인</GoMainActionBtn>
 
-          <LinkItemGroup>
-            <LinkItem onClick={() => navigate("#")}>이용약관</LinkItem>
-            {/* 페이지 연결해야함 */}
-            <LinkItem onClick={() => navigate("#")}>비밀번호 변경</LinkItem>
-            {/* 로그아웃 기능 넣어야함 */}
-            <LinkItem onClick={() => logout(navigate)}>로그아웃</LinkItem>
-          </LinkItemGroup>
+            <GoSubActionBtn onClick={goJoin}>회원가입</GoSubActionBtn>
 
-          <Copyright>Copyright © 2022 abang All Rights Reserved.</Copyright>
-        </MenuContents>
+            <Copyright>Copyright © 2022 abang All Rights Reserved.</Copyright>
+          </MenuContents>
+        )}
       </StyledMenu>
+
+      <CommonModal
+        toggle={openModal}
+        setToggle={handleCommonModal}
+        submitBtnLabel='로그아웃'
+        cancleBtnLabel='취소'
+        submitBtnOnClick={modalSubmit}
+        cancleBtnOnClick={handleCommonModal}
+      >
+        <img src={iconWarning} alt='경고아이콘'></img>
+        정말 로그아웃 하시겠습니까?
+      </CommonModal>
     </>
   );
 };
-
 
 //4-1. 백그라운드 딤드 애니메이션 정의
 const handleFade = keyframes`
@@ -214,7 +284,7 @@ const StyledMenu = styled.nav`
   .greeting {
     padding: 40px 24px 30px;
   }
-  
+
   .greeting-title {
     font-size: 20px;
     font-weight: 400;
@@ -242,7 +312,8 @@ const StyledMenu = styled.nav`
     font-weight: 400;
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+    padding: 10px 0;
     border-bottom: 1px solid #dddddd;
   }
 
@@ -250,8 +321,20 @@ const StyledMenu = styled.nav`
     font-size: 16px;
     font-weight: 400;
     display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .fruit_badge {
+    margin-right: 10px;
+  }
+
+  .fruit_type {
+    flex-grow: 10;
+  }
+
+  .fruit_count {
+    text-align: right;
   }
 `;
 
@@ -263,7 +346,7 @@ const LogoImg = styled.img`
 `;
 
 //4-5-1. 스터디 만들기 버튼 스타일 정의
-const GoOpenStudyBtn = styled.div`
+const GoMainActionBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,7 +360,7 @@ const GoOpenStudyBtn = styled.div`
 `;
 
 //4-5-2. 제주 열매 현황 버튼 스타일 정의
-const GoJejuFruitsBtn = styled.div`
+const GoSubActionBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,7 +377,6 @@ const GoJejuFruitsBtn = styled.div`
 const LinkItemGroup = styled.div`
   margin-top: 50px;
 `;
-
 
 //4-6-2. 유틸메뉴 3개 스타일 정의
 const LinkItem = styled.div`
