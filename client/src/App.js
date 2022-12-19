@@ -19,18 +19,20 @@ function App() {
   const PartyJoin = React.lazy(() => import("./page/detail/PartyJoin"));
   const PartyDetail = React.lazy(() => import("./page/detail/PartyDetail"));
   const Footer = React.lazy(() => import("./components/Footer"));
+  const Account = React.lazy(() => import("./page/account/Account"));
 
   return (
-    <AppContainer className="App">
+    <AppContainer className='App'>
       <Suspense fallback={<Lending />}>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/changepw" element={<ChangePw />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/partyjoin" element={<PartyJoin />} />
+          <Route path='/' element={<Main />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/join' element={<Join />} />
+          <Route path='/changepw' element={<ChangePw />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/partyjoin' element={<PartyJoin />} />
           <Route path={`/partydetail/:id`} element={<PartyDetail />} />
+          <Route path='/account' element={<Account />} />
         </Routes>
         <Footer />
       </Suspense>
@@ -40,7 +42,7 @@ function App() {
 }
 
 const AppContainer = styled.div`
-  font-family:"NanumSquare"
-`
+  font-family: "NanumSquare";
+`;
 
 export default App;
