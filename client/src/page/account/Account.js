@@ -3,17 +3,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { BsChevronLeft } from "react-icons/bs";
 
 export default function Titlebar() {
   const navigate = useNavigate();
   return (
-    <MainStyle>
-      <BsChevronLeft className='header-goback' onClick={() => navigate(-1)} />
-      <h1 className='header-title'>계정 관리</h1>
-      <hr />
-    </MainStyle>
+    <LayoutDetailPage>
+      <MainStyle>
+        <BsChevronLeft className="header-goback" onClick={() => navigate(-1)} />
+        <h1 className="header-title">계정 관리</h1>
+        <hr />
+      </MainStyle>
+    </LayoutDetailPage>
   );
 }
 

@@ -8,6 +8,7 @@ import Footer from "./../../components/Footer";
 import AddressInput from "../../components/maps/AddressInput";
 import StudyCard from "../../components/StudyCard";
 import Titlebar from "../../components/Titlebar.js";
+import LayoutMainPage from "../../layouts/LayoutMainPage";
 
 export default function Main() {
   const [category, setCategory] = useState("code");
@@ -15,36 +16,31 @@ export default function Main() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`/api/getStudyList/${category}`)
-      .then((res) => {
-        console.log(res.data);
-        setList(res.data.studyList);
-      })
-      .catch(function (error) {
-        navigate("/login");
-      });
-  }, [category, navigate]);
+    axios.get(`/api/getStudyList/${category}`).then((res) => {
+      console.log(res.data);
+      setList(res.data.studyList);
+    });
+  }, [category]);
 
   return (
-    <MainContainer>
-      <Titlebar />
-      <AddressInput update={setList} />
-      <MainCategory selected={category} changeCategory={setCategory} />
-      {list.map((el, idx) => {
-        return (
-          <Link to={`/partydetail/${el.study_no}`} key={idx}>
-            <StudyCard item={el} />
-          </Link>
-        );
-      })}
-      <Footer />
-    </MainContainer>
+    <LayoutMainPage>
+      <MainContainer>
+        <AddressInput update={setList} />
+        <MainCategory selected={category} changeCategory={setCategory} />
+        {list.map((el, idx) => {
+          return (
+            <Link to={`/detail/partydetail/${el.study_no}`} key={idx}>
+              <StudyCard item={el} />
+            </Link>
+          );
+        })}
+      </MainContainer>
+    </LayoutMainPage>
   );
 }
 
 const MainContainer = styled.div`
-  margin-top: 100px;
+  padding-top: 30px;
   margin-bottom: 100px;
 
   .test {

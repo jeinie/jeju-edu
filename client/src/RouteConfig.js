@@ -1,0 +1,96 @@
+import React from "react";
+
+const LayoutMainPage = React.lazy(() => import("./layouts/LayoutMainPage"));
+const Main = React.lazy(() => import("./page/Main/Main"));
+const Profile = React.lazy(() => import("./page/profile/Profile"));
+
+const LayoutDetailPage = React.lazy(() => import("./layouts/LayoutDetailPage"));
+const PartyJoin = React.lazy(() => import("./page/detail/PartyJoin"));
+const PartyDetail = React.lazy(() => import("./page/detail/PartyDetail"));
+const Account = React.lazy(() => import("./page/account/Account"));
+const Login = React.lazy(() => import("./page/login/Login"));
+const Join = React.lazy(() => import("./page/Join"));
+const ChangePw = React.lazy(() => import("./page/ChangePw"));
+
+export const RouterConfig = [
+  {
+    path: "/",
+    element: <LayoutMainPage />,
+    sceneConfig: {
+      enter: "from-fade",
+      exit: "to-fade",
+    },
+  },
+  {
+    path: "/home",
+    element: <Main />,
+    sceneConfig: {
+      enter: "from-fade",
+      exit: "to-fade",
+    },
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+    sceneConfig: {
+      enter: "from-fade",
+      exit: "to-fade",
+    },
+  },
+  {
+    path: "/detail",
+    element: <LayoutDetailPage />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/partydetail/:id",
+    element: <PartyDetail />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/partyjoin",
+    element: <PartyJoin />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/acount",
+    element: <Account />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/login",
+    element: <Login />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/join",
+    element: <Join />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/changepw",
+    element: <ChangePw />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+];

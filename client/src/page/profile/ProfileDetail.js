@@ -3,39 +3,42 @@ import styled from "styled-components";
 
 import { MdPeopleAlt } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 
 export default function ProfileDetail({ list }) {
   console.log(list);
   // const stateArr = ["대기","매칭","마감기한 만료","","완료"]
   return (
-    <Wrapper>
-      {list.map((el, idx) => {
-        console.log(el);
-        return (
-          <ListContainer key={idx}>
-            <div className="header">
-              <div className="headerTitleState">
-                <p className="userName">{el.who_open}</p>
-                <p className="partyName">{el.study_name}</p>
+    <LayoutDetailPage>
+      <Wrapper>
+        {list.map((el, idx) => {
+          console.log(el);
+          return (
+            <ListContainer key={idx}>
+              <div className="header">
+                <div className="headerTitleState">
+                  <p className="userName">{el.who_open}</p>
+                  <p className="partyName">{el.study_name}</p>
+                </div>
+                <div>
+                  <button className="matching">매칭</button>
+                </div>
               </div>
-              <div>
-                <button className="matching">매칭</button>
+              <div className="body">
+                <div className="bodyInfo">
+                  <HiLocationMarker />
+                  <p>{el.location}</p>
+                </div>
+                <div className="footerInfo">
+                  <MdPeopleAlt />
+                  <p className="footerMember">{el.members}</p>
+                </div>
               </div>
-            </div>
-            <div className="body">
-              <div className="bodyInfo">
-                <HiLocationMarker />
-                <p>{el.location}</p>
-              </div>
-              <div className="footerInfo">
-                <MdPeopleAlt />
-                <p className="footerMember">{el.members}</p>
-              </div>
-            </div>
-          </ListContainer>
-        );
-      })}
-    </Wrapper>
+            </ListContainer>
+          );
+        })}
+      </Wrapper>
+    </LayoutDetailPage>
   );
 }
 

@@ -6,7 +6,7 @@ export default function AddressAPI() {
   const { opener } = window;
   //   document.domain = "http://44.211.218.78/login";
   function init() {
-    var url = navigate("/");
+    var url = navigate("/home");
     var confmKey = `devU01TX0FVVEgyMDIyMTIxNjIxMDQwMzExMzM1MDY
     `;
     // 연계신청시 부여받은 승인키입력(테스트용 승인키 : TESTJUSOGOKR)

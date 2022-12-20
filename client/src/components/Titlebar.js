@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled, { keyframes } from "styled-components"; // 1.컴포넌트 추가
 import { logout } from "./func";
@@ -7,6 +7,7 @@ import CommonModal from "./modals/CommonModal";
 
 // 2.이미지 불러옴
 import fir from "../img/fir.png";
+import backbtn from "../img/icon-back.svg";
 import normalFruit from "../img/normal_fruit.png";
 import sickFruit from "../img/sick_fruit.png";
 import iconWarning from "../img/icon-warning.png";
@@ -14,15 +15,54 @@ import iconWarning from "../img/icon-warning.png";
 // 3.타이틀바 : 로고(img), 메뉴(StyledBurger)
 export default function Titlebar() {
   const [open, setOpen] = useState(false);
+  const [bg, setBg] = useState("#ffffff");
+
   return (
-    <TitlebarContainer>
-      <img src={fir} alt='logo' width='67px' height='21px' />
+    <TitlebarContainer bg={bg}>
+      <img src={fir} alt="logo" width="67px" height="21px" />
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
         <div />
         <div />
         <div />
       </StyledBurger>
       <Menu open={open} setOpen={setOpen} />
+    </TitlebarContainer>
+  );
+}
+
+export function DetailTitlebar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
+  const [title, setTitle] = useState("");
+  const [bg, setBg] = useState("#FAF6F2");
+  const [none, setNone] = useState("");
+
+  useEffect(() => {
+    switch (pathname) {
+      case "/detail/login":
+        return setTitle("로그인하기");
+      case "/detail/account":
+        return setTitle("계정 관리");
+      case "/detail/changepw":
+        return setTitle("비밀번호 변경");
+      case "/detail/partyjoin":
+        return setTitle("스터디 개설하기"), setBg("#ffffff");
+      case "/detail/account":
+        return setTitle("계정 관리");
+      case "/detail/join":
+        return setTitle("회원가입");
+      default:
+        return setTitle(""), setNone("none");
+    }
+  }, [pathname]);
+
+  return (
+    <TitlebarContainer detail={true} bg={bg} none={none}>
+      <div className="backbtn" onClick={() => navigate(-1)}>
+        <img src={backbtn} alt="뒤로가기" height="24px" />
+      </div>
+      <div className="title">{title}</div>
     </TitlebarContainer>
   );
 }
@@ -37,24 +77,43 @@ const TitlebarContainer = styled.header`
   left: 0;
   background: #ffffff;
   z-index: 100;
-  border-bottom: 1px solid #dddddd;
-
+  border-bottom: ${({ detail }) => (detail ? "none" : "1px solid #dddddd")};
   width: 100%;
   height: 60px;
   font-size: 48px;
   left: 0;
   bottom: 0;
-  background: white;
+  background: ${(props) => props.bg};
   box-sizing: border-box;
   width: 100%;
   padding: 0px 20px;
-
+  display: ${(props) => props.none};
   .plusbtn {
     width: 48px;
     height: 48px;
     border-radius: 50%;
     color: white;
     background-color: black;
+  }
+
+  .backbtn {
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title {
+    margin-left: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    color: #000000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
 
@@ -90,7 +149,8 @@ const StyledBurger = styled.div`
 
     :nth-child(2) {
       opacity: ${({ open }) => (open ? "0" : "1")};
-      transform: ${({ open }) => (open ? "translateX(-20px)" : "translateX(0)")};
+      transform: ${({ open }) =>
+        open ? "translateX(-20px)" : "translateX(0)"};
     }
 
     :nth-child(3) {
@@ -102,22 +162,21 @@ const StyledBurger = styled.div`
 //4.슬라이딩 박스 : 로고, 유저이름, 열매현황, 액션버튼, 유틸메뉴, 저작권표기
 const Menu = ({ open, setOpen }) => {
   let user = useSelector((state) => state.user);
-  console.log(user);
   const navigate = useNavigate();
   const goPartyJoin = () => {
-    navigate("/partyjoin");
+    navigate("/detail/partyjoin");
   };
   const goJejuFruits = () => {
     navigate("#");
   };
   const gologin = () => {
-    navigate("/login");
+    navigate("/detail/login");
   };
   const goJoin = () => {
-    navigate("/join");
+    navigate("/detail/join");
   };
   const goAccount = () => {
-    navigate("/account");
+    navigate("/detail/account");
   };
   const handleBackSpace = () => {
     setOpen(!open);
@@ -145,40 +204,56 @@ const Menu = ({ open, setOpen }) => {
       {open && <Dimmed onClick={handleBackSpace} />}
       <StyledMenu open={open}>
         <MenuHead>
-          <LogoImg src={fir} alt='logo' />
+          <LogoImg src={fir} alt="logo" />
         </MenuHead>
         {/* 로그인 상태일 때 */}
         {user.id && (
           <MenuContents>
-            <div className='greeting'>
-              <div className='greeting-title'>반갑습니다!</div>
-              <div className='greeting-name'>
-                <p className='userName'>
-                  <span className='biColor'>{user.nick}</span>님
+            <div className="greeting">
+              <div className="greeting-title">반갑습니다!</div>
+              <div className="greeting-name">
+                <p className="userName">
+                  <span className="biColor">{user.nick}</span>님
                 </p>
               </div>
             </div>
 
-            <div className='fruit-dashboard'>
-              <div className='fruit-normal'>
-                <img className='fruit_badge' src={normalFruit} alt='수확 열매' width='40px' height='40px' />
-                <span className='fruit_type'>수확 열매</span>
-                <span className='fruit_count'>
+            <div className="fruit-dashboard">
+              <div className="fruit-normal">
+                <img
+                  className="fruit_badge"
+                  src={normalFruit}
+                  alt="수확 열매"
+                  width="40px"
+                  height="40px"
+                />
+                <span className="fruit_type">수확 열매</span>
+                <span className="fruit_count">
                   <b>{user.good_cnt}</b>개
                 </span>
               </div>
-              <div className='fruit-sick'>
-                <img className='fruit_badge' src={sickFruit} alt='아픈 열매' width='40px' height='40px' />
-                <span className='fruit_type'>아픈 열매</span>
-                <span className='fruit_count'>
+              <div className="fruit-sick">
+                <img
+                  className="fruit_badge"
+                  src={sickFruit}
+                  alt="아픈 열매"
+                  width="40px"
+                  height="40px"
+                />
+                <span className="fruit_type">아픈 열매</span>
+                <span className="fruit_count">
                   <b>{user.bad_cnt}</b>개
                 </span>
               </div>
             </div>
 
-            <GoMainActionBtn onClick={goPartyJoin}>스터디 만들기</GoMainActionBtn>
+            <GoMainActionBtn onClick={goPartyJoin}>
+              스터디 만들기
+            </GoMainActionBtn>
 
-            <GoSubActionBtn onClick={goJejuFruits}>제주 열매 현황</GoSubActionBtn>
+            <GoSubActionBtn onClick={goJejuFruits}>
+              제주 열매 현황
+            </GoSubActionBtn>
 
             <LinkItemGroup>
               <LinkItem onClick={() => navigate("#")}>이용약관</LinkItem>
@@ -193,25 +268,37 @@ const Menu = ({ open, setOpen }) => {
         {/* 로그인 안한 상태일 때 */}
         {!user.id && (
           <MenuContents>
-            <div className='greeting'>
-              <div className='greeting-title'>반갑습니다!</div>
-              <div className='greeting-name'>
-                <span className='biColor'>스터디</span>를 시작해보세요.
+            <div className="greeting">
+              <div className="greeting-title">반갑습니다!</div>
+              <div className="greeting-name">
+                <span className="biColor">스터디</span>를 시작해보세요.
               </div>
             </div>
 
-            <div className='fruit-dashboard'>
-              <div className='fruit-normal'>
-                <img className='fruit_badge' src={normalFruit} alt='수확 열매' width='40px' height='40px' />
-                <span className='fruit_type'>수확 열매</span>
-                <span className='fruit_count'>
+            <div className="fruit-dashboard">
+              <div className="fruit-normal">
+                <img
+                  className="fruit_badge"
+                  src={normalFruit}
+                  alt="수확 열매"
+                  width="40px"
+                  height="40px"
+                />
+                <span className="fruit_type">수확 열매</span>
+                <span className="fruit_count">
                   <b>0</b>개
                 </span>
               </div>
-              <div className='fruit-sick'>
-                <img className='fruit_badge' src={sickFruit} alt='아픈 열매' width='40px' height='40px' />
-                <span className='fruit_type'>아픈 열매</span>
-                <span className='fruit_count'>
+              <div className="fruit-sick">
+                <img
+                  className="fruit_badge"
+                  src={sickFruit}
+                  alt="아픈 열매"
+                  width="40px"
+                  height="40px"
+                />
+                <span className="fruit_type">아픈 열매</span>
+                <span className="fruit_count">
                   <b>0</b>개
                 </span>
               </div>
@@ -229,12 +316,12 @@ const Menu = ({ open, setOpen }) => {
       <CommonModal
         toggle={openModal}
         setToggle={handleCommonModal}
-        submitBtnLabel='로그아웃'
-        cancleBtnLabel='취소'
+        submitBtnLabel="로그아웃"
+        cancleBtnLabel="취소"
         submitBtnOnClick={modalSubmit}
         cancleBtnOnClick={handleCommonModal}
       >
-        <img src={iconWarning} alt='경고아이콘'></img>
+        <img src={iconWarning} alt="경고아이콘"></img>
         정말 로그아웃 하시겠습니까?
       </CommonModal>
     </>
