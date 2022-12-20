@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import {Input, Checkbox, Button, InputWithBtn} from '../components/form';
 import styled from 'styled-components';
-import { BsChevronLeft } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
-import fir from '../img/fir.png';
 import axios from 'axios';
+import {Input, Checkbox, Button, InputWithBtn} from '../components/form';
+import CommonModal from "../components/modals/CommonModal";
+
+import fir from '../img/fir.png';
+import { BsChevronLeft, BsCheckCircle } from "react-icons/bs";
+import iconWarning from "../img/icon-warning.png";
 
 /**
  * 2022-12-12 hssuh
@@ -33,6 +36,9 @@ export default function Join() {
     const idMount = useRef(false);
     const pwMount = useRef(false);
     const pwConfirmMount = useRef(false);
+
+    const [openModal, setOpenModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState({type:"", text:""})
 
     const totalValidCheck = () => {
         return (name !== "") && (nick !== "") && idOk && pwOk && pwConfirmOk && check
@@ -90,10 +96,11 @@ export default function Join() {
         axios.post(`/api/auth/join`, body)
         .then((response) => {
             if (response.data.success === 200) {
-                alert("가입을 완료했습니다.")
-                navigate("/login");
+                setOpenModal(true);
+                setModalMsg({type:"success", text:"가입을 완료했습니다."});
             } else {
-                alert("저장실패")
+                setOpenModal(true);
+                setModalMsg({type:"fail", text:"가입 실패"});
             }
         })
     }
@@ -128,6 +135,15 @@ export default function Join() {
                 <Checkbox label={"젠프라의 <b>서비스이용약관, 개인정보 취급 방침</b>에 동의합니다. (필수)"} value={check} setValue={setCheck} style={{marginTop:"50px"}} />
                 <Button text="회원가입 완료하기" marginTop="44px" disabled={!totalOk}/>
             </JoinForm>
+            <CommonModal
+                toggle={openModal}
+                setToggle={()=>setOpenModal(!openModal)}
+                submitBtnLabel='닫기'
+                submitBtnOnClick={()=>navigate("/login")}
+            >
+                { modalMsg.type === "fail" ? <img src={iconWarning} alt='경고아이콘' /> : <BsCheckCircle color='orange' size="32" marginBottom="10px"/> }
+                { modalMsg.text }
+            </CommonModal>
         </JoinContainer>
     );
 };

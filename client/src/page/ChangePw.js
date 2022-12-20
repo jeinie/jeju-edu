@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux'; 
-import { Input, Button } from '../components/form';
-import styled from 'styled-components';
-import { BsChevronLeft } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'; 
+import styled from 'styled-components';
+import { Input, Button } from '../components/form';
+import CommonModal from "../components/modals/CommonModal";
+import { BsChevronLeft } from "react-icons/bs";
 
+import iconWarning from "../img/icon-warning.png";
 import axios from 'axios';
 /**
  * 2022-12-18 hssuh
@@ -32,6 +34,8 @@ export default function ChangePw() {
     const [newPwConfirmOk, setNewPwConfirmOk] = useState(false);
 
     const [totalOk, setTotalOk] = useState(false);
+
+    const [openModal, setOpenModal] = useState(false);
 
     const pwValidCheck = () => {
         if (pw.length < 8) {
@@ -67,19 +71,21 @@ export default function ChangePw() {
         return pwOk && newPwOk && newPwConfirmOk;
     }
 
-    const handleSubmit = (e) => {
+    const handleClick = (e) => {
         e.preventDefault();
+        setOpenModal(true);
+    }
 
+    const handleSubmit = () => {
         const body = {
             id:id,
-            pw:e.target.pw.value,
-            newPw:e.target.newPw.value
+            pw:pw,
+            newPw:newPw
         };
 
         axios.post(`/api/auth/message/modifyPW`, body)
         .then((response) => {
             if (response.data.code === 200) {
-                alert("변경완료")
                 navigate("/login");
             } else if (response.data.code === 202){
                 setPwOk(false);
@@ -87,7 +93,7 @@ export default function ChangePw() {
             } else {
                 alert("변경실패 : 서버오류")
             }
-        })
+        }).finally(()=>setOpenModal(true))
     };
 
     useEffect(()=>{
@@ -106,10 +112,10 @@ export default function ChangePw() {
     }, [newPwConfirm]);
 
     useEffect(()=>setTotalOk(totalValidCheck()), [pw, newPw, newPwConfirm, pwOk, newPwOk, newPwConfirmOk,]);
-
+    //navigate("/login");
     return (
         <ChangePwContainer>
-            <ChangePwForm onSubmit={handleSubmit}>
+            <ChangePwForm onSubmit={handleClick}>
                 <BsChevronLeft className='header-goback' onClick={()=>navigate(-1)}/>
                 <h1 className="header-title">비밀번호변경</h1>
                 <hr/>
@@ -118,6 +124,17 @@ export default function ChangePw() {
                 <Input label="변경하실 비밀번호 확인*" name="newPwConfirm" placeholder="변경하실 비밀번호를 입력해주세요" value={newPwConfirm} setValue={setNewPwConfirm} desc={newPwConfirmDesc} style={{marginBottom:"20px"}} maxLength={16} password/>
                 <Button text="비밀번호 변경완료" style={{position:"absolute", bottom:"20px"}} disabled={!totalOk}/>
             </ChangePwForm>
+            <CommonModal
+                toggle={openModal}
+                setToggle={()=>setOpenModal(!openModal)}
+                submitBtnLabel='비밀번호 변경'
+                cancleBtnLabel='취소'
+                submitBtnOnClick={handleSubmit}
+                cancleBtnOnClick={()=>setOpenModal(false)}
+            >
+            <img src={iconWarning} alt='경고아이콘'></img>
+            비밀번호를 변경하시겠어요?
+            </CommonModal>
         </ChangePwContainer>
     );
 }
