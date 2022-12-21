@@ -132,12 +132,6 @@ export default function Join() {
     <LayoutDetailPage>
       <JoinContainer>
         <JoinForm onSubmit={handleSubmit}>
-          <BsChevronLeft
-            className="header-goback"
-            onClick={() => navigate(-1)}
-          />
-          <h1 className="header-title">회원가입</h1>
-          <hr />
           <ImageContainer>
             <img src={fir} alt="logo" />
           </ImageContainer>
@@ -211,7 +205,7 @@ export default function Join() {
           toggle={openModal}
           setToggle={() => setOpenModal(!openModal)}
           submitBtnLabel="닫기"
-          submitBtnOnClick={() => navigate("/login")}
+          submitBtnOnClick={() => navigate("/detail/login")}
         >
           {modalMsg.type === "fail" ? (
             <img src={iconWarning} alt="경고아이콘" />
@@ -238,7 +232,7 @@ const JoinForm = styled.form`
 
 const JoinContainer = styled.div`
   position: absolute;
-  background: #f4ede7;
+  background: #faf6f2;
   background-size: cover;
 `;
 

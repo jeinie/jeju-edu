@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect, useNavigate } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Input, Button } from "../components/form";
 import styled from "styled-components";
@@ -121,12 +122,6 @@ export default function ChangePw() {
     <LayoutDetailPage>
       <ChangePwContainer>
         <ChangePwForm onSubmit={handleSubmit}>
-          <BsChevronLeft
-            className="header-goback"
-            onClick={() => navigate(-1)}
-          />
-          <h1 className="header-title">비밀번호변경</h1>
-          <hr />
           <Input
             label="현재 비밀번호*"
             name="pw"
@@ -171,8 +166,9 @@ export default function ChangePw() {
   );
 }
 const ChangePwForm = styled.form`
-  height: 90vh;
   margin: 32px 32px;
+  display: block;
+  height: calc(100% - 100px);
   position: relative;
   .header-goback {
     float: left;
@@ -184,7 +180,10 @@ const ChangePwForm = styled.form`
 `;
 
 const ChangePwContainer = styled.div`
+  box-sizing: border-box;
+  height: calc(100vh - 60px);
+  width: 100%;
   position: absolute;
-  background: #f4ede7;
+  background: #faf6f2;
   background-size: cover;
 `;
