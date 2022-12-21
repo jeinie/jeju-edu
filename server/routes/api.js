@@ -9,6 +9,24 @@ const router = express.Router();
 const userAgentMiddleWare = require("./userAgentMiddleWare");
 const authMiddleWare = require("./authMiddleWare");
 
+const getDateDiff = (date) => {
+  var today = new Date();
+
+  return Math.floor(
+    Math.abs(
+      (new Date(
+        today.getFullYear() +
+          "-" +
+          ("0" + (today.getMonth() + 1)).slice(-2) +
+          "-" +
+          ("0" + today.getDate()).slice(-2)
+      ).getTime() -
+        new Date(date).getTime()) /
+        (1000 * 60 * 60 * 24)
+    )
+  ); // 밀리세컨 * 초 * 분 * 시 = 일
+};
+
 router.get(
   "/getStudyList/code",
   userAgentMiddleWare("/api/getStudyList/code"),
@@ -32,6 +50,7 @@ router.get(
           let concat = item.studyAt_location.split(" ");
           let result = concat[1] + " " + concat[2];
           item.studyAt_location = result;
+          item.Dday = getDateDiff(item.studyAt_date);
         });
 
         res.status(200).json({
@@ -70,9 +89,12 @@ router.get(
 
       if (studyList) {
         Array.from(studyList).forEach((item) => {
-          let concat = item.studyAt_location.split(" ");
-          let result = concat[1] + " " + concat[2];
-          item.studyAt_location = result;
+          Array.from(studyList).forEach((item) => {
+            let concat = item.studyAt_location.split(" ");
+            let result = concat[1] + " " + concat[2];
+            item.studyAt_location = result;
+            item.Dday = getDateDiff(item.studyAt_date);
+          });
         });
 
         res.status(200).json({
@@ -115,13 +137,14 @@ router.get(
           let concat = item.studyAt_location.split(" ");
           let result = concat[1] + " " + concat[2];
           item.studyAt_location = result;
-        });
-        res.status(200).json({
-          code: 200,
-          message: `디자인 관련 스터디 추출 성공`,
-          studyList: studyList,
+          item.Dday = getDateDiff(item.studyAt_date);
         });
       }
+      res.status(200).json({
+        code: 200,
+        message: `디자인 관련 스터디 추출 성공`,
+        studyList: studyList,
+      });
     } catch (error) {
       res.status(500).json({
         code: 500,
@@ -286,25 +309,25 @@ router.post(
   userAgentMiddleWare("/api/openStudy"),
   authMiddleWare,
   async (req, res, next) => {
-    const result = {};
-    const {
-      who_open,
-      study_title,
-      study_category,
-      study_detail_description,
-      min_member_cnt,
-      studyAt_date,
-      studyAt_location,
-      tmX,
-      tmY,
-      deadline,
-      status,
-    } = req.body;
-
-    console.log(tmX);
-    console.log(tmY);
-
     try {
+      const {
+        who_open,
+        study_title,
+        study_category,
+        study_detail_description,
+        min_member_cnt,
+        studyAt_date,
+        studyAt_location,
+        tmX,
+        tmY,
+        deadline,
+        status,
+      } = req.body;
+
+      console.log(tmX);
+      console.log(tmY);
+      console.log(studyAt_date);
+      console.log(deadline);
       await Study.create({
         who_open: who_open,
         study_title: study_title,

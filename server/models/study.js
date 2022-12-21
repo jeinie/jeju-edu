@@ -51,7 +51,7 @@ module.exports = class Study extends Sequelize.Model {
         */
         //공부하기로 잡힌 날짜는 따로 기록하는게 맞음으로 study_date는 살린다
         studyAt_date: {
-          type: Sequelize.DATEONLY,
+          type: Sequelize.DATE,
           allowNull: false,
         },
         //좌표를 따로 넣을건데 지역구 네임을 가지는 의미가 있을까 싶다.. 상의해봐야할듯하다
@@ -72,10 +72,14 @@ module.exports = class Study extends Sequelize.Model {
         기한이 지난 스터디는 쿼리하나로 한꺼번에 삭제하여 deletedAt기록을 남기는게 맞는것같은데.." 상의를 해보자
         */
         deadline: {
-          type: Sequelize.DATEONLY,
+          type: Sequelize.DATE,
           allowNull: false,
         },
         status: {
+          type: Sequelize.INTEGER,
+          defaultValue: 0,
+        },
+        Dday: {
           type: Sequelize.INTEGER,
           defaultValue: 0,
         },

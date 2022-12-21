@@ -725,6 +725,10 @@ const options = {
           status: {
             type: "integer",
           },
+          Dday: {
+            type: "integer",
+            description: "해당 스터디 개시의 Dday",
+          },
         },
       },
       DBAllStudyListTable: {
@@ -830,14 +834,16 @@ const options = {
             type: "string",
             description: "고객의 실명이 기입된다",
           },
+          /*
           tel: {
             type: "string",
             description: "고객의 휴대폰 번호이다",
           },
-          /*nick: {
+          */
+          nick: {
             type: "string",
             description: "고객이 웹/앱상에서 사용할 닉네임이 입력된다",
-          },*/
+          },
         },
       },
       apiAuthJoinResponseForm: {
@@ -1016,6 +1022,10 @@ const options = {
                 description:
                   "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
               },
+              Dday: {
+                type: "integer",
+                description: "해당 스터디 개시의 Dday",
+              },
               createdAt: {
                 type: "date",
                 description:
@@ -1119,6 +1129,10 @@ const options = {
                 description:
                   "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
               },
+              Dday: {
+                type: "integer",
+                description: "해당 스터디 개시의 Dday",
+              },
               createdAt: {
                 type: "date",
                 description:
@@ -1221,6 +1235,10 @@ const options = {
                 type: "integer",
                 description:
                   "해당 스터디의 상태 ex) 0 = 모집중 , 1 = 인원마감 , 2 = 진행중 , 3 = 완료 근데 완료가 굳이 필요할까싶은...",
+              },
+              Dday: {
+                type: "integer",
+                description: "해당 스터디 개시의 Dday",
               },
               createdAt: {
                 type: "date",
