@@ -1,11 +1,5 @@
 import React, { useEffect, Suspense } from "react";
-import {
-  Route,
-  Routes,
-  useNavigate,
-  useNavigationType,
-  useLocation,
-} from "react-router-dom";
+import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { RouterConfig } from "./RouteConfig";
@@ -36,19 +30,14 @@ function App() {
 
   useEffect(() => {
     let pathname = location.pathname;
-    pathname === "/"
-      ? navigate("/home", { replace: true })
-      : navigate(pathname, { replace: true });
+    pathname === "/" ? navigate("/home", { replace: true }) : navigate(pathname, { replace: true });
 
     dispatch(savePathname({ pathname }));
   }, []);
 
   const getSceneConfig = (location) => {
     const matchedRoute =
-      location &&
-      RouterConfig.find((config) =>
-        new RegExp(`^${config.path}$`).test(location.pathname)
-      );
+      location && RouterConfig.find((config) => new RegExp(`^${config.path}$`).test(location.pathname));
 
     return (matchedRoute && matchedRoute.sceneConfig) || DEFAULT_SCENE_CONFIG;
   };
@@ -64,11 +53,8 @@ function App() {
   oldLocation = location;
 
   return (
-    <TransitionGroup
-      className={"router-wrapper"}
-      childFactory={(child) => React.cloneElement(child, { classNames })}
-    >
-      <CSSTransition timeout={150} key={location.pathname}>
+    <TransitionGroup className={"router-wrapper"} childFactory={(child) => React.cloneElement(child, { classNames })}>
+      <CSSTransition timeout={300} key={location.pathname}>
         <Suspense fallback={<LoadingSpinner />}>
           <Routes location={location}>
             {RouterConfig.map((config, index) => {

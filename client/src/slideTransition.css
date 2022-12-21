@@ -41,6 +41,47 @@
   transition: all 400ms;
 }
 
+
+
+.forward-from-left-enter main {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.forward-from-left-enter-active main {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 400ms;
+}
+
+.forward-from-left-exit main {
+  opacity: 1;
+}
+.forward-from-left-exit-active main {
+  opacity: 0.3;
+  transition: all 400ms;
+}
+
+.back-to-left-enter main {
+  opacity: 0.3;
+}
+.back-to-left-enter-active main {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 400ms;
+}
+
+.back-to-left-exit main {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.back-to-left-exit-active main {
+  opacity: 0;
+  transform: translate(-100%);
+  transition: all 400ms;
+}
+
 .forward-from-fade-enter main {
   opacity: 0;
 }
