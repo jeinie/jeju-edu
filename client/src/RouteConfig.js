@@ -25,16 +25,16 @@ export const RouterConfig = [
     path: "/home",
     element: <Main />,
     sceneConfig: {
-      enter: "from-fade",
-      exit: "to-fade",
+      enter: "from-left",
+      exit: "to-left",
     },
   },
   {
     path: "/profile",
     element: <Profile />,
     sceneConfig: {
-      enter: "from-fade",
-      exit: "to-fade",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
@@ -73,16 +73,16 @@ export const RouterConfig = [
     path: "/detail/login",
     element: <Login />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-fade",
+      exit: "to-fade",
     },
   },
   {
     path: "/detail/join",
     element: <Join />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-fade",
+      exit: "to-fade",
     },
   },
   {

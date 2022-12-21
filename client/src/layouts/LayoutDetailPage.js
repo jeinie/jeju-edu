@@ -10,9 +10,10 @@ const Content = styled.main`
   position: fixed;
   top: ${(props) => props.top};
   left: 0;
-  z-index: 20;
+  z-index: 50;
   overflow-y: scroll;
   overflow-x: hidden;
+  background: #fff;
 `;
 const LayoutDetailPage = ({ children, top = "60px" }) => {
   return (
