@@ -1,126 +1,158 @@
 import styled from "styled-components";
-
-import { BsSuitHeartFill } from "react-icons/bs";
-import { MdPeopleAlt, MdLocationOn } from "react-icons/md";
 import React from "react";
+
+import { ChangeDate } from "../utils/ChangeDate";
+
+import IconLocation from "../img/icon-location.png";
+import IconMember from "../img/icon-member.png";
+import IconCalendar from "../img/icon-calendar.png";
+import tree_2_1x from "../img/tree_2_1x.png";
+import tree_3_1x from "../img/tree_3_1x.png";
+import tree_4_1x from "../img/tree_4_1x.png";
+import tree_1_1x from "../img/tree_1_1x.png";
+import { useEffect } from "react";
 
 export default function StudyCard({ item }) {
   console.log(item);
+
+  const handleImage = (currentValue, totalValue) => {
+    if (totalValue === currentValue) return tree_4_1x;
+    if (parseInt(totalValue / 4) * 3 <= currentValue) return tree_3_1x;
+    if (parseInt(totalValue / 4) * 2 <= currentValue) return tree_2_1x;
+    if (parseInt(totalValue / 4) >= currentValue) return tree_1_1x;
+  };
+
   return (
     <StudyBox>
-      <IconBox>
-        <StudyTitle>{item.study_title}</StudyTitle>
-        <div className="deadLine">D-</div>
-      </IconBox>
-      <div className="partyInfo">
-        <div className="partyLocation">
-          <MdLocationOn />
-          {/* place 아이콘 */}
-          <p className="partyLocationAddress">{item.studyAt_location}</p>
+      <DDay>모집 마감까지 D-{item.Dday}</DDay>
+      <StudyTitle>{item.study_title}</StudyTitle>
+      <Location>
+        <img src={IconLocation} alt="지역" width="15px" />
+        <p>{item.studyAt_location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
+      </Location>
+      <UtilityGroup>
+        <div>
+          <img src={IconCalendar} alt="지역" width="21px" />
+          <p>{ChangeDate(item.studyAt_date)}</p>
         </div>
-        <div className="partyMembers">
-          <div className="peopleGraph">
-            <div className="peopleGraphCount"></div>
-          </div>
-          <div className="peopleCount">
-            <MdPeopleAlt className="peopleIcon" />
-            <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
-          </div>
+        <div>
+          <img src={IconMember} alt="참여인원" width="20px" />
+          <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
         </div>
-      </div>
+      </UtilityGroup>
+
+      <VisualIconBg />
+      <VisualIcon
+        className="Seed"
+        src={handleImage(item.current_member_cnt, item.min_member_cnt)}
+        alt="viewDetail.js 이미지"
+      />
     </StudyBox>
   );
 }
 
 const StudyBox = styled.div`
-  height: 102px;
-  margin: 20px;
-  padding: 14px 20px;
+  margin: 0 30px 12px;
+  padding: 16px;
+  position: relative;
   background: #f4ede7;
-  border-radius: 15px;
-
-  .likeBtn {
-    color: lightGray;
-  }
-  .font {
-    margin-top: 20px;
-  }
-  .partyInfo {
-    font-size: 12px;
-    margin-top: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .partyLocation {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    width: 47%;
-
-    .partyLocationAddress {
-      margin-left: 10px;
-    }
-  }
-
-  .partyMembers {
-    display: flex;
-    justify-content: space-between;
-    height: 16px;
-    font-size: 16px;
-    padding-top: 18px;
-  }
-
-  .peopleIcon {
-    border: none;
-  }
-
-  .peopleCount {
-    width: 20%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .peopleGraph {
-    width: 75%;
-    border: 1px solid black;
-    border-radius: 3px;
-    box-sizing: border-box;
-    padding: 0;
-    overflow: hidden;
-  }
-  .peopleGraphCount {
-    width: 70%;
-    height: 120%;
-    background-color: black;
-    border-radius: 3px;
-    box-sizing: border-box;
-  }
+  border-radius: 10px;
 `;
 
-const IconBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  height: 17px;
-
-  .deadLine {
-    color: white;
-    background-color: black;
-    border-radius: 8px;
-    width: 20%;
-    height: 100%;
-    text-align: center;
-  }
+const DDay = styled.div`
+  display: inline-flex;
+  padding: 4.5px 5.5px;
+  margin-bottom: 19px;
+  background: #000000;
+  border-radius: 3px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 14px;
+  text-align: center;
+  color: #ffffff;
 `;
 
 const StudyTitle = styled.p`
-  text-align: left;
-  color: #000000;
+  max-width: 70%;
+  max-height: 44px;
+  margin-bottom: 21px;
+
+  font-weight: 700;
   font-size: 15px;
-  font-weight: bold;
+  line-height: 125%;
+  color: #000000;
+
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
+const Location = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 23px;
+
+  p {
+    margin-left: 10px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 14px;
+    color: #000000;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+`;
+
+const UtilityGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    img:nth-child(1) {
+      margin-left: -3px;
+    }
+
+    > p {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 14px;
+      color: #000000;
+      margin-left: 7px;
+
+      &:nth-child(1) {
+        margin-left: 10px;
+      }
+    }
+  }
+`;
+
+const VisualIcon = styled.img`
+  width: 54px;
+  height: 56px;
+  position: absolute;
+  top: 25px;
+  right: 29px;
+`;
+
+const VisualIconBg = styled.div`
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  top: 40px;
+  right: 17px;
+  background: #e47b00;
+  border-radius: 22px;
 `;

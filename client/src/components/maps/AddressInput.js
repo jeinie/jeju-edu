@@ -67,7 +67,7 @@ const TestBox = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 30px;
   }
   .alarm {
     color: red;
@@ -77,8 +77,8 @@ const TestBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
-    margin: 0 21px 12px 21px;
+    padding: 0 20px;
+    margin: 0 30px 10px 30px;
     height: 36px;
     border-radius: 25px;
     background: black;
@@ -94,6 +94,10 @@ const TestBox = styled.div`
     display: flex;
     align-items: center;
     margin-right: 10px;
+
+    font-size: 12px;
+    line-height: 13px;
+    color: #474747;
   }
 
   .locationIcon {
