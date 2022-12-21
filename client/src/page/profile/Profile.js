@@ -8,7 +8,7 @@ import axios from "axios";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdPeopleAlt } from "react-icons/md";
 
-import Titlebar from "../../components/Titlebar.js"
+import LayoutMainPage from "../../layouts/LayoutMainPage.js";
 
 export default function Profile() {
   const [selected, setSelected] = useState("join");
@@ -50,53 +50,59 @@ export default function Profile() {
   }, []);
 
   return (
-    <MainContainer>
-      <Titlebar/>
-      <p className="myProfile">My page</p>
-      <div className="pageBtn">
-        {/* 상단의 Page 바꾸는 버튼 */}
-        <div
-          className={selected === "join" ? "changeStyle" : "base"}
-          onClick={handleJoin}
-        >
-          참여
+    <LayoutMainPage>
+      <MainContainer>
+        <p className="myProfile">My page</p>
+        <div className="pageBtn">
+          {/* 상단의 Page 바꾸는 버튼 */}
+          <div
+            className={selected === "join" ? "changeStyle" : "base"}
+            onClick={handleJoin}
+          >
+            참여
+          </div>
+          <div
+            className={selected === "create" ? "changeStyle" : "base"}
+            onClick={handleCreate}
+          >
+            개설
+          </div>
         </div>
-        <div
-          className={selected === "create" ? "changeStyle" : "base"}
-          onClick={handleCreate}
-        >
-          개설
-        </div>
-      </div>
-      <ListContainer>
-        {studyList.map((el, idx) => {
-          return (
-            <ListWrapper key={idx}>
-              <Link to={`/partyDetail/${el.study_no}`} className="LinkWrapper">
-                <WrapperHeader>
-                  <p className="headerUserName">{el.who_open}</p>
-                  <div className="headerStatus">{handleImage(el.study_no)}</div>
-                </WrapperHeader>
-                <div className="listTitle">{el.study_title}</div>
-                <LocationPeople>
-                  <LocationContainer>
-                    <HiLocationMarker />
-                    <p>place</p>
-                    <p>{el.studyAt_location}</p>
-                  </LocationContainer>
-                  <PeopleContainer>
-                    <MdPeopleAlt />
-                    <p className="peopleData">
-                      {el.study_no}/{el.min_member_cnt}
-                    </p>
-                  </PeopleContainer>
-                </LocationPeople>
-              </Link>
-            </ListWrapper>
-          );
-        })}
-      </ListContainer>
-    </MainContainer>
+        <ListContainer>
+          {studyList.map((el, idx) => {
+            return (
+              <ListWrapper key={idx}>
+                <Link
+                  to={`/partyDetail/${el.study_no}`}
+                  className="LinkWrapper"
+                >
+                  <WrapperHeader>
+                    <p className="headerUserName">{el.who_open}</p>
+                    <div className="headerStatus">
+                      {handleImage(el.study_no)}
+                    </div>
+                  </WrapperHeader>
+                  <div className="listTitle">{el.study_title}</div>
+                  <LocationPeople>
+                    <LocationContainer>
+                      <HiLocationMarker />
+                      <p>place</p>
+                      <p>{el.studyAt_location}</p>
+                    </LocationContainer>
+                    <PeopleContainer>
+                      <MdPeopleAlt />
+                      <p className="peopleData">
+                        {el.study_no}/{el.min_member_cnt}
+                      </p>
+                    </PeopleContainer>
+                  </LocationPeople>
+                </Link>
+              </ListWrapper>
+            );
+          })}
+        </ListContainer>
+      </MainContainer>
+    </LayoutMainPage>
   );
 }
 
@@ -174,7 +180,7 @@ const WrapperHeader = styled.div`
 `;
 
 const MainContainer = styled.section`
-  margin-top: 100px;
+  padding-top: 30px;
   background-color: white;
   .pageBtn {
     padding: 0 20px;

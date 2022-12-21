@@ -8,6 +8,7 @@ import fir from "../../img/fir.png";
 import sec from "../../img/sec.png";
 
 import { saveUser } from "../../store/userSlice";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function Login() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    
+
     let body = {
       id: userId,
       pw: password,
@@ -35,7 +36,7 @@ export default function Login() {
     axios.post(`/api/auth/login`, body).then((response) => {
       if (response.data.code === 200) {
         dispatch(saveUser(response.data.userInfo));
-        navigate("/");
+        navigate("/home");
       } else {
         alert(response.data.message);
       }
@@ -43,43 +44,50 @@ export default function Login() {
   };
 
   return (
-    <LoginContainer>
-      <form className="submitForm" onSubmit={onSubmitHandler}>
-        <div className="LoginHeader">
-          <h1 className="serviceName">
-            <img src={fir} alt="서비스 이름" />
-          </h1>
-          <p className="serviceSlogan">
-            <img src={sec} alt="서비스 슬로건" />
-          </p>
-        </div>
-        <div className="LoginData">
-          <IdContainer>
+    <LayoutDetailPage>
+      <LoginContainer>
+        <form className="submitForm" onSubmit={onSubmitHandler}>
+          <div className="LoginHeader">
+            <h1 className="serviceName">
+              <img src={fir} alt="서비스 이름" />
+            </h1>
+            <p className="serviceSlogan">
+              <img src={sec} alt="서비스 슬로건" />
+            </p>
+          </div>
+          <div className="LoginData">
+            <IdContainer>
+              <input
+                type="id"
+                name="id"
+                className="userId"
+                placeholder="아이디"
+                onChange={onUserIdHandler}
+              />
+            </IdContainer>
+            <PwContainer>
+              <input
+                type="password"
+                name="pw"
+                className="userPw"
+                onChange={onPasswordHandler}
+                placeholder="비밀번호"
+              />
+            </PwContainer>
+            <p className="lostPw">비밀번호를 잊으셨나요?</p>
+          </div>
+          <div className="BtnBox">
+            <input type="submit" className="loginBtn" value="로그인" />
             <input
-              type="id"
-              name="id"
-              className="userId"
-              placeholder="아이디"
-              onChange={onUserIdHandler}
+              type="button"
+              className="signInBtn"
+              value="회원가입"
+              onClick={() => navigate("/detail/join")}
             />
-          </IdContainer>
-          <PwContainer>
-            <input
-              type="password"
-              name="pw"
-              className="userPw"
-              onChange={onPasswordHandler}
-              placeholder="비밀번호"
-            />
-          </PwContainer>
-          <p className="lostPw">비밀번호를 잊으셨나요?</p>
-        </div>
-        <div className="BtnBox">
-          <input type="submit" className="loginBtn" value="로그인"/>
-          <input type="button" className="signInBtn" value="회원가입" onClick={()=>navigate("/join")}/>
-        </div>
-      </form>
-    </LoginContainer>
+          </div>
+        </form>
+      </LoginContainer>
+    </LayoutDetailPage>
   );
 }
 
@@ -125,7 +133,7 @@ const LoginContainer = styled.section`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 60px);
   background-color: #faf6f2;
 
   .LoginData {

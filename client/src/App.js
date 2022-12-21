@@ -1,48 +1,84 @@
-import React from "react";
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect, Suspense } from "react";
+import {
+  Route,
+  Routes,
+  useNavigate,
+  useNavigationType,
+  useLocation,
+} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { RouterConfig } from "./RouteConfig";
 
 import Lending from "./page/Lending";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 import "./reset.css";
 import "./app.css";
 import "./font.css";
+import "./slideTransition.css";
 import styled from "styled-components";
 import KaKaoAddress from "./components/maps/mapAPI/KaKaoAddress";
+import { savePathname } from "./store/pathnameSlice";
+
+let oldLocation = null;
+
+const DEFAULT_SCENE_CONFIG = {
+  enter: "from-bottom",
+  exit: "to-bottom",
+};
 
 function App() {
-  const Main = React.lazy(() => import("./page/Main/Main"));
-  const Login = React.lazy(() => import("./page/login/Login"));
-  const Join = React.lazy(() => import("./page/Join"));
-  const ChangePw = React.lazy(() => import("./page/ChangePw"));
-  const Profile = React.lazy(() => import("./page/profile/Profile"));
-  const PartyJoin = React.lazy(() => import("./page/detail/PartyJoin"));
-  const PartyDetail = React.lazy(() => import("./page/detail/PartyDetail"));
-  const Footer = React.lazy(() => import("./components/Footer"));
-  const Account = React.lazy(() => import("./page/account/Account"));
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigationType = useNavigationType();
+  const location = useLocation();
+
+  useEffect(() => {
+    let pathname = location.pathname;
+    pathname === "/"
+      ? navigate("/home", { replace: true })
+      : navigate(pathname, { replace: true });
+
+    dispatch(savePathname({ pathname }));
+  }, []);
+
+  const getSceneConfig = (location) => {
+    const matchedRoute =
+      location &&
+      RouterConfig.find((config) =>
+        new RegExp(`^${config.path}$`).test(location.pathname)
+      );
+
+    return (matchedRoute && matchedRoute.sceneConfig) || DEFAULT_SCENE_CONFIG;
+  };
+
+  let classNames = "";
+
+  if (navigationType === "PUSH" || navigationType === "REPLACE") {
+    classNames = "forward-" + getSceneConfig(location).enter;
+  } else if (navigationType === "POP") {
+    classNames = "back-" + getSceneConfig(oldLocation).exit;
+  }
+
+  oldLocation = location;
 
   return (
-    <AppContainer className='App'>
-      <Suspense fallback={<Lending />}>
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/join' element={<Join />} />
-          <Route path='/changepw' element={<ChangePw />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/partyjoin' element={<PartyJoin />} />
-          <Route path={`/partydetail/:id`} element={<PartyDetail />} />
-          <Route path='/account' element={<Account />} />
-        </Routes>
-        <Footer />
-      </Suspense>
-      {/* <KaKaoAddress /> */}
-    </AppContainer>
+    <TransitionGroup
+      className={"router-wrapper"}
+      childFactory={(child) => React.cloneElement(child, { classNames })}
+    >
+      <CSSTransition timeout={150} key={location.pathname}>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes location={location}>
+            {RouterConfig.map((config, index) => {
+              return <Route key={index} {...config} />;
+            })}
+          </Routes>
+        </Suspense>
+      </CSSTransition>
+    </TransitionGroup>
   );
 }
-
-const AppContainer = styled.div`
-  font-family: "NanumSquare";
-`;
 
 export default App;

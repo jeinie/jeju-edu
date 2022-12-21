@@ -17,6 +17,7 @@ import tree_1_1x from "../../img/tree_1_1x.png";
 import backspace from "../../img/back.svg";
 
 import Modal from "../../components/modals/Modal";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 
 export default function PartyDetail() {
   const { id } = useParams();
@@ -49,69 +50,86 @@ export default function PartyDetail() {
   };
 
   useEffect(() => {
-    axios.post(`/api/viewDetail/${id}`).then((res) => setStudy(res.data.study_Detail_Info));
+    axios
+      .post(`/api/viewDetail/${id}`)
+      .then((res) => setStudy(res.data.study_Detail_Info));
   }, []);
 
   console.log(study);
 
   return (
-    <OutputContainer>
-      <Backspace onClick={() => navigate(-1)}>
-        <img src={backspace} alt='뒤로가기'></img>
-      </Backspace>
-      <PartyMarker lat={study.tmX} lon={study.tmY} />
-      <ViewDetailContainer>
-        <div className='wrapper'>
-          <div className='headerLeft'>
-            {/* <section className="headerLeftContent"> */}
-            <ContainerHeader>
-              <div className='headerText'>
-                <p className='userName'>@{study.who_open}</p>
-                <p className='studyName'>{study.study_title}</p>
-              </div>
-              <div className='headerCircle'>
-                <img className='Seed' src={handleImage(study.members)} alt='viewDetail.js 이미지' />
-              </div>
-            </ContainerHeader>
-            {/* </section> */}
-            <PlaceData>
-              <div className='memberContainer'>
-                <MdPeopleAlt />
-                {/* 사람들 아이콘 */}
-                <p className='partyMembers'>{`${study.current_member_cnt}/${study.min_member_cnt}`}</p>
-              </div>
-              <div className='calender'>
-                {/* 달력 아이콘 */}
-                <BsCalendar2WeekFill />
-                <p className='deathLine'>{study.deadline}</p>
-              </div>
-              <div className='placeAddress'>
-                <HiLocationMarker />
-                {/* 마커 아이콘 */}
-                <p className='address'>{study.studyAt_location}</p>
-              </div>
-            </PlaceData>
-          </div>
-          <p className='partyDesc'>{study.study_detail_description}</p>
-          {study.study_no >= study.min_member_cnt ? <p className='fullParty'>모집인원이 가득 찼습니다!</p> : ""}
-          <DetailCreateBtnBox>
-            <div className='btnBox'>
-              <button
-                className='joinBtn'
-                disabled={study.study_no >= study.min_member_cnt}
-                onClick={() => {
-                  setOpen(true);
-                  handleModalView();
-                }}
-              >
-                <p className='join'>J-Join</p>
-              </button>
-              <Modal status={1} open={open} handleClose={setOpen} list={study} />
+    <LayoutDetailPage top="0">
+      <OutputContainer>
+        <Backspace onClick={() => navigate(-1)}>
+          <img src={backspace} alt="뒤로가기"></img>
+        </Backspace>
+        <PartyMarker lat={study.tmX} lon={study.tmY} />
+        <ViewDetailContainer>
+          <div className="wrapper">
+            <div className="headerLeft">
+              {/* <section className="headerLeftContent"> */}
+              <ContainerHeader>
+                <div className="headerText">
+                  <p className="userName">@{study.who_open}</p>
+                  <p className="studyName">{study.study_title}</p>
+                </div>
+                <div className="headerCircle">
+                  <img
+                    className="Seed"
+                    src={handleImage(study.members)}
+                    alt="viewDetail.js 이미지"
+                  />
+                </div>
+              </ContainerHeader>
+              {/* </section> */}
+              <PlaceData>
+                <div className="memberContainer">
+                  <MdPeopleAlt />
+                  {/* 사람들 아이콘 */}
+                  <p className="partyMembers">{`${study.current_member_cnt}/${study.min_member_cnt}`}</p>
+                </div>
+                <div className="calender">
+                  {/* 달력 아이콘 */}
+                  <BsCalendar2WeekFill />
+                  <p className="deathLine">{study.deadline}</p>
+                </div>
+                <div className="placeAddress">
+                  <HiLocationMarker />
+                  {/* 마커 아이콘 */}
+                  <p className="address">{study.studyAt_location}</p>
+                </div>
+              </PlaceData>
             </div>
-          </DetailCreateBtnBox>
-        </div>
-      </ViewDetailContainer>
-    </OutputContainer>
+            <p className="partyDesc">{study.study_detail_description}</p>
+            {study.study_no >= study.min_member_cnt ? (
+              <p className="fullParty">모집인원이 가득 찼습니다!</p>
+            ) : (
+              ""
+            )}
+            <DetailCreateBtnBox>
+              <div className="btnBox">
+                <button
+                  className="joinBtn"
+                  disabled={study.study_no >= study.min_member_cnt}
+                  onClick={() => {
+                    setOpen(true);
+                    handleModalView();
+                  }}
+                >
+                  <p className="join">J-Join</p>
+                </button>
+                <Modal
+                  status={1}
+                  open={open}
+                  handleClose={setOpen}
+                  list={study}
+                />
+              </div>
+            </DetailCreateBtnBox>
+          </div>
+        </ViewDetailContainer>
+      </OutputContainer>
+    </LayoutDetailPage>
   );
 }
 

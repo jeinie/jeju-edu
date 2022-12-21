@@ -9,6 +9,7 @@ import { MdPeopleAlt } from "react-icons/md";
 import Modal from "../../components/modals/Modal";
 import Footer from "../../components/Footer";
 import { BsChevronLeft } from "react-icons/bs";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 
 export default function PartyJoin() {
   const navigate = useNavigate();
@@ -163,104 +164,105 @@ export default function PartyJoin() {
   };
 
   return (
-    <MainStyle>
-      <div className="titleBox">
-        <BsChevronLeft onClick={() => navigate(-1)} />
-        <p className="title">스터디 개설하기</p>
-      </div>
-      {/* Nav 대체품 */}
-      <NavContainer>
-        <div
-          className={category === "code" ? "navBox addColor" : "navBox"}
-          onClick={() => setCategory("code")}
-        >
-          프로그래밍
-        </div>
-        <div
-          className={category === "sing" ? "navBox addColor" : "navBox"}
-          onClick={() => setCategory("sing")}
-        >
-          보컬댄스
-        </div>
-        <div
-          className={category === "design" ? "navBox addColor" : "navBox"}
-          onClick={() => setCategory("design")}
-        >
-          디자인
-        </div>
-      </NavContainer>
-      {/* Nav 대채품 */}
+    <LayoutDetailPage>
+      <MainStyle>
+        {/* Nav 대체품 */}
+        <NavContainer>
+          <div
+            className={category === "code" ? "navBox addColor" : "navBox"}
+            onClick={() => setCategory("code")}
+          >
+            프로그래밍
+          </div>
+          <div
+            className={category === "sing" ? "navBox addColor" : "navBox"}
+            onClick={() => setCategory("sing")}
+          >
+            보컬댄스
+          </div>
+          <div
+            className={category === "design" ? "navBox addColor" : "navBox"}
+            onClick={() => setCategory("design")}
+          >
+            디자인
+          </div>
+        </NavContainer>
+        {/* Nav 대채품 */}
 
-      {/* <BsChevronLeft className="header-goback" onClick={() => navigate(-1)} />
+        {/* <BsChevronLeft className="header-goback" onClick={() => navigate(-1)} />
       <h1 className="header-title">스터디 개설하기</h1>
       <hr /> */}
-      {/* <Nav /> */}
-      <div className="wrapper">
-        <form className="createParty">
-          <div className="partName">
-            <label className="labels" htmlFor="study_name">
-              스터디 이름
-            </label>
-            <InputStyle
-              id="studyName"
-              ref={partyName}
-              placeholder="스터디 이름을 입력해주세요"
-              name="study_name"
-            />
-          </div>
-
-          <label className="labels" htmlFor="studyDate">
-            스터디 날짜
-          </label>
-          <input ref={partyDate} name="studyDate" type="datetime-local" />
-
-          <label className="labels" htmlFor="studyClose">
-            모집 마감 날짜
-          </label>
-          <input name="studyClose" ref={partyClose} type="datetime-local" />
-
-          <PeopleCountContainer>
-            <MdPeopleAlt />
-            <button className="peopleBtn" onClick={(e) => handleMinusPeople(e)}>
-              -
-            </button>
-            <div ref={partyPeople} onChange={(e) => handlePeopleChange(e)}>
-              {peopleNum}
+        {/* <Nav /> */}
+        <div className="wrapper">
+          <form className="createParty">
+            <div className="partName">
+              <label className="labels" htmlFor="study_name">
+                스터디 이름
+              </label>
+              <InputStyle
+                id="studyName"
+                ref={partyName}
+                placeholder="스터디 이름을 입력해주세요"
+                name="study_name"
+              />
             </div>
-            <button className="peopleBtn" onClick={(e) => handlePlusPeople(e)}>
-              +
-            </button>
-          </PeopleCountContainer>
 
-          <div className="partName">
-            <label className="labels" htmlFor="location">
-              스터디 장소
+            <label className="labels" htmlFor="studyDate">
+              스터디 날짜
             </label>
-            <InputStyle
-              ref={partyAddress}
-              placeholder="스터디 장소를 입력해주세요"
-              name="location"
-            />
-          </div>
+            <input ref={partyDate} name="studyDate" type="datetime-local" />
 
-          <label className="partyDescLabel labels">스터디 상세설명</label>
-          <textarea
-            ref={partyDesc}
-            className="partyDesc"
-            placeholder="스터디를 설명해주세요"
-          />
-          <button className="finish" onClick={onSubmitHandler}>
-            스터디 개설 완료하기
-          </button>
-        </form>
-      </div>
-      <div className="modalLayout">
-        <Modal open={open} handleClose={setOpen} status={0} />
-      </div>
-      <div>
-        <Footer />
-      </div>
-    </MainStyle>
+            <label className="labels" htmlFor="studyClose">
+              모집 마감 날짜
+            </label>
+            <input name="studyClose" ref={partyClose} type="datetime-local" />
+
+            <PeopleCountContainer>
+              <MdPeopleAlt />
+              <button
+                className="peopleBtn"
+                onClick={(e) => handleMinusPeople(e)}
+              >
+                -
+              </button>
+              <div ref={partyPeople} onChange={(e) => handlePeopleChange(e)}>
+                {peopleNum}
+              </div>
+              <button
+                className="peopleBtn"
+                onClick={(e) => handlePlusPeople(e)}
+              >
+                +
+              </button>
+            </PeopleCountContainer>
+
+            <div className="partName">
+              <label className="labels" htmlFor="location">
+                스터디 장소
+              </label>
+              <InputStyle
+                ref={partyAddress}
+                placeholder="스터디 장소를 입력해주세요"
+                name="location"
+              />
+            </div>
+
+            <label className="partyDescLabel labels">스터디 상세설명</label>
+            <textarea
+              ref={partyDesc}
+              className="partyDesc"
+              placeholder="스터디를 설명해주세요"
+            />
+            <button className="finish" onClick={onSubmitHandler}>
+              스터디 개설 완료하기
+            </button>
+          </form>
+        </div>
+        <div className="modalLayout">
+          <Modal open={open} handleClose={setOpen} status={0} />
+        </div>
+      </MainStyle>
+    </LayoutDetailPage>
   );
 }
 

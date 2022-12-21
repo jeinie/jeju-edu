@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -10,36 +10,39 @@ export default function Footer() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setPage(pathname);
+  }, [pathname]);
+
   const goSearch = () => {
-    setPage("search");
-    navigate("/");
+    navigate("/home");
   };
 
   const goJoin = () => {
-    navigate("/partyjoin");
+    navigate("/detail/partyjoin");
   };
 
   const goProfile = () => {
-    setPage("profile");
     navigate("/profile");
   };
 
-  if (pathname === "/" || pathname === "/profile" ) {
-    return (
-      <FooterContainer>
+  return (
+    <FooterContainer>
+      <div onClick={goSearch}>
         <FiSearch
-          onClick={goSearch}
-          color={page === "search" ? "#000000" : "#bababa"}
+          className="icon"
+          color={page === "/home" ? "#000000" : "#bababa"}
         />
-        <AiOutlinePlus className="plusbtn" onClick={goJoin} />
+      </div>
+      <AiOutlinePlus className="plusbtn" onClick={goJoin} />
+      <div onClick={goProfile}>
         <BsFillPersonFill
-          onClick={goProfile}
-          color={page === "profile" ? "#000000" : "#bababa"}
+          className="icon"
+          color={page === "/profile" ? "#000000" : "#bababa"}
         />
-      </FooterContainer>
-    );
-  } else return null;
-  
+      </div>
+    </FooterContainer>
+  );
 }
 
 const FooterContainer = styled.footer`
@@ -48,18 +51,30 @@ const FooterContainer = styled.footer`
   align-items: center;
 
   width: 100%;
-  height: 49px;
+  height: 60px;
   font-size: 48px;
   position: fixed;
   left: 0;
   bottom: 0;
+  z-index: 20;
   background: white;
 
   .plusbtn {
-    width: 48px;
+    min-width: 48px;
     height: 48px;
     border-radius: 50%;
     color: white;
     background-color: black;
+  }
+
+  div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      height: 48px;
+    }
   }
 `;
