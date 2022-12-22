@@ -58,7 +58,7 @@ export default function Main() {
 
 const MainContainer = styled.div`
   padding-top: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 
   .test {
     height: 900px;
