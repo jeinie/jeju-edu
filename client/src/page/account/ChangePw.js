@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Input, Button } from "../components/form";
+import { Input, Button } from "../../components/form";
 import styled from "styled-components";
 import { BsChevronLeft } from "react-icons/bs";
 
 import axios from "axios";
-import LayoutDetailPage from "../layouts/LayoutDetailPage";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 /**
  * 2022-12-18 hssuh
  * 패스워드 변경
@@ -113,19 +113,16 @@ export default function ChangePw() {
     else newPwConfirmRef.current = true;
   }, [newPwConfirm]);
 
-  useEffect(
-    () => setTotalOk(totalValidCheck()),
-    [pw, newPw, newPwConfirm, pwOk, newPwOk, newPwConfirmOk]
-  );
+  useEffect(() => setTotalOk(totalValidCheck()), [pw, newPw, newPwConfirm, pwOk, newPwOk, newPwConfirmOk]);
 
   return (
     <LayoutDetailPage>
       <ChangePwContainer>
         <ChangePwForm onSubmit={handleSubmit}>
           <Input
-            label="현재 비밀번호*"
-            name="pw"
-            placeholder="현재 사용하고 있는 비밀번호를 입력해주세요"
+            label='현재 비밀번호*'
+            name='pw'
+            placeholder='현재 사용하고 있는 비밀번호를 입력해주세요'
             value={pw}
             setValue={setPw}
             desc={pwDesc}
@@ -134,9 +131,9 @@ export default function ChangePw() {
             password
           />
           <Input
-            label="변경하실 비밀번호*"
-            name="newPw"
-            placeholder="변경하실 비밀번호를 입력해주세요"
+            label='변경하실 비밀번호*'
+            name='newPw'
+            placeholder='변경하실 비밀번호를 입력해주세요'
             value={newPw}
             setValue={setNewPw}
             desc={newPwDesc}
@@ -145,9 +142,9 @@ export default function ChangePw() {
             password
           />
           <Input
-            label="변경하실 비밀번호 확인*"
-            name="newPwConfirm"
-            placeholder="변경하실 비밀번호를 입력해주세요"
+            label='변경하실 비밀번호 확인*'
+            name='newPwConfirm'
+            placeholder='변경하실 비밀번호를 입력해주세요'
             value={newPwConfirm}
             setValue={setNewPwConfirm}
             desc={newPwConfirmDesc}
@@ -155,11 +152,7 @@ export default function ChangePw() {
             maxLength={16}
             password
           />
-          <Button
-            text="비밀번호 변경완료"
-            style={{ position: "absolute", bottom: "20px" }}
-            disabled={!totalOk}
-          />
+          <Button text='비밀번호 변경완료' style={{ position: "absolute", bottom: "20px" }} disabled={!totalOk} />
         </ChangePwForm>
       </ChangePwContainer>
     </LayoutDetailPage>
