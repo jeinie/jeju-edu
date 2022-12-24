@@ -4,7 +4,7 @@ import { persistor } from "..";
 const logout = (navigate) => {
   axios.get("/api/auth/logout").then(() => {
     persistor.purge();
-    navigate("/");
+    navigate("/home");
   });
 };
 
