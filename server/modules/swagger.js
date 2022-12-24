@@ -632,11 +632,66 @@ const options = {
                 $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed202",
               },
             },
+            203: {
+              description:
+                "변경하려고 하는 비밀번호가 현재 비밀번호와 같은 경우 코드 203을 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed203",
+              },
+            },
             500: {
               description:
                 "비밀번호 변경중 서버내의 알수없는 에러가 발생하였을때 코드 500이 리턴됩니다",
               schema: {
                 $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed500",
+              },
+            },
+          },
+        },
+      },
+
+      "/api/auth/message/modifyNickName": {
+        post: {
+          tags: ["기존의 닉네임을 새로운 닉네임으로 변경하는 API"],
+          summary: "기존의 닉네임을 새로운 닉네임으로 변경하는 API 입니다",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description:
+                "id와 새로운 닉네임, 기존의 닉네임을 넘겨주세요",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyNickNameRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "기존의 닉네임으로 본인인증이 되었고, 기존의 닉네임이 새로운 닉네임으로 성공적으로 변경되었다면 코드 200을 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Success200",
+              },
+            },
+            202: {
+              description:
+                "id는 일치하지만 기존의 닉네임을 맞추지 못해 본인인증에 실패하였을때에 코드 202를 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Failed202",
+              },
+            },
+            203: {
+              description:
+                "변경하려고 하는 닉네임이 현재 닉네임과 같은 경우 코드 203을 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Failed203",
+              },
+            },
+            500: {
+              description:
+                "닉네임 변경중 서버내의 알수없는 에러가 발생하였을때 코드 500이 리턴됩니다",
+              schema: {
+                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Failed500",
               },
             },
           },
@@ -1990,11 +2045,23 @@ const options = {
         properties: {
           code: {
             type: "integer",
-            description: "실패하면 코드 202이 리턴된다",
+            description: "실패하면 코드 202가 리턴된다",
           },
           message: {
             type: "string",
             description: `실패하면 현재 비밀번호 인증 실패 라는 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgModifyPW_ResponseForm_Failed203: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 203이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 현재와 동일한 비밀번호 라는 메세지가 리턴된다`,
           },
         },
       },
@@ -2007,6 +2074,70 @@ const options = {
           message: {
             type: "string",
             description: `실패하면 비밀번호 변경 중 서버내 알수없는 에러발생 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgModifyNickNameRequestForm: {
+        properties: {
+          id: {
+            type: "string",
+            description: "가입한 당시의 ID (로그인할때 쓰는거)",
+          },
+          newNickName: {
+            type: "string",
+            description: "새롭게 변경을 원하는 닉네임",
+          },
+          nickName: {
+            type: "string",
+            description: "본인확인용 기존의 닉네임",
+          },
+        },
+      },
+      apiAuthMsgModifyNickName_ResponseForm_Success200: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `성공하면 닉네임 변경 성공 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgModifyNickName_ResponseForm_Failed202: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 202가 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 현재 닉네임 인증 실패 라는 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgModifyNickName_ResponseForm_Failed203: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 203이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 현재와 동일한 닉네임 이라는 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthMsgModifyNickName_ResponseForm_Failed500: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 닉네임 변경 중 서버내 알수없는 에러발생 이란 메세지가 리턴된다`,
           },
         },
       },
