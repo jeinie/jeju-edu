@@ -74,7 +74,7 @@ router.post(
           res.status(203).json({
             code: 203,
             message: "현재와 동일한 비밀번호",
-          })
+          });
         }
       } else {
         res.status(202).json({
@@ -101,32 +101,31 @@ router.post(
   async (req, res, next) => {
     try {
       const { newNickName, nickName } = req.body;
-      // const exUser = await User.findOne({ where: { id: id } });
-      
 
       if (nickName !== newNickName) {
         const Flag = await User.update(
           { nick: newNickName },
-          { where: { nick: nickName } })
+          { where: { nick: nickName } }
+        );
 
-        if (Flag == 0) {
-          res.status(204).json({
-            code:204,
+        if (Flag[0] == 0) {
+          return res.status(405).json({
+            code: 405,
             message: "존재하지 않는 닉네임입니다",
-          })
+          });
         }
-        res.status(200).json({
+        return res.status(200).json({
           code: 200,
           message: "닉네임 변경 성공",
         });
-      } else {
-        res.status(203).json({
-          code: 203,
-          message: "현재와 동일한 닉네임",
-        })
       }
+
+      return res.status(203).json({
+        code: 203,
+        message: "현재와 동일한 닉네임 입니다",
+      });
     } catch (e) {
-      res.status(500).json({
+      return res.status(500).json({
         code: 500,
         message: `닉네임 변경 중 서버 내 알 수 없는 에러발생 ${e}`,
       });
