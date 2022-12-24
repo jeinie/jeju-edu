@@ -46,44 +46,27 @@ export default function Login() {
   return (
     <LayoutDetailPage>
       <LoginContainer>
-        <form className="submitForm" onSubmit={onSubmitHandler}>
-          <div className="LoginHeader">
-            <h1 className="serviceName">
-              <img src={fir} alt="서비스 이름" />
+        <form className='submitForm' onSubmit={onSubmitHandler}>
+          <div className='LoginHeader'>
+            <h1 className='serviceName'>
+              <img src={fir} alt='서비스 이름' />
             </h1>
-            <p className="serviceSlogan">
-              <img src={sec} alt="서비스 슬로건" />
+            <p className='serviceSlogan'>
+              <img src={sec} alt='서비스 슬로건' />
             </p>
           </div>
-          <div className="LoginData">
+          <div className='LoginData'>
             <IdContainer>
-              <input
-                type="id"
-                name="id"
-                className="userId"
-                placeholder="아이디"
-                onChange={onUserIdHandler}
-              />
+              <input type='id' name='id' className='userId' placeholder='아이디' onChange={onUserIdHandler} />
             </IdContainer>
             <PwContainer>
-              <input
-                type="password"
-                name="pw"
-                className="userPw"
-                onChange={onPasswordHandler}
-                placeholder="비밀번호"
-              />
+              <input type='password' name='pw' className='userPw' onChange={onPasswordHandler} placeholder='비밀번호' />
             </PwContainer>
-            <p className="lostPw">비밀번호를 잊으셨나요?</p>
+            <p className='lostPw'>비밀번호를 잊으셨나요?</p>
           </div>
-          <div className="BtnBox">
-            <input type="submit" className="loginBtn" value="로그인" />
-            <input
-              type="button"
-              className="signInBtn"
-              value="회원가입"
-              onClick={() => navigate("/detail/join")}
-            />
+          <div className='BtnBox'>
+            <input type='submit' className='loginBtn' value='로그인' />
+            <input type='button' className='signInBtn' onClick={() => navigate("/detail/join")} value='회원가입' />
           </div>
         </form>
       </LoginContainer>
@@ -95,17 +78,16 @@ const IdContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 100%;
 
   .userId {
-    width: 60%;
+    width: 100%;
     height: 42px;
     box-sizing: border-box;
-
     border-radius: 21px;
     padding: 10px;
     border: none;
+    margin: 0 32px;
   }
 `;
 
@@ -113,21 +95,21 @@ const PwContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 100%;
-  margin-top: 31px;
+  margin-top: 20px;
 
   .userPw {
     box-sizing: border-box;
-    width: 60%;
+    width: 100%;
     height: 42px;
     border-radius: 21px;
     padding: 10px;
     border: none;
+    margin: 0 32px;
   }
 `;
 
-const LoginContainer = styled.section`
+const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -161,30 +143,40 @@ const LoginContainer = styled.section`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px;
     width: 100%;
     height: 80vh;
+    margin: 0 32px;
   }
 
   .lostPw {
     display: none;
-
-    width: 60%;
+    width: 100%;
     text-align: right;
     margin-top: 10px;
     font-size: 10px;
   }
 
   .BtnBox {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .userPw {
+      box-sizing: border-box;
+      width: 100%;
+      height: 40px;
+      border-radius: 30px;
+      background-color: #e47b00;
+      color: white;
+      border: none;
+      margin: 0 32px;
+    }
   }
 
   .loginBtn {
-    width: 60%;
+    width: calc(100% - 64px);
     height: 40px;
     border-radius: 30px;
     background-color: #e47b00;
@@ -193,12 +185,12 @@ const LoginContainer = styled.section`
   }
 
   .signInBtn {
-    width: 60%;
+    width: calc(100% - 64px);
     height: 40px;
     border-radius: 30px;
     background-color: white;
     color: #e47b00;
     border: 1px solid #e47b00;
-    margin-top: 12px;
+    margin-top: 10px;
   }
 `;
