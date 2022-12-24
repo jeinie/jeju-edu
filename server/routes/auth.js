@@ -73,8 +73,8 @@ router.post(
           console.log(`pw=${pw}, newPw=${newPw}`);
           res.status(203).json({
             code: 203,
-            message: "현재와 동일한 비밀번호",
-          });
+            message: "현재 비밀번호와 수정하려는 비밀번호가 같습니다.",
+          })
         }
       } else {
         res.status(202).json({
@@ -122,7 +122,7 @@ router.post(
 
       return res.status(203).json({
         code: 203,
-        message: "현재와 동일한 닉네임 입니다",
+        message: "현재 닉네임과 수정하려는 닉네임이 같습니다.",
       });
     } catch (e) {
       return res.status(500).json({
