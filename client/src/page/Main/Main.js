@@ -1,13 +1,11 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-import MainCategory from "../../components/Nav";
-import Footer from "./../../components/Footer";
 import AddressInput from "../../components/maps/AddressInput";
 import StudyCard from "../../components/StudyCard";
-import Titlebar from "../../components/Titlebar.js";
+// import Titlebar from "../../components/Titlebar.js";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
@@ -15,7 +13,6 @@ export default function Main() {
   const [category, setCategory] = useState("code");
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const getStudyList = async (category) => {
     try {
@@ -37,19 +34,22 @@ export default function Main() {
     <LayoutMainPage>
       <MainContainer>
         <AddressInput update={setList} />
-        <MainCategory selected={category} changeCategory={setCategory} />
         {loading ? (
           <LoadingSpinner height="50vh" />
         ) : (
-          <>
+          <ItemListContainer>
             {list.map((el, idx) => {
               return (
-                <Link to={`/detail/partydetail/${el.study_no}`} key={idx}>
+                <Link
+                  className="ItemDetailLink"
+                  to={`/detail/partydetail/${el.study_no}`}
+                  key={idx}
+                >
                   <StudyCard item={el} />
                 </Link>
               );
             })}
-          </>
+          </ItemListContainer>
         )}
       </MainContainer>
     </LayoutMainPage>
@@ -58,10 +58,25 @@ export default function Main() {
 
 const MainContainer = styled.div`
   padding-top: 30px;
-  margin-bottom: 80px;
+  /* margin-bottom: 80px; */
+  overflow: hidden;
+  width: 100%;
+  height: 75vh;
+`;
 
-  .test {
-    height: 900px;
-    border: 1px solid black;
+const ItemListContainer = styled.div`
+  overflow-y: scroll;
+  height: 90%;
+  padding: 10px 0 50px 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ItemDetailLink {
+    display: block;
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
 `;

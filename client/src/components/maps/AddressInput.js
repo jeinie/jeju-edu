@@ -50,7 +50,6 @@ const AddressInput = ({ update }) => {
           <MdMyLocation className="myLocation locationIcon" />
           현재 위치로 설정
         </p>
-        {/* {popup && <Modal2 open={popup} setOpen={setPopup} />} */}
       </div>
     </TestBox>
   );
@@ -67,29 +66,40 @@ const TestBox = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 30px;
   }
-  .alarm {
-    color: red;
-  }
-
   .par_box {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    margin: 0 30px 10px 30px;
+    margin: 0 0 10px;
     height: 36px;
     border-radius: 25px;
-    background: black;
+    background: #e47b00;
   }
   .inputBox {
     border-radius: 25px;
     border: none;
-    background: black;
+    background: #e47b00;
     color: white;
     font-weight: bolder;
   }
+
+  .inputBox::placeholder {
+    color: white;
+    font-weight: 400;
+  }
+
+  .inputBox:focus {
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      display: none;
+      color: #e47b00;
+    }
+  }
+
   .myLocation {
     display: flex;
     align-items: center;
@@ -97,7 +107,7 @@ const TestBox = styled.div`
 
     font-size: 12px;
     line-height: 13px;
-    color: #474747;
+    color: #e47b00;
   }
 
   .locationIcon {

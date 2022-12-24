@@ -24,12 +24,8 @@ export default function StudyCard({ item }) {
 
   return (
     <StudyBox>
-      <DDay>모집 마감까지 D-{item.Dday}</DDay>
+      <DDay>모집 마감 D-{item.Dday}</DDay>
       <StudyTitle>{item.study_title}</StudyTitle>
-      <Location>
-        <img src={IconLocation} alt="지역" width="15px" />
-        <p>{item.studyAt_location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
-      </Location>
       <UtilityGroup>
         <div>
           <img src={IconCalendar} alt="지역" width="21px" />
@@ -40,36 +36,38 @@ export default function StudyCard({ item }) {
           <p>{`${item.current_member_cnt} / ${item.min_member_cnt}`}</p>
         </div>
       </UtilityGroup>
+      <Location>
+        <img src={IconLocation} alt="지역" width="15px" />
+        <p>{item.studyAt_location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
+      </Location>
 
-      <VisualIconBg />
-      <VisualIcon
+      {/* <VisualIconBg /> */}
+      {/* <VisualIcon
         className="Seed"
         src={handleImage(item.current_member_cnt, item.min_member_cnt)}
         alt="viewDetail.js 이미지"
-      />
+      /> */}
     </StudyBox>
   );
 }
 
 const StudyBox = styled.div`
-  margin: 0 30px 12px;
-  padding: 16px;
+  margin: 24px 0px 0px;
   position: relative;
-  background: #f4ede7;
-  border-radius: 10px;
 `;
 
 const DDay = styled.div`
   display: inline-flex;
-  padding: 4.5px 5.5px;
+  padding: 5px 11px;
   margin-bottom: 19px;
-  background: #000000;
-  border-radius: 3px;
+  /* background: ; */
+  border-radius: 20px;
+  border: 1px solid black;
   font-weight: 400;
   font-size: 13px;
   line-height: 14px;
   text-align: center;
-  color: #ffffff;
+  /* color: ㅠ; */
 `;
 
 const StudyTitle = styled.p`
@@ -94,7 +92,7 @@ const Location = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 23px;
+  margin-top: 16px;
 
   p {
     margin-left: 10px;
@@ -114,12 +112,13 @@ const Location = styled.div`
 const UtilityGroup = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   > div {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    margin-right: 20px;
 
     img:nth-child(1) {
       margin-left: -3px;
