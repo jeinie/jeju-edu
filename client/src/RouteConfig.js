@@ -12,6 +12,11 @@ const Login = React.lazy(() => import("./page/login/Login"));
 const Join = React.lazy(() => import("./page/Join"));
 const ChangePw = React.lazy(() => import("./page/ChangePw"));
 
+const AddressInput = React.lazy(() => import("./components/maps/AddressInput"));
+const TransFormAddress = React.lazy(() =>
+  import("./components/maps/PartyMarker")
+);
+
 export const RouterConfig = [
   {
     path: "/",
@@ -88,6 +93,22 @@ export const RouterConfig = [
   {
     path: "/detail/changepw",
     element: <ChangePw />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/mapaddress",
+    element: <AddressInput />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/detail/maplocation",
+    element: <TransFormAddress />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",
