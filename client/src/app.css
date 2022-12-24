@@ -1,3 +1,8 @@
+body,
+html {
+  font-family: "NanumSqare", Roboto, Helvetica, sans-serif;
+}
+
 .font {
   font-family: "NanumSquare Neo";
   font-style: normal;

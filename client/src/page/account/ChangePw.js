@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Input, Button } from "../components/form";
+import { Input, Button } from "../../components/form";
 import styled from "styled-components";
 
 import CommonModal from "../components/modals/CommonModal";
-import { BsChevronLeft } from "react-icons/bs";
 
 import axios from "axios";
 import LayoutDetailPage from "../layouts/LayoutDetailPage";
