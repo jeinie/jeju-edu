@@ -1,5 +1,6 @@
 .router-wrapper {
   overflow: hidden;
+  /* margin: 0 24px; */
 }
 
 .forward-from-right-enter main {
@@ -40,8 +41,6 @@
   transform: translate(100%);
   transition: all 400ms;
 }
-
-
 
 .forward-from-left-enter main {
   opacity: 0;

@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Input, Button } from "../components/form";
+import { Input, Button } from "../../components/form";
 import styled from "styled-components";
-import { BsChevronLeft } from "react-icons/bs";
 
+import CommonModal from "../../components/modals/CommonModal";
 import axios from "axios";
-import LayoutDetailPage from "../layouts/LayoutDetailPage";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import iconWarning from "../../img/icon-warning.png";
+
 /**
  * 2022-12-18 hssuh
  * 패스워드 변경
@@ -36,6 +38,8 @@ export default function ChangePw() {
   const [newPwConfirmOk, setNewPwConfirmOk] = useState(false);
 
   const [totalOk, setTotalOk] = useState(false);
+
+  const [openModal, setOpenModal] = useState(false);
 
   const pwValidCheck = () => {
     if (pw.length < 8) {
@@ -74,28 +78,31 @@ export default function ChangePw() {
     return pwOk && newPwOk && newPwConfirmOk;
   };
 
-  const handleSubmit = (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
+    setOpenModal(true);
+  };
 
-    const handleSubmit = () => {
-      const body = {
-        id: id,
-        pw: pw,
-        newPw: newPw,
-      };
+  const handleSubmit = () => {
+    const body = {
+      id: id,
+      pw: pw,
+      newPw: newPw,
+    };
 
-      axios.post(`/api/auth/message/modifyPW`, body).then((response) => {
+    axios
+      .post(`/api/auth/message/modifyPW`, body)
+      .then((response) => {
         if (response.data.code === 200) {
-          alert("변경완료");
-          navigate("/login");
+          navigate("/detail/login");
         } else if (response.data.code === 202) {
           setPwOk(false);
           setPwDesc({ type: "WARN", text: "현재 비밀번호가 아니에요" });
         } else {
           alert("변경실패 : 서버오류");
         }
-      });
-    };
+      })
+      .finally(() => setOpenModal(false));
   };
 
   useEffect(() => {
@@ -121,7 +128,7 @@ export default function ChangePw() {
   return (
     <LayoutDetailPage>
       <ChangePwContainer>
-        <ChangePwForm onSubmit={handleSubmit}>
+        <ChangePwForm onSubmit={handleClick}>
           <Input
             label="현재 비밀번호*"
             name="pw"
@@ -161,10 +168,22 @@ export default function ChangePw() {
             disabled={!totalOk}
           />
         </ChangePwForm>
+        <CommonModal
+          toggle={openModal}
+          setToggle={() => setOpenModal(!openModal)}
+          submitBtnLabel="비밀번호 변경"
+          cancleBtnLabel="취소"
+          submitBtnOnClick={handleSubmit}
+          cancleBtnOnClick={() => setOpenModal(false)}
+        >
+          <img src={iconWarning} alt="경고아이콘"></img>
+          비밀번호를 변경하시겠어요?
+        </CommonModal>
       </ChangePwContainer>
     </LayoutDetailPage>
   );
 }
+
 const ChangePwForm = styled.form`
   margin: 32px 32px;
   display: block;
