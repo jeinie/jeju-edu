@@ -59,14 +59,23 @@ router.post(
       const Flag = await bcrypt.compare(pw, exUser.dataValues.password);
       console.log(Flag);
       if (Flag) {
-        await User.update(
-          { password: await bcrypt.hash(newPw, 12) },
-          { where: { id: id } }
-        );
-        res.status(200).json({
-          code: 200,
-          message: "비밀번호 변경 성공",
-        });
+        console.log(`newPw=${newPw}, pw=${pw}`);
+        if (pw !== newPw) {
+          await User.update(
+            { password: await bcrypt.hash(newPw, 12) },
+            { where: { id: id } }
+          );
+          res.status(200).json({
+            code: 200,
+            message: "비밀번호 변경 성공",
+          });
+        } else {
+          console.log(`pw=${pw}, newPw=${newPw}`);
+          res.status(203).json({
+            code: 203,
+            message: "현재와 동일한 비밀번호",
+          })
+        }
       } else {
         res.status(202).json({
           code: 202,
@@ -76,7 +85,50 @@ router.post(
     } catch (e) {
       res.status(500).json({
         code: 500,
-        message: `비밀번호 변경 중 서버내 알수없는 에러발생 ${e}`,
+        message: `비밀번호 변경 중 서버 내 알 수 없는 에러발생 ${e}`,
+      });
+    }
+  }
+);
+
+/**
+ * 닉네임 변경
+ *
+ */
+router.post(
+  "/message/modifyNickName",
+  userAgentMiddleWare("/api/auth/message/modifyNickName"),
+  async (req, res, next) => {
+    try {
+      const { newNickName, nickName } = req.body;
+      // const exUser = await User.findOne({ where: { id: id } });
+      
+
+      if (nickName !== newNickName) {
+        const Flag = await User.update(
+          { nick: newNickName },
+          { where: { nick: nickName } })
+
+        if (Flag == 0) {
+          res.status(204).json({
+            code:204,
+            message: "존재하지 않는 닉네임입니다",
+          })
+        }
+        res.status(200).json({
+          code: 200,
+          message: "닉네임 변경 성공",
+        });
+      } else {
+        res.status(203).json({
+          code: 203,
+          message: "현재와 동일한 닉네임",
+        })
+      }
+    } catch (e) {
+      res.status(500).json({
+        code: 500,
+        message: `닉네임 변경 중 서버 내 알 수 없는 에러발생 ${e}`,
       });
     }
   }
