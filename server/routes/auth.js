@@ -112,7 +112,7 @@ router.post(
           return res.status(405).json({
             code: 405,
             message: "존재하지 않는 닉네임입니다",
-          })
+          });
         }
         return res.status(200).json({
           code: 200,

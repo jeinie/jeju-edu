@@ -689,7 +689,8 @@ const options = {
             },
             500: {
               description:
-                "닉네임 변경중 서버내의 알 수 없는 에러가 발생하였을 때 코드 500이 리턴됩니다",
+                "닉네임 변경중 서버내의 알수없는 에러가 발생하였을때 코드 500이 리턴됩니다",
+
               schema: {
                 $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Failed500",
               },
@@ -2104,7 +2105,7 @@ const options = {
             description: `성공하면 닉네임 변경 성공 이란 메세지가 리턴된다`,
           },
         },
-      },
+      },     
       apiAuthMsgModifyNickName_ResponseForm_Failed203: {
         properties: {
           code: {
