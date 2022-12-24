@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { BsChevronLeft } from "react-icons/bs";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import LayoutDetailPage from '../../layouts/LayoutDetailPage';
+import { BsChevronLeft } from 'react-icons/bs';
 
 export default function Account() {
   const navigate = useNavigate();
   const goChangePw = () => {
-    navigate("/detail/changepw");
+    navigate('/detail/changepw');
   };
   const goChangeNick = () => {
-    navigate("/detail/changenick");
+    navigate('/detail/changenick');
   };
   return (
     <LayoutDetailPage>
       <MainContainer>
         <InfoContainer>
-          <div className='myinfo-title'>내 정보</div>
-          <div className='myinfo-content'>
-            <ul className='info-list'>
-              <li className='list-item'>
-                <div className='item-label'>이름</div>
-                <div className='item-data'>서현석</div>
+          <div className="myinfo-title">내 정보</div>
+          <div className="myinfo-content">
+            <ul className="info-list">
+              <li className="list-item">
+                <div className="item-label">이름</div>
+                <div className="item-data">서현석</div>
               </li>
-              <li className='list-item'>
-                <div className='item-label'>아이디</div>
-                <div className='item-data'>asdf</div>
+              <li className="list-item">
+                <div className="item-label">아이디</div>
+                <div className="item-data">asdf</div>
               </li>
-              <li className='list-item'>
-                <div className='item-label'>닉네임</div>
-                <div className='item-data'>외계공룡</div>
-                <div className='item-change' onClick={goChangeNick}>
+              <li className="list-item">
+                <div className="item-label">닉네임</div>
+                <div className="item-data">외계공룡</div>
+                <div className="item-change" onClick={goChangeNick}>
                   변경하기
                 </div>
               </li>
@@ -40,10 +40,10 @@ export default function Account() {
           </div>
         </InfoContainer>
         <ButtonContainer>
-          <div className='movePage' onClick={goChangePw}>
+          <div className="movePage" onClick={goChangePw}>
             비밀번호 변경하기
           </div>
-          <div className='movePage'>회원 탈퇴</div>
+          <div className="movePage">회원 탈퇴</div>
         </ButtonContainer>
       </MainContainer>
     </LayoutDetailPage>
