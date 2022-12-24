@@ -6,16 +6,15 @@ import { logout } from "./func";
 import CommonModal from "./modals/CommonModal";
 
 // 2.이미지 불러옴
-import fir from "../img/fir.png";
+import fir from "../img/logo_white.png";
 import backbtn from "../img/icon-back.svg";
 import normalFruit from "../img/normal_fruit.png";
 import sickFruit from "../img/sick_fruit.png";
 import iconWarning from "../img/icon-warning.png";
 
 // 3.타이틀바 : 로고(img), 메뉴(StyledBurger)
-export default function Titlebar() {
-  const [open, setOpen] = useState(false);
-  const [bg, setBg] = useState("#ffffff");
+export default function Titlebar({ open, setOpen }) {
+  const [bg, setBg] = useState("#E47B00");
 
   return (
     <TitlebarContainer bg={bg}>
@@ -46,10 +45,10 @@ export function DetailTitlebar() {
         return setTitle("계정 관리");
       case "/detail/changepw":
         return setTitle("비밀번호 변경");
+      case "/detail/changenick":
+        return setTitle("닉네임 변경");
       case "/detail/partyjoin":
         return setTitle("스터디 개설하기"), setBg("#ffffff");
-      case "/detail/account":
-        return setTitle("계정 관리");
       case "/detail/join":
         return setTitle("회원가입");
       default:
@@ -77,17 +76,21 @@ const TitlebarContainer = styled.header`
   left: 0;
   background: #ffffff;
   z-index: 100;
-  border-bottom: ${({ detail }) => (detail ? "none" : "1px solid #dddddd")};
+
+  /* border-bottom: ${({ detail }) =>
+    detail ? "none" : "1px solid #dddddd"}; */
+
   width: 100%;
-  height: 60px;
+  height: 80px;
   font-size: 48px;
   left: 0;
   bottom: 0;
   background: ${(props) => props.bg};
   box-sizing: border-box;
   width: 100%;
-  padding: 0px 20px;
+  padding: 0px 24px;
   display: ${(props) => props.none};
+
   .plusbtn {
     width: 48px;
     height: 48px;
@@ -138,6 +141,7 @@ const StyledBurger = styled.div`
     width: 1.5rem;
     height: 0.15rem;
     background: ${({ open }) => (open ? "#333333" : "#333333")};
+    background-color: ${({ open }) => (open ? "#000000" : "#ffffff")};
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
@@ -210,7 +214,7 @@ const Menu = ({ open, setOpen }) => {
         {user.id && (
           <MenuContents>
             <div className="greeting">
-              <div className="greeting-title">반갑습니다!</div>
+              <div className="greeting-title">만나서 반가워요!</div>
               <div className="greeting-name">
                 <p className="userName">
                   <span className="biColor">{user.nick}</span>님
@@ -269,7 +273,7 @@ const Menu = ({ open, setOpen }) => {
         {!user.id && (
           <MenuContents>
             <div className="greeting">
-              <div className="greeting-title">반갑습니다!</div>
+              <div className="greeting-title">만나서 반가워요!</div>
               <div className="greeting-name">
                 <span className="biColor">스터디</span>를 시작해보세요.
               </div>
@@ -366,10 +370,11 @@ const StyledMenu = styled.nav`
   right: 0;
   transition: transform 0.3s ease-in-out;
   z-index: 100;
+
   filter: drop-shadow(-5px 0px 2px rgba(0, 0, 0, 0.3));
 
   .greeting {
-    padding: 40px 24px 30px;
+    padding: 40px 20px 22px;
   }
 
   .greeting-title {
@@ -381,6 +386,8 @@ const StyledMenu = styled.nav`
   .greeting-name {
     font-size: 24px;
     font-weight: 600;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid #4f4f4f;
   }
 
   .biColor {
@@ -389,9 +396,11 @@ const StyledMenu = styled.nav`
 
   .fruit-dashboard {
     background: #ffffff;
-    padding: 0 24px;
-    border-top: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
+    padding: 0 14px;
+    border: 1px solid #dddddd;
+    margin: 0 20px;
+    border-radius: 13px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
 
   .fruit-normal {
@@ -429,7 +438,7 @@ const StyledMenu = styled.nav`
 const LogoImg = styled.img`
   width: 67px;
   display: inline-block;
-  padding: 20px;
+  margin-left: 20px;
 `;
 
 //4-5-1. 스터디 만들기 버튼 스타일 정의
@@ -442,7 +451,7 @@ const GoMainActionBtn = styled.div`
   background-color: #e47b00;
   color: white;
   border: none;
-  margin: 20px 24px 10px;
+  margin: 35px 20px 10px;
   font-size: 15px;
 `;
 
@@ -456,7 +465,7 @@ const GoSubActionBtn = styled.div`
   background-color: #ffffff;
   color: black;
   border: 1px solid #666666;
-  margin: 0 24px;
+  margin: 0 20px;
   font-size: 15px;
 `;
 
@@ -469,7 +478,7 @@ const LinkItemGroup = styled.div`
 const LinkItem = styled.div`
   border-bottom: 1px solid #dddddd;
   text-align: right;
-  margin: 5px 24px;
+  margin: 5px 20px;
   padding: 10px 0px;
   color: #666666;
   font-size: 14px;
@@ -492,4 +501,5 @@ const Copyright = styled.div`
 const MenuHead = styled.div`
   border-bottom: 1px solid #dddddd;
   height: 60px;
+  min-height: 60px;
 `;

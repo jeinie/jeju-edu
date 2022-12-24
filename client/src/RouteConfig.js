@@ -10,12 +10,8 @@ const PartyDetail = React.lazy(() => import("./page/detail/PartyDetail"));
 const Account = React.lazy(() => import("./page/account/Account"));
 const Login = React.lazy(() => import("./page/login/Login"));
 const Join = React.lazy(() => import("./page/Join"));
-const ChangePw = React.lazy(() => import("./page/ChangePw"));
-
-const AddressInput = React.lazy(() => import("./components/maps/AddressInput"));
-const TransFormAddress = React.lazy(() =>
-  import("./components/maps/PartyMarker")
-);
+const ChangePw = React.lazy(() => import("./page/account/ChangePw"));
+const ChangeNick = React.lazy(() => import("./page/account/ChangeNick"));
 
 export const RouterConfig = [
   {
@@ -67,7 +63,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/detail/acount",
+    path: "/detail/account",
     element: <Account />,
     sceneConfig: {
       enter: "from-bottom",
@@ -99,16 +95,8 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/detail/mapaddress",
-    element: <AddressInput />,
-    sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
-    },
-  },
-  {
-    path: "/detail/maplocation",
-    element: <TransFormAddress />,
+    path: "/detail/changenick",
+    element: <ChangeNick />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",
