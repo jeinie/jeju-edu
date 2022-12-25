@@ -602,7 +602,7 @@ const options = {
         },
       },
 
-      "/api/auth/message/modifyPW": {
+      "/api/auth/modifyPW": {
         post: {
           tags: ["기존의 비밀번호를 새로운 비밀번호로 변경하는 API"],
           summary: "기존의 비밀번호를 새로운 비밀번호로 변경하는 API 입니다",
@@ -613,7 +613,7 @@ const options = {
               description:
                 "id와 새로운 비밀번호 , 기존의 비밀번호를 넘겨주세요",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyPwRequestForm",
+                $ref: "#/definitions/apiAuthModifyPwRequestForm",
               },
             },
           ],
@@ -622,35 +622,35 @@ const options = {
               description:
                 "기존의 비밀번호로 본인인증이 되었고, 기존의 비밀번호가 새로운 비밀번호로 성공적으로 변경되었다면 코드 200을 리턴합니다",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Success200",
+                $ref: "#/definitions/apiAuthModifyPw_ResponseForm_Success200",
               },
             },
             202: {
               description:
                 "id는 일치하지만 기존의 비밀번호를 맞추지 못해 본인인증에 실패하였을때에 코드 202를 리턴합니다",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed202",
+                $ref: "#/definitions/apiAuthModifyPw_ResponseForm_Failed202",
               },
             },
             203: {
               description:
                 "변경하려고 하는 비밀번호가 현재 비밀번호와 같은 경우 코드 203을 리턴합니다",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed203",
+                $ref: "#/definitions/apiAuthModifyPw_ResponseForm_Failed203",
               },
             },
             500: {
               description:
                 "비밀번호 변경중 서버내의 알수없는 에러가 발생하였을때 코드 500이 리턴됩니다",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyPw_ResponseForm_Failed500",
+                $ref: "#/definitions/apiAuthModifyPw_ResponseForm_Failed500",
               },
             },
           },
         },
       },
 
-      "/api/auth/message/modifyNickName": {
+      "/api/auth/modifyNickName": {
         post: {
           tags: ["기존의 닉네임을 새로운 닉네임으로 변경하는 API"],
           summary: "기존의 닉네임을 새로운 닉네임으로 변경하는 API 입니다",
@@ -658,10 +658,9 @@ const options = {
             {
               in: "body",
               name: "body",
-              description:
-                "id와 새로운 닉네임, 기존의 닉네임을 넘겨주세요",
+              description: "id와 새로운 닉네임, 기존의 닉네임을 넘겨주세요",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyNickNameRequestForm",
+                $ref: "#/definitions/apiAuthModifyNickNameRequestForm",
               },
             },
           ],
@@ -670,21 +669,21 @@ const options = {
               description:
                 "기존의 닉네임으로 본인인증이 되었고, 기존의 닉네임이 새로운 닉네임으로 성공적으로 변경되었다면 코드 200을 리턴합니다",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Success200",
+                $ref: "#/definitions/apiAuthModifyNickName_ResponseForm_Success200",
               },
             },
             203: {
               description:
                 "변경하려고 하는 닉네임이 현재 닉네임과 같은 경우 코드 203을 리턴합니다",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Failed203",
+                $ref: "#/definitions/apiAuthModifyNickName_ResponseForm_Failed203",
               },
             },
             405: {
               description:
                 "기존의 닉네임이 존재하지 않는 닉네임이면 코드 405를 리턴합니다",
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Failed405",
+                $ref: "#/definitions/apiAuthModifyNickName_ResponseForm_Failed405",
               },
             },
             500: {
@@ -692,7 +691,7 @@ const options = {
                 "닉네임 변경중 서버내의 알수없는 에러가 발생하였을때 코드 500이 리턴됩니다",
 
               schema: {
-                $ref: "#/definitions/apiAuthMsgModifyNickName_ResponseForm_Failed500",
+                $ref: "#/definitions/apiAuthModifyNickName_ResponseForm_Failed500",
               },
             },
           },
@@ -2078,7 +2077,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyNickNameRequestForm: {
+      apiAuthModifyNickNameRequestForm: {
         properties: {
           id: {
             type: "string",
@@ -2094,7 +2093,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyNickName_ResponseForm_Success200: {
+      apiAuthModifyNickName_ResponseForm_Success200: {
         properties: {
           code: {
             type: "integer",
@@ -2105,8 +2104,8 @@ const options = {
             description: `성공하면 닉네임 변경 성공 이란 메세지가 리턴된다`,
           },
         },
-      },     
-      apiAuthMsgModifyNickName_ResponseForm_Failed203: {
+      },
+      apiAuthModifyNickName_ResponseForm_Failed203: {
         properties: {
           code: {
             type: "integer",
@@ -2118,7 +2117,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyNickName_ResponseForm_Failed405: {
+      apiAuthModifyNickName_ResponseForm_Failed405: {
         properties: {
           code: {
             type: "integer",
@@ -2130,7 +2129,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyNickName_ResponseForm_Failed500: {
+      apiAuthModifyNickName_ResponseForm_Failed500: {
         properties: {
           code: {
             type: "integer",
