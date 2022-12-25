@@ -1,4 +1,4 @@
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -10,6 +10,7 @@ import App from "./App";
 import store from "./store.js";
 
 export let persistor = persistStore(store);
+persistor.purge();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
