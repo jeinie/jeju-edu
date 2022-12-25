@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BsFillPersonFill } from "react-icons/bs";
-import { FiSearch } from "react-icons/fi";
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { FiSearch } from 'react-icons/fi';
 
 export default function Footer() {
-  const [page, setPage] = useState("search");
+  const [page, setPage] = useState('search');
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -15,24 +15,21 @@ export default function Footer() {
   }, [pathname]);
 
   const goSearch = () => {
-    navigate("/home");
+    navigate('/home');
   };
 
   const goJoin = () => {
-    navigate("/detail/partyjoin");
+    navigate('/detail/partyjoin');
   };
 
   const goProfile = () => {
-    navigate("/profile");
+    navigate('/profile');
   };
 
   return (
     <FooterContainer>
       <div onClick={goSearch}>
-        <FiSearch
-          className="icon"
-          color={page === "/home" ? "#000000" : "#bababa"}
-        />
+        <FiSearch className="icon" color={page === '/home' ? '#000000' : '#bababa'} />
         <p className="iconText">스터디 탐색</p>
       </div>
       <div>
@@ -40,10 +37,7 @@ export default function Footer() {
         <p className="iconText">스터디 생성</p>
       </div>
       <div onClick={goProfile}>
-        <BsFillPersonFill
-          className="icon"
-          color={page === "/profile" ? "#000000" : "#bababa"}
-        />
+        <BsFillPersonFill className="icon" color={page === '/profile' ? '#000000' : '#bababa'} />
         <p className="iconText">스터디 관리</p>
       </div>
     </FooterContainer>
@@ -63,6 +57,7 @@ const FooterContainer = styled.footer`
   bottom: 0;
   z-index: 20;
   background: white;
+
   .iconText {
     font-size: 8px;
     margin-top: 10px;
