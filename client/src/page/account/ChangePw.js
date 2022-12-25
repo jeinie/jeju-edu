@@ -91,7 +91,7 @@ export default function ChangePw() {
     };
 
     axios
-      .post(`/api/auth/message/modifyPW`, body)
+      .post(`/api/auth/modifyPW`, body)
       .then((response) => {
         if (response.data.code === 200) {
           navigate("/detail/login");

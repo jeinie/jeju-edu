@@ -50,7 +50,7 @@ router.post(
  *
  */
 router.post(
-  "/message/modifyPW",
+  "/modifyPW",
   userAgentMiddleWare("/api/auth/message/modifyPW"),
   async (req, res, next) => {
     try {
@@ -74,7 +74,7 @@ router.post(
           res.status(203).json({
             code: 203,
             message: "현재 비밀번호와 수정하려는 비밀번호가 같습니다.",
-          })
+          });
         }
       } else {
         res.status(202).json({
@@ -96,8 +96,8 @@ router.post(
  *
  */
 router.post(
-  "/message/modifyNickName",
-  userAgentMiddleWare("/api/auth/message/modifyNickName"),
+  "/modifyNickName",
+  userAgentMiddleWare("/api/auth/modifyNickName"),
   async (req, res, next) => {
     try {
       const { newNickName, nickName } = req.body;
