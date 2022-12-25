@@ -1,20 +1,17 @@
-import styled from "styled-components";
-import React from "react";
+import styled from 'styled-components';
+import React from 'react';
 
-import { ChangeDate } from "../utils/ChangeDate";
+import { ChangeDate } from '../utils/ChangeDate';
 
-import IconLocation from "../img/icon-location.png";
-import IconMember from "../img/icon-member.png";
-import IconCalendar from "../img/icon-calendar.png";
-import tree_2_1x from "../img/tree_2_1x.png";
-import tree_3_1x from "../img/tree_3_1x.png";
-import tree_4_1x from "../img/tree_4_1x.png";
-import tree_1_1x from "../img/tree_1_1x.png";
-import { useEffect } from "react";
+import IconLocation from '../img/icon-location.png';
+import IconMember from '../img/icon-member.png';
+import IconCalendar from '../img/icon-calendar.png';
+import tree_2_1x from '../img/tree_2_1x.png';
+import tree_3_1x from '../img/tree_3_1x.png';
+import tree_4_1x from '../img/tree_4_1x.png';
+import tree_1_1x from '../img/tree_1_1x.png';
 
 export default function StudyCard({ item }) {
-  console.log(item);
-
   const handleImage = (currentValue, totalValue) => {
     if (totalValue === currentValue) return tree_4_1x;
     if (parseInt(totalValue / 4) * 3 <= currentValue) return tree_3_1x;
@@ -40,13 +37,6 @@ export default function StudyCard({ item }) {
         <img src={IconLocation} alt="지역" width="15px" />
         <p>{item.studyAt_location /* tmX, tmY값이 넘어옴 location없어짐 */}</p>
       </Location>
-
-      {/* <VisualIconBg /> */}
-      {/* <VisualIcon
-        className="Seed"
-        src={handleImage(item.current_member_cnt, item.min_member_cnt)}
-        alt="viewDetail.js 이미지"
-      /> */}
     </StudyBox>
   );
 }

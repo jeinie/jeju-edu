@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-import PartyMarker from "../../components/maps/PartyMarker";
+import PartyMarker from '../../components/maps/PartyMarker';
 
-import { HiLocationMarker } from "react-icons/hi";
-import { MdPeopleAlt } from "react-icons/md";
-import { BsCalendar2WeekFill } from "react-icons/bs";
+import { HiLocationMarker } from 'react-icons/hi';
+import { MdPeopleAlt } from 'react-icons/md';
+import { BsCalendar2WeekFill } from 'react-icons/bs';
 
-import tree_2_1x from "../../img/tree_2_1x.png";
-import tree_3_1x from "../../img/tree_3_1x.png";
-import tree_4_1x from "../../img/tree_4_1x.png";
-import tree_1_1x from "../../img/tree_1_1x.png";
-import backspace from "../../img/back.svg";
+import tree_2_1x from '../../img/tree_2_1x.png';
+import tree_3_1x from '../../img/tree_3_1x.png';
+import tree_4_1x from '../../img/tree_4_1x.png';
+import tree_1_1x from '../../img/tree_1_1x.png';
+import backspace from '../../img/back.svg';
 
-import Modal from "../../components/modals/Modal";
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import Modal from '../../components/modals/Modal';
+import LayoutDetailPage from '../../layouts/LayoutDetailPage';
+import Footer from '../../components/Footer';
 
 export default function PartyDetail() {
   const { id } = useParams();
@@ -50,9 +51,7 @@ export default function PartyDetail() {
   };
 
   useEffect(() => {
-    axios
-      .post(`/api/viewDetail/${id}`)
-      .then((res) => setStudy(res.data.study_Detail_Info));
+    axios.post(`/api/viewDetail/${id}`).then((res) => setStudy(res.data.study_Detail_Info));
   }, []);
 
   console.log(study);
@@ -60,28 +59,21 @@ export default function PartyDetail() {
   return (
     <LayoutDetailPage top="0">
       <OutputContainer>
-        <Backspace onClick={() => navigate(-1)}>
-          <img src={backspace} alt="뒤로가기"></img>
-        </Backspace>
-        <PartyMarker lat={study.tmX} lon={study.tmY} />
+        <div className="headerWrapper">
+          <Backspace onClick={() => navigate(-1)}>
+            <img src={backspace} alt="뒤로가기"></img>
+          </Backspace>
+          <PartyMarker lat={study.tmX} lon={study.tmY} />
+        </div>
         <ViewDetailContainer>
           <div className="wrapper">
             <div className="headerLeft">
-              {/* <section className="headerLeftContent"> */}
               <ContainerHeader>
                 <div className="headerText">
                   <p className="userName">@{study.who_open}</p>
                   <p className="studyName">{study.study_title}</p>
                 </div>
-                <div className="headerCircle">
-                  <img
-                    className="Seed"
-                    src={handleImage(study.members)}
-                    alt="viewDetail.js 이미지"
-                  />
-                </div>
               </ContainerHeader>
-              {/* </section> */}
               <PlaceData>
                 <div className="memberContainer">
                   <MdPeopleAlt />
@@ -104,30 +96,26 @@ export default function PartyDetail() {
             {study.study_no >= study.min_member_cnt ? (
               <p className="fullParty">모집인원이 가득 찼습니다!</p>
             ) : (
-              ""
+              ''
             )}
-            <DetailCreateBtnBox>
-              <div className="btnBox">
-                <button
-                  className="joinBtn"
-                  disabled={study.study_no >= study.min_member_cnt}
-                  onClick={() => {
-                    setOpen(true);
-                    handleModalView();
-                  }}
-                >
-                  <p className="join">J-Join</p>
-                </button>
-                <Modal
-                  status={1}
-                  open={open}
-                  handleClose={setOpen}
-                  list={study}
-                />
-              </div>
-            </DetailCreateBtnBox>
           </div>
         </ViewDetailContainer>
+        <DetailCreateBtnBox>
+          <div className="btnBox">
+            <button
+              className="joinBtn"
+              disabled={study.study_no >= study.min_member_cnt}
+              onClick={() => {
+                setOpen(true);
+                // handleModalView();
+              }}
+            >
+              <p className="join">J-Join</p>
+            </button>
+            <Modal status={1} open={open} handleClose={setOpen} list={study} />
+          </div>
+        </DetailCreateBtnBox>
+        <Footer />
       </OutputContainer>
     </LayoutDetailPage>
   );
@@ -144,18 +132,14 @@ const OutputContainer = styled.section`
   width: 100%;
   box-sizing: border-box;
   height: 100%;
-  padding-bottom: 40px;
+  background-color: #faf6f2;
+
+  .headerWrapper {
+    height: 212px;
+  }
 `;
 
 const ContainerHeader = styled.section`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  .headerText {
-    width: 70%;
-  }
-
   .userName {
     margin-bottom: 15px;
     font-size: 12px;
@@ -230,22 +214,17 @@ const PlaceData = styled.div`
 
   .address {
     font-size: 15px;
-    margin-left: 15px;
+    line-height: 15px;
+    margin: 0 20px 0 15px;
   }
 `;
 
 const DetailCreateBtnBox = styled.div`
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  margin-top: 27px;
-  width: 90%;
-
   .btnBox {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
+    position: fixed;
+    left: 24px;
+    bottom: 70px;
+    width: 90%;
   }
 
   .joinBtn {
@@ -260,6 +239,13 @@ const DetailCreateBtnBox = styled.div`
 
 const ViewDetailContainer = styled.section`
   padding-top: 35px;
+  z-index: 10;
+  border-radius: 22px;
+  background-color: #faf6f2;
+  /* transform: translate(0, -25px); */
+  position: relative;
+  top: -20px;
+  left: 0;
 
   .fullParty {
     text-align: center;
@@ -268,31 +254,13 @@ const ViewDetailContainer = styled.section`
 
   .wrapper {
     font-size: 12px;
-    margin: 0 20px;
-    padding: 0 0 27px 17px;
-  }
-
-  .headerLeftContent {
-    display: flex;
-    margin-bottom: 10px;
-  }
-  .headerLeft {
-    display: flex;
-    width: 90%;
-    flex-direction: column;
-  }
-
-  .headerTitle {
-    padding-left: 6px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
+    padding: 0 24px;
   }
 
   .partyDesc {
     margin-top: 30px;
     width: 280px;
-    height: auto;
+    height: 100%;
     padding: 10px;
   }
 `;
