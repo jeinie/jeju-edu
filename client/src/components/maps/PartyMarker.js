@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import markerImg from '../../img/marker.png';
 
 // 개설된 스터디 상세페이지에서 사용될 지도 와 마커
 export default function PartyMarker({ lat, lon }) {
@@ -8,16 +10,12 @@ export default function PartyMarker({ lat, lon }) {
   // Ma: 33.2478036598913;
   useEffect(() => {
     setTimeout(() => {
-      const markerPosition = new kakao.maps.LatLng(
-        33.2478036598913,
-        126.552302849197
-      );
+      const markerPosition = new kakao.maps.LatLng(33.2478036598913, 126.552302849197);
       // 마커(스터디장소)를 찍기 위한 변수
-      const container = document.getElementById("map");
-      const imageSrc =
-        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-      const imageSize = new kakao.maps.Size(24, 35);
-      const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+      const container = document.getElementById('map');
+      const imageSrc = <FaMapMarkerAlt />;
+      const imageSize = new kakao.maps.Size(35, 35);
+      const markerImage = new kakao.maps.MarkerImage(markerImg, imageSize);
 
       // const displayMarker = (localPosition, message) => {
       //   const marker = new kakao.maps.Marker({
@@ -40,6 +38,7 @@ export default function PartyMarker({ lat, lon }) {
 
       const marker = new kakao.maps.Marker({
         position: markerPosition,
+        image: markerImage,
       });
 
       const options = {
@@ -71,10 +70,10 @@ export default function PartyMarker({ lat, lon }) {
 
 const MapContainer = styled.section`
   .map {
-    height: 150px;
+    height: 212px;
   }
 
   #map {
-    height: 150px;
+    height: 212px;
   }
 `;

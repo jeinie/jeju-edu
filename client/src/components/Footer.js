@@ -56,7 +56,7 @@ const FooterContainer = styled.footer`
   left: 0;
   bottom: 0;
   z-index: 20;
-  background: white;
+  background: #faf6f2;
 
   .iconText {
     font-size: 8px;
