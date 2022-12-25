@@ -10,7 +10,6 @@ import App from "./App";
 import store from "./store.js";
 
 export let persistor = persistStore(store);
-persistor.purge();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
