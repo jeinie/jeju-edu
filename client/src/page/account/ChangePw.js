@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Input, Button } from "../../components/form";
-import styled from "styled-components";
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Input, Button } from '../../components/form';
+import styled from 'styled-components';
 
-import CommonModal from "../../components/modals/CommonModal";
-import axios from "axios";
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import iconWarning from "../../img/icon-warning.png";
+import CommonModal from '../../components/modals/CommonModal';
+import axios from 'axios';
+import LayoutDetailPage from '../../layouts/LayoutDetailPage';
+import iconWarning from '../../img/icon-warning.png';
 
 /**
  * 2022-12-18 hssuh
@@ -18,9 +18,9 @@ export default function ChangePw() {
 
   const id = useSelector((state) => state.user.id);
 
-  const [pw, setPw] = useState("");
-  const [newPw, setNewPw] = useState("");
-  const [newPwConfirm, setNewPwConfirm] = useState("");
+  const [pw, setPw] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [newPwConfirm, setNewPwConfirm] = useState('');
 
   const pwRef = useRef(false);
   const newPwRef = useRef(false);
@@ -28,8 +28,8 @@ export default function ChangePw() {
 
   const [pwDesc, setPwDesc] = useState({});
   const [newPwDesc, setNewPwDesc] = useState({
-    type: "DEFAULT",
-    text: "8~16자의 영문,숫자, 특수문자를 사용해주세요.",
+    type: 'DEFAULT',
+    text: '8~16자의 영문,숫자, 특수문자를 사용해주세요.',
   });
   const [newPwConfirmDesc, setNewPwConfirmDesc] = useState({});
 
@@ -44,7 +44,7 @@ export default function ChangePw() {
   const pwValidCheck = () => {
     if (pw.length < 8) {
       setPwOk(false);
-      setPwDesc({ type: "WARN", text: "8자 이상 입력해주세요." });
+      setPwDesc({ type: 'WARN', text: '8자 이상 입력해주세요.' });
     } else {
       setPwOk(true);
       setPwDesc({});
@@ -54,10 +54,10 @@ export default function ChangePw() {
   const newPwValidCheck = () => {
     if (newPw.length < 8) {
       setNewPwOk(false);
-      setNewPwDesc({ type: "WARN", text: "8자 이상 입력해주세요." });
+      setNewPwDesc({ type: 'WARN', text: '8자 이상 입력해주세요.' });
     } else {
       setNewPwOk(true);
-      setNewPwDesc({ type: "SUCCESS", text: "적합한 비밀번호 입니다." });
+      setNewPwDesc({ type: 'SUCCESS', text: '적합한 비밀번호 입니다.' });
     }
   };
 
@@ -65,12 +65,12 @@ export default function ChangePw() {
     if (newPw !== newPwConfirm) {
       setNewPwConfirmOk(false);
       setNewPwConfirmDesc({
-        type: "WARN",
-        text: "비밀번호가 일치하지 않습니다.",
+        type: 'WARN',
+        text: '비밀번호가 일치하지 않습니다.',
       });
     } else {
       setNewPwConfirmOk(true);
-      setNewPwConfirmDesc({ type: "SUCCESS", text: "비밀번호가 일치합니다." });
+      setNewPwConfirmDesc({ type: 'SUCCESS', text: '비밀번호가 일치합니다.' });
     }
   };
 
@@ -94,12 +94,15 @@ export default function ChangePw() {
       .post(`/api/auth/modifyPW`, body)
       .then((response) => {
         if (response.data.code === 200) {
-          navigate("/detail/login");
+          navigate('/detail/login');
         } else if (response.data.code === 202) {
           setPwOk(false);
-          setPwDesc({ type: "WARN", text: "현재 비밀번호가 아니에요" });
+          setPwDesc({ type: 'WARN', text: '현재 비밀번호가 아니에요' });
+        } else if (response.data.code === 203) {
+          setNewPwOk(false);
+          setNewPwDesc({ type: 'WARN', text: response.data.message });
         } else {
-          alert("변경실패 : 서버오류");
+          alert('변경실패 : 서버오류');
         }
       })
       .finally(() => setOpenModal(false));
@@ -122,7 +125,7 @@ export default function ChangePw() {
 
   useEffect(
     () => setTotalOk(totalValidCheck()),
-    [pw, newPw, newPwConfirm, pwOk, newPwOk, newPwConfirmOk]
+    [pw, newPw, newPwConfirm, pwOk, newPwOk, newPwConfirmOk],
   );
 
   return (
@@ -136,7 +139,7 @@ export default function ChangePw() {
             value={pw}
             setValue={setPw}
             desc={pwDesc}
-            style={{ marginBottom: "20px", marginTop: "52px" }}
+            style={{ marginBottom: '20px', marginTop: '52px' }}
             maxLength={16}
             password
           />
@@ -147,7 +150,7 @@ export default function ChangePw() {
             value={newPw}
             setValue={setNewPw}
             desc={newPwDesc}
-            style={{ marginBottom: "20px" }}
+            style={{ marginBottom: '20px' }}
             maxLength={16}
             password
           />
@@ -158,13 +161,13 @@ export default function ChangePw() {
             value={newPwConfirm}
             setValue={setNewPwConfirm}
             desc={newPwConfirmDesc}
-            style={{ marginBottom: "20px" }}
+            style={{ marginBottom: '20px' }}
             maxLength={16}
             password
           />
           <Button
             text="비밀번호 변경완료"
-            style={{ position: "absolute", bottom: "20px" }}
+            style={{ position: 'absolute', bottom: '20px' }}
             disabled={!totalOk}
           />
         </ChangePwForm>
