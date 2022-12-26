@@ -1,13 +1,13 @@
-const express = require("express");
-const session = require("express-session");
-const StudyAllList = require("../models/studyAllList");
-const Study = require("../models/study");
-const JejuAreaDB = require("../models/jejuAreaDB");
-let { Op } = require("sequelize");
-const { route } = require("./page");
+const express = require('express');
+const session = require('express-session');
+const StudyAllList = require('../models/studyAllList');
+const Study = require('../models/study');
+const JejuAreaDB = require('../models/jejuAreaDB');
+let { Op } = require('sequelize');
+const { route } = require('./page');
 const router = express.Router();
-const userAgentMiddleWare = require("./userAgentMiddleWare");
-const authMiddleWare = require("./authMiddleWare");
+const userAgentMiddleWare = require('./userAgentMiddleWare');
+const authMiddleWare = require('./authMiddleWare');
 
 const getDateDiff = (date) => {
   var today = new Date();
@@ -16,20 +16,20 @@ const getDateDiff = (date) => {
     Math.abs(
       (new Date(
         today.getFullYear() +
-          "-" +
-          ("0" + (today.getMonth() + 1)).slice(-2) +
-          "-" +
-          ("0" + today.getDate()).slice(-2)
+          '-' +
+          ('0' + (today.getMonth() + 1)).slice(-2) +
+          '-' +
+          ('0' + today.getDate()).slice(-2),
       ).getTime() -
         new Date(date).getTime()) /
-        (1000 * 60 * 60 * 24)
-    )
+        (1000 * 60 * 60 * 24),
+    ),
   ); // 밀리세컨 * 초 * 분 * 시 = 일
 };
 
 router.get(
-  "/getStudyList/code",
-  userAgentMiddleWare("/api/getStudyList/code"),
+  '/getStudyList/code',
+  userAgentMiddleWare('/api/getStudyList/code'),
   //authMiddleWare,
   async (req, res, next) => {
     try {
@@ -47,8 +47,8 @@ router.get(
 
       if (studyList) {
         Array.from(studyList).forEach((item) => {
-          let concat = item.studyAt_location.split(" ");
-          let result = concat[1] + " " + concat[2];
+          let concat = item.studyAt_location.split(' ');
+          let result = concat[1] + ' ' + concat[2];
           item.studyAt_location = result;
           item.Dday = getDateDiff(item.studyAt_date);
         });
@@ -66,12 +66,12 @@ router.get(
       });
       return next(error);
     }
-  }
+  },
 );
 
 router.get(
-  "/getStudyList/sing",
-  userAgentMiddleWare("/api/getStudyList/sing"),
+  '/getStudyList/sing',
+  userAgentMiddleWare('/api/getStudyList/sing'),
   //authMiddleWare,
   async (req, res, next) => {
     try {
@@ -90,8 +90,8 @@ router.get(
       if (studyList) {
         Array.from(studyList).forEach((item) => {
           Array.from(studyList).forEach((item) => {
-            let concat = item.studyAt_location.split(" ");
-            let result = concat[1] + " " + concat[2];
+            let concat = item.studyAt_location.split(' ');
+            let result = concat[1] + ' ' + concat[2];
             item.studyAt_location = result;
             item.Dday = getDateDiff(item.studyAt_date);
           });
@@ -110,12 +110,12 @@ router.get(
       });
       return next(error);
     }
-  }
+  },
 );
 
 router.get(
-  "/getStudyList/design",
-  userAgentMiddleWare("/api/getStudyList/design"),
+  '/getStudyList/design',
+  userAgentMiddleWare('/api/getStudyList/design'),
   //authMiddleWare,
   async (req, res, next) => {
     try {
@@ -134,8 +134,8 @@ router.get(
 
       if (studyList) {
         Array.from(studyList).forEach((item) => {
-          let concat = item.studyAt_location.split(" ");
-          let result = concat[1] + " " + concat[2];
+          let concat = item.studyAt_location.split(' ');
+          let result = concat[1] + ' ' + concat[2];
           item.studyAt_location = result;
           item.Dday = getDateDiff(item.studyAt_date);
         });
@@ -152,15 +152,15 @@ router.get(
       });
       return next(error);
     }
-  }
+  },
 );
 /**
  * 이거 검색창에 위치기반 검색하면 뜨게하려는것같은데 현석이형이
  * 흠..
  */
 router.post(
-  "/getStudyList",
-  userAgentMiddleWare("/api/getStudyList"),
+  '/getStudyList',
+  userAgentMiddleWare('/api/getStudyList'),
   authMiddleWare,
   async (req, res, next) => {
     try {
@@ -181,8 +181,8 @@ router.post(
 
       if (studyList) {
         for (var i = 0; i < studyList.length; i++) {
-          let concat = studyList[i].studyAt_location.split(" ");
-          let result = concat[1] + " " + concat[2];
+          let concat = studyList[i].studyAt_location.split(' ');
+          let result = concat[1] + ' ' + concat[2];
           studyList[i].studyAt_location = result;
         }
 
@@ -199,18 +199,18 @@ router.post(
       });
       return next(error);
     }
-  }
+  },
 );
 
 /*
  * 내가 개설한 스터디들만 보기
  */
 router.get(
-  "/getStudyListMine/:id",
-  userAgentMiddleWare("/api/getStudyListMine/:id"),
+  '/getStudyListMine/:id',
+  userAgentMiddleWare('/api/getStudyListMine/:id'),
   authMiddleWare,
   async (req, res, next) => {
-    const statusList = ["모집중", "인원마감", "진행중", "완료", "종료"];
+    const statusList = ['모집중', '인원마감', '진행중', '완료', '종료'];
     try {
       const studyList = await Study.findAll({
         where: {
@@ -218,17 +218,17 @@ router.get(
         },
       });
 
-      let dayArr = JSON.stringify(new Date()).split("T")[0].substring(1, 11);
-      const todayDate = dayArr.replaceAll("-", "");
+      let dayArr = JSON.stringify(new Date()).split('T')[0].substring(1, 11);
+      const todayDate = dayArr.replaceAll('-', '');
 
       Array.from(studyList).forEach((item) => {
-        let concat = item.studyAt_location.split(" ");
-        let result = concat[1] + " " + concat[2];
+        let concat = item.studyAt_location.split(' ');
+        let result = concat[1] + ' ' + concat[2];
         item.studyAt_location = result;
 
         if (item.deadline != null) {
-          item.deadline = item.deadline.replaceAll("-", "");
-          item.studyAt_date = item.studyAt_date.replaceAll("-", "");
+          item.deadline = item.deadline.replaceAll('-', '');
+          item.studyAt_date = item.studyAt_date.replaceAll('-', '');
           if (todayDate > item.deadline || todayDate > item.studyAt_date) {
             item.status = statusList[4];
             return;
@@ -239,8 +239,7 @@ router.get(
 
       res.status(200).json({
         code: 200,
-        message:
-          "성공적으로 다른 유저가 개설한 스터디 목록 불러오기가 성공했습니다",
+        message: '성공적으로 다른 유저가 개설한 스터디 목록 불러오기가 성공했습니다',
         studyListMine: studyList,
       });
     } catch (error) {
@@ -250,18 +249,18 @@ router.get(
       });
       return next(error);
     }
-  }
+  },
 );
 
 /**
  * 다른사람이 개설한 스터디들만 보기
  */
 router.get(
-  "/getStudyListNotMine/:id",
-  userAgentMiddleWare("/api/getStudyListNotMine/:id"),
+  '/getStudyListNotMine/:id',
+  userAgentMiddleWare('/api/getStudyListNotMine/:id'),
   authMiddleWare,
   async (req, res, next) => {
-    const statusList = ["모집중", "인원마감", "진행중", "완료", "종료"];
+    const statusList = ['모집중', '인원마감', '진행중', '완료', '종료'];
     try {
       const studyList = await Study.findAll({
         where: {
@@ -269,17 +268,17 @@ router.get(
         },
       });
 
-      let dayArr = JSON.stringify(new Date()).split("T")[0].substring(1, 11);
-      const todayDate = dayArr.replaceAll("-", "");
+      let dayArr = JSON.stringify(new Date()).split('T')[0].substring(1, 11);
+      const todayDate = dayArr.replaceAll('-', '');
 
       Array.from(studyList).forEach((item) => {
-        let concat = item.studyAt_location.split(" ");
-        let result = concat[1] + " " + concat[2];
+        let concat = item.studyAt_location.split(' ');
+        let result = concat[1] + ' ' + concat[2];
         item.studyAt_location = result;
 
         if (item.deadline != null) {
-          item.deadline = item.deadline.replaceAll("-", "");
-          item.studyAt_date = item.studyAt_date.replaceAll("-", "");
+          item.deadline = item.deadline.replaceAll('-', '');
+          item.studyAt_date = item.studyAt_date.replaceAll('-', '');
           if (todayDate > item.deadline || todayDate > item.studyAt_date) {
             item.status = statusList[4];
             return;
@@ -290,8 +289,7 @@ router.get(
 
       res.status(200).json({
         code: 200,
-        message:
-          "성공적으로 다른 유저가 개설한 스터디 목록 불러오기가 성공했습니다",
+        message: '성공적으로 다른 유저가 개설한 스터디 목록 불러오기가 성공했습니다',
         studyListNotMine: studyList,
       });
     } catch (error) {
@@ -301,12 +299,12 @@ router.get(
       });
       return next(error);
     }
-  }
+  },
 );
 
 router.post(
-  "/openStudy",
-  userAgentMiddleWare("/api/openStudy"),
+  '/openStudy',
+  userAgentMiddleWare('/api/openStudy'),
   authMiddleWare,
   async (req, res, next) => {
     try {
@@ -352,12 +350,12 @@ router.post(
       });
       return next(error);
     }
-  }
+  },
 );
 
 router.post(
-  "/joinStudy",
-  userAgentMiddleWare("/api/joinStudy"),
+  '/joinStudy',
+  userAgentMiddleWare('/api/joinStudy'),
   authMiddleWare,
   async (req, res, next) => {
     const { user_no, study_no } = req.body;
@@ -380,10 +378,7 @@ router.post(
         return;
       }
 
-      await Study.increment(
-        { current_member_cnt: 1 },
-        { where: { study_no: study_no } }
-      );
+      await Study.increment({ current_member_cnt: 1 }, { where: { study_no: study_no } });
 
       res.status(200).json({
         code: 200,
@@ -397,12 +392,12 @@ router.post(
       });
       return next(error);
     }
-  }
+  },
 );
 
 router.post(
-  "/closeStudy",
-  userAgentMiddleWare("/api/closeStudy"),
+  '/closeStudy',
+  userAgentMiddleWare('/api/closeStudy'),
   authMiddleWare,
   async (req, res, next) => {
     const { study_no } = req.body;
@@ -420,7 +415,7 @@ router.post(
       });
       return next(error);
     }
-  }
+  },
 );
 
 module.exports = router;
