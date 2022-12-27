@@ -4,13 +4,24 @@ module.exports = class jejuAreaDB extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        idx: {
+        id: {
           type: Sequelize.INTEGER,
-          autoIncrement: true,
           primaryKey: true,
+          autoIncrement: true,
         },
-        areaName: {
+        name: {
           type: Sequelize.STRING(1200),
+        },
+        latitude: {
+          type: Sequelize.DataTypes.DOUBLE,
+          allowNull: false,
+        },
+        longtitude: {
+          type: Sequelize.DataTypes.DOUBLE,
+          allowNull: false,
+        },
+        distance: {
+          type: Sequelize.DataTypes.DOUBLE,
         },
       },
       {
