@@ -12,6 +12,8 @@ const Login = React.lazy(() => import('./page/login/Login'));
 const Join = React.lazy(() => import('./page/Join'));
 const ChangePw = React.lazy(() => import('./page/account/ChangePw'));
 const ChangeNick = React.lazy(() => import('./page/account/ChangeNick'));
+const Error = React.lazy(() => import('./page/Error'));
+
 
 export const RouterConfig = [
   {
@@ -97,6 +99,15 @@ export const RouterConfig = [
   {
     path: '/detail/changenick',
     element: <ChangeNick />,
+    sceneConfig: {
+      enter: 'from-bottom',
+      exit: 'to-bottom',
+
+    },
+  },
+  {
+    path: '/detail/error',
+    element: <Error />,
     sceneConfig: {
       enter: 'from-bottom',
       exit: 'to-bottom',
