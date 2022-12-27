@@ -1,24 +1,24 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import styled from "styled-components";
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import styled from 'styled-components';
 
-import { MdPeopleAlt } from "react-icons/md";
+import { MdPeopleAlt } from 'react-icons/md';
 
-import Modal from "../../components/modals/Modal";
-import Footer from "../../components/Footer";
-import { BsChevronLeft } from "react-icons/bs";
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import JoinModal from './joinModal';
+import Footer from '../../components/Footer';
+import { BsChevronLeft } from 'react-icons/bs';
+import LayoutDetailPage from '../../layouts/LayoutDetailPage';
 
 export default function PartyJoin() {
   const navigate = useNavigate();
   const { kakao } = window;
   const [open, setOpen] = useState(false);
   const [peopleNum, setPeopleNum] = useState(1);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState('');
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
   const partyName = useRef(); // 스터디 이름
   const partyDate = useRef(); // 스터디 모임 날짜
@@ -37,12 +37,12 @@ export default function PartyJoin() {
 
   const [formData, setFormData] = useState({
     who_open: userId,
-    study_title: "", // partyName
-    study_category: "", // 값을 받아낼 좋은 방법 추천좀.
-    study_detail_description: "", //partyDesc
+    study_title: '', // partyName
+    study_category: '', // 값을 받아낼 좋은 방법 추천좀.
+    study_detail_description: '', //partyDesc
     min_member_cnt: 0,
-    studyAt_date: "",
-    studyAt_location: "", // 무슨 값을 보내줘야 할지 모르겠음.
+    studyAt_date: '',
+    studyAt_location: '', // 무슨 값을 보내줘야 할지 모르겠음.
     tmX: 0,
     tmY: 0,
     deadline: new Date(),
@@ -61,7 +61,7 @@ export default function PartyJoin() {
         setLatLng(coords.Ma);
         setLonLng(coords.La);
       } else {
-        console.log("err");
+        console.log('err');
       }
     });
     // setFormData({
@@ -157,7 +157,7 @@ export default function PartyJoin() {
     setPeopleNum(peopleNum - 1);
     if (peopleNum < 2) {
       setPeopleNum(1);
-      return alert("1 이하는 안됩니다.");
+      return alert('1 이하는 안됩니다.');
     }
   };
 
@@ -171,20 +171,20 @@ export default function PartyJoin() {
         {/* Nav 대체품 */}
         <NavContainer>
           <div
-            className={category === "code" ? "navBox addColor" : "navBox"}
-            onClick={() => setCategory("code")}
+            className={category === 'code' ? 'navBox addColor' : 'navBox'}
+            onClick={() => setCategory('code')}
           >
             프로그래밍
           </div>
           <div
-            className={category === "sing" ? "navBox addColor" : "navBox"}
-            onClick={() => setCategory("sing")}
+            className={category === 'sing' ? 'navBox addColor' : 'navBox'}
+            onClick={() => setCategory('sing')}
           >
             보컬댄스
           </div>
           <div
-            className={category === "design" ? "navBox addColor" : "navBox"}
-            onClick={() => setCategory("design")}
+            className={category === 'design' ? 'navBox addColor' : 'navBox'}
+            onClick={() => setCategory('design')}
           >
             디자인
           </div>
@@ -221,19 +221,13 @@ export default function PartyJoin() {
 
             <PeopleCountContainer>
               <MdPeopleAlt />
-              <button
-                className="peopleBtn"
-                onClick={(e) => handleMinusPeople(e)}
-              >
+              <button className="peopleBtn" onClick={(e) => handleMinusPeople(e)}>
                 -
               </button>
               <div ref={partyPeople} onChange={(e) => handlePeopleChange(e)}>
                 {peopleNum}
               </div>
-              <button
-                className="peopleBtn"
-                onClick={(e) => handlePlusPeople(e)}
-              >
+              <button className="peopleBtn" onClick={(e) => handlePlusPeople(e)}>
                 +
               </button>
             </PeopleCountContainer>
@@ -250,18 +244,14 @@ export default function PartyJoin() {
             </div>
 
             <label className="partyDescLabel labels">스터디 상세설명</label>
-            <textarea
-              ref={partyDesc}
-              className="partyDesc"
-              placeholder="스터디를 설명해주세요"
-            />
+            <textarea ref={partyDesc} className="partyDesc" placeholder="스터디를 설명해주세요" />
             <button className="finish" onClick={onSubmitHandler}>
               스터디 개설 완료하기
             </button>
           </form>
         </div>
         <div className="modalLayout">
-          <Modal open={open} handleClose={setOpen} status={0} />
+          <JoinModal open={open} handleClose={setOpen} status={0} />
         </div>
       </MainStyle>
     </LayoutDetailPage>

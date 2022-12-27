@@ -5,14 +5,15 @@ const Main = React.lazy(() => import('./page/Main/Main'));
 const Profile = React.lazy(() => import('./page/profile/Profile'));
 
 const LayoutDetailPage = React.lazy(() => import('./layouts/LayoutDetailPage'));
-const PartyJoin = React.lazy(() => import('./page/detail/PartyJoin'));
-const PartyDetail = React.lazy(() => import('./page/detail/PartyDetail'));
+const StudyCreate = React.lazy(() => import('./page/study/create'));
+const StudyDetail = React.lazy(() => import('./page/study/detail'));
 const Account = React.lazy(() => import('./page/account/Account'));
 const Login = React.lazy(() => import('./page/login/Login'));
 const Join = React.lazy(() => import('./page/Join'));
 const ChangePw = React.lazy(() => import('./page/account/ChangePw'));
 const ChangeNick = React.lazy(() => import('./page/account/ChangeNick'));
 const Error = React.lazy(() => import('./page/Error'));
+
 
 export const RouterConfig = [
   {
@@ -49,7 +50,7 @@ export const RouterConfig = [
   },
   {
     path: '/detail/partydetail/:id',
-    element: <PartyDetail />,
+    element: <StudyDetail />,
     sceneConfig: {
       enter: 'from-bottom',
       exit: 'to-bottom',
@@ -57,7 +58,7 @@ export const RouterConfig = [
   },
   {
     path: '/detail/partyjoin',
-    element: <PartyJoin />,
+    element: <StudyCreate />,
     sceneConfig: {
       enter: 'from-bottom',
       exit: 'to-bottom',
@@ -101,6 +102,7 @@ export const RouterConfig = [
     sceneConfig: {
       enter: 'from-bottom',
       exit: 'to-bottom',
+
     },
   },
   {
