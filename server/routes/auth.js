@@ -14,6 +14,7 @@ const {
   login,
   payload,
   logout,
+  withdrawal,
 } = require('../dao/user/userModule');
 
 const { sendVerificationsSMS, verifySMSMsg, getNewPw } = require('../dto/NVsens');
@@ -62,6 +63,11 @@ router.post('/checkDupId', userAgentMiddleWare('/api/auth/checkDupId'), checkDup
 router.post('/join', userAgentMiddleWare('/api/auth/join'), join);
 
 router.post('/login', userAgentMiddleWare('/api/auth/login'), login);
+
+/**
+ * 회원 탈퇴 
+ */
+router.post('/withdrawal', userAgentMiddleWare('/api/auth/withdrawal'), withdrawal);
 
 /**
  * url : /api/payload
