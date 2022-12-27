@@ -267,23 +267,20 @@ module.exports = {
       });
     }
   },
-  withdrawal: async(req, res, next) => {
+  withdrawal: async (req, res, next) => {
     try {
       const { id } = req.body;
-      const isExistedId = await User.findOne({ where: { id: id } });
 
-      console.log(`isExistedId = ${isExistedId}`);
-      if (isExistedId != null) {
-        await User.destroy({ where: { id: id } });
+      if (await User.destroy({ where: { id: id } })) {
         res.status(200).json({
           code: 200,
-          message: "회원탈퇴를 완료하였습니다.",
-        })
+          message: '회원탈퇴를 완료하였습니다.',
+        });
       } else {
         res.status(405).json({
           code: 405,
-          message: "존재하지 않는 아이디입니다.",
-        })
+          message: '존재하지 않는 아이디입니다.',
+        });
       }
     } catch (e) {
       return res.status(500).json({
@@ -291,5 +288,5 @@ module.exports = {
         message: `회원 탈퇴 중 서버 내 알 수 없는 에러발생 ${e}`,
       });
     }
-  }
+  },
 };
