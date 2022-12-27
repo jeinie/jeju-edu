@@ -697,6 +697,46 @@ const options = {
           },
         },
       },
+      "/api/auth/withdrawal": {
+        post: {
+          tags: ["회원 탈퇴하는 API"],
+          summary: "회원 탈퇴하는 API 입니다",
+          parameters: [
+            {
+              in: "body",
+              name: "body",
+              description: "현재 id를 넘겨주세요",
+              schema: {
+                $ref: "#/definitions/apiAuthWithdrawalRequestForm",
+              },
+            },
+          ],
+          responses: {
+            200: {
+              description:
+                "기존의 id로 본인인증이 되었고, 기존 id로 회원 탈퇴가 성공적으로 되었다면 코드 200을 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthWithdrawal_ResponseForm_Success200",
+              },
+            },
+            405: {
+              description:
+                "기존의 id가 존재하지 않는 id이면 코드 405를 리턴합니다",
+              schema: {
+                $ref: "#/definitions/apiAuthWithdrawal_ResponseForm_Failed405",
+              },
+            },
+            500: {
+              description:
+                "회원 탈퇴 중 서버 내의 알 수 없는 에러가 발생하였을 때 코드 500이 리턴됩니다",
+
+              schema: {
+                $ref: "#/definitions/apiAuthWithdrawal_ResponseForm_Failed500",
+              },
+            },
+          },
+        },
+      },
     },
     definitions: {
       DBuserTable: {
@@ -2138,6 +2178,50 @@ const options = {
           message: {
             type: "string",
             description: `실패하면 닉네임 변경 중 서버 내 알 수 없는 에러발생 이란 메세지가 리턴된다`,
+          },
+        },
+      },
+            apiAuthWithdrawalRequestForm: {
+        properties: {
+          id: {
+            type: "string",
+            description: "본인 확인용 기존 아이디",
+          },
+        },
+      },
+      apiAuthWithdrawal_ResponseForm_Success200: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "성공하면 코드 200이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `성공하면 회원탈퇴를 완료하였습니다 라는 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthWithdrawal_ResponseForm_Failed405: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 405가 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 존재하지 않는 아이디입니다 라는 메세지가 리턴된다`,
+          },
+        },
+      },
+      apiAuthWithdrawal_ResponseForm_Failed500: {
+        properties: {
+          code: {
+            type: "integer",
+            description: "실패하면 코드 500이 리턴된다",
+          },
+          message: {
+            type: "string",
+            description: `실패하면 회원 탈퇴 중 서버 내 알 수 없는 에러발생 이란 메세지가 리턴된다`,
           },
         },
       },
