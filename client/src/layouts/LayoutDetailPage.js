@@ -13,7 +13,7 @@ const Content = styled.main`
   z-index: 300;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: #fff;
+  background: #faf6f2;
 `;
 const LayoutDetailPage = ({ children, top = '60px' }) => {
   return (

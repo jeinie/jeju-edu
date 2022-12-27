@@ -60,7 +60,7 @@ export default function PartyDetail() {
             <div className="headerLeft">
               <ContainerHeader>
                 <div className="headerText">
-                  <p className="userName">@{study.who_open}</p>
+                  <p className="userName">{study.who_open}</p>
                   <p className="studyName">{study.study_title}</p>
                 </div>
               </ContainerHeader>
@@ -229,6 +229,12 @@ const DetailCreateBtnBox = styled.div`
 
 const ViewDetailContainer = styled.div`
   padding-top: 35px;
+  transform: translate(0, -40px);
+  /* z-index: 1000; */
+  background-color: #faf6f2;
+  border-radius: 22px;
+
+  /* border: 1px solid black; */
 
   .fullParty {
     text-align: center;
