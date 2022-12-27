@@ -54,8 +54,6 @@ export default function PartyDetail() {
     axios.post(`/api/viewDetail/${id}`).then((res) => setStudy(res.data.study_Detail_Info));
   }, []);
 
-  console.log(study);
-
   return (
     <LayoutDetailPage top="0">
       <OutputContainer>
@@ -107,7 +105,7 @@ export default function PartyDetail() {
               disabled={study.study_no >= study.min_member_cnt}
               onClick={() => {
                 setOpen(true);
-                // handleModalView();
+                handleModalView();
               }}
             >
               <p className="join">J-Join</p>

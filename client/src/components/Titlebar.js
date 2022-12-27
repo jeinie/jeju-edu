@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import styled, { keyframes } from "styled-components"; // 1.컴포넌트 추가
-import { logout } from "./func";
-import CommonModal from "./modals/CommonModal";
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import styled, { keyframes } from 'styled-components'; // 1.컴포넌트 추가
+import { logout } from './func';
+import CommonModal from './modals/CommonModal';
 
 // 2.이미지 불러옴
-import fir from "../img/logo_white.png";
-import backbtn from "../img/icon-back.svg";
-import normalFruit from "../img/normal_fruit.png";
-import sickFruit from "../img/sick_fruit.png";
-import iconWarning from "../img/icon-warning.png";
+import fir from '../img/logo_white.png';
+import backbtn from '../img/icon-back.svg';
+import normalFruit from '../img/normal_fruit.png';
+import sickFruit from '../img/sick_fruit.png';
+import iconWarning from '../img/icon-warning.png';
 
 // 3.타이틀바 : 로고(img), 메뉴(StyledBurger)
 export default function Titlebar({ open, setOpen }) {
-  const [bg, setBg] = useState("#E47B00");
+  const [bg, setBg] = useState('#E47B00');
 
   return (
     <TitlebarContainer bg={bg}>
@@ -33,26 +33,26 @@ export function DetailTitlebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
-  const [title, setTitle] = useState("");
-  const [bg, setBg] = useState("#FAF6F2");
-  const [none, setNone] = useState("");
+  const [title, setTitle] = useState('');
+  const [bg, setBg] = useState('#FAF6F2');
+  const [none, setNone] = useState('');
 
   useEffect(() => {
     switch (pathname) {
-      case "/detail/login":
-        return setTitle("로그인하기");
-      case "/detail/account":
-        return setTitle("계정 관리");
-      case "/detail/changepw":
-        return setTitle("비밀번호 변경");
-      case "/detail/changenick":
-        return setTitle("닉네임 변경");
-      case "/detail/partyjoin":
-        return setTitle("스터디 개설하기"), setBg("#ffffff");
-      case "/detail/join":
-        return setTitle("회원가입");
+      case '/detail/login':
+        return setTitle('로그인하기');
+      case '/detail/account':
+        return setTitle('계정 관리');
+      case '/detail/changepw':
+        return setTitle('비밀번호 변경');
+      case '/detail/changenick':
+        return setTitle('닉네임 변경');
+      case '/detail/partyjoin':
+        return setTitle('스터디 개설하기'), setBg('#ffffff');
+      case '/detail/join':
+        return setTitle('회원가입');
       default:
-        return setTitle(""), setNone("none");
+        return setTitle(''), setNone('none');
     }
   }, [pathname]);
 
@@ -77,11 +77,10 @@ const TitlebarContainer = styled.header`
   background: #ffffff;
   z-index: 100;
 
-  /* border-bottom: ${({ detail }) =>
-    detail ? "none" : "1px solid #dddddd"}; */
+  /* border-bottom: ${({ detail }) => (detail ? 'none' : '1px solid #dddddd')}; */
 
   width: 100%;
-  height: 80px;
+  height: 60px;
   font-size: 48px;
   left: 0;
   bottom: 0;
@@ -140,25 +139,24 @@ const StyledBurger = styled.div`
   div {
     width: 1.5rem;
     height: 0.15rem;
-    background: ${({ open }) => (open ? "#333333" : "#333333")};
-    background-color: ${({ open }) => (open ? "#000000" : "#ffffff")};
+    background: ${({ open }) => (open ? '#333333' : '#333333')};
+    background-color: ${({ open }) => (open ? '#000000' : '#ffffff')};
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 23px;
 
     :first-child {
-      transform: ${({ open }) => (open ? "rotate(-45deg)" : "rotate(0)")};
+      transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
     }
 
     :nth-child(2) {
-      opacity: ${({ open }) => (open ? "0" : "1")};
-      transform: ${({ open }) =>
-        open ? "translateX(-20px)" : "translateX(0)"};
+      opacity: ${({ open }) => (open ? '0' : '1')};
+      transform: ${({ open }) => (open ? 'translateX(-20px)' : 'translateX(0)')};
     }
 
     :nth-child(3) {
-      transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
+      transform: ${({ open }) => (open ? 'rotate(45deg)' : 'rotate(0)')};
     }
   }
 `;
@@ -168,28 +166,28 @@ const Menu = ({ open, setOpen }) => {
   let user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const goPartyJoin = () => {
-    navigate("/detail/partyjoin");
+    navigate('/detail/partyjoin');
   };
   const goJejuFruits = () => {
-    navigate("#");
+    navigate('#');
   };
   const gologin = () => {
-    navigate("/detail/login");
+    navigate('/detail/login');
   };
   const goJoin = () => {
-    navigate("/detail/join");
+    navigate('/detail/join');
   };
   const goAccount = () => {
-    navigate("/detail/account");
+    navigate('/detail/account');
   };
   const handleBackSpace = () => {
     setOpen(!open);
   };
   useEffect(() => {
     if (open) {
-      document.body.classList.add("scroll_lock");
+      document.body.classList.add('scroll_lock');
       return () => {
-        document.body.classList.remove("scroll_lock");
+        document.body.classList.remove('scroll_lock');
       };
     }
   }, [open]);
@@ -251,16 +249,12 @@ const Menu = ({ open, setOpen }) => {
               </div>
             </div>
 
-            <GoMainActionBtn onClick={goPartyJoin}>
-              스터디 만들기
-            </GoMainActionBtn>
+            <GoMainActionBtn onClick={goPartyJoin}>스터디 만들기</GoMainActionBtn>
 
-            <GoSubActionBtn onClick={goJejuFruits}>
-              제주 열매 현황
-            </GoSubActionBtn>
+            <GoSubActionBtn onClick={goJejuFruits}>제주 열매 현황</GoSubActionBtn>
 
             <LinkItemGroup>
-              <LinkItem onClick={() => navigate("#")}>이용약관</LinkItem>
+              <LinkItem onClick={() => navigate('#')}>이용약관</LinkItem>
               {/* 페이지 연결해야함 */}
               <LinkItem onClick={goAccount}>계정 관리</LinkItem>
               {/* 로그아웃 기능 넣어야함 */}
@@ -361,7 +355,7 @@ const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   background: #faf6f2;
-  transform: ${({ open }) => (open ? "translateX(0px)" : "translateX(105%)")};
+  transform: ${({ open }) => (open ? 'translateX(0px)' : 'translateX(105%)')};
   width: calc(80%);
   height: 100vh;
   text-align: left;
