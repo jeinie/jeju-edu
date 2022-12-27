@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = async (req, res, next) => {
@@ -11,10 +11,7 @@ module.exports = async (req, res, next) => {
      */
 
     //req.decoded = jwt.verify(req.headers.authorization, key);
-    req.decoded = jwt.verify(
-      req.cookies.accessToken,
-      process.env.ACCESS_SECRET_KEY
-    );
+    req.decoded = jwt.verify(req.cookies.accessToken, process.env.ACCESS_SECRET_KEY);
     console.log(req.decoded);
     return next();
   } catch (error) {
@@ -23,13 +20,8 @@ module.exports = async (req, res, next) => {
      * 그냥 여기서 refresh토큰을 토대로 accessToken을 만들어주면 되니까
      */
     try {
-      req.decoded = jwt.verify(
-        req.cookies.refreshToken,
-        process.env.REFRESH_SECRET_KEY
-      );
-      console.log(
-        `accessToken은 망가졌는데 refresh은 살아있을때 오는 req.decoded값 :\n`
-      );
+      req.decoded = jwt.verify(req.cookies.refreshToken, process.env.REFRESH_SECRET_KEY);
+      console.log(`accessToken은 망가졌는데 refresh은 살아있을때 오는 req.decoded값 :\n`);
       console.log(req.decoded);
       /**
        * refreshToken은 정상이라 하면 refreshToken을 decode해서 해당 데이터들로 새로운 accessToken을 만들어
@@ -37,31 +29,31 @@ module.exports = async (req, res, next) => {
        */
       try {
         res.cookie(
-          "accessToken",
+          'accessToken',
           jwt.sign(
             {
-              type: "JWT",
+              type: 'JWT',
               id: req.decoded.id,
               profile: req.decoded.profile,
             },
             process.env.ACCESS_SECRET_KEY,
             {
-              expiresIn: "1m",
-              issuer: "admin",
-            }
+              expiresIn: '5m',
+              issuer: 'admin',
+            },
           ),
           {
             secure: false,
             httpOnly: true,
-          }
+          },
         );
 
         next();
       } catch (error) {
         console.log(
-          `authMiddleWare에서 refreshToken이 유효한 상태에서 accessToken재발행시 에러발생 : ${error}`
+          `authMiddleWare에서 refreshToken이 유효한 상태에서 accessToken재발행시 에러발생 : ${error}`,
         );
-        res.status(500).json({
+        return res.status(500).json({
           code: 500,
           message: `authMiddleWare에서 refreshToken이 유효한 상태에서 accessToken재발행시 에러발생 error : ${error}`,
         });
@@ -79,14 +71,14 @@ module.exports = async (req, res, next) => {
        * 유효시간이 초과된 경우인데 refreshToken까지 만료가 되었다면...
        */
 
-      if (error.name === "TokenExpiredError") {
+      if (error.name === 'TokenExpiredError') {
         return res.status(419).json({
           code: 419,
           message: `토큰이 만료되었습니다. error : ${error}`,
         });
       }
       // 토큰의 비밀키가 일치하지 않는 경우
-      if (error.name === "JsonWebTokenError") {
+      if (error.name === 'JsonWebTokenError') {
         return res.status(401).json({
           code: 401,
           message: `유효하지 않은 토큰입니다. error : ${error}`,
