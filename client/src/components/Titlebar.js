@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components'; // 1.컴포넌트 추가
 import { logout } from './func';
 import CommonModal from './modals/CommonModal';
-
 // 2.이미지 불러옴
 import fir from '../img/logo_white.png';
 import backbtn from '../img/icon-back.svg';
@@ -12,6 +11,7 @@ import normalFruit from '../img/normal_fruit.png';
 import sickFruit from '../img/sick_fruit.png';
 import iconWarning from '../img/icon-warning.png';
 
+// height & align 맞추기
 // 3.타이틀바 : 로고(img), 메뉴(StyledBurger)
 export default function Titlebar({ open, setOpen }) {
   const [bg, setBg] = useState('#E47B00');
