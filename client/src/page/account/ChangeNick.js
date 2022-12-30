@@ -1,48 +1,57 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Input, Button } from "../../components/form";
-import styled from "styled-components";
-import { BsChevronLeft } from "react-icons/bs";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { saveUser } from '../../store/userSlice';
+import axios from 'axios';
 
-import axios from "axios";
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-/**
- * 2022-12-23 mkchoi
- * 닉네임 변경
- */
+import styled from 'styled-components';
+
+import { Input, Button } from '../../components/form';
+import LayoutDetailPage from '../../layouts/LayoutDetailPage';
+import CommonModal from '../../components/modals/CommonModal';
+
+import iconSuccess from '../../img/icon-success.png';
+
+const CHECK_NICKNAME_DEFAULT = { type: '', text: '' };
+
 export default function ChangeNick() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const id = useSelector((state) => state.user.id);
-  const [newNick, setNewNick] = useState("");
+  const userInfo = useSelector((state) => state.user);
+  const [newNick, setNewNick] = useState('');
+  const [checkNickname, setCheckNickname] = useState({ type: '', text: '' });
+  const [openModal, setOpenModal] = useState(false);
 
+  // 닉네임 유효성 체크
   useEffect(() => {
-    console.log(newNick);
+    newNick === userInfo.nick
+      ? setCheckNickname({ type: 'WARN', text: '기존 닉네임과 동일합니다.' })
+      : setCheckNickname(CHECK_NICKNAME_DEFAULT);
   }, [newNick]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const handleSubmit = () => {
-      const body = {
-        id: id,
-        newNick: newNick,
-      };
+    if (checkNickname.type === 'WARN') {
+      alert('기존 닉네임과 동일합니다.');
+      return;
+    }
 
-      //닉네임 변경 API 필요
-      axios.post(`/api/auth/message/modifyPW`, body).then((response) => {
-        if (response.data.code === 200) {
-          alert("변경완료");
-          //   navigate("/login");
-        } else if (response.data.code === 202) {
-          //   setPwOk(false);
-          //   setPwDesc({ type: "WARN", text: "현재 비밀번호가 아니에요" });
-        } else {
-          alert("변경실패 : 서버오류");
-        }
-      });
+    const body = {
+      id: userInfo.id,
+      newNickName: newNick,
+      nickName: userInfo.nick,
     };
+    axios.post(`/api/auth/modifyNickName`, body).then((response) => {
+      if (response.data.code === 200) {
+        dispatch(saveUser({ ...userInfo, nick: newNick }));
+        setOpenModal(!openModal);
+      } else {
+        alert('변경실패 : 서버오류');
+      }
+    });
   };
 
   return (
@@ -50,17 +59,31 @@ export default function ChangeNick() {
       <ChangeNickContainer>
         <ChangeNickForm onSubmit={handleSubmit}>
           <Input
-            label='닉네임*'
-            placeholder='닉네임을 입력해주세요.'
-            value={newNick || ""}
+            label="닉네임*"
+            placeholder="닉네임을 입력해주세요."
+            value={newNick || ''}
             setValue={setNewNick}
-            style={{ marginBottom: "20px", marginTop: "52px" }}
+            desc={checkNickname}
+            style={{ marginBottom: '20px', marginTop: '52px' }}
             maxLength={16}
           />
 
-          <Button text='닉네임 변경하기' style={{ position: "absolute", bottom: "20px" }} disabled={!newNick} />
+          <Button
+            text="닉네임 변경하기"
+            style={{ position: 'absolute', bottom: '20px' }}
+            disabled={!newNick || checkNickname.type === 'WARN'}
+          />
         </ChangeNickForm>
       </ChangeNickContainer>
+      <CommonModal
+        toggle={openModal}
+        setToggle={() => navigate('/detail/account')}
+        submitBtnLabel="확인"
+        submitBtnOnClick={() => navigate('/detail/account')}
+      >
+        <img src={iconSuccess} alt="경고아이콘"></img>
+        닉네임 변경을 완료했습니다.
+      </CommonModal>
     </LayoutDetailPage>
   );
 }

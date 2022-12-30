@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import LayoutDetailPage from '../../layouts/LayoutDetailPage';
-import { BsChevronLeft } from 'react-icons/bs';
 
 export default function Account() {
   const navigate = useNavigate();
+
+  const id = useSelector((state) => state.user.id);
+  const name = useSelector((state) => state.user.name);
+  const nick = useSelector((state) => state.user.nick);
+
   const goChangePw = () => {
     navigate('/detail/changepw');
   };
@@ -23,15 +26,15 @@ export default function Account() {
             <ul className="info-list">
               <li className="list-item">
                 <div className="item-label">이름</div>
-                <div className="item-data">서현석</div>
+                <div className="item-data">{name}</div>
               </li>
               <li className="list-item">
                 <div className="item-label">아이디</div>
-                <div className="item-data">asdf</div>
+                <div className="item-data">{id}</div>
               </li>
               <li className="list-item">
                 <div className="item-label">닉네임</div>
-                <div className="item-data">외계공룡</div>
+                <div className="item-data">{nick}</div>
                 <div className="item-change" onClick={goChangeNick}>
                   변경하기
                 </div>
