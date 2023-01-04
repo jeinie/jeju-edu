@@ -191,7 +191,8 @@ module.exports = {
     try {
       const studyList = await Study.findAll({
         where: {
-          who_open: req.params.id,
+          //who_open: req.params.id,
+          user_no: req.params.id,
         },
       });
 
@@ -232,7 +233,7 @@ module.exports = {
     try {
       const studyList = await Study.findAll({
         where: {
-          who_open: { [Op.ne]: req.params.id },
+          user_no: { [Op.ne]: req.params.id },
         },
       });
 
@@ -262,6 +263,7 @@ module.exports = {
   openStudy: async (req, res, next) => {
     try {
       const {
+        user_no,
         who_open,
         study_title,
         study_category,
@@ -275,23 +277,37 @@ module.exports = {
         status,
       } = req.body;
 
-      await Study.create({
-        who_open: who_open,
-        study_title: study_title,
-        study_category: study_category,
-        study_detail_description: study_detail_description,
-        min_member_cnt: min_member_cnt,
-        studyAt_date: studyAt_date,
-        studyAt_location: studyAt_location,
-        tmX: tmX,
-        tmY: tmY,
-        deadline: deadline,
-        status: status,
-      });
+      req.body.user_no = user_no;
+      req.body.study_no = (
+        await Study.create({
+          user_no: user_no,
+          who_open: who_open,
+          study_title: study_title,
+          study_category: study_category,
+          study_detail_description: study_detail_description,
+          min_member_cnt: min_member_cnt,
+          studyAt_date: studyAt_date,
+          studyAt_location: studyAt_location,
+          tmX: tmX,
+          tmY: tmY,
+          deadline: deadline,
+          status: status,
+        })
+      ).dataValues.study_no;
+      /**
+       * 해당 스터디가 내가 개설한것에
+       * 첫 개설때 나를 참여시키는 동작인지 아닌지
+       * 구분하는 Flag값
+       */
+      req.body.mineFlag = 1;
+
+      return next();
+      /*
       res.status(200).json({
         code: 200,
         message: `스터디 개설 성공`,
       });
+      */
     } catch (error) {
       res.status(500).json({
         code: 500,
@@ -301,15 +317,25 @@ module.exports = {
     }
   },
 
+  /**
+   * mineFlag값을 0으로 정해두고
+   * 0이면 남의 스터디에 참여하는것이며,
+   * 1이면 내 스터디를 개설할때에 내가 참여하는 것
+   */
   joinStudy: async (req, res, next) => {
-    const { user_no, study_no } = req.body;
     try {
-      await StudyAllList.create({
-        study_no: study_no,
-        user_no: user_no,
-      });
-
+      const { user_no, study_no, mineFlag = 0 } = req.body;
       const studyInfo = await Study.findOne({ where: { study_no: study_no } });
+      console.log('이상한데');
+      console.log(studyInfo);
+
+      if (!studyInfo) {
+        res.status(404).json({
+          code: 404,
+          message: `존재하지 않는 스터디입니다 (참여실패)`,
+        });
+        return;
+      }
 
       /**
        * study의 상태가 모집중( 0 )이 아니라면 더 참가할수가 없겠다
@@ -322,17 +348,29 @@ module.exports = {
         return;
       }
 
-      await Study.increment({ current_member_cnt: 1 }, { where: { study_no: study_no } });
-
-      res.status(200).json({
-        code: 200,
-        message: `해당 스터디에 참여 성공`,
-        updated_current_member_cnt: studyInfo.current_member_cnt + 1,
-      });
+      if (studyInfo) {
+        await StudyAllList.create({
+          study_no: study_no,
+          user_no: user_no,
+        });
+        await Study.increment({ current_member_cnt: 1 }, { where: { study_no: study_no } });
+        if (mineFlag) {
+          res.status(200).json({
+            code: 200,
+            message: `스터디 개설 성공`,
+          });
+        } else {
+          res.status(200).json({
+            code: 200,
+            message: `해당 스터디에 참여 성공`,
+            updated_current_member_cnt: studyInfo.current_member_cnt + 1,
+          });
+        }
+      }
     } catch (error) {
-      res.status(500).json({
-        code: 500,
-        message: `알수없는 서버내의 이유로 스터디 참여 실패 error : ${error}`,
+      res.status(202).json({
+        code: 202,
+        message: `이미 참여해있는 스터디입니다 (참여실패) : ${error}`,
       });
       return next(error);
     }

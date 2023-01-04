@@ -61,7 +61,13 @@ router.get(
   getStudyListNotMineId,
 );
 
-router.post('/openStudy', userAgentMiddleWare('/api/openStudy'), authMiddleWare, openStudy);
+router.post(
+  '/openStudy',
+  userAgentMiddleWare('/api/openStudy'),
+  authMiddleWare,
+  openStudy,
+  joinStudy,
+);
 
 router.post('/joinStudy', userAgentMiddleWare('/api/joinStudy'), authMiddleWare, joinStudy);
 
