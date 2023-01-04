@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 module.exports = class Study extends Sequelize.Model {
   static init(sequelize) {
@@ -7,6 +7,10 @@ module.exports = class Study extends Sequelize.Model {
         study_no: {
           type: Sequelize.INTEGER(100),
           autoIncrement: true,
+          primaryKey: true,
+        },
+        user_no: {
+          type: Sequelize.INTEGER(100),
           primaryKey: true,
         },
         /**닉네임이 될것임 */
@@ -33,7 +37,7 @@ module.exports = class Study extends Sequelize.Model {
          */
         current_member_cnt: {
           type: Sequelize.INTEGER,
-          defaultValue: 1,
+          defaultValue: 0,
         },
         min_member_cnt: {
           type: Sequelize.INTEGER,
@@ -88,12 +92,12 @@ module.exports = class Study extends Sequelize.Model {
         sequelize,
         timestamps: true,
         underscored: false,
-        modelName: "Study",
-        tableName: "study",
+        modelName: 'Study',
+        tableName: 'study',
         paranoid: true,
-        charset: "utf8",
-        collate: "utf8_general_ci",
-      }
+        charset: 'utf8',
+        collate: 'utf8_general_ci',
+      },
     );
   }
 
