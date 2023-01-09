@@ -2052,7 +2052,7 @@ const options = {
         },
       },
 
-      apiAuthMsgModifyPwRequestForm: {
+      apiAuthModifyPwRequestForm: {
         properties: {
           id: {
             type: 'string',
@@ -2068,7 +2068,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyPw_ResponseForm_Success200: {
+      apiAuthModifyPw_ResponseForm_Success200: {
         properties: {
           code: {
             type: 'integer',
@@ -2080,7 +2080,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyPw_ResponseForm_Failed202: {
+      apiAuthModifyPw_ResponseForm_Failed202: {
         properties: {
           code: {
             type: 'integer',
@@ -2092,7 +2092,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyPW_ResponseForm_Failed203: {
+      apiAuthModifyPw_ResponseForm_Failed203: {
         properties: {
           code: {
             type: 'integer',
@@ -2104,7 +2104,7 @@ const options = {
           },
         },
       },
-      apiAuthMsgModifyPw_ResponseForm_Failed500: {
+      apiAuthModifyPw_ResponseForm_Failed500: {
         properties: {
           code: {
             type: 'integer',
