@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import { useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
-const CommonModal = ({
+const Modal = ({
   children,
   toggle,
   setToggle,
@@ -42,7 +42,7 @@ const CommonModal = ({
 };
 
 const CustomModalContainer = styled.div`
-  visibility: ${(props) => (props.toggle ? "visible" : "hidden")};
+  visibility: ${(props) => (props.toggle ? 'visible' : 'hidden')};
   position: fixed;
   left: 0;
   top: 0;
@@ -76,8 +76,8 @@ const ModalContainer = styled.div`
   border-radius: 20px;
   z-index: 1000;
   overflow: hidden;
-  ont-family: "NanumSquare Neo";
-  ont-family: "NanumSquare Neo";
+  ont-family: 'NanumSquare Neo';
+  ont-family: 'NanumSquare Neo';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -140,4 +140,4 @@ const fadeOut = keyframes`
     opacity: 0;
   }
 `;
-export default CommonModal;
+export default Modal;

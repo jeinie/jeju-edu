@@ -1,8 +1,7 @@
 import * as React from 'react';
-import styled from 'styled-components';
-import freshMandarin_1x from '../../img/freshMandarin_1x.png';
+import freshMandarin_1x from '../../../img/freshMandarin_1x.png';
 
-export default function HarvestModal(props) {
+export default function ExampleModal(props) {
   const handleClose = () => props.setOpen(false);
 
   return (
